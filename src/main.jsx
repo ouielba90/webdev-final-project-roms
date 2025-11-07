@@ -11,7 +11,7 @@ import LicensesInvPage from './pages/inventory/LicensesInvPage.jsx'
 import ServersInvPage from './pages/inventory/ServersInvPage.jsx'
 import AddInvPage from './pages/inventory/AddToInvPage.jsx'
 import './indexOuissam.css'
-import UsersTest from './pages/users/UsersTest.jsx'
+import UserHomePage from './pages/users/UserHomePage.jsx'
 import HomeProjPage from './pages/projects/HomeProjPage.jsx'
 import HomeCommPage from './pages/communications/HomeCommPage.jsx'
 import MessagesPage from './pages/communications/MessagesPage.jsx'
@@ -67,7 +67,7 @@ const router = createBrowserRouter(
         },
         {
           path: '/users',
-          element: <UsersTest />,
+          element: <UserHomePage />,
           children: []
         },
         {
