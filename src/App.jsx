@@ -9,7 +9,7 @@ function App() {
       <Link to='/inventory'>Inventory</Link> |
       <Link to='/projects'>Projects</Link> |
       <Link to='/users'>Users</Link> |
-      <Link to='/messages'>Messages</Link>
+      <Link to='/communications'>Comunicaciones</Link>
       <hr />
       <Outlet></Outlet>
     </>

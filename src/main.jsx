@@ -11,9 +11,11 @@ import LicensesInvPage from './pages/inventory/LicensesInvPage.jsx'
 import ServersInvPage from './pages/inventory/ServersInvPage.jsx'
 import AddInvPage from './pages/inventory/AddToInvPage.jsx'
 import './indexOuissam.css'
-import ProjectsTest from './pages/projects/ProjectsTest.jsx'
 import UsersTest from './pages/users/UsersTest.jsx'
-import MessagesTest from './pages/messages/MessagesTest.jsx'
+import HomeProjPage from './pages/projects/HomeProjPage.jsx'
+import HomeCommPage from './pages/communications/HomeCommPage.jsx'
+import MessagesPage from './pages/communications/MessagesPage.jsx'
+import NotificationsPage from './pages/communications/NotificationsPage.jsx'
 
 const router = createBrowserRouter(
   [
@@ -60,7 +62,7 @@ const router = createBrowserRouter(
         },
         {
           path: '/projects',
-          element: <ProjectsTest />,
+          element: <HomeProjPage />,
           children: []
         },
         {
@@ -69,9 +71,18 @@ const router = createBrowserRouter(
           children: []
         },
         {
-          path: '/messages',
-          element: <MessagesTest />,
-          children: []
+          path: '/communications',
+          element: <HomeCommPage />,
+          children: [
+            {
+              path: 'messages',
+              element: <MessagesPage />,
+            },
+            {
+              path: 'notifications',
+              element: <NotificationsPage />,
+            }
+          ]
         },
       ]
     }
@@ -80,5 +91,5 @@ const router = createBrowserRouter(
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <RouterProvider router={router} />
-  </StrictMode >,
+  </StrictMode>,
 )
