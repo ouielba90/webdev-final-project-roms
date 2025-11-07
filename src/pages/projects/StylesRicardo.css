@@ -1,10 +1,12 @@
-.list-projects{
+/*Estilos para la lista de projectos*/
+.list-projects {
     display: flex;
-    flex-direction: column;    
+    flex-direction: column;
     align-items: center;
 }
 
-.box-project{
+/*Estilos para el componente project*/
+.box-project {
     border: 1px, solid, black;
     width: 800px;
     margin-bottom: 30px;
@@ -13,9 +15,34 @@
     justify-content: space-between;
 }
 
-.status-project{
-    border: 1px, solid, black ;
+.status-project {
+    border: 1px, solid, black;
     /*width: 50px;
     height: 50px;*/
     padding: 20px;
+}
+
+.client-project {
+    border: 1px, solid, black;
+    padding: 10px;
+    width: 200px;
+}
+
+.description-project {
+    border: 1px, solid, black;
+    padding: 20px;
+    width: 500px;
+}
+
+.box-list-tasks {
+    display: flex;
+    flex-direction: column;
+    border: 1px, solid, black;
+    width: 500px;
+    padding: 20px;
+    gap: 10px;
+}
+
+.box-list-tasks li {
+    margin-left: 10px;
 }
