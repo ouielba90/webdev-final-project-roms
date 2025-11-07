@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";  //hook para manejar estados
 import notificationData from "../../../data/notifications"; //datos externos -  array datos sistema
-import NotificationCard from "../../components/NotificationCard"
+
+import NotificationCard from "../../components/communications/NotificationCard"
+
 
 function NotificationsPage() {
   //notificationData para no confundir notificatios

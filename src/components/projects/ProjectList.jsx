@@ -7,9 +7,11 @@ function ProjectList() {
   return (
     <>
       <h1>Project list</h1>
-      {projects.map((projects) => {
-        return <ProjectItem key={projects.id} {...projects} />
-      })}
+      <div className="list-projects">
+        {projects.map((projects) => {
+          return <ProjectItem key={projects.id} {...projects} />
+        })}
+      </div>
     </>
   )
 }
