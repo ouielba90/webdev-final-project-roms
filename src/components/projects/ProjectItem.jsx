@@ -3,15 +3,14 @@ function ProjectItem({ id, name, client, status, description }) {
 
     return (
         <>
-            <h1>Project</h1>
-            <div key={id}>
+            <div key={id} className="box-project">
                 <div>
                     <h3>{name}</h3>
                     <p>{client}</p>
                     <p>{description}</p>
                 </div>
                 <div>
-                    <p>{status}</p>
+                    <p className="status-project" >{status}</p>
                 </div>
             </div>
         </>
