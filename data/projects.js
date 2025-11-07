@@ -194,3 +194,5 @@ export const projects = [
     description: "Implementación de paneles de vigilancia para tráfico de red.",
   },
 ];
+
+export default projects;
