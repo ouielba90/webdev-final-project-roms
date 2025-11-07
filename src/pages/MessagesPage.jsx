@@ -11,6 +11,19 @@ function MessagesPages() {
     useEffect(() => {
         setMessages(messagesData)
     },[])  //el array vacio evita la re-renderizacion infinita
+
+    const handleDeleteMessage = (id) => {
+        // Actualiza el estado eliminando el mensaje con el id dado
+        setMessages(prev => prev.filter(message => message.id !== id));
+        
+     /* return (
+            <div>
+            {messages.map(message => (
+                <MessageCard key={message.id} {...message} onDelete={() => handleDeleteMessage(message.id)} />
+           ))}
+            </div>
+        ) */
+    }
     
     {/*Renderizacion de la estructura basica*/ }
     return (
@@ -23,11 +36,14 @@ function MessagesPages() {
                         <MessageCard
                             //el componente MessageCard recibe las props desde el objeto message
                             key={message.id}
+                            id={message.id}
                             from={message.from}
                             to={message.to}
                             text={message.text}
                             date={message.date}
                             isAlert={message.isAlert}
+                            onDeleteMessage={handleDeleteMessage}
+
                         />
                     ))}
 

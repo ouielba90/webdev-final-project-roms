@@ -18,7 +18,7 @@ function NotificationsPage() {
                     {notifications.map((notification) => (
                     <NotificationCard   //componente NotificationCard recibe las props desde objeto notification
                         key={notification.id}
-                        from={Notification.from}
+                        from={notification.from}
                         to={notification.to}
                         text={notification.text}
                         date={notification.date}

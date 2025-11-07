@@ -1,11 +1,11 @@
 
-function NotificationCard ({ from, to, text, date, isSent}) {
+function NotificationCard ({ from, to, text, date, isAlert}) {
     
       //formateo de fecha a hora local
     const fechaFormateada = new Date(date).toLocaleString('es-ES');
     
     return (
-        <div className={`notification-card ${isSent ? 'sent' : 'received'}`}>
+        <div className={`notification-card ${isAlert ? 'sent' : 'received'}`}>
             <p className="notification-from"> {/*muestra el remitente*/}
                 👤 De: {from}
             </p>

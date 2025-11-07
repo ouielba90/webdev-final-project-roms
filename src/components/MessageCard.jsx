@@ -1,6 +1,6 @@
 
 //lo que recibe la funcion
-function MessageCard({ from, to, text, date, isAlert }) {
+function MessageCard({id, from, to, text, date, isAlert, onDeleteMessage }) {
 
     //formateo de fecha a hora local
     const fechaFormateada = new Date(date).toLocaleString('es-ES');
@@ -8,7 +8,9 @@ function MessageCard({ from, to, text, date, isAlert }) {
     //Operador ternario
     const mensajeTernario = isAlert ? `⚠️ ${text}` : text
 
-
+    /*function handleDeleteMessage(id) {
+        onDeleteMessage(id)
+    }*/
 
 
     //Renderizado
@@ -21,11 +23,12 @@ function MessageCard({ from, to, text, date, isAlert }) {
                 📧 Para: {to}
             </p>
             <p className="message-text">  {/*muestra texto de mensaje*/}
-                {text}
+                {mensajeTernario}
             </p>
             <p className="message-date">  {/*fecha formateada*/}
                 🕒 {fechaFormateada}
             </p>
+            <button onClick={() => onDeleteMessage(id)}>Borrar Mensaje</button>
         </div>
     );
 
