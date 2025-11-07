@@ -1,5 +1,5 @@
 
-function NotificationCard ({ from, to, text, date, isAlert}) {
+function NotificationCard ({ id, from, to, text, date, isAlert, onDeleteNotification}) {
     
       //formateo de fecha a hora local
     const fechaFormateada = new Date(date).toLocaleString('es-ES');
@@ -18,6 +18,7 @@ function NotificationCard ({ from, to, text, date, isAlert}) {
             <p className="notification-date">  {/*fecha formateada*/}
                 🕒 {fechaFormateada}
             </p>
+            <button onClick={() => onDeleteNotification(id)}>Borrar Notificacion</button>
         </div>
     )
 }

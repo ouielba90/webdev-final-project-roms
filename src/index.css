@@ -1,25 +1,69 @@
+/*=================================
+  CONTENEDORES PRINCIPALES DE PÁGINAS
+  Definen el ancho máximo y centrado, Dan padding para que no esté pegado a los bordes
+   ==================================*/
+
+   .container-messages,
+   .container-notifications {
+    max-width: 900px; /*ancho maximo para que no se estire demasiado*/
+    margin: 0 auto; /*centrado horizontal*/
+    padding: 20px; /*espacio interno*/
+    background-color: #f8fafc;
+    min-height: 2100vh; /*min. altura de la pantalla*/
+   }
+
+   /*Encabezado con titulo y boton*/
+   .messages-header,
+   .notifications-header {
+    display: flex; /* alinea titulo y boton*/
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px; /*espacio debajo*/
+    padding-bottom: 16px;
+    border-bottom: 3px solid #3b82f6;
+   }
+   
+   .messages-header h1,
+   .notifications-header h1 {
+    color: #1e293b;
+    font-size: 2em; /*tamaño grande*/
+    margin: 0;
+   }
+
+
 /*====================
 Componente MessageCard
 =====================*/
 
 .message-card {
   border: 1px solid #334155;
-  border-left: 4px solid #3b82f6;
-  border-radius: 6px;
-  padding: 16px;
-  margin: 12px 0;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border-left: 4px solid #3b82f6;/*borde grueso izquierdo */
+  border-radius: 8px;
+  padding: 20px;
+  margin: 16px 0;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);/*profundidadad sombra*/
   color: #e2e8f0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
+  transition: all 0.3s ease; /*transicion hover*/
   font-family: "Courier New", monospace; /* Fuente tech */
+  position: relative; /* Para posicionar el botón absoluto si quieres */
 }
 
-/*efecto Hover*/
+/*efecto Hover-pasar mouse por encima*/
 .message-card:hover {
-  transform: translateX(4px);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+  transform: translateX(4px); /*4 pixel a la dereca*/
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
   border-left-color: #60a5fa;
+}
+
+/*mensaje de alerta*/
+.message-card.alert {
+  border-left-color: #ef4444;/*rojo para aleras*/
+  background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%); ;
+}
+.message-card.alert:hover {
+  box-shadow: 0 6px 16px rgba(2398, 68, 68, 0.5); /*sombra roja*/
+  
 }
 
 /*Remitente*/
