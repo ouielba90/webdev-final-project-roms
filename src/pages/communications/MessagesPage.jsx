@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";  //hook para manejar estados
-import { messages as messagesData } from "../../../data/messages"; //datos externos -  array datos sistema
+import { messages as messagesData } from "../../../data/invetory/Mensajeria/messages"; //datos externos -  array datos sistema
 import MessageCard from "../../components/communications/MessageCard"
 
 //funcion principal
@@ -13,18 +13,14 @@ function MessagesPages() {
   }, [])  //el array vacio evita la re-renderizacion infinita
 
   const handleDeleteMessage = (id) => {
-    // Actualiza el estado eliminando el mensaje con el id dado
-    setMessages(prev => prev.filter(message => message.id !== id));
+    // código de eliminación
+    if (window.confirm('¿Mensaje de confirmación?')) {
+      // Actualiza el estado eliminando el mensaje con el id dado
+      setMessages(prev => prev.filter(message => message.id !== id));
 
-    /* return (
-           <div>
-           {messages.map(message => (
-               <MessageCard key={message.id} {...message} onDelete={() => handleDeleteMessage(message.id)} />
-          ))}
-           </div>
-       ) */
+    }
   }
-
+console.log(messages)
   {/*Renderizacion de la estructura basica*/ }
   return (
     <>

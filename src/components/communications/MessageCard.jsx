@@ -4,13 +4,12 @@ function MessageCard({id, from, to, text, date, isAlert, onDeleteMessage }) {
 
     //formateo de fecha a hora local
     const fechaFormateada = new Date(date).toLocaleString('es-ES');
+    console.log('hora', date);
 
     //Operador ternario
     const mensajeTernario = isAlert ? `⚠️ ${text}` : text
 
-    /*function handleDeleteMessage(id) {
-        onDeleteMessage(id)
-    }*/
+    
 
 
     //Renderizado
