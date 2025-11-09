@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";  //hook para manejar estados
-import { messages as messagesData } from "../../../data/invetory/Mensajeria/messages"; //datos externos -  array datos sistema
+import { messages as messagesData } from "../../../data/communications/messages"; //datos externos -  array datos sistema
 import MessageCard from "../../components/communications/MessageCard"
 
 //funcion principal
@@ -20,7 +20,7 @@ function MessagesPages() {
 
     }
   }
-console.log(messages)
+  console.log(messages)
   {/*Renderizacion de la estructura basica*/ }
   return (
     <>

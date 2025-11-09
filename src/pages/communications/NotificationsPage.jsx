@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";  //hook para manejar estados
-import notificationData from "../../../data/notifications"; //datos externos -  array datos sistema
+import notificationData from "../../../data/communications/notifications"; //datos externos -  array datos sistema
 import NotificationCard from "../../components/communications/NotificationCard"
 
 //funcion principal
