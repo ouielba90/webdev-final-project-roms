@@ -10,10 +10,6 @@ export const servers = [
     diskTb: 2,
     uptimeDays: 245,
     status: "active",
-    location: "Madrid",
-    cpuUsage: 35,
-    ramUsage: 50,
-    diskUsage: 20,
     hostedSoftware: [
       1001, 1006, 1007, 1008, 1009, 1029, 1030, 1040, 1052, 1095,
     ],
@@ -29,10 +25,6 @@ export const servers = [
     diskTb: 1,
     uptimeDays: 189,
     status: "active",
-    location: "Barcelona",
-    cpuUsage: 65,
-    ramUsage: 70,
-    diskUsage: 50,
     hostedSoftware: [1002, 1003, 1022, 1089, 1090, 1099],
   },
   {
@@ -46,10 +38,6 @@ export const servers = [
     diskTb: 4,
     uptimeDays: 120,
     status: "active",
-    location: "Madrid",
-    cpuUsage: 40,
-    ramUsage: 35,
-    diskUsage: 25,
     hostedSoftware: [1010, 1011, 1012, 1028, 1055, 1056],
   },
   {
@@ -63,10 +51,6 @@ export const servers = [
     diskTb: 2,
     uptimeDays: 300,
     status: "maintenance",
-    location: "Barcelona",
-    cpuUsage: 25,
-    ramUsage: 30,
-    diskUsage: 10,
     hostedSoftware: [1013, 1032, 1082],
   },
   {
@@ -80,10 +64,6 @@ export const servers = [
     diskTb: 10,
     uptimeDays: 400,
     status: "active",
-    location: "Madrid",
-    cpuUsage: 80,
-    ramUsage: 90,
-    diskUsage: 85,
     hostedSoftware: [1030, 1031, 1032, 1029],
   },
   {
@@ -97,10 +77,6 @@ export const servers = [
     diskTb: 6,
     uptimeDays: 210,
     status: "active",
-    location: "Barcelona",
-    cpuUsage: 50,
-    ramUsage: 45,
-    diskUsage: 40,
     hostedSoftware: [1008, 1009, 1021, 1051, 1095],
   },
   {
@@ -114,10 +90,6 @@ export const servers = [
     diskTb: 20,
     uptimeDays: 150,
     status: "active",
-    location: "Madrid",
-    cpuUsage: 20,
-    ramUsage: 25,
-    diskUsage: 30,
     hostedSoftware: [1065, 1066],
   },
   {
@@ -131,10 +103,6 @@ export const servers = [
     diskTb: 1,
     uptimeDays: 75,
     status: "active",
-    location: "Barcelona",
-    cpuUsage: 30,
-    ramUsage: 35,
-    diskUsage: 15,
     hostedSoftware: [1047, 1048],
   },
   {
@@ -148,10 +116,6 @@ export const servers = [
     diskTb: 0.5,
     uptimeDays: 500,
     status: "active",
-    location: "Madrid",
-    cpuUsage: 15,
-    ramUsage: 20,
-    diskUsage: 10,
     hostedSoftware: [1025, 1023],
   },
   {
@@ -165,10 +129,8 @@ export const servers = [
     diskTb: 1,
     uptimeDays: 20,
     status: "active",
-    location: "Barcelona",
-    cpuUsage: 10,
-    ramUsage: 15,
-    diskUsage: 5,
     hostedSoftware: [1050, 1051, 1052],
   },
 ];
+
+export default servers;

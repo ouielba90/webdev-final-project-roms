@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { DataContext } from "../../context/DataContext";
+import HardwareCard from "../../components/inventory/HardwareCard";
 
 function HardwareInvPage() {
   const { hardware } = useContext(DataContext)
@@ -8,14 +9,13 @@ function HardwareInvPage() {
       <h1>Hardware</h1>
       {hardware.map((el) => {
         return (
-          <div key={el.id}>
-            <div>Tipo: {el.type}</div>
-            <div>Modelo: {el.model}</div>
-            <div>Ubicación: {el.location}</div>
-            <div>Estado: {el.status}</div>
-            <div>Fecha de compra:: {el.purchaseDate}</div>
-            <hr />
-          </div>
+          <HardwareCard
+            key={el.id}
+            type={el.type}
+            model={el.model}
+            location={el.location}
+            status={el.status}
+            purchaseDate={el.purchaseDate} />
         )
       })}
     </>
