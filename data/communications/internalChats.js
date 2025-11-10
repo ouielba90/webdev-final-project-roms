@@ -2,7 +2,7 @@
 export const internalChats = [
   
   {
-    chatId: 1,
+    chatId: 2,
     participants: ["Carlos", "Ana"], // Dos trabajadores
     lastMessage: "¿Revisaste el firewall?",
     lastMessageDate: "2025-11-08T14:30:00",
@@ -10,7 +10,7 @@ export const internalChats = [
     type: "internal",
   },
   {
-    chatId: 2,
+    chatId: 6,
     participants: ["María", "Pedro"],
     lastMessage: "La reunión es a las 10",
     lastMessageDate: "2025-11-08T13:15:00",
@@ -18,7 +18,7 @@ export const internalChats = [
     type: "internal",
   },
   {
-    chatId: 3,
+    chatId: 7,
     participants: ["Carlos", "Ana"], // Dos trabajadores
     lastMessage: "¿Revisaste el firewall?",
     lastMessageDate: "2025-11-08T14:30:00",
@@ -26,7 +26,7 @@ export const internalChats = [
     type: "internal",
   },
   {
-    chatId: 4,
+    chatId: 8,
     participants: ["Manuel", "Lucía"], // Dos trabajadores
     lastMessage: "Ya está configurado el proxy.",
     lastMessageDate: "2025-11-08T09:15:00",

@@ -222,3 +222,54 @@ Diferenciacion visual entre normal y alerta
   font-style: italic;
   margin-top: 8px;
 }
+
+/*=================================
+  ESTILOS PARA HOME COMUNICACIONES
+==================================*/
+
+/* Contenedor de cada sección de navegación */
+.nav-section {
+  margin: 20px 0;
+}
+
+.nav-section h3 {
+  color: #1e293b;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+/* Contenedor de los links */
+.nav-links {
+  display: flex;
+  gap: 15px; /* Espacio entre los botones */
+  flex-wrap: wrap; /* Si no caben, bajan a la siguiente línea */
+}
+
+/* Estilos para los enlaces (botones) */
+.nav-links a {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none; /* Quitar subrayado */
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+/* Efecto hover en los enlaces */
+.nav-links a:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  transform: translateY(-2px); /* Se eleva un poco */
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.5);
+}
+
+/* Línea separadora */
+hr {
+  border: none;
+  border-top: 2px solid #e2e8f0;
+  margin: 20px 0;
+}
+```
+

@@ -3,7 +3,7 @@
 export const clientChats = [
  
   {
-    chatId: 3,
+    chatId: 1,
     participants: ["Carlos", "Cliente: TechCorp"], // Trabajador y cliente
     lastMessage: "¿Cuándo estará listo el proyecto?",
     lastMessageDate: "2025-11-08T15:00:00",

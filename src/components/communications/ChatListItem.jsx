@@ -1,4 +1,6 @@
 
+
+
 // Formatear fecha del último mensaje
 function ChatListItem({ chat, onClick }) {
 
@@ -6,7 +8,7 @@ function ChatListItem({ chat, onClick }) {
     //.toLocaleString('es-ES', {...}) formato local de España 
     //El método toLocaleString devuelve una cadena de texto con la fecha y hora formateadas según las opciones que se le pasen.
 
-    const fechaFormateada = new Date(chat.lastMenssageDate).toLocaleString('es-Es', {
+    const fechaFormateada = new Date(chat.lastMessageDate).toLocaleString('es-Es', {
         day: '2-digit',
         month: '2-digit',
         hour: '2-digit',
@@ -33,7 +35,7 @@ function ChatListItem({ chat, onClick }) {
 
                 <div className="chat-info">
                  <h3 className="chat-participants">{otherParticipant}</h3>
-                 <p className="chat-last-message">{chat.lastMenssage}</p>
+                 <p className="chat-last-message">{chat.lastMessage}</p>
                 </div>
 
                 <div className="chat-meta">
