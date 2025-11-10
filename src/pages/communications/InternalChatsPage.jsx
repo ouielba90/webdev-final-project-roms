@@ -12,7 +12,7 @@ function InternalChatPage() {
     //Función para abrir un chat específico y Navega a la página del chat
     const handleOpenChat = (chatId) => {
         //navega a la pagina del chat
-        navigate(`/comunications/Chat/${chatId}`);
+        navigate(`/comunications/chat/${chatId}`);
     };
 
     return (

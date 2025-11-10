@@ -23,13 +23,7 @@ function App() {
         </Routes>
       
 
-      <nav>
-        <ul>
-          <li><Link to="/communications/internal-chats">Chats Internos</Link></li>
-          <li><Link to="/communications/client-chats">Chats con Clientes</Link></li>
-        </ul>
-      </nav>
-
+      
       <Outlet></Outlet>
 
     </>
