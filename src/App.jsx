@@ -15,16 +15,7 @@ function App() {
       <Link to='/communications'>Comunicaciones</Link>
       <hr />
 
-      
-        <Routes>
-          <Route path="/communications/internal-chats" element={<InternalChatsPage />} />
-          <Route path="/communications/client-chats" element={<ClientChatsPage />} />
-          <Route path="/communications/chat/:chatId" element={<ChatViewPage />} />
-        </Routes>
-      
-
-      
-      <Outlet></Outlet>
+       <Outlet></Outlet>
 
     </>
   )
