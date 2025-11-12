@@ -18,6 +18,9 @@ import MessagesPage from './pages/communications/MessagesPage.jsx'
 import NotificationsPage from './pages/communications/NotificationsPage.jsx'
 import UserPage from './pages/UserPage.jsx'
 
+import ClientChatsPage from './pages/communications/ClientChatsPage.jsx'
+import ChatViewPage from './pages/communications/ChatViewPage.jsx'
+import InternalChatsPage from './pages/communications/InternalChatsPage.jsx'
 const router = createBrowserRouter(
   [
     {
@@ -77,19 +80,32 @@ const router = createBrowserRouter(
           ]
         },
         {
-          path: '/communications',
-          element: <HomeCommPage />,
-          children: [
-            {
-              path: 'messages',
-              element: <MessagesPage />,
-            },
-            {
-              path: 'notifications',
-              element: <NotificationsPage />,
-            }
-          ]
-        },
+  path: '/communications',
+  element: <HomeCommPage />,
+  children: [
+    {
+      path: 'messages',
+      element: <MessagesPage />,
+    },
+    {
+      path: 'notifications',
+      element: <NotificationsPage />,
+    },
+   
+    {
+      path: 'internal-chats',
+      element: <InternalChatsPage />,
+    },
+    {
+      path: 'client-chats',
+      element: <ClientChatsPage />,
+    },
+    {
+      path: 'chat/:chatId',
+      element: <ChatViewPage />,
+    }
+  ]
+},
       ]
     }
   ]
