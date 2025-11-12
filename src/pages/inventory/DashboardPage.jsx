@@ -7,39 +7,35 @@ function DashboardPage() {
 
   const availableSoft = software.filter(el => el.status === "available").length;
   const inUseSoft = software.filter(el => el.status === "in-use").length;
-  const maintSoft = software.filter(el => el.status === "maintenance").length;
   const operatHard = hardware.filter(el => el.status === "operational").length;
   const maintHard = hardware.filter(el => el.status === "maintenance").length;
   const activeServers = servers.filter(el => el.status === "active").length;
   const maintServers = servers.filter(el => el.status === "maintenance").length;
   const activeLic = licenses.filter(el => daysBetweenDates(el.expiryDate) > 0).length;
+  console.log(activeLic)
   const expiredLic = licenses.filter(el => daysBetweenDates(el.expiryDate) < 0).length;
   const sumActives = 100 * (availableSoft + operatHard + activeServers + activeLic) / 200
 
-  let riskLicenses = licenses.filter(item => item.status === "expiring" || item.status === "expired")
-    .map(item => ({ softwareIds: item.softwareIds, daysLeft: daysBetweenDates(item.expiryDate) }))
+  let riskLicenses = licenses
+    .map(item => ({ softwareId: item.softwareId, daysLeft: daysBetweenDates(item.expiryDate) }))
     .sort((a, b) => a.daysLeft - b.daysLeft)
     .slice(0, 5);
+
+  console.log(riskLicenses)
 
   let usedSoft = software.map(item => ({ name: item.name, used: item.installedOnHardware.length }))
     .sort((a, b) => b.used - a.used)
     .slice(0, 5);
 
-  let usedHard = hardware.map(item => ({ name: item.type + ' - ' + item.model, used: item.installedSoftware.length }))
+  let usedHard = hardware.map(item => ({ name: item.type + ' - ' + item.model, used: software.filter(s => s.installedOnHardware.find(el => el === item.id)).length }))
     .sort((a, b) => b.used - a.used)
     .slice(0, 5);
 
-  let ramUse = servers.map(item => ({ name: item.name, cpuUsage: item.cpuUsage, ramUsage: item.ramUsage, diskUsage: item.diskUsage }))
-    .sort((a, b) => b.ramUsage - a.ramUsage)
-    .slice(0, 4);
-
-  let diskUse = servers.map(item => ({ name: item.name, cpuUsage: item.cpuUsage, ramUsage: item.ramUsage, diskUsage: item.diskUsage }))
-    .sort((a, b) => b.diskUsage - a.diskUsage)
-    .slice(0, 4);
-
-  let cpuUse = servers.map(item => ({ name: item.name, cpuUsage: item.cpuUsage, ramUsage: item.ramUsage, diskUsage: item.diskUsage }))
-    .sort((a, b) => b.cpuUsage - a.cpuUsage)
-    .slice(0, 4);
+  const aggregated = getServerAverages(servers);
+  console.log(aggregated)
+  let ramUse = aggregated.sort((a, b) => b.ramUsage - a.ramUsage).slice(0, 4);
+  let diskUse = aggregated.sort((a, b) => b.diskUsage - a.diskUsage).slice(0, 4);
+  let cpuUse = aggregated.sort((a, b) => b.cpuUsage - a.cpuUsage).slice(0, 4);
 
   let combined = [...cpuUse, ...ramUse, ...diskUse]
   const uniqueElements = Array.from(
@@ -51,7 +47,7 @@ function DashboardPage() {
       <div>
         <h2>Estado General</h2>
         <p>Total recursos: {totalNumRes}</p>
-        <p>Software: {availableSoft} disponibles / {inUseSoft} en uso / {maintSoft} en mantenimiento</p>
+        <p>Software: {availableSoft} disponibles / {inUseSoft} en uso</p>
         <p>Hardware: {operatHard} operativos / {maintHard} en mantenimiento</p>
         <p>Licencias: {activeLic} activas / {expiredLic} expiradas </p>
         <p>Servidores: {activeServers} activos / {maintServers} en mantenimiento</p>
@@ -61,9 +57,9 @@ function DashboardPage() {
         <h2>Recursos con riesgo o atención prioritaria</h2>
         {riskLicenses.map((item) => {
           if (item.daysLeft < 0) {
-            return (<p>{software.filter(s => s.id === item.softwareIds[0]).map(s => s.name)} - expirada</p>)
-          } else {
-            return (<p>{software.filter(s => s.id === item.softwareIds[0]).map(s => s.name)} expira en {item.daysLeft} dias</p>)
+            return (<p>{software.filter(s => s.id === item.softwareId).map(s => s.name)} - expirada</p>)
+          } else if (item.daysLeft > 0 && item.daysLeft < 30) {
+            return (<p>{software.filter(s => s.id === item.softwareId).map(s => s.name)} expira en {item.daysLeft} dias</p>)
           }
         })}
       </div>
@@ -90,6 +86,22 @@ function daysBetweenDates(euDateStr) {
   const diffDays = Math.floor((today - givenDate) / (1000 * 60 * 60 * 24));
 
   return diffDays;
+}
+
+function getServerAverages(servers) {
+  return servers.map(server => {
+    const nodes = server.nodeSpecs;
+    const avgCpu = nodes.reduce((sum, n) => sum + n.cpuUsage, 0) / nodes.length;
+    const avgRam = nodes.reduce((sum, n) => sum + n.ramUsage, 0) / nodes.length;
+    const avgDisk = nodes.reduce((sum, n) => sum + n.diskUsage, 0) / nodes.length;
+
+    return {
+      name: server.name,
+      cpuUsage: avgCpu,
+      ramUsage: avgRam,
+      diskUsage: avgDisk
+    };
+  }).filter(s => s.ramUsage > 90 || s.diskUsage > 85);
 }
 
 export default DashboardPage 
