@@ -16,6 +16,7 @@ import HomeProjPage from './pages/projects/HomeProjPage.jsx'
 import HomeCommPage from './pages/communications/HomeCommPage.jsx'
 import MessagesPage from './pages/communications/MessagesPage.jsx'
 import NotificationsPage from './pages/communications/NotificationsPage.jsx'
+import UserPage from './pages/UserPage.jsx'
 
 const router = createBrowserRouter(
   [
@@ -68,7 +69,12 @@ const router = createBrowserRouter(
         {
           path: '/users',
           element: <UserHomePage />,
-          children: []
+          children: [
+            {
+              path: 'usersList',
+              element: <UserPage />
+            } 
+          ]
         },
         {
           path: '/communications',
