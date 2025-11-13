@@ -13,7 +13,7 @@ function HomeCommPage() {
         <Link to='/communications/notifications'>Notificaciones</Link>
         </div>
       </nav>
-      <hr /> {/*separador visual*/}
+      <hr className="separador-msgs-chats" />
        <nav className="nav-section">
         <h3>💬 Chats</h3>
         <div className="nav-links">
@@ -21,7 +21,7 @@ function HomeCommPage() {
           <Link to='/communications/client-chats'>Chats con Clientes</Link>
         </div>
       </nav>
-      <hr />
+      <hr className="separador-msgs-chats" />
       <Outlet></Outlet>
     </>
   )
