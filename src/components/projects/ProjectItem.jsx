@@ -19,6 +19,20 @@ function ProjectItem({ id, name, client, status, description, tasks }) {
                 </div>
                 <div>
                     <p className="status-project" >{status}</p>
+                    <div className="box-users-project">
+                        <h4>Usuarios</h4>
+                        <ul>
+                            <li>
+                                <p>ana</p>
+                            </li>
+                            <li>
+                                <p>maria</p>
+                            </li>
+                            <li>
+                                <p>juan</p>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </>

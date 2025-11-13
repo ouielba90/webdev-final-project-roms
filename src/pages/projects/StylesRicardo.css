@@ -46,3 +46,15 @@
 .box-list-tasks li {
     margin-left: 10px;
 }
+
+.box-users-project{
+    border: 1px, solid, black;
+    padding: 20px;
+}
+.box-users-project h4{
+    margin-top: 0px;
+}
+.box-users-project ul{
+    list-style-type: none;
+    padding-left: 0px;
+}
