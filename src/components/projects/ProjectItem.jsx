@@ -43,10 +43,12 @@ function ProjectItem({ id, name, client, status, description, tasks, projectUser
                         
                     </div>
                     )}
+                    {isOpen && (
                     <div className="box-buttons-project">
                         <button className="btn-edit-project">Editar</button>
                         <button className="btn-delete-project">Eliminar</button>
                     </div>
+                    )}
                 </div>
             </div>
         </>
