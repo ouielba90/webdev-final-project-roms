@@ -1,59 +1,64 @@
-export function obtenerColorPorRol(rol) {
-    const coloresPorRol = {
+export function obtenerEstilosPorRol(rol) {
+    const estilosPorRol = {
         Consultor: {
-            background:'#A3C8FF',
-            border: '#006affff',
+            color: {
+                background:'#68a4ffff',
+                border: '#006affff',
+            },
+            tema: {
+                background: '#8cbcffff',
+                border: '#006affff',
+                text: '#ffff',
+            },
         },
         
         Consultora: {
-            background:'#A3C8FF',
-            border: '#006affff',
+            color: {
+                background:'#68a4ffff',
+                border: '#006affff',
+            },
+            tema: {
+                background: '#8cbcffff',
+                border: '#006affff',
+                text: '#ffff',
+            },
         },
 
         Manager: {
-            background: '#FF8080',
-            border: '#e00000ff',
+            color: {
+                background: '#ff6969ff',
+                border: '#e00000ff',
+            },
+            tema: {
+                background: '#ff8080',
+                border: '#e00000ff',
+                text: '#ffff',
+            },
         },
         
         Cliente: {
-            background: '#9FDCAB',
-            border: '#36a745ff',
+            color: {
+                background: '#6ccb79ff',
+                border: '#36a745ff',
+            },
+            tema: {
+                background: '#9FDCAB',
+                border: '#36a745ff',
+                text: '#ffff',
+            },
         },
     };
     
-    return coloresPorRol[rol] || '#CCCCCC';
-}
-
-export function temaPorRol(rol) {
-    const temaPorRol = {
-        Consultor: {
-            background: '#4D96FF',
-            border: '#006affff',
-            text: '#ffff',
+    return estilosPorRol[rol] || {
+        color: {
+            background: '#DDDDDD',
+            border: '#CCCCCC',
         },
 
-        Consultora: {
-            background: '#4D96FF',
-            border: '#006affff',
-            text: '#ffff',
+        tema: {
+            background: '#F0F0F0',
+            border: '#CCCCCC',
+            text: '#333333',
         },
-
-        Manager: {
-            background: '#eb4040ff',
-            border: '#e00000ff',
-            text: '#ffff',
-        },
-
-        Cliente: {
-            background: '#6BCB77',
-            border: '#36a745ff',
-            text: '#ffff',
-        },
-    };
-    
-    return temaPorRol[rol] || {
-        background: '#F0F0F0',
-        border: '#CCCCCC',
-        text: '#333333',
     };
 }

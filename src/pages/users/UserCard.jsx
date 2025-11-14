@@ -1,32 +1,20 @@
 import { obtenerIniciales } from "./helpers"
-import { obtenerColorPorRol, temaPorRol } from "./themes"
+import { obtenerEstilosPorRol } from "./themes"
 
 function UserCard({ user }) {
-    const tema = temaPorRol(user.role)
-    const color = obtenerColorPorRol(user.role)
-
+    const { color, tema } = obtenerEstilosPorRol(user.role)
     return (
-        <div 
-        className="userDiv"
-        style={{
-            backgroundColor: tema.background,
-            border: `20px solid ${tema.border}`,
-            color: tema.text,
-            borderRadius: '10px',
-            borderTopLeftRadius: '150px',
-            borderBottomLeftRadius: '150px',
-        }} 
-        key={user.id}>
-            <div className="img-perfil" 
-                style={{ 
-                    backgroundColor: color.background,
-                    border: `15px solid ${color.border}` }}>
-                {obtenerIniciales(user.name)}
+        <div className="userDiv" style={{ backgroundColor: color.background, border: `15px solid ${color.border}` }}>
+            <div className="user-data">
+                <p>
+                    Nombre: {user.name} <br /> <br />
+                    Rol: {user.role} <br /> <br />
+                    Correo: {user.email}
+                </p>
             </div>
-            <div className="user-data user-name">
-                <h2 className="title-dato">Nombre: {user.name} </h2>
-                <h2 className="title-dato">Rol: {user.role}</h2>
-                <h2 className="title-dato">Correo: {user.email}</h2>
+            <div className="img-perfil" style={{ background: tema.background, border: ` 20px solid ${tema.border}`, color: tema.text }}>
+                <span>{obtenerIniciales(user.name)}</span>
+                
             </div>
         </div>
     )
