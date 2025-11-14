@@ -12,17 +12,14 @@ function ChatMessage ({ message, currentUser }) {
     //.toLocaleString('es-ES', {...}) formato local de España 
     //El método toLocaleString devuelve una cadena de texto con la fecha y hora formateadas según las opciones que se le pasen.
 
-    const fechaFormateada = new Date(message.date).toLocaleString('es-ES', {
-    hour: '2-digit',
-    minute: '2-digit'
-  });
+    
 
   {/*representa un mensaje individual en una conversación de chat*/}
   return ( 
     <div className={`chat-message ${isMine ? 'mine' : 'theirs'}`}>
       <div className="message-bubble">
+        <p>Author: {message.from}</p>
         <p className="message-text">{message.text}</p>
-        <span className="message-time">{fechaFormateada}</span>
       </div>
     </div>
   )

@@ -1,19 +1,21 @@
 
-import { useState } from 'react';
-import { internalChats } from '../../../data/communications/internalChats.js';
+import { useEffect, useState } from 'react';
+import { allChats } from '../../../data/communications/chats.js';
 import ChatListItem from '../../components/communications/ChatListItem';
-import { useNavigate } from 'react-router-dom';
 
+//Funcion principal
 function InternalChatPage() {
+    const [chats, setChats] = useState(allChats);
 
-    const [chats, setChats] = useState(internalChats);
-    const navigate = useNavigate(); //para navegar a otras paginas
+    //2. Filtramos los chats con la propiedad type:internal
+    //2.1. Usamos filter y useEffect
 
-    //Función para abrir un chat específico y Navega a la página del chat
-    const handleOpenChat = (chatId) => {
-        //navega a la pagina del chat
-        navigate(`/comunications/chat/${chatId}`);
-    };
+    useEffect(() => {
+        //chat de tipo interno y con al menos un mensaje sin leer
+        const chat = allChats.filter(chat => chat.type === "internal" && chat.unreadCount > 0)
+            setChats(chat);
+        }, []);
+        
 
     return (
         <div className='container-chats'>
@@ -26,7 +28,6 @@ function InternalChatPage() {
                         <ChatListItem
                             key={chat.chatId}
                             chat={chat}
-                            onClick={() => handleOpenChat(chat.chatId)}
                         />
                     ))
                 )}
