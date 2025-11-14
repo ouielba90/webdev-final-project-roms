@@ -58,3 +58,30 @@
     list-style-type: none;
     padding-left: 0px;
 }
+.box-users-project ul li{
+    margin-bottom: 10px;
+}
+
+.box-buttons-project{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 40px;
+}
+
+.btn-new-project{
+    border: solid;
+    background-color: lightblue;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+.btn-edit-project{
+    border: solid;
+    background-color: lightblue;
+    padding: 10px;
+}
+.btn-delete-project{
+    border: solid;
+    background-color: lightblue;
+    padding: 10px;
+}
