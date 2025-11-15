@@ -20,8 +20,8 @@ function ProjectItem({ id, name, client, status, description, tasks, projectUser
 
     return (
         <>
-            <div key={id} className="box-project" onClick={toggleOpen}>
-                <div>
+            <div key={id} className="box-project">
+                <div onClick={toggleOpen}>
                     <h3 className="name-project">{name}</h3>
                     <p className="client-project">{client}</p>
                     <p className="description-project">{description}</p>
@@ -36,17 +36,15 @@ function ProjectItem({ id, name, client, status, description, tasks, projectUser
                     {isOpen && (
                     <div className="box-users-project">
                         <h4>Usuarios</h4>
-                        
                         <ul>
                             {usersItems}
-                        </ul>
-                        
+                        </ul>  
                     </div>
                     )}
                     {isOpen && (
                     <div className="box-buttons-project">
-                        <button className="btn-edit-project">Editar</button>
-                        <button className="btn-delete-project">Eliminar</button>
+                        <button className="btn-card-project">Editar</button>
+                        <button className="btn-card-project">Eliminar</button>
                     </div>
                     )}
                 </div>
