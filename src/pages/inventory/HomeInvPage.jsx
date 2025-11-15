@@ -4,6 +4,7 @@ import { software } from './../../../data/inventory/software'
 import { hardware } from './../../../data/inventory/hardware'
 import { servers } from './../../../data/inventory/servers'
 import { licenses } from './../../../data/inventory/licenses'
+import "./../../indexOuissam.css"
 
 function HomeInvPage() {
   const dataValue = { software, hardware, servers, licenses }
