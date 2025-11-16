@@ -300,11 +300,17 @@ Chats internos y clientes
   border-radius: 8px;
 }
 
+.chat-list {
+  background-color: #99bff5;
+}
+
 .chat-list-item {
+  display: block;
   cursor: pointer;
+  background-color: blue;
 }
 .chat-avatar {
-color:#2563eb
+  color:darkblue;
 }
 
 .chat-info {
@@ -312,10 +318,22 @@ color:white;
 }
 
 .chat-meta {
-color: black;
+color: white;
 
 }
 .chat-list:hover {
   transform: translateY(-3px); /*se eleva hacia arriba*/
   box-shadow: 0 6px 12px rgba(59, 130, 246, 0.5); /*sombra*/
+}
+
+.chat-message.mine {
+
+}
+
+.chat-message.theirs {
+
+}
+
+.chat-input-area {
+  
 }

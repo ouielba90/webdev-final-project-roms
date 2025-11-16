@@ -45,6 +45,7 @@ function ChatListItem({ chat }) {
                         <span className="chat-unread-badge">{chat.unreadCount}</span>
                     )}
                 </div>
+                <hr className="separador-chats-internos" />
          </div>
             );
 }

@@ -22,7 +22,7 @@ export const allChats = [
       { id: 4, from: "María", text: "Trae los informes del proyecto" },
     ],
     lastMessageDate: "2025-11-08T13:15:00",
-    unreadCount: 0,
+    unreadCount: 1,
     type: "internal",
   },
   {
@@ -49,7 +49,7 @@ export const allChats = [
       { id: 5, from: "Lucía", text: "Excelente trabajo, gracias" },
     ],
     lastMessageDate: "2025-11-08T09:15:00",
-    unreadCount: 0,
+    unreadCount: 7,
     type: "internal",
   },
 
@@ -94,7 +94,7 @@ export const allChats = [
     { id: 2, from: "Cliente: Sergio", text: "El acceso remoto ya está funcionando." }
   ],
   lastMessageDate: "2025-11-05T08:50:00",
-  unreadCount: 0,
+  unreadCount: 2,
   type: "client"
 }
 
