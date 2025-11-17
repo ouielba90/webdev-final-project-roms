@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router-dom"
 import { users } from "./../../data/users.js"
-import UserCard from "./users/userCard.jsx"
+import UserCard from "./users/UserCard.jsx"
 import { useState } from "react"
 import RegistroForm from "./users/formulario.jsx"
 

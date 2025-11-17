@@ -871,7 +871,7 @@ export const software = [
   },
   {
     id: 1080,
-    name: "MongoDB (Enterprise example)",
+    name: "MongoDB (Enterprise)",
     version: "6.0",
     category: "Databases",
     status: "available",
@@ -900,7 +900,7 @@ export const software = [
     licenseId: 4012,
     installedOnHardware: [],
     serverId: [3004],
-    description: "Source management & CI; enterprise license example.",
+    description: "Source management & CI; enterprise license.",
   },
   {
     id: 1083,
