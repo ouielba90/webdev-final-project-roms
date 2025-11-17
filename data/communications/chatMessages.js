@@ -7,18 +7,16 @@ export const chatMessages = {
   1: [
     {
       id: 1,
-      chatId: 1,
       from: "Carlos",
-      to: "Ana",
+      
       text: "Hola Ana, ¿revisaste el firewall de TechNova?",
       date: "2025-11-08T10:00:00",
       read: true,
     },
     {
       id: 2,
-      chatId: 1,
       from: "Ana",
-      to: "Carlos",
+      
       text: "Sí, ya está configurado. ¿Necesitas algo más?",
       date: "2025-11-08T10:05:00",
       read: false,

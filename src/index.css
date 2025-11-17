@@ -3,33 +3,32 @@
   Definen el ancho máximo y centrado, Dan padding para que no esté pegado a los bordes
    ==================================*/
 
-   .container-messages,
-   .container-notifications {
-    max-width: 900px; /*ancho maximo para que no se estire demasiado*/
-    margin: 0 auto; /*centrado horizontal*/
-    padding: 20px; /*espacio interno*/
-    background-color: #f8fafc;
-    min-height: 2100vh; /*min. altura de la pantalla*/
-   }
+.container-messages,
+.container-notifications {
+  max-width: 900px; /*ancho maximo para que no se estire demasiado*/
+  margin: 0 auto; /*centrado horizontal*/
+  padding: 20px; /*espacio interno*/
+  background-color: #f8fafc;
+  min-height: 2100vh; /*min. altura de la pantalla*/
+}
 
-   /*Encabezado con titulo y boton*/
-   .messages-header,
-   .notifications-header {
-    display: flex; /* alinea titulo y boton*/
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px; /*espacio debajo*/
-    padding-bottom: 16px;
-    border-bottom: 3px solid #3b82f6;
-   }
-   
-   .messages-header h1,
-   .notifications-header h1 {
-    color: #1e293b;
-    font-size: 2em; /*tamaño grande*/
-    margin: 0;
-   }
+/*Encabezado con titulo y boton*/
+.messages-header,
+.notifications-header {
+  display: flex; /* alinea titulo y boton*/
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px; /*espacio debajo*/
+  padding-bottom: 16px;
+  border-bottom: 3px solid #3b82f6;
+}
 
+.messages-header h1,
+.notifications-header h1 {
+  color: #1e293b;
+  font-size: 2em; /*tamaño grande*/
+  margin: 0;
+}
 
 /*====================
 2.COMPONENTE MESSAGECARD
@@ -38,11 +37,15 @@ diseño tipo terminal, hover para interactividad
 
 .message-card {
   border: 1px solid #334155;
-  border-left: 4px solid #3b82f6;/*borde grueso izquierdo */
+  border-left: 4px solid #3b82f6; /*borde grueso izquierdo */
   border-radius: 8px;
   padding: 20px;
   margin: 16px 0;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);/*profundidadad sombra*/
+  background: linear-gradient(
+    135deg,
+    #0f172a 0%,
+    #1e293b 100%
+  ); /*profundidadad sombra*/
   color: #e2e8f0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease; /*transicion hover*/
@@ -59,12 +62,11 @@ diseño tipo terminal, hover para interactividad
 
 /*mensaje de alerta*/
 .message-card.alert {
-  border-left-color: #ef4444;/*rojo para aleras*/
-  background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%); ;
+  border-left-color: #ef4444; /*rojo para aleras*/
+  background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
 }
 .message-card.alert:hover {
   box-shadow: 0 6px 16px rgba(2398, 68, 68, 0.5); /*sombra roja*/
-  
 }
 
 /*=================================
@@ -101,10 +103,9 @@ diseño tipo terminal, hover para interactividad
   font-size: 1em;
   line-height: 1.5; /*mejora visibilidad*/
   padding: 12px;
-  background-color: rgba(15, 23, 42, 0.5);/*fondo semitransparente*/
+  background-color: rgba(15, 23, 42, 0.5); /*fondo semitransparente*/
   border-radius: 6px;
   border-left: 3px solid #475569; /*borde izquierdo decorativo*/
-
 }
 
 /*Fecha*/
@@ -113,10 +114,11 @@ diseño tipo terminal, hover para interactividad
   color: #64748b;
   text-align: right;
   margin-top: 10px;
-  font-style: italic;/*cursiva*/
+  font-style: italic; /*cursiva*/
 }
 
-.message-date::before { /*icono  antes de la propiedad*/
+.message-date::before {
+  /*icono  antes de la propiedad*/
   content: "⏱ ";
 }
 
@@ -136,9 +138,13 @@ diseño tipo terminal, hover para interactividad
 /*Boton Eliminar Mensaje y Notificacion*/
 .message-card button,
 .notification-card button {
-  background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);/*degradado rojo*/
+  background: linear-gradient(
+    135deg,
+    #dc2626 0%,
+    #991b1b 100%
+  ); /*degradado rojo*/
   color: white;
-  border:none;
+  border: none;
   padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer; /*manita al pasar el mouse*/
@@ -157,8 +163,6 @@ diseño tipo terminal, hover para interactividad
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /*sombra original*/
 }
 
-
-
 /*====================================
 3. NOTIFICATIONCARD
 Diferenciacion visual entre normal y alerta
@@ -176,23 +180,31 @@ Diferenciacion visual entre normal y alerta
 }
 
 .notification-card:hover {
-  transform: translateY(-3px);/*se eleva hacia arriba*/
-  box-shadow: 0 6px 12px rgba(59, 130, 246, 0.5);/*sombra*/
+  transform: translateY(-3px); /*se eleva hacia arriba*/
+  box-shadow: 0 6px 12px rgba(59, 130, 246, 0.5); /*sombra*/
 }
 
 .notification-card.alert {
-  background-color: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); /* Degradado rojo claro */;
+  background-color: linear-gradient(
+    135deg,
+    #fef2f2 0%,
+    #fee2e2 100%
+  ); /* Degradado rojo claro */
   border-color: #ff4d4d;
-  border-left: 5px solid #dc2626/* Borde izquierdo más grueso y rojo oscuro */
+  border-left: 5px solid #dc2626; /* Borde izquierdo más grueso y rojo oscuro */
 }
 
 .notification-card.normal {
-  background: linear-gradient(135deg,#eff6ff 0%, #dbeafe 100%);/*degradado azul*/
+  background: linear-gradient(
+    135deg,
+    #eff6ff 0%,
+    #dbeafe 100%
+  ); /*degradado azul*/
   border-color: #3b82f6;
-  
 }
 
-.notification-from { /* Elementos internos de la notificación */
+.notification-from {
+  /* Elementos internos de la notificación */
   font-weight: 700;
   color: #1e40af; /* Azul oscuro */
   font-size: 0.95em;
@@ -200,7 +212,7 @@ Diferenciacion visual entre normal y alerta
 }
 
 .notification-to {
-  color: #64748b; 
+  color: #64748b;
   font-size: 0.88em;
   margin-bottom: 10px;
 }
@@ -211,7 +223,12 @@ Diferenciacion visual entre normal y alerta
   line-height: 1.5;
   margin: 12px 0;
   padding: 10px;
-  background-color: rgba(255, 255, 255, 0.6); /* Fondo blanco semi-transparente */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.6
+  ); /* Fondo blanco semi-transparente */
   border-radius: 6px;
 }
 
@@ -272,4 +289,51 @@ Diferenciacion visual entre normal y alerta
   margin: 20px 0;
 }
 
+/*=======================
+Chats internos y clientes
+=======================*/
 
+.container-chats {
+  background-color: #60a5fa;
+  display: block;
+  border: 2px solid;
+  border-radius: 8px;
+}
+
+.chat-list {
+  background-color: #99bff5;
+}
+
+.chat-list-item {
+  display: block;
+  cursor: pointer;
+  background-color: blue;
+}
+.chat-avatar {
+  color:darkblue;
+}
+
+.chat-info {
+color:white;
+}
+
+.chat-meta {
+color: white;
+
+}
+.chat-list:hover {
+  transform: translateY(-3px); /*se eleva hacia arriba*/
+  box-shadow: 0 6px 12px rgba(59, 130, 246, 0.5); /*sombra*/
+}
+
+.chat-message.mine {
+
+}
+
+.chat-message.theirs {
+
+}
+
+.chat-input-area {
+  
+}

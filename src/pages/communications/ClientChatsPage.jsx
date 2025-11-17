@@ -1,41 +1,36 @@
-import { useState } from "react";
-import { clientChats } from '../../../data/communications/clientChats.js';
+import { useEffect, useState } from "react";
+import { allChats } from '../../../data/communications/chats.js';
 import ChatListItem from '../../components/communications/ChatListItem.jsx';
-import  { useNavigate } from 'react-router-dom';
-
 
 function ClientChatsPage() {
+const [chats, setChats] = useState(allChats);
 
-    const [chats, setChats] = useState(clientChats);
-    const navigate = useNavigate();  //para navegar a otra pagina
+useEffect(() => {
+        //chat de tipo interno y con al menos un mensaje sin leer
+        const chat = allChats.filter(chat => chat.type === "client" && chat.unreadCount > 0)
+            setChats(chat);
+        }, []);
 
-    //funcion para abri un chat especifico
-    const handleOpenChat = (chatId) => {
-        //navega a la pagina del chat
-        navigate(`/communications/chat/${chatId}`);
-    };
+  return (
 
-    return(
-         
     <div className="container-chats">
-      <h1>💬 Client Chats</h1>
-      
+      <h1>💬 Chats con Clientes</h1>
       <div className="chat-list">
         {chats.length === 0 ? (
           <p>No hay chats disponibles</p>
         ) : (
           chats.map((chat) => (
-            <ChatListItem 
+            <ChatListItem
               key={chat.chatId}
               chat={chat}
-              onClick={() => handleOpenChat(chat.chatId)}
+
             />
           ))
         )}
       </div>
     </div>
 
-    )
+  )
 }
 
 

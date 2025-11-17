@@ -17,8 +17,8 @@
 
 .status-project {
     border: 1px, solid, black;
-    /*width: 50px;
-    height: 50px;*/
+    width: 110px;
+    /*height: 50px;*/
     padding: 20px;
 }
 
@@ -57,4 +57,60 @@
 .box-users-project ul{
     list-style-type: none;
     padding-left: 0px;
+}
+.box-users-project ul li{
+    margin-bottom: 10px;
+}
+
+.box-buttons-project{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 40px;
+}
+
+.btn-standard{
+    border: solid;
+    background-color: lightblue;
+    padding: 10px;
+    margin: 10px;
+}
+.btn-cancel{
+    border: solid;
+    background-color: lightcoral;
+    padding: 10px;
+    margin: 10px;
+}
+.btn-new-project{
+    border: solid;
+    background-color: lightblue;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+.btn-card-project{
+    border: solid;
+    background-color: lightblue;
+    padding: 10px;
+}
+
+/*Estilos para el componente create project*/
+.create-project-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.box-create-project{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    border: 1px, solid, black;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.div-create{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
 }

@@ -1,8 +1,9 @@
-
+import { useNavigate } from "react-router-dom";
 
 
 // Formatear fecha del último mensaje
-function ChatListItem({ chat, onClick }) {
+function ChatListItem({ chat }) {
+    const navigate = useNavigate();  //para navegar a otra pagina
 
     //new Date(chat.lastMenssageDate) Convierte el valor chat.lastMenssageDate, string, en un objeto Date de JavaScript.(manipula fechas)
     //.toLocaleString('es-ES', {...}) formato local de España 
@@ -27,7 +28,7 @@ function ChatListItem({ chat, onClick }) {
     return (
         <div 
             className = {`chat-list-item ${chat.unreadCount > 0 ? 'unread' :''}`}
-            onClick = { onClick } >{/*abre el chat*/ }
+            onClick = {() => navigate(`/communications/chat/${chat.chatId}`) } >{/*abre el chat*/ }
     
                 <div className = "chat-avatar"> {/*avatar o icono*/ }
                 { chat.type === 'internal' ? '👥' : '🏢' } 
@@ -35,7 +36,7 @@ function ChatListItem({ chat, onClick }) {
 
                 <div className="chat-info">
                  <h3 className="chat-participants">{otherParticipant}</h3>
-                 <p className="chat-last-message">{chat.lastMessage}</p>
+                 <p className="chat-last-message">{chat.messages[chat.messages.length -1 ].text}</p>
                 </div>
 
                 <div className="chat-meta">
@@ -44,6 +45,7 @@ function ChatListItem({ chat, onClick }) {
                         <span className="chat-unread-badge">{chat.unreadCount}</span>
                     )}
                 </div>
+                <hr className="separador-chats-internos" />
          </div>
             );
 }
