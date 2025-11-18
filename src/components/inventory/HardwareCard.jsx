@@ -6,9 +6,9 @@ function HardwareCard({ id, type, model, status, specs, handleRemove, handleEdit
         <span className="software-card-status">{status}</span>
       </div>
 
-      <div>
-        <div>Tipo: {type}</div>
-        <div>Especificaciones: CPU - {specs.cpu} RAM - {specs.ram} Storage - {specs.storage}</div>
+      <div>{type}</div>
+      <div className="software-card-third-section">
+        <div>{specs.cpu} - {specs.ram} - {specs.storage}</div>
       </div>
 
       <div className="software-card-second-section">

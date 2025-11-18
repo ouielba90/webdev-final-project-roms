@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function SoftwareCard({ id, name, version, category, status, handleRemove, handleEdit }) {
   return (
     <>
@@ -8,7 +10,11 @@ function SoftwareCard({ id, name, version, category, status, handleRemove, handl
         </div>
         <div>{category} · {version}</div>
         <div className="software-card-second-section">
-          <div className="software-card-details-btn"><button>Ver detalles</button></div>
+          <div className="software-card-details-btn">
+            <Link to={`/inventory/software/${id}`} className="btn-link">
+              Ver detalles
+            </Link>
+          </div>
           <div className=""><button onClick={() => handleEdit(id)}>Edit</button></div>
           <div className="software-card-delete-btn"><button onClick={() => handleRemove(id)}>Delete</button></div>
         </div>

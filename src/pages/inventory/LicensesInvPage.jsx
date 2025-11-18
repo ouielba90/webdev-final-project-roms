@@ -147,19 +147,27 @@ function LicensesInvPage() {
       </Modal>
       <h1>Licenses</h1>
       <div className="software-main-container">
-        <div className="hardware-filters">
-          <input type="text" id="searchForm" onChange={handleSearch} />
-          <button onClick={handleSortAZ}>A-Z</button>
-          <button onClick={handleSortZA}>Z-A</button>
-        </div>
-        <div className="hardware-add-wrapper">
-          <p>Status</p>
-          <select onClick={handleStatus}>
-            <option></option>
-            <option>active</option>
-            <option>expired</option>
-          </select>
-          <button onClick={() => setAddFormOpen(!addFormOpen)}>Add license</button>
+        <div className="filters-container">
+          <div className="filters-row-main">
+            <input type="text" id="searchForm" onChange={handleSearch} />
+            <div className="filter-field">
+              <p>Status</p>
+              <select onClick={handleStatus}>
+                <option></option>
+                <option>active</option>
+                <option>expired</option>
+              </select>
+            </div>
+          </div>
+          <div className="filters-btn-combined">
+            <div className="filters-row-sort">
+              <button onClick={handleSortAZ}>A-Z</button>
+              <button onClick={handleSortZA}>Z-A</button>
+            </div>
+            <div className="filters-row-combined">
+              <button onClick={() => setAddFormOpen(!addFormOpen)}>Add license</button>
+            </div>
+          </div>
         </div>
         <div className="software-cards">
           {query.map((el) => {

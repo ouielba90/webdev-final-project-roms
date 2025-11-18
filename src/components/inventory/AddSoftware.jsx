@@ -55,11 +55,11 @@ function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHa
           <select multiple id="serverId" name="serverId" value={selectedServ}
             onChange={(e) => setSelectedServ(Array.from(e.target.selectedOptions, o => o.value))}
           >
-            <option value="">None</option>
             {serverList.map((srv, i) => (
               <option key={i} value={srv.id}>{srv.name}</option>
             ))}
           </select>
+          <small className="hint">Hold CTRL to select multiple</small>
         </div>
       </div>
 

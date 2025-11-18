@@ -142,25 +142,35 @@ function HardwareInvPage() {
       </Modal>
       <h1>Hardware</h1>
       <div className="software-main-container">
-        <div className="hardware-filters">
-          <input type="text" id="searchForm" onChange={handleSearch} />
-          <button onClick={handleSortAZ}>A-Z</button>
-          <button onClick={handleSortZA}>Z-A</button>
-        </div>
-        <div className="hardware-add-wrapper">
-          <label>State</label>
-          <select onClick={handleType}>
-            <option></option>
-            <option>Laptop</option>
-            <option>Desktop</option>
-          </select>
-          <label>Status</label>
-          <select onClick={handleStatus}>
-            <option></option>
-            <option>operational</option>
-            <option>maintenance</option>
-          </select>
-          <button onClick={() => setAddFormOpen(!addFormOpen)}>Add hardware</button>
+        <div className="filters-container">
+          <div className="filters-row-main">
+            <input type="text" id="searchForm" onChange={handleSearch} />
+            <div className="filter-field">
+              <p>State</p>
+              <select onClick={handleType}>
+                <option></option>
+                <option>Laptop</option>
+                <option>Desktop</option>
+              </select>
+            </div>
+            <div className="filter-field">
+              <p>Status</p>
+              <select onClick={handleStatus}>
+                <option></option>
+                <option>operational</option>
+                <option>maintenance</option>
+              </select>
+            </div>
+          </div>
+          <div className="filters-btn-combined">
+            <div className="filters-row-sort">
+              <button onClick={handleSortAZ}>A-Z</button>
+              <button onClick={handleSortZA}>Z-A</button>
+            </div>
+            <div className="filters-row-sort">
+              <button onClick={() => setAddFormOpen(!addFormOpen)}>Add hardware</button>
+            </div>
+          </div>
         </div>
         <div className="software-cards">
           {query.map((el) => {
@@ -180,7 +190,7 @@ function HardwareInvPage() {
             )
           })}
         </div>
-      </div>
+      </div >
     </>
   )
 }

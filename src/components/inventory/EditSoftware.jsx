@@ -90,6 +90,7 @@ function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmi
               <option key={i} value={srv.id}>{srv.name}</option>
             ))}
           </select>
+          <small className="hint">Hold CTRL to select multiple</small>
         </div>
       </div>
 

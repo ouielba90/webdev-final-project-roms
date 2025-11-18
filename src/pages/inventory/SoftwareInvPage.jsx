@@ -4,6 +4,7 @@ import SoftwareCard from "../../components/inventory/SoftwareCard";
 import AddSoftware from "../../components/inventory/AddSoftware";
 import EditSoftware from "../../components/inventory/EditSoftware.jsx"
 import Modal from "../../components/inventory/Modal.jsx"
+import { Outlet } from "react-router-dom";
 
 function SoftwareInvPage() {
   const { software, hardware, servers } = useContext(DataContext);
@@ -149,46 +150,57 @@ function SoftwareInvPage() {
       </Modal>
       <h1>Sofware</h1>
       <div className="software-main-container">
-        <div className="software-filters">
-          <input type="text" id="searchForm" onChange={handleSearch} />
-          <button onClick={handleSortAZ}>A-Z</button>
-          <button onClick={handleSortZA}>Z-A</button>
-          <p>Status</p>
-          <select onChange={handleStatus}>
-            <option></option>
-            <option>available</option>
-            <option>in-use</option>
-          </select>
-        </div>
-        <div className="software-add-wrapper">
-          <button onClick={() => setAddFormOpen(!addFormOpen)}>Add software</button>
+        <div className="filters-container">
+          <div className="filters-row-main">
+            <input type="text" id="searchForm" onChange={handleSearch} />
+            <div className="filter-field">
+              <p>Status</p>
+              <select onChange={handleStatus}>
+                <option></option>
+                <option>available</option>
+                <option>in-use</option>
+              </select>
+            </div>
+          </div>
+          <div className="filters-btn-combined">
+            <div className="filters-row-sort">
+              <button onClick={handleSortAZ}>A-Z</button>
+              <button onClick={handleSortZA}>Z-A</button>
+            </div>
+            <div className="filters-row-sort">
+              <button onClick={() => setAddFormOpen(!addFormOpen)}>Add software</button>
+            </div>
+          </div>
         </div>
         <div className="software-cards">
           {query.map((el) => {
             console.log("card", el.id, el.name, el.serverId)
             return (
-              <SoftwareCard
-                key={el.id}
-                id={el.id}
-                name={el.name}
-                version={el.version}
-                category={el.category}
-                description={el.description}
-                status={el.status}
-                licenseId={el.licenseId}
-                installedOnHardware={el.installedOnHardware.map(hard => {
-                  // console.log(hardware.find(h => h.id === hard).model)
-                  const v = hardware.find(h => Number(hard) === h.id)
-                  return v ? v.model : undefined;
-                })}
-                serverId={el.serverId.map(serv => {
-                  // console.log(hardware.find(h => h.id === hard).model)
-                  const v = servers.find(s => Number(serv) === s.id)
-                  return v ? v.name : undefined;
-                })}
-                handleRemove={handleRemove}
-                handleEdit={handleEdit}
-              />
+              <>
+                <SoftwareCard
+                  key={el.id}
+                  id={el.id}
+                  name={el.name}
+                  version={el.version}
+                  category={el.category}
+                  description={el.description}
+                  status={el.status}
+                  licenseId={el.licenseId}
+                  installedOnHardware={el.installedOnHardware.map(hard => {
+                    // console.log(hardware.find(h => h.id === hard).model)
+                    const v = hardware.find(h => Number(hard) === h.id)
+                    return v ? v.model : undefined;
+                  })}
+                  serverId={el.serverId.map(serv => {
+                    // console.log(hardware.find(h => h.id === hard).model)
+                    const v = servers.find(s => Number(serv) === s.id)
+                    return v ? v.name : undefined;
+                  })}
+                  handleRemove={handleRemove}
+                  handleEdit={handleEdit}
+                />
+                <Outlet></Outlet>
+              </>
             )
           })}
         </div>
