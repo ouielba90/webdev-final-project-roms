@@ -1,24 +1,23 @@
-function SoftwareCard({ id, name, version, category, description, status, licenseId, installedOnHardware, handleRemove, serverId }) {
+import { Link } from "react-router-dom";
+
+function SoftwareCard({ id, name, version, category, status, handleRemove, handleEdit }) {
   return (
     <>
-      <div>
-        <div>Nombre: {name}</div>
-        <div>Versión: {version}</div>
-        <div>Categoría: {category}</div>
-        <div>Descripción: {description}</div>
-        {installedOnHardware.length !== 0 ? (
-          <div>Hardware: {installedOnHardware.join(", ")}</div>)
-          : <div>Hardware: no se ha encontrado ningún hardware</div>
-        }
-        {serverId.length !== 0 ? (
-          <div>Servers: {serverId.join(", ")} </div>)
-          : <div>Servers: no se ha encontrado ningún servidor</div>
-        }
-        <div>Estado: {status}</div>
-        {licenseId !== null ? <div>Licencia: {licenseId}</div> : undefined
-        }
-        <div><button onClick={() => handleRemove(id)}>Delete</button></div>
-        <hr />
+      <div className="software-card">
+        <div className="software-card-first-section">
+          <div className="software-card-name">{name}</div>
+          <div className="software-card-status">{status}</div>
+        </div>
+        <div>{category} · {version}</div>
+        <div className="software-card-second-section">
+          <div className="software-card-details-btn">
+            <Link to={`/inventory/software/${id}`} className="btn-link">
+              Ver detalles
+            </Link>
+          </div>
+          <div className=""><button onClick={() => handleEdit(id)}>Edit</button></div>
+          <div className="software-card-delete-btn"><button onClick={() => handleRemove(id)}>Delete</button></div>
+        </div>
       </div>
     </>
   )
