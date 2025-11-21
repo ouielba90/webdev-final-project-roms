@@ -21,7 +21,7 @@ function DashboardPage() {
     .slice(0, 6);
 
   let highPopServer = servers
-    .map(item => ({ connectedUsers: item.connectedUsers, name: item.name }))
+    .map(item => ({ serverId: item.id, connectedUsers: item.connectedUsers, name: item.name }))
     .sort((a, b) => b.connectedUsers - a.connectedUsers)
     .slice(0, 6)
 
@@ -36,7 +36,6 @@ function DashboardPage() {
   //    .slice(0, 5);
 
   const aggregated = getServerAverages(servers);
-  //console.log(aggregated)
   let ramUse = aggregated.sort((a, b) => b.ramUsage - a.ramUsage)//.slice(0, 4);
   let diskUse = aggregated.sort((a, b) => b.diskUsage - a.diskUsage)//.slice(0, 4);
   let cpuUse = aggregated.sort((a, b) => b.cpuUsage - a.cpuUsage)//.slice(0, 4);
@@ -49,15 +48,12 @@ function DashboardPage() {
   return (
     <>
       <h1 className="dashboard-title">Dashboard</h1>
-
       <div className="status-grid">
         <h2 className="section-title">Estado General</h2>
-
         <div className="status-block-main">
           <h3>Total recursos</h3>
           <p className="total-num-res">{totalNumRes}</p>
           <p>Activos {sumActives}</p>
-
           <div className="bar-container">
             <div
               className="bar bar-active"
@@ -173,7 +169,7 @@ function DashboardPage() {
               {riskLicenses.map((item) => {
                 if (item.daysLeft < 0) {
                   return (
-                    <tr>
+                    <tr key={item.softwareId}>
                       <td>{software.filter(s => s.id === item.softwareId).map(s => s.name)}</td>
                       <td>Expirada</td>
                       <td>🔴</td>
@@ -181,7 +177,7 @@ function DashboardPage() {
                   );
                 } else if (item.daysLeft > 0 && item.daysLeft < 30) {
                   return (
-                    <tr>
+                    <tr key={item.softwareId}>
                       <td>{software.filter(s => s.id === item.softwareId).map(s => s.name)}</td>
                       <td>Expira en {item.daysLeft}</td>
                       <td>🟡</td>
@@ -208,7 +204,7 @@ function DashboardPage() {
 
             <tbody>
               {highPopServer.map((item) => (
-                <tr>
+                <tr key={item.serverId}>
                   <td>{item.name}</td>
                   <td className="th-users">{item.connectedUsers}</td>
                 </tr>
@@ -292,12 +288,9 @@ function DashboardPage() {
 function daysBetweenDates(euDateStr) {
   const [day, month, year] = euDateStr.split("/");
   const formattedDate = `${year}-${month}-${day}`;
-
   const givenDate = new Date(formattedDate);
   const today = new Date();
-
   const diffDays = Math.floor((today - givenDate) / (1000 * 60 * 60 * 24));
-
   return diffDays;
 }
 
@@ -318,4 +311,4 @@ function getServerAverages(servers) {
   })//.filter(s => s.cpuUsage > 90 || s.ramUsage > 90 || s.diskUsage > 85);
 }
 
-export default DashboardPage 
+export default DashboardPage

@@ -27,7 +27,7 @@ function LicensesInvPage() {
         const softQueryName = software.find((s) => el.softwareName === s.name).name
         const matchesSearch = softQueryName.toLowerCase().includes(search.toLowerCase())
 
-        const matchesStatus = status === "" || el.status === status
+        const matchesStatus = status === "" || status === "Todos" || el.status === status
 
         return matchesSearch && matchesStatus
       })
@@ -151,9 +151,9 @@ function LicensesInvPage() {
           <div className="filters-row-main">
             <input type="text" id="searchForm" onChange={handleSearch} />
             <div className="filter-field">
-              <p>Status</p>
+              <p>Estado</p>
               <select onClick={handleStatus}>
-                <option></option>
+                <option>Todos</option>
                 <option>active</option>
                 <option>expired</option>
               </select>
@@ -165,7 +165,7 @@ function LicensesInvPage() {
               <button onClick={handleSortZA}>Z-A</button>
             </div>
             <div className="filters-row-combined">
-              <button onClick={() => setAddFormOpen(!addFormOpen)}>Add license</button>
+              <button onClick={() => setAddFormOpen(!addFormOpen)}>Añadir license</button>
             </div>
           </div>
         </div>

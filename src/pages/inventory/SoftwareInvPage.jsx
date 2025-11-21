@@ -20,7 +20,7 @@ function SoftwareInvPage() {
       (el) => {
         const matchesSearch = el.name.toLowerCase().includes(search.toLowerCase()) ||
           el.description.toLowerCase().includes(search.toLowerCase())
-        const matchesStatus = status === "" || el.status === status
+        const matchesStatus = status === "" || status === "Todos" || el.status === status
 
         return matchesSearch && matchesStatus
       })
@@ -152,11 +152,11 @@ function SoftwareInvPage() {
       <div className="software-main-container">
         <div className="filters-container">
           <div className="filters-row-main">
-            <input type="text" id="searchForm" onChange={handleSearch} />
+            <input type="text" id="searchForm" onChange={handleSearch} placeholder="Buscar software..." />
             <div className="filter-field">
-              <p>Status</p>
+              <p>Estado</p>
               <select onChange={handleStatus}>
-                <option></option>
+                <option>Todos</option>
                 <option>available</option>
                 <option>in-use</option>
               </select>
@@ -168,7 +168,7 @@ function SoftwareInvPage() {
               <button onClick={handleSortZA}>Z-A</button>
             </div>
             <div className="filters-row-sort">
-              <button onClick={() => setAddFormOpen(!addFormOpen)}>Add software</button>
+              <button onClick={() => setAddFormOpen(!addFormOpen)}>Añadir software</button>
             </div>
           </div>
         </div>

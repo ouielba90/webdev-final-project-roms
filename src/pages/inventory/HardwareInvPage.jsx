@@ -19,8 +19,8 @@ function HardwareInvPage() {
     let filtered = hardware.filter(
       (el) => {
         const matchesSearch = el.model.toLowerCase().includes(search.toLowerCase())
-        const matchesType = type === "" || el.type === type
-        const matchesStatus = status === "" || el.status === status
+        const matchesType = type === "" || type === "Todos" || el.type === type
+        const matchesStatus = status === "" || status === "Todos" || el.status === status
 
         return matchesSearch && matchesType && matchesStatus
       })
@@ -54,6 +54,7 @@ function HardwareInvPage() {
   }
 
   function handleType(e) {
+    console.log(e.target.value)
     setType(e.target.value)
   }
   function handleStatus(e) {
@@ -101,7 +102,7 @@ function HardwareInvPage() {
     e.preventDefault()
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    console.log('data from edit', data)
+    //console.log('data from edit', data)
     setQuery(prev =>
       prev.map(item =>
         item.id === Number(data.id) ? {
@@ -144,19 +145,19 @@ function HardwareInvPage() {
       <div className="software-main-container">
         <div className="filters-container">
           <div className="filters-row-main">
-            <input type="text" id="searchForm" onChange={handleSearch} />
+            <input type="text" id="searchForm" onChange={handleSearch} placeholder="Buscar hardware..." />
             <div className="filter-field">
-              <p>State</p>
+              <p>Tipo</p>
               <select onClick={handleType}>
-                <option></option>
+                <option>Todos</option>
                 <option>Laptop</option>
                 <option>Desktop</option>
               </select>
             </div>
             <div className="filter-field">
-              <p>Status</p>
+              <p>Estado</p>
               <select onClick={handleStatus}>
-                <option></option>
+                <option>Todos</option>
                 <option>operational</option>
                 <option>maintenance</option>
               </select>
@@ -168,7 +169,7 @@ function HardwareInvPage() {
               <button onClick={handleSortZA}>Z-A</button>
             </div>
             <div className="filters-row-sort">
-              <button onClick={() => setAddFormOpen(!addFormOpen)}>Add hardware</button>
+              <button onClick={() => setAddFormOpen(!addFormOpen)}>Añadir hardware</button>
             </div>
           </div>
         </div>
