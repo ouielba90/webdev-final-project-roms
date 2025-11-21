@@ -17,7 +17,6 @@ function ProjectItem({ id, name, client, status, description, tasks, projectUser
         }
     }
 
-
     const isOpen = activeId === id;
 
     const toggleOpen = () => {
