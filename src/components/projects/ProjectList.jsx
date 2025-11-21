@@ -16,12 +16,15 @@ function ProjectList() {
 
   function handleCeate(data) {
     const newProject = {
-      id: listProjects.length + 1,
-      name: "Nuevo Proyecto",
-      client: "Cliente X",
-      status: "Pendiente",
-      description: "Descripción del nuevo proyecto",
-      tasks: [],
+      id: globalThis.crypto?.randomUUID?.() || `p_${Date.now().toString(36)}`,
+      //valores del formulario
+      name: data.name,
+      client: data.client,
+      description: data.description,
+      //valores por defecto
+      status: data.status || "Pendiente",
+      task: data.task || [],
+      users: data.users || [],
     }
     setUseProjects((prev) => [...prev, newProject])
     setCreateOpen(false)
@@ -39,7 +42,7 @@ function ProjectList() {
       )}
 
       <div className="list-projects">
-        {listProjects.map((projects) => {
+        {useprojects.map((projects) => {
           return <ProjectItem key={projects.id} {...projects} projectUsers={projectsUsers} activeId={activeId} setActiveId={setActiveId} />
         })}
       </div>

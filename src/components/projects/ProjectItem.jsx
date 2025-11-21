@@ -2,15 +2,21 @@
 function ProjectItem({ id, name, client, status, description, tasks, projectUsers, activeId, setActiveId }) {
 
     const taskItems = [];
-    for (let i = 0; i < tasks.length; i++) {
-        taskItems.push(<li key={i}>{tasks[i]}</li>);
-    }
-    const usersItems = [];
-    for (let i = 0; i < projectUsers.length; i++) {
-        if (projectUsers[i].id_project === id) {
-            usersItems.push(<li key={projectUsers[i].id}>{projectUsers[i].name}</li>);
+    if (tasks == []) {
+        for (let i = 0; i < tasks.length; i++) {
+            taskItems.push(<li key={i}>{tasks[i]}</li>);
         }
     }
+
+    const usersItems = [];
+    if (projectUsers == []) {
+        for (let i = 0; i < projectUsers.length; i++) {
+            if (projectUsers[i].id_project === id) {
+                usersItems.push(<li key={projectUsers[i].id}>{projectUsers[i].name}</li>);
+            }
+        }
+    }
+
 
     const isOpen = activeId === id;
 
@@ -34,18 +40,18 @@ function ProjectItem({ id, name, client, status, description, tasks, projectUser
                 <div>
                     <p className="status-project" >{status}</p>
                     {isOpen && (
-                    <div className="box-users-project">
-                        <h4>Usuarios</h4>
-                        <ul>
-                            {usersItems}
-                        </ul>  
-                    </div>
+                        <div className="box-users-project">
+                            <h4>Usuarios</h4>
+                            <ul>
+                                {usersItems}
+                            </ul>
+                        </div>
                     )}
                     {isOpen && (
-                    <div className="box-buttons-project">
-                        <button className="btn-card-project">Editar</button>
-                        <button className="btn-card-project">Eliminar</button>
-                    </div>
+                        <div className="box-buttons-project">
+                            <button className="btn-card-project">Editar</button>
+                            <button className="btn-card-project">Eliminar</button>
+                        </div>
                     )}
                 </div>
             </div>
