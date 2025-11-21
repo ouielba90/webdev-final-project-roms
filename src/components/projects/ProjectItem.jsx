@@ -1,6 +1,9 @@
 
-function ProjectItem({ id, name, client, status, description, tasks, projectUsers, activeId, setActiveId }) {
+function ProjectItem({ project, projectUsers, activeId, setActiveId, onEdit, onDelete}) {
 
+    const {id, name, client, status, description, tasks} = project
+
+    // Renderiza las tareas asociadas al proyecto
     const taskItems = [];
     if (Array.isArray(tasks) && tasks.length > 0) {
         for (let i = 0; i < tasks.length; i++) {
@@ -8,6 +11,7 @@ function ProjectItem({ id, name, client, status, description, tasks, projectUser
         }
     }
 
+    // Renderiza los usuarios asociados al proyecto
     const usersItems = [];
     if (Array.isArray(projectUsers) && projectUsers.length > 0) {
         for (let i = 0; i < projectUsers.length; i++) {
@@ -49,7 +53,7 @@ function ProjectItem({ id, name, client, status, description, tasks, projectUser
                     {isOpen && (
                         <div className="box-buttons-project">
                             <button className="btn-card-project">Editar</button>
-                            <button className="btn-card-project">Eliminar</button>
+                            <button className="btn-card-project" onClick={() => onDelete?.(project)}>Eliminar</button>
                         </div>
                     )}
                 </div>

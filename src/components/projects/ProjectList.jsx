@@ -3,18 +3,20 @@ import ProjectItem from "./ProjectItem"
 import listProjects from "./../../../data/projects"
 import projectsUsers from "./../../../data/projectsUsers"
 import ProjectCreate from "./ProjectCreate"
+import ProjectDelete from "./ProjectDelete"
 
 function ProjectList() {
 
   const [useprojects, setUseProjects] = useState(listProjects)
   const [activeId, setActiveId] = useState(null)
   const [createOpen, setCreateOpen] = useState(false)
+  const [deleteProject, setDeleteProject] = useState(null)
 
   useEffect(() => {
     setUseProjects(listProjects)
   }, [])
 
-  function handleCeate(data) {
+  function handleCreate(data) {
     const newProject = {
       id: globalThis.crypto?.randomUUID?.() || `p_${Date.now().toString(36)}`,
       //valores del formulario
@@ -30,6 +32,12 @@ function ProjectList() {
     setCreateOpen(false)
   }
 
+  function handleDelete(projectId) {
+    setUseProjects((prev) => prev.filter((project) => project.id !== projectId))
+    setDeleteProject(null)
+  }
+
+
   return (
     <>
       <h1>Project list</h1>
@@ -37,13 +45,29 @@ function ProjectList() {
       {createOpen && (
         <ProjectCreate
           onClose={() => setCreateOpen(false)}
-          onSumit={handleCeate}
+          onSumit={handleCreate}
         />
       )}
 
+      {deleteProject && (
+        <ProjectDelete
+          project={deleteProject}
+          onCancel={() => setDeleteProject(null)}
+          onConfirm={handleDelete}
+        />
+      )}
+
+
       <div className="list-projects">
         {useprojects.map((projects) => {
-          return <ProjectItem key={projects.id} {...projects} projectUsers={projectsUsers} activeId={activeId} setActiveId={setActiveId} />
+          return <ProjectItem
+            key={projects.id}
+            project={projects}
+            projectUsers={projectsUsers}
+            activeId={activeId}
+            setActiveId={setActiveId}
+            onDelete={(current) => setDeleteProject(current)}
+          />
         })}
       </div>
     </>
