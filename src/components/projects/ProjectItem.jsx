@@ -2,14 +2,14 @@
 function ProjectItem({ id, name, client, status, description, tasks, projectUsers, activeId, setActiveId }) {
 
     const taskItems = [];
-    if (tasks == []) {
+    if (Array.isArray(tasks) && tasks.length > 0) {
         for (let i = 0; i < tasks.length; i++) {
             taskItems.push(<li key={i}>{tasks[i]}</li>);
         }
     }
 
     const usersItems = [];
-    if (projectUsers == []) {
+    if (Array.isArray(projectUsers) && projectUsers.length > 0) {
         for (let i = 0; i < projectUsers.length; i++) {
             if (projectUsers[i].id_project === id) {
                 usersItems.push(<li key={projectUsers[i].id}>{projectUsers[i].name}</li>);
