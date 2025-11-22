@@ -5,9 +5,12 @@ import projectsUsers from "./../../../data/projectsUsers"
 import ProjectCreate from "./ProjectCreate"
 import ProjectDelete from "./ProjectDelete"
 import ProjectEdit from "./ProjectEdit"
-import projectFetchData from "./ProjectFetchData"
+import FetchData from "./FetchData"
 
 function ProjectList() {
+  //URLs de las APIs
+  const apiProjects = import.meta.env.VITE_API_URL_PROJECTS;
+  const apiProjectsUsers = import.meta.env.VITE_API_URL_PROJECTS_USERS;
   //la siguiente linea es para usar datos locales
   /*const [useprojects, setUseProjects] = useState(listProjects)*/
   const [useprojects, setUseProjects] = useState([])
@@ -17,8 +20,10 @@ function ProjectList() {
   const [projectEdit, setProjectEdit] = useState(null)
 
   useEffect(() => {
+    console.log("Cargando proyectos desde la API...");
     async function loadProjects() {
-      const data = await projectFetchData();
+      console.log("API URL:", apiProjects);
+      const data = await FetchData(apiProjects);
       if (Array.isArray(data)) {
         setUseProjects(data);
       } else {
@@ -87,14 +92,14 @@ function ProjectList() {
       )}
 
       {projectEdit && (
-        <ProjectEdit 
+        <ProjectEdit
           key={projectEdit.id}
           project={projectEdit}
           onClose={() => setProjectEdit(null)}
           onSubmit={handleUpdate}
-      />
+        />
       )}
-      
+
       <div className="list-projects">
         {useprojects.map((projects) => {
           return <ProjectItem

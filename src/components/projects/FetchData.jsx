@@ -1,10 +1,9 @@
 
 
-function projectFetchData() {
-    const apiProjects = import.meta.env.VITE_API_URL_PROJECTS;
-    const apiProjectsUsers = import.meta.env.VITE_API_URL_PROJECTS_USERS;
-
-    return fetch(apiProjects)
+function fetchData(apiUrl) {
+  
+    console.log("Fetching data from:", apiUrl);
+    return fetch(apiUrl)
         .then((response) => {
             if (!response.ok) {
                 throw new Error(`Error HTTP! status: ${response.status}`);
@@ -21,4 +20,4 @@ function projectFetchData() {
         });
 }
 
-export default projectFetchData;
+export default fetchData;
