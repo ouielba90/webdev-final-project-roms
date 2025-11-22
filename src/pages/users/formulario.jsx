@@ -1,8 +1,8 @@
 import { useState } from "react"
 
-function RegistroForm() {
+function RegistroForm({handleSubmit}) {
     const [formData, setFormData] = useState({
-        nombre: "", email: "", password: "",
+        nombre: "", email: "", role: "",
     })
     
     function handleChange(event) {
@@ -15,14 +15,15 @@ function RegistroForm() {
 
     return (
         <div className="form-container">
-            <h2 className="form-title">Formulario de Registro</h2>
-            <form>
+            <h2 className="subtitle">Formulario de Registro</h2>
+            <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Nombre </label>
-                    <input
+                    <input 
+                        className="input-text"
                         type="text" 
-                        name="nombre"
-                        value={formData.nombre}
+                        name="name"
+                        value={formData.name}
                         onChange={handleChange}
                         required
                         placeholder="Escrbe tu nombre..."
@@ -31,7 +32,8 @@ function RegistroForm() {
 
                 <div className="form-group">
                     <label>Email </label>
-                    <input
+                    <input 
+                        className="input-text"
                         type="email" 
                         name="email"
                         value={formData.email}
@@ -42,16 +44,24 @@ function RegistroForm() {
                 </div>
 
                 <div className="form-group">
-                    <label>Contraseña </label>
-                    <input
-                        type="password" 
-                        name="password"
-                        value={formData.password}
+                    <label>Rol</label>
+                    <select 
+                        className="select-text"
+                        type="selector" 
+                        name="role"
+                        value={formData.role}
                         onChange={handleChange}
                         required
-                        placeholder="Escriba una contraseña..."
-                    />
+                        >
+                        <option>Selecciona un rol</option>
+                        <option>Manager</option>
+                        <option>Cliente</option>
+                        <option>Consultor/a</option>
+                        <option>Otros</option>
+                    </select>
                 </div>
+
+                <button className="login-btn" type="submit">Aceptar</button>
             </form>
         </div>
     )
