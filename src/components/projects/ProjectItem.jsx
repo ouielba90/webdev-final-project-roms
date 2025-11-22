@@ -52,7 +52,7 @@ function ProjectItem({ project, projectUsers, activeId, setActiveId, onEdit, onD
                     )}
                     {isOpen && (
                         <div className="box-buttons-project">
-                            <button className="btn-card-project">Editar</button>
+                            <button className="btn-card-project" onClick={() => onEdit?.(project)}>Editar</button>
                             <button className="btn-card-project" onClick={() => onDelete?.(project)}>Eliminar</button>
                         </div>
                     )}

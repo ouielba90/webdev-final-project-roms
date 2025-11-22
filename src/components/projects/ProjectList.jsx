@@ -4,6 +4,7 @@ import listProjects from "./../../../data/projects"
 import projectsUsers from "./../../../data/projectsUsers"
 import ProjectCreate from "./ProjectCreate"
 import ProjectDelete from "./ProjectDelete"
+import ProjectEdit from "./ProjectEdit"
 
 function ProjectList() {
 
@@ -11,11 +12,13 @@ function ProjectList() {
   const [activeId, setActiveId] = useState(null)
   const [createOpen, setCreateOpen] = useState(false)
   const [deleteProject, setDeleteProject] = useState(null)
+  const [projectEdit, setProjectEdit] = useState(null)
 
   useEffect(() => {
     setUseProjects(listProjects)
   }, [])
 
+  //funcion para crear un nuevo proyecto
   function handleCreate(data) {
     const newProject = {
       id: globalThis.crypto?.randomUUID?.() || `p_${Date.now().toString(36)}`,
@@ -32,9 +35,25 @@ function ProjectList() {
     setCreateOpen(false)
   }
 
+  //funcion para eliminar el proyecto
   function handleDelete(projectId) {
     setUseProjects((prev) => prev.filter((project) => project.id !== projectId))
     setDeleteProject(null)
+  }
+
+  //funcion para actualizar el proyecto editado
+  function handleUpdate(data) {
+    console.log("Updating project:", data.name)
+    if (!projectEdit) return
+
+    setUseProjects((prev) =>
+      prev.map((project) =>
+        project.id === projectEdit.id
+          ? { ...project, ...data }
+          : project
+      )
+    )
+    setProjectEdit(null)
   }
 
 
@@ -57,7 +76,15 @@ function ProjectList() {
         />
       )}
 
-
+      {projectEdit && (
+        <ProjectEdit 
+          key={projectEdit.id}
+          project={projectEdit}
+          onClose={() => setProjectEdit(null)}
+          onSubmit={handleUpdate}
+      />
+      )}
+      
       <div className="list-projects">
         {useprojects.map((projects) => {
           return <ProjectItem
@@ -67,6 +94,7 @@ function ProjectList() {
             activeId={activeId}
             setActiveId={setActiveId}
             onDelete={(current) => setDeleteProject(current)}
+            onEdit={(current) => setProjectEdit(current)}
           />
         })}
       </div>
