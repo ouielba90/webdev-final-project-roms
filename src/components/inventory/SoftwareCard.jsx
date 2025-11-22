@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 function SoftwareCard({ id, name, version, category, status, handleRemove, handleEdit }) {
+  console.log(handleRemove)
   return (
     <>
       <div className="software-card">
