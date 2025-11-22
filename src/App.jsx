@@ -1,7 +1,4 @@
-import { Link, Outlet, Route, Routes} from 'react-router-dom'
-import InternalChatsPage from './pages/communications/InternalChatsPage';
-import ClientChatsPage from './pages/communications/ClientChatsPage';
-import ChatViewPage from './pages/communications/ChatViewPage';
+import { Link, Outlet } from 'react-router-dom'
 
 function App() {
 
@@ -15,7 +12,7 @@ function App() {
       <Link to='/communications'>Comunicaciones</Link>
       <hr />
 
-       <Outlet></Outlet>
+      <Outlet></Outlet>
 
     </>
   )

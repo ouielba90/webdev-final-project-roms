@@ -9,7 +9,10 @@ import SoftwareInvPage from './pages/inventory/SoftwareInvPage.jsx'
 import HardwareInvPage from './pages/inventory/HardwareInvPage.jsx'
 import LicensesInvPage from './pages/inventory/LicensesInvPage.jsx'
 import ServersInvPage from './pages/inventory/ServersInvPage.jsx'
-import AddInvPage from './pages/inventory/AddToInvPage.jsx'
+import SoftwareDetailsPage from './pages/inventory/SoftwareDetailsPage.jsx'
+import HardwareDetailsPage from './pages/inventory/HardwareDetailsPage.jsx'
+import LicensesDetailsPage from './pages/inventory/LicensesDetailsPage.jsx'
+import ServersDetailsPage from './pages/inventory/ServersDetailsPage.jsx'
 import './indexOuissam.css'
 import UserHomePage from './pages/users/UserHomePage.jsx'
 import HomeProjPage from './pages/projects/HomeProjPage.jsx'
@@ -41,26 +44,35 @@ const router = createBrowserRouter(
             },
             {
               path: 'software',
-              element: <SoftwareInvPage></SoftwareInvPage>
+              element: <SoftwareInvPage></SoftwareInvPage>,
+            },
+            {
+              path: 'software/:id',
+              element: <SoftwareDetailsPage></SoftwareDetailsPage>
             },
             {
               path: 'hardware',
               element: <HardwareInvPage></HardwareInvPage>
             },
             {
+              path: 'hardware/:id',
+              element: <HardwareDetailsPage></HardwareDetailsPage>
+            },
+            {
               path: 'licenses',
               element: <LicensesInvPage></LicensesInvPage>
+            },
+            {
+              path: 'licenses/:id',
+              element: <LicensesDetailsPage></LicensesDetailsPage>
             },
             {
               path: 'servers',
               element: <ServersInvPage></ServersInvPage>
             },
             {
-              path: 'add',
-              element: <AddInvPage></AddInvPage>
-            },
-            {
-              path: ':prodId',
+              path: 'servers/:id',
+              element: <ServersDetailsPage></ServersDetailsPage>
             },
           ]
         },
@@ -76,36 +88,36 @@ const router = createBrowserRouter(
             {
               path: 'usersList',
               element: <UserPage />
-            } 
+            }
           ]
         },
         {
-  path: '/communications',
-  element: <HomeCommPage />,
-  children: [
-    {
-      path: 'messages',
-      element: <MessagesPage />,
-    },
-    {
-      path: 'notifications',
-      element: <NotificationsPage />,
-    },
-   
-    {
-      path: 'internal-chats',
-      element: <InternalChatsPage />,
-    },
-    {
-      path: 'client-chats',
-      element: <ClientChatsPage />,
-    },
-    {
-      path: 'chat/:chatId',
-      element: <ChatViewPage />,
-    }
-  ]
-},
+          path: '/communications',
+          element: <HomeCommPage />,
+          children: [
+            {
+              path: 'messages',
+              element: <MessagesPage />,
+            },
+            {
+              path: 'notifications',
+              element: <NotificationsPage />,
+            },
+
+            {
+              path: 'internal-chats',
+              element: <InternalChatsPage />,
+            },
+            {
+              path: 'client-chats',
+              element: <ClientChatsPage />,
+            },
+            {
+              path: 'chat/:chatId',
+              element: <ChatViewPage />,
+            }
+          ]
+        },
       ]
     }
   ]

@@ -47,60 +47,66 @@
     margin-left: 10px;
 }
 
-.box-users-project{
+.box-users-project {
     border: 1px, solid, black;
     padding: 20px;
 }
-.box-users-project h4{
+
+.box-users-project h4 {
     margin-top: 0px;
 }
-.box-users-project ul{
+
+.box-users-project ul {
     list-style-type: none;
     padding-left: 0px;
 }
-.box-users-project ul li{
+
+.box-users-project ul li {
     margin-bottom: 10px;
 }
 
-.box-buttons-project{
+.box-buttons-project {
     display: flex;
     justify-content: center;
     gap: 10px;
     margin-top: 40px;
 }
 
-.btn-standard{
+.btn-standard {
     border: solid;
     background-color: lightblue;
     padding: 10px;
     margin: 10px;
 }
-.btn-cancel{
+
+.btn-cancel {
     border: solid;
     background-color: lightcoral;
     padding: 10px;
     margin: 10px;
 }
-.btn-new-project{
+
+.btn-new-project {
     border: solid;
     background-color: lightblue;
     margin-bottom: 20px;
     padding: 10px;
 }
-.btn-card-project{
+
+.btn-card-project {
     border: solid;
     background-color: lightblue;
     padding: 10px;
 }
 
 /*Estilos para el componente create project*/
-.create-project-container{
+.create-project-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.box-create-project{
+.box-create-project {
     display: flex;
     flex-direction: column;
     width: 400px;
@@ -109,8 +115,27 @@
     margin-bottom: 30px;
 }
 
-.div-create{
+.div-create {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
+}
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 50;
+}
+
+.modal-content {
+    background: #ffffff;
+    border-radius: 16px;
+    width: min(480px, 100%);
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
+    border: 1px solid #d9e2ec;
 }

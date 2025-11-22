@@ -1,17 +1,33 @@
-function HardwareCard({ id, type, model, status, purchaseDate, specs, installedSoftware, handleRemove }) {
-  console.log(specs)
+import { Link } from "react-router-dom";
+
+function HardwareCard({ id, type, model, status, specs, handleRemove, handleEdit }) {
   return (
-    <div>
-      <div>Tipo: {type}</div>
-      <div>Modelo: {model}</div>
-      <div>Estado: {status}</div>
-      <div>Fecha de compra:: {purchaseDate}</div>
-      <div>Especificaciones: CPU - {specs.cpu} RAM - {specs.ram} Storage {specs.storage}</div>
-      <div>Software instalado: {installedSoftware.join(", ")}</div>
-      <div><button onClick={() => handleRemove(id)}>Delete</button></div>
-      <hr />
+    <div className="software-card">
+      <div className="software-card-first-section">
+        <span className="software-card-name">{model}</span>
+        <span className={`software-status status-${status}`}>{status}</span>
+      </div>
+
+      <div>{type}</div>
+      <div className="software-card-third-section">
+        <div>{specs.cpu} - {specs.ram} - {specs.storage}</div>
+      </div>
+
+      <div className="software-card-second-section">
+        <div className="software-card-details-btn">
+          <Link to={`/inventory/hardware/${id}`} className="details-btn-link">
+            Ver detalles
+          </Link>
+        </div>
+        <div className="software-card-edit-btn">
+          <button onClick={() => handleEdit(id)}>Modificar</button>
+        </div>
+        <div className="software-card-delete-btn">
+          <button onClick={() => handleRemove(id)}>Eliminar</button>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
 export default HardwareCard

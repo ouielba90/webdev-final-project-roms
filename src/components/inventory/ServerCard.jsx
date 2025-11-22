@@ -1,25 +1,26 @@
-function ServerCard({ name, ip, location, os, status, numberOfNodes, nodeSpecs, hostedSoftware, usersWithAccess, connectedUsers }) {
+import { Link } from "react-router-dom"
+function ServerCard({ id, name, location, os, status, hostedSoftware, connectedUsers }) {
   return (
-    <div>
-      <div>Nombre: {name}</div>
-      <div>IP: {ip}</div>
-      <div>Ubicación: {location}</div>
-      <div>OS: {os}</div>
-      <div>Nodes ({numberOfNodes}):</div>
-      {nodeSpecs.map((node) => {
-        return (
-          <div key={node.nodeId}>
-            <div>{node.nodeId} - CPU: {node.cpu} RAM: {node.ram} Storage: {node.storage} </div>
+    <>
+      <div className="software-card">
+        <div className="software-card-first-section">
+          <div className="software-card-name">{name}</div>
+          <div className={`software-status status-${status}`}>{status}</div>
+        </div>
+        <div>{location} · {os}</div>
+        <div className="software-card-third-section">
+          <div>Usuarios conectados: {connectedUsers}</div>
+          <div>Software alojado: {hostedSoftware.length}</div>
+        </div>
+        <div className="software-card-second-section">
+          <div className="software-card-details-btn">
+            <Link to={`/inventory/servers/${id}`} className="details-btn-link">
+              Ver detalles
+            </Link>
           </div>
-        )
-      })}
-      <div>Software hosteado: {hostedSoftware?.join(", ")}</div>
-      <div>Usuarios con acceso: {usersWithAccess?.join(", ")}</div>
-      <div>Estado: {status}</div>
-      {status !== "maintenance" ? <div>Connected users: {connectedUsers}</div> : undefined
-      }
-      <hr />
-    </div>
+        </div>
+      </div>
+    </>
   )
 }
 

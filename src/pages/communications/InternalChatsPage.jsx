@@ -46,39 +46,39 @@ function InternalChatPage() {
         setFilterChats(filtered);
     }, [name, chats]); // Agregar 'chats' como dependencia
 
-    
-    
-
     return (
-        <div className='container-chats'>
-            <h1>💬 Chats Internos</h1>
-            
-            <form onSubmit={(e) => e.preventDefault()}>
-                <label htmlFor='name-input'>name</label>
-                <input
-                    id="name-input"
-                    type='text'
-                    value={name}
-                    onChange={(event) => setName(event.target.value)} />
-            </form>
-            <div className='chat-list'>
-                {filterChats.length === 0 ? (
-                    <p>
-                        {name 
-                            ? `No se encontraron chats con "${name}"` 
-                            : "No hay chats disponibles"}
-                    </p>
-                ) : (
-                    filterChats.map((chat) => (
-                        <ChatListItem
-                            key={chat.chatId}
-                            chat={chat}
-                        />
-                    ))
-                )}
-            </div>
-        </div>
-    );
-}
+    <>
+      <div className="header-chats-internos">
+        <h1>💬 Chats Internos</h1>
+        <form onSubmit={(e) => e.preventDefault()}>
+          <label htmlFor="name-input-c">name</label>
+          <input
+            id="name-input-c"
+            type="text"
+            value={name}
+            onChange={(event) => setName(event.target.value)} />
+        </form>
+      </div>
 
+      <div className="container-chats">
+        <div className="chat-list-grid">
+          {filterChats.length === 0 ? (
+            <p className="no-chats-message">
+              {name
+                ? `No se encontraron chats con "${name}"`
+                : "No hay chats disponibles"}
+            </p>
+          ) : (
+            filterChats.map((chat) => (
+              <ChatListItem
+                key={chat.chatId}
+                chat={chat}
+              />
+            ))
+          )}
+        </div>
+      </div>
+    </>
+  )
+}
 export default InternalChatPage;

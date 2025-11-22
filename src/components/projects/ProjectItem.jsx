@@ -1,14 +1,23 @@
 
-function ProjectItem({ id, name, client, status, description, tasks, projectUsers, activeId, setActiveId }) {
+function ProjectItem({ project, projectUsers, activeId, setActiveId, onEdit, onDelete}) {
 
+    const {id, name, client, status, description, tasks} = project
+
+    // Renderiza las tareas asociadas al proyecto
     const taskItems = [];
-    for (let i = 0; i < tasks.length; i++) {
-        taskItems.push(<li key={i}>{tasks[i]}</li>);
+    if (Array.isArray(tasks) && tasks.length > 0) {
+        for (let i = 0; i < tasks.length; i++) {
+            taskItems.push(<li key={i}>{tasks[i]}</li>);
+        }
     }
+
+    // Renderiza los usuarios asociados al proyecto
     const usersItems = [];
-    for (let i = 0; i < projectUsers.length; i++) {
-        if (projectUsers[i].id_project === id) {
-            usersItems.push(<li key={projectUsers[i].id}>{projectUsers[i].name}</li>);
+    if (Array.isArray(projectUsers) && projectUsers.length > 0) {
+        for (let i = 0; i < projectUsers.length; i++) {
+            if (projectUsers[i].id_project === id) {
+                usersItems.push(<li key={projectUsers[i].id}>{projectUsers[i].name}</li>);
+            }
         }
     }
 
@@ -34,18 +43,18 @@ function ProjectItem({ id, name, client, status, description, tasks, projectUser
                 <div>
                     <p className="status-project" >{status}</p>
                     {isOpen && (
-                    <div className="box-users-project">
-                        <h4>Usuarios</h4>
-                        <ul>
-                            {usersItems}
-                        </ul>  
-                    </div>
+                        <div className="box-users-project">
+                            <h4>Usuarios</h4>
+                            <ul>
+                                {usersItems}
+                            </ul>
+                        </div>
                     )}
                     {isOpen && (
-                    <div className="box-buttons-project">
-                        <button className="btn-card-project">Editar</button>
-                        <button className="btn-card-project">Eliminar</button>
-                    </div>
+                        <div className="box-buttons-project">
+                            <button className="btn-card-project" onClick={() => onEdit?.(project)}>Editar</button>
+                            <button className="btn-card-project" onClick={() => onDelete?.(project)}>Eliminar</button>
+                        </div>
                     )}
                 </div>
             </div>

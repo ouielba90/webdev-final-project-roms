@@ -308,6 +308,7 @@ Chats internos y clientes
   display: block;
   cursor: pointer;
   background-color: blue;
+  border-radius: 10px;
 }
 .chat-avatar {
   color:darkblue;
@@ -326,14 +327,122 @@ color: white;
   box-shadow: 0 6px 12px rgba(59, 130, 246, 0.5); /*sombra*/
 }
 
-.chat-message.mine {
-
+/* Estilo buscadores Chats Internos*/
+.header-chats-internos {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: white;
+  margin-bottom: 0;
 }
 
-.chat-message.theirs {
-
+.header-chats-internos h1 {
+  margin: 0;
+  font-size: 2rem;
 }
 
-.chat-input-area {
-  
+.header-chats-internos form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.header-chats-internos label {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.header-chats-internos input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Grid de dos columnas para los chats */
+.chat-list-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Dos columnas iguales */
+  gap: 20px; /* Espacio entre los chats */
+  padding: 20px;
+  background-color: #99bff5;
+}
+
+/* Mensaje cuando no hay chats */
+.no-chats-message {
+  grid-column: 1 / -1; /* Ocupa ambas columnas */
+  text-align: center;
+  padding: 40px;
+  color: #1e293b;
+  font-size: 1.1em;
+}
+
+/* Responsive: en pantallas pequeñas, una sola columna */
+@media (max-width: 768px) {
+  .chat-list-grid {
+    grid-template-columns: 1fr; /* Una columna en móviles */
+  }
+}
+
+
+/* Estilo buscadores Chats Clientes*/
+
+.header-chats-clientes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: white;
+  margin-bottom: 0;
+}
+
+.header-chats-clientes h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.header-chats-clientes form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.header-chats-clientes label {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.header-chats-clientes input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Grid de dos columnas para los chats */
+.chat-list-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Dos columnas iguales */
+  gap: 20px; /* Espacio entre los chats */
+  padding: 20px;
+  background-color: #99bff5;
+}
+
+/* Mensaje cuando no hay chats */
+.no-chats-message {
+  grid-column: 1 / -1; /* Ocupa ambas columnas */
+  text-align: center;
+  padding: 40px;
+  color: #1e293b;
+  font-size: 1.1em;
+}
+
+/* Responsive: en pantallas pequeñas, una sola columna */
+@media (max-width: 768px) {
+  .chat-list-grid {
+    grid-template-columns: 1fr; /* Una columna en móviles */
+  }
 }
