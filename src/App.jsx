@@ -1,4 +1,7 @@
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, Route, Routes } from 'react-router-dom'
+import InternalChatsPage from './pages/communications/InternalChatsPage';
+import ClientChatsPage from './pages/communications/ClientChatsPage';
+import ChatViewPage from './pages/communications/ChatViewPage';
 
 function App() {
   return (
@@ -16,3 +19,5 @@ function App() {
 }
 
 export default App
+
+

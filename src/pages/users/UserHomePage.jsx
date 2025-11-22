@@ -7,7 +7,7 @@ function UsersHomePage() {
   const location = useLocation()
   return (
     <div className='users-list-body'>
-      <h1>Usuarios y clientes</h1>
+      <h1 className='title'>ZONA DE USUARIOS</h1>
       <div className='containerUsersHome'>
       {location.pathname === '/users' && (
         <div>
