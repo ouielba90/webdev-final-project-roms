@@ -13,6 +13,7 @@ function getInitialValues(project) {
 
 function ProjectItem({ project, onClose, onSubmit }) {
     const [values, setValues] = useState(getInitialValues(project));
+    const [newTask, setNewTask] = useState("");
 
     if (!project) return null;
 
@@ -30,10 +31,20 @@ function ProjectItem({ project, onClose, onSubmit }) {
             description: values.description.trim(),
             tasks: values.tasks,
         }
-        console.log("Submitting project:", trimmed)
-        if (!trimmed.name || !trimmed.client || !trimmed.description || !trimmed.tasks) return;
+        if (!trimmed.name || !trimmed.client || !trimmed.description) return;
         onSubmit?.(trimmed)
-        
+
+    }
+
+    function addTask() {
+        const t = newTask.trim();
+        if (!t) return;
+
+        setValues({
+            ...values,
+            tasks: [...values.tasks, t]
+        });
+        setNewTask("");
     }
 
     return (
@@ -82,14 +93,39 @@ function ProjectItem({ project, onClose, onSubmit }) {
                                 onChange={(e) => setValues({ ...values, description: e.target.value })}
                                 required
                             />
-                            <label htmlFor={`edit-task-${project.tasks}`}>Tareas:</label>
-                            <textarea
-                                id={`edit-task-${project.tasks}`}
-                                name="tasks"
-                                value={values.tasks}
-                                onChange={(e) => setValues({ ...values, tasks: e.target.value })}
-                                required
-                            />
+                            <label htmlFor={`edit-task-${project.id}`}>Nueva tarea:</label>
+                            <div style={{ display: "flex", gap: "8px", marginBottom: "10px" }}>
+                                <input
+                                    id={`edit-task-${project.id}`}
+                                    type="text"
+                                    value={newTask}
+                                    onChange={(e) => setNewTask(e.target.value)}
+                                    placeholder="Escribe una tarea..."
+                                />
+                                <button type="button" onClick={addTask}>
+                                    Añadir
+                                </button>
+                            </div>
+
+                            {/* Lista de tareas añadidas */}
+                            <ul>
+                                {values.tasks.map((task, index) => (
+                                    <li key={index} style={{ display: "flex", justifyContent: "space-between", marginBottom: "5px" }}>
+                                        {task}
+                                        <button
+                                            type="button"
+                                            onClick={() =>
+                                                setValues({
+                                                    ...values,
+                                                    tasks: values.tasks.filter((_, i) => i !== index)
+                                                })
+                                            }
+                                        >
+                                            X
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
                             <div>
                                 <button type="button" onClick={handleCancel}>Cancelar</button>
                                 <button type="submit">Guardar</button>

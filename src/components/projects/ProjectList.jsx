@@ -43,7 +43,6 @@ function ProjectList() {
 
   //funcion para actualizar el proyecto editado
   function handleUpdate(data) {
-    console.log("Updating project:", data.name)
     if (!projectEdit) return
 
     setUseProjects((prev) =>
