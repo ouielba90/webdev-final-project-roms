@@ -5,17 +5,29 @@ import projectsUsers from "./../../../data/projectsUsers"
 import ProjectCreate from "./ProjectCreate"
 import ProjectDelete from "./ProjectDelete"
 import ProjectEdit from "./ProjectEdit"
+import projectFetchData from "./ProjectFetchData"
 
 function ProjectList() {
-
-  const [useprojects, setUseProjects] = useState(listProjects)
+  //la siguiente linea es para usar datos locales
+  /*const [useprojects, setUseProjects] = useState(listProjects)*/
+  const [useprojects, setUseProjects] = useState([])
   const [activeId, setActiveId] = useState(null)
   const [createOpen, setCreateOpen] = useState(false)
   const [deleteProject, setDeleteProject] = useState(null)
   const [projectEdit, setProjectEdit] = useState(null)
 
   useEffect(() => {
-    setUseProjects(listProjects)
+    async function loadProjects() {
+      const data = await projectFetchData();
+      if (Array.isArray(data)) {
+        setUseProjects(data);
+      } else {
+        // Manejo de caso inesperado
+        console.log("Formato inesperado:", data);
+        setUseProjects([]);
+      }
+    }
+    loadProjects();
   }, [])
 
   //funcion para crear un nuevo proyecto
@@ -54,7 +66,6 @@ function ProjectList() {
     )
     setProjectEdit(null)
   }
-
 
   return (
     <>
