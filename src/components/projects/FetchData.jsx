@@ -1,8 +1,7 @@
 
 
 function fetchData(apiUrl) {
-  
-    console.log("Fetching data from:", apiUrl);
+    console.log("Cargando proyectos desde la API...");
     return fetch(apiUrl)
         .then((response) => {
             if (!response.ok) {

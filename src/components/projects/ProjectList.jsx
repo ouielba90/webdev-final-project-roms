@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import ProjectItem from "./ProjectItem"
-import listProjects from "./../../../data/projects"
-import projectsUsers from "./../../../data/projectsUsers"
+// las dos siguientes lineas son para usar datos locales
+/*import listProjects from "./../../../data/projects"*/
+/*import projectsUsers from "./../../../data/projectsUsers"*/
 import ProjectCreate from "./ProjectCreate"
 import ProjectDelete from "./ProjectDelete"
 import ProjectEdit from "./ProjectEdit"
@@ -14,25 +15,35 @@ function ProjectList() {
   //la siguiente linea es para usar datos locales
   /*const [useprojects, setUseProjects] = useState(listProjects)*/
   const [useprojects, setUseProjects] = useState([])
+
   const [activeId, setActiveId] = useState(null)
   const [createOpen, setCreateOpen] = useState(false)
   const [deleteProject, setDeleteProject] = useState(null)
   const [projectEdit, setProjectEdit] = useState(null)
+  const [projectsUsers, setProjectsUsers] = useState([])
 
   useEffect(() => {
-    console.log("Cargando proyectos desde la API...");
     async function loadProjects() {
-      console.log("API URL:", apiProjects);
       const data = await FetchData(apiProjects);
       if (Array.isArray(data)) {
         setUseProjects(data);
       } else {
         // Manejo de caso inesperado
         console.log("Formato inesperado:", data);
-        setUseProjects([]);
       }
     }
-    loadProjects();
+    loadProjects()
+
+    async function loadProjectsUsers() {
+      const dataUsers = await FetchData(apiProjectsUsers);
+      if (Array.isArray(dataUsers)) {
+        setProjectsUsers(dataUsers);
+      } else {
+        // Manejo de caso inesperado
+        console.log("Formato inesperado:", dataUsers);
+      }  
+    }
+    loadProjectsUsers()
   }, [])
 
   //funcion para crear un nuevo proyecto
