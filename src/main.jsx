@@ -10,6 +10,9 @@ import HardwareInvPage from './pages/inventory/HardwareInvPage.jsx'
 import LicensesInvPage from './pages/inventory/LicensesInvPage.jsx'
 import ServersInvPage from './pages/inventory/ServersInvPage.jsx'
 import SoftwareDetailsPage from './pages/inventory/SoftwareDetailsPage.jsx'
+import HardwareDetailsPage from './pages/inventory/HardwareDetailsPage.jsx'
+import LicensesDetailsPage from './pages/inventory/LicensesDetailsPage.jsx'
+import ServersDetailsPage from './pages/inventory/ServersDetailsPage.jsx'
 import './indexOuissam.css'
 import UserHomePage from './pages/users/UserHomePage.jsx'
 import HomeProjPage from './pages/projects/HomeProjPage.jsx'
@@ -52,12 +55,24 @@ const router = createBrowserRouter(
               element: <HardwareInvPage></HardwareInvPage>
             },
             {
+              path: 'hardware/:id',
+              element: <HardwareDetailsPage></HardwareDetailsPage>
+            },
+            {
               path: 'licenses',
               element: <LicensesInvPage></LicensesInvPage>
             },
             {
+              path: 'licenses/:id',
+              element: <LicensesDetailsPage></LicensesDetailsPage>
+            },
+            {
               path: 'servers',
               element: <ServersInvPage></ServersInvPage>
+            },
+            {
+              path: 'servers/:id',
+              element: <ServersDetailsPage></ServersDetailsPage>
             },
           ]
         },

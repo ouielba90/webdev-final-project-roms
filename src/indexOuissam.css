@@ -1,11 +1,17 @@
-/*DASHBOARD*/
+/*****************************************************/
+/* ------------------- DASHBOARD ------------------- */
+/*****************************************************/
+
 .dashboard-title {
   text-align: center;
   padding: 10px 0;
-  font-size: 2rem;
+  font-size: 32px;
   color: #1f2937;
   font-weight: 600;
+  font-family: "Segoe UI", Roboto, sans-serif;
 }
+
+/* ------------------- STATUS GRID ------------------- */
 
 .status-grid {
   display: grid;
@@ -20,10 +26,11 @@
   padding: 20px 25px;
   color: #111827;
   font-family: "Segoe UI", Roboto, sans-serif;
+
   grid-template-areas:
     "subtitle subtitle subtitle"
-    "row1 software servers"
-    "row1 hardware licenses";
+    "status-summary software servers"
+    "status-summary hardware licenses";
 }
 
 .section-title {
@@ -36,62 +43,53 @@
 
 .status-block-main {
   grid-column: 1 / span 2;
-  grid-area: row1;
+  grid-area: status-summary;
   text-align: center;
+  align-content: center;
   border-top: 1px solid #e5e7eb;
   border-bottom: 1px solid #e5e7eb;
   padding: 10px;
-  align-content: center;
 }
 
-.status-block-main h3 {
-  margin: 0;
+.status-block-main h3,
+.status-block h3 {
+  margin: 0 0 10px 0;
+  text-align: center;
 }
 
-.software {
-  grid-area: software;
+.status-block p {
+  margin: 5px;
 }
-
-.hardware {
-  grid-area: hardware;
-}
-
-.licenses {
-  grid-area: licenses;
-}
-
-.servers {
-  grid-area: servers;
-}
-
 .total-num-res {
   font-size: 50px;
-  padding-bottom: 10px;
   font-weight: bold;
-  margin: 0;
+  margin: 0 0 10px 0;
+  padding-bottom: 10px;
 }
+
+/* ------------------- STATUS BLOCKS ------------------- */
 
 .status-block {
   background: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   padding: 12px 16px;
-  transition: box-shadow 0.2s ease;
 }
 
-.status-block:hover {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+.software {
+  grid-area: software;
+}
+.hardware {
+  grid-area: hardware;
+}
+.servers {
+  grid-area: servers;
+}
+.licenses {
+  grid-area: licenses;
 }
 
-.status-block h3 {
-  margin: 0;
-  padding-bottom: 10px;
-  text-align: center;
-}
-
-.status-block p {
-  margin: 0;
-}
+/* ------------------- BARS ------------------- */
 
 .bar-container {
   background: #e5e7eb;
@@ -104,34 +102,29 @@
 .bar {
   height: 100%;
   border-radius: 10px;
-  transition: width 0.5s ease;
 }
 
 .bar-active {
   background: #10b981;
 }
-
 .bar-inactive {
   background: #6b7280;
 }
-
 .bar-inuse {
   background: #3b82f6;
 }
-
 .bar-maintenance {
   background: #f59e0b;
 }
-
 .bar-expired {
   background: #ef4444;
 }
 
-/* Insights */
+/* ------------------- INSIGHTS ------------------- */
 
 .insights-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   background: #f9fafb;
   border: 1px solid #d1d5db;
@@ -151,44 +144,23 @@
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   padding: 16px;
-  transition: box-shadow 0.2s ease;
 }
 
-.insights-card:hover {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-/* Licenses card */
 .insights-licenses {
   grid-area: insights-licenses;
 }
-
-/* Top resources card */
 .insights-top-resources {
   grid-area: insights-top-resources;
 }
-
-/* Server risk card */
 .insights-server-risk {
   grid-area: insights-server-risk;
 }
 
-/*.server-risk-list p {
-  margin: 4px 0;
-}*/
+/* -------------- SERVER TABLES ----------------- */
 
-.table-licenses,
-.table-top-resources,
-.table-server-risk-1,
-.table-server-risk-2 {
+table {
   width: 100%;
   border-collapse: collapse;
-}
-
-.table-licenses,
-.table-top-resource,
-.table-server-risk-1,
-.table-server-risk-2 {
   text-align: left;
 }
 
@@ -216,7 +188,14 @@
   grid-area: table-server-risk-2;
 }
 
-/* SOFTWARE */
+/*****************************************************/
+/* --------------- END OF DASHBOARD ---------------- */
+/*****************************************************/
+
+/* --------------------------------------------- */
+/* SOFTWARE - CONTENEDOR PRINCIPAL */
+/* --------------------------------------------- */
+
 .software-main-container {
   max-width: 550px;
   margin: 40px auto;
@@ -230,12 +209,13 @@
   font-family: "Inter", "Segoe UI", Roboto, sans-serif;
 }
 
-.software-filters {
-  display: grid;
-  grid-template-columns: 1fr auto auto auto 1fr;
-  gap: 12px;
-  align-items: center;
+.software-main-container p {
+  margin: 0;
 }
+
+/* --------------------------------------------- */
+/* INPUTS Y SELECT */
+/* --------------------------------------------- */
 
 .software-main-container input[type="text"],
 .software-main-container select {
@@ -243,18 +223,10 @@
   border-radius: 10px;
   border: 1px solid #d1d5db;
   background: white;
-  font-size: 0.95rem;
+  font-size: 15px;
   transition:
     border 0.2s,
     box-shadow 0.2s;
-}
-
-.software-add-wrapper {
-  text-align: center;
-  margin: 15px 0;
-}
-.software-main-container p {
-  margin: 0;
 }
 
 .software-main-container input[type="text"]:focus,
@@ -264,19 +236,78 @@
   outline: none;
 }
 
+/* --------------------------------------------- */
+/* BOTONES */
+/* --------------------------------------------- */
+
+.software-main-container .details-btn-link,
 .software-main-container button {
   background: #1f2937;
   color: white;
   padding: 10px 16px;
   border-radius: 10px;
-  font-size: 0.9rem;
+  font-size: 14px;
   font-weight: 500;
   border: none;
   cursor: pointer;
-  transition: 0.2s;
+  transition: background 0.2s;
+  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
 }
 
-.software-main-container .software-cards {
+.add-btn {
+  background: #2563eb;
+  padding: 10px 16px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  height: 42px;
+  align-self: end;
+}
+
+/* --------------------------------------------- */
+/* SECCIÓN DE FILTROS */
+/* --------------------------------------------- */
+
+.filters-container {
+  margin-bottom: 20px;
+}
+
+.filters-row-main {
+  display: grid;
+  grid-template-columns: 2fr 1fr auto;
+  gap: 18px;
+  align-items: end;
+}
+
+.filter-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.filter-field label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.filters-btn-combined {
+  display: flex;
+  justify-content: space-around;
+  padding: 15px 0;
+}
+
+.filters-row-sort {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* --------------------------------------------- */
+/* TARJETAS */
+/* --------------------------------------------- */
+
+.software-cards {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -292,10 +323,12 @@
     box-shadow 0.2s,
     border-color 0.2s;
 }
+
 .software-card:hover {
   border-color: #cbd5e1;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
 }
+
 .software-card-first-section {
   display: flex;
   justify-content: space-between;
@@ -303,41 +336,52 @@
 }
 
 .software-card-name {
-  font-size: 1.2rem;
+  font-size: 19px;
   font-weight: 600;
   color: #1e293b;
 }
 
-.software-card-status {
-  font-size: 0.85rem;
+/* ESTADOS (reemplazo de :contains) */
+.software-status {
+  font-size: 14px;
   font-weight: 600;
   text-transform: capitalize;
   padding: 6px 10px;
   border-radius: 8px;
 }
-.software-card-status:contains("available") {
+
+.status-available {
   background: #dcfce7;
   color: #166534;
 }
-
-.software-card-status:contains("in-use") {
+.status-in-use {
   background: #dbeafe;
   color: #1e40af;
 }
 
-.software-card-status:contains("operational") {
+.status-operational {
   background: #10b981;
   color: white;
 }
 
-.software-card-status:contains("maintenance") {
+.status-maintenance {
   background: #f59e0b;
   color: white;
 }
 
+.status-active {
+  background: #a7f3d0;
+  color: #047857;
+}
+
+.status-expired {
+  background: #fecaca;
+  color: #b91c1c;
+}
+
 .software-card > div:nth-child(2) {
   margin: 6px 0 14px 0;
-  font-size: 0.9rem;
+  font-size: 14px;
   color: #475569;
 }
 
@@ -346,14 +390,25 @@
   justify-content: flex-end;
   gap: 12px;
   padding-top: 10px;
+  align-items: center;
 }
 
-.software-card-details-btn button {
+.software-card-details-btn .details-btn-link {
   background: #2563eb;
+  text-decoration: none;
+  font-weight: unset;
 }
 
-.software-card-details-btn button:hover {
+.software-card-details-btn .details-btn-link:hover {
   background: #1d4ed8;
+}
+
+.software-card-edit-btn button {
+  background: #f59e0b;
+}
+
+.software-card-edit-btn button:hover {
+  background: #d97706;
 }
 
 .software-card-delete-btn button {
@@ -364,20 +419,32 @@
   background: #b91c1c;
 }
 
-.software-card-subinfo {
-  margin: 3px 0;
-  font-size: 0.9rem;
-  color: #475569;
-}
+/* No usadas en los JSX que enviaste, pero necesarias para otros componentes */
 
-.software-card-main {
+/* Wrapper general para agregar software */
+/*.software-add-wrapper {
+  text-align: center;
+  margin: 15px 0;
+}*/
+
+/* Sub-información dentro de una tarjeta */
+/*.software-card-subinfo {
+  margin: 3px 0;
+  font-size: 14px;
+  color: #475569;
+}*/
+
+/* Contenedor principal de info adicional */
+/*.software-card-main {
   margin: 10px 0 14px 0;
   display: flex;
   flex-direction: column;
   gap: 4px;
-  font-size: 0.9rem;
+  font-size: 14px;
   color: #374151;
-}
+}*/
+
+/* Sección extra para hardware, licencias y servidores */
 .software-card-third-section {
   display: flex;
   flex-direction: column;
@@ -387,7 +454,7 @@
   background: #f3f4f6;
   border: 1px solid #e5e7eb;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
-  font-size: 0.9rem;
+  font-size: 14px;
   color: #475569;
 }
 
@@ -404,72 +471,17 @@
   color: #6b7280;
 }
 
-/*Filters*/
-
-.filters-row-main {
+/* Grid original de filtros */
+/*.software-filters {
   display: grid;
-  grid-template-columns: 2fr 1fr auto;
-  gap: 18px;
-  align-items: end;
-}
-
-.filter-field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.filter-field label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #374151;
-}
-
-.filter-input,
-.filter-select,
-.filters-row-main select {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
-  background: white;
-  font-size: 0.95rem;
-  transition: 0.2s;
-}
-
-.filter-input:focus,
-.filter-select:focus {
-  border-color: #60a5fa;
-  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.3);
-  outline: none;
-}
-
-.filters-row-sort {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
+  grid-template-columns: 1fr auto auto auto 1fr;
+  gap: 12px;
   align-items: center;
-}
+}*/
 
-.add-btn {
-  background: #2563eb;
-  padding: 10px 16px;
-  border-radius: 10px;
-  color: white;
-  font-weight: 600;
-  height: 42px;
-  align-self: end;
-}
-
-.filters-btn-combined {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  padding: 15px 0;
-}
-
-/*Modal*/
+/* ------------------------------------------------------ */
+/* -----------------------------Modal---------------------*/
+/* ------------------------------------------------------ */
 
 .modal-overlay {
   position: fixed;
@@ -490,7 +502,9 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-/*Add Software Form*/
+/* ------------------------------------------------------ */
+/* Add Software Form – Contenedor General */
+/* ------------------------------------------------------ */
 .addsoft-form {
   display: flex;
   flex-direction: column;
@@ -503,13 +517,20 @@
   font-family: "Inter", "Segoe UI", Roboto, sans-serif;
 }
 
+/* Título */
 .addsoft-title {
   text-align: center;
-  font-size: 1.25rem;
+  font-size: 20px;
   font-weight: 700;
-  margin-bottom: 4px;
-  margin-top: 4px;
+  margin: 4px 0;
   color: #111827;
+}
+
+/* Filas y Grupos de Inputs */
+.addsoft-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
 .addsoft-group {
@@ -519,24 +540,19 @@
 }
 
 .addsoft-group label {
-  font-size: 0.85rem;
+  font-size: 14px;
   font-weight: 600;
   color: #374151;
 }
 
-.addsoft-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
+/* Inputs, Selects y Textarea */
 .addsoft-group input,
 .addsoft-group select,
 .addsoft-group textarea {
   padding: 8px 10px;
   border: 1px solid #d1d5db;
   border-radius: 6px;
-  font-size: 0.85rem;
+  font-size: 14px;
   background: #f9fafb;
   transition: all 0.15s ease;
 }
@@ -555,11 +571,13 @@
   background: #fff;
 }
 
-.addsoft-input-disabled {
+/* (NO USADO en JSX actual) */
+/*.addsoft-input-disabled {
   background: #f3f4f6;
   opacity: 0.6;
-}
+}*/
 
+/* Botón enviar */
 .addsoft-submit {
   margin-top: 8px;
   background: #1f2937;
@@ -567,7 +585,7 @@
   padding: 10px;
   border-radius: 8px;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 14px;
   border: none;
   cursor: pointer;
   transition: background 0.2s ease;
@@ -577,12 +595,18 @@
   background: #111827;
 }
 
+/* Ayuda (small) */
 .hint {
-  font-size: 0.7rem;
+  font-size: 11px;
   color: #6b7280;
   opacity: 0.7;
 }
 
+/* ------------------------------------------------------ */
+/* Final de Add Software Form – Contenedor General */
+/* ------------------------------------------------------ */
+
+/* IDK I created them
 .hardware-filters {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -599,7 +623,7 @@
 .hardware-filters label {
   display: block;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 14px;
   margin-bottom: 4px;
 }
 
@@ -607,8 +631,8 @@
   text-align: center;
   margin: 15px 0;
 }
-
-.btn-link {
+*/
+/*.btn-link {
   display: inline-block;
   padding: 8px 16px;
   background-color: #2563eb;
@@ -621,4 +645,337 @@
 
 .btn-link:hover {
   background-color: #1d4ed8;
+}*/
+
+/* ==========================
+   Main Details Pages
+========================== */
+.details-main {
+  display: flex;
+  flex-direction: column;
+  margin: 40px auto;
+  min-width: 360px;
+  max-width: 825px;
+  gap: 30px;
+  padding: 25px 30px;
+  background: linear-gradient(145deg, #f8fafc, #e2e8f0);
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+  color: #1f2937;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.details-main h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.details-main p {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #374151;
+}
+
+.details-main p.status {
+  font-weight: 600;
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 8px;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #fff;
+}
+
+.details-main p.status.available {
+  background: #10b981;
+}
+.details-main p.status.in-use {
+  background: #3b82f6;
+}
+.details-main p.status.maintenance {
+  background: #f59e0b;
+}
+.details-main p.status.expired {
+  background: #ef4444;
+}
+
+/* ==========================
+   Quick Stats / Cards
+========================== */
+.details-quick-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 15px 0;
+}
+
+.details-quick-stats div {
+  flex: 1;
+  min-width: 120px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px 20px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  cursor: default;
+}
+
+.details-quick-stats div p {
+  margin: 0;
+  color: #1f2937;
+}
+
+.details-quick-stats div span {
+  background: #f3f4f6;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #4b5563;
+  transition: background 0.2s ease;
+}
+
+/* ==========================
+   Back Button
+========================== */
+.details-main button {
+  align-self: flex-start;
+  background: #6366f1;
+  color: white;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  transition:
+    background 0.3s ease,
+    transform 0.2s ease;
+}
+
+.details-main button:hover {
+  background: #4f46e5;
+  transform: translateY(-2px);
+}
+
+/* ==========================
+   Hardware & Software Cards
+========================== */
+.assoc-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px 18px;
+  min-width: 140px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  cursor: default;
+}
+
+.assoc-name {
+  font-weight: 600;
+  font-size: 16px;
+  color: #1f2937;
+}
+
+.assoc-type {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.assoc-status {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.assoc-status.operational {
+  background: #10b981;
+}
+.assoc-status.in-use {
+  background: #3b82f6;
+}
+.assoc-status.maintenance {
+  background: #f59e0b;
+}
+.assoc-status.expired {
+  background: #ef4444;
+}
+.assoc-status.available {
+  background: #16a34a;
+}
+
+/* ==========================
+   Server Details
+========================== */
+.server-details {
+  display: flex;
+  flex-direction: column;
+  margin: 40px auto;
+  min-width: 360px;
+  max-width: 825px;
+  gap: 30px;
+  padding: 25px 30px;
+  background: linear-gradient(145deg, #f8fafc, #e2e8f0);
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+  color: #1f2937;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* HERO */
+.server-hero {
+  background: #fff;
+  padding: 22px 26px;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+  position: relative;
+}
+
+.server-hero .ip {
+  font-size: 14px;
+  color: #64748b;
+}
+.server-hero .small {
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 13px;
+}
+
+.status-badge.active {
+  background: #10b981;
+}
+.status-badge.down {
+  background: #ef4444;
+}
+
+.connected-users {
+  grid-column: 1 / span 2;
+  color: #334155;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* SUMMARY */
+.server-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.server-summary > div {
+  background: #fff;
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  text-align: center;
+  align-content: center;
+}
+
+.server-summary .big {
+  font-size: 29px;
+  font-weight: 700;
+  margin: 6px 0;
+}
+
+.bar-specs {
+  background: #e5e7eb;
+  border-radius: 10px;
+  height: 10px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.bar-specs div {
+  height: 100%;
+  background: #3b82f6;
+  border-radius: 10px;
+  transition: width 0.4s ease;
+}
+
+/* GRID DE NODOS */
+.nodes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.node-card {
+  background: white;
+  padding: 16px 18px;
+  border-radius: 16px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.node-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+}
+
+.node-card h4 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 700;
+}
+.node-spec-line {
+  font-size: 14px;
+  color: #475569;
+}
+.node-usage label {
+  font-size: 12px;
+  color: #334155;
+}
+
+/* MINI CARDS */
+.small-card-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.small-card-list.scrollable {
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.mini-card {
+  background: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  font-size: 14px;
+  color: #374151;
 }

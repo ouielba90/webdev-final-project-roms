@@ -16,8 +16,8 @@ function ServersInvPage() {
       (el) => {
         const matchesSearch = el.name.toLowerCase().includes(search.toLowerCase()) ||
           el.ip.includes(search)
-        const marchesOs = os === "" || el.os.includes(os)
-        const matchesStatus = status === "" || el.status === status
+        const marchesOs = os === "" || os === "Todos" || el.os.includes(os)
+        const matchesStatus = status === "" || status === "Todos" || el.status === status
 
         return matchesSearch && marchesOs && matchesStatus
       })
@@ -63,7 +63,7 @@ function ServersInvPage() {
             <div className="filter-field">
               <p>OS</p>
               <select onClick={handleOS}>
-                <option></option>
+                <option>Todos</option>
                 <option>CentOS</option>
                 <option>Debian</option>
                 <option>Rocky Linux</option>
@@ -71,9 +71,9 @@ function ServersInvPage() {
               </select>
             </div>
             <div className="filter-field">
-              <p>Status</p>
+              <p>Estado</p>
               <select onClick={handleStatus}>
-                <option></option>
+                <option>Todos</option>
                 <option>active</option>
                 <option>maintenance</option>
               </select>
@@ -91,16 +91,15 @@ function ServersInvPage() {
             return (
               <ServerCard
                 key={el.id}
+                id={el.id}
                 name={el.name}
                 ip={el.ip}
                 location={el.location}
                 os={el.os}
                 status={el.status}
                 numberOfNodes={el.numberOfNodes}
-                nodeSpecs={el.nodeSpecs}
                 hostedSoftware={el.hostedSoftware.map((hS) =>
                   software.find((s) => hS === s.id).name)}
-                usersWithAccess={el.usersWithAccess}
                 connectedUsers={el.connectedUsers}
               />
             )
