@@ -1,44 +1,85 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom"; //para obtener el chat de la URL
+import { useParams } from "react-router-dom";
 import { allChats } from '../../../data/communications/chats';
 import ChatMessage from "../../components/communications/ChatMessage";
 
-
-//funcion principal
 function ChatViewPage() {
-  const { chatId } = useParams(); //obtine el Id del chat de la URL
+  const { chatId } = useParams();
   const [messages, setMessages] = useState([]);
-  const [participants, setParticipants] = useState([])
+  const [participants, setParticipants] = useState([]);
   const [newMessageText, setNewMessageText] = useState('');
-  const currentUser = "Carlos"; //simulamos que es el usuario actual
+  const [editingMessageId, setEditingMessageId] = useState(null);
+  const [editText, setEditText] = useState('');
+  
+  // Obtener el usuario actual desde localStorage o usar valor por defecto
+  const currentUser = localStorage.getItem('currentUser') || "Carlos";
 
-  //carga los mensajes del chat
+  // Cargar los mensajes del chat
   useEffect(() => {
     const chat = allChats.find(chat => chat.chatId == chatId) || [];
-    setParticipants(chat.participants)
+    setParticipants(chat.participants);
     setMessages(chat.messages);
   }, [chatId]);
 
-  //funcion para enviar un nuevo mensaje
+  // Función para enviar un nuevo mensaje
   const handleSendMessage = () => {
-    if (newMessageText.trim() === '') return; //no enviar vacio
+    if (newMessageText.trim() === '') return;
 
-    const user = participants.find(user => user !== messages[messages.length - 1].from)
+    const user = participants.find(user => user !== messages[messages.length - 1].from);
 
-    //crea nuevo mensaje
     const newMessage = {
       id: messages.length + 1,
       from: user,
       text: newMessageText,
+      edited: false,
+      editedAt: null,
     };
 
-    //agragar al estado
     setMessages([...messages, newMessage]);
-    setNewMessageText(''); //limpia input
+    setNewMessageText('');
+  };
+
+  // Nueva función para iniciar edición
+  const handleStartEdit = (messageId, messageText) => {
+    setEditingMessageId(messageId);
+    setEditText(messageText);
+  };
+
+  // Nueva función para guardar edición
+  const handleSaveEdit = (messageId) => {
+    setMessages(prev => prev.map(msg =>
+      msg.id === messageId
+        ? {
+            ...msg,
+            text: editText,
+            edited: true,
+            editedAt: new Date().toLocaleString('es-ES')
+          }
+        : msg
+    ));
+    setEditingMessageId(null);
+    setEditText('');
+  };
+
+  // Nueva función para cancelar edición
+  const handleCancelEdit = () => {
+    setEditingMessageId(null);
+    setEditText('');
+  };
+
+  // Nueva función para eliminar mensaje
+  const handleDeleteMessage = (messageId) => {
+    if (window.confirm('¿Estás seguro de que quieres eliminar este mensaje?')) {
+      setMessages(prev => prev.filter(msg => msg.id !== messageId));
+    }
   };
 
   return (
     <div className="chat-view-container">
+      {/* Mostrar usuario actual */}
+      <div className="chat-header-info">
+        <p>Conectado como: <strong>{currentUser}</strong></p>
+      </div>
       {/* Área de mensajes */}
       <div className="chat-messages-area">
         {messages.map((message) => (
@@ -46,6 +87,14 @@ function ChatViewPage() {
             key={message.id}
             message={message}
             currentUser={currentUser}
+            chatId={chatId}
+            editingMessageId={editingMessageId}
+            editText={editText}
+            onStartEdit={handleStartEdit}
+            onSaveEdit={handleSaveEdit}
+            onCancelEdit={handleCancelEdit}
+            onDeleteMessage={handleDeleteMessage}
+            onEditTextChange={(newText) => setEditText(newText)}
           />
         ))}
       </div>
@@ -64,9 +113,7 @@ function ChatViewPage() {
         </button>
       </div>
     </div>
-  )
-
+  );
 }
-
 
 export default ChatViewPage;
