@@ -1,7 +1,6 @@
 import { Link, Outlet } from 'react-router-dom'
 
 function App() {
-
   return (
     <>
       <h3>Menú principal</h3>
@@ -11,14 +10,9 @@ function App() {
       <Link to='/users'>Users</Link> |
       <Link to='/communications'>Comunicaciones</Link>
       <hr />
-
       <Outlet></Outlet>
-
     </>
   )
-
-
-
 }
 
 export default App

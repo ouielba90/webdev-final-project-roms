@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { DataContext } from "../../context/DataContext";
+import { DataContext } from "../../context/inventory/DataContext";
 import ServerCard from "../../components/inventory/ServerCard";
 
 function ServersInvPage() {
