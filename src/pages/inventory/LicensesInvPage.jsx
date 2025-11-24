@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { DataContext } from "../../context/DataContext";
+import { DataContext } from "../../context/inventory/DataContext";
 import LicenseCard from "../../components/inventory/LicenseCard";
 import AddLicense from "../../components/inventory/AddLicense";
 import EditLicense from "../../components/inventory/EditLicense";

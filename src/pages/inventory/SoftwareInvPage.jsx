@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { DataContext } from "../../context/DataContext";
+import { DataContext } from "../../context/inventory/DataContext";
 import SoftwareCard from "../../components/inventory/SoftwareCard";
 import AddSoftware from "../../components/inventory/AddSoftware";
 import EditSoftware from "../../components/inventory/EditSoftware.jsx"
@@ -74,7 +74,7 @@ function SoftwareInvPage() {
     e.preventDefault()
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    console.log('handle', selectedHard)
+    //console.log('handle', selectedHard)
     const newItem = {
       id: query.length ? query.at(-1).id + 1 : 1001,
       name: data.name,
@@ -103,7 +103,7 @@ function SoftwareInvPage() {
     e.preventDefault()
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    console.log('data from edit', data, selectedHard)
+    //console.log('data from edit', data, selectedHard)
     setQuery(prev =>
       prev.map(item =>
         item.id === Number(data.id) ? {
@@ -174,35 +174,33 @@ function SoftwareInvPage() {
         </div>
         <div className="software-cards">
           {query.map((el) => {
-            console.log("card", el.id, el.name, el.serverId)
+            //console.log("card", el.id, el.name, el.serverId)
             return (
-              <>
-                <SoftwareCard
-                  key={el.id}
-                  id={el.id}
-                  name={el.name}
-                  version={el.version}
-                  category={el.category}
-                  description={el.description}
-                  status={el.status}
-                  licenseId={el.licenseId}
-                  installedOnHardware={el.installedOnHardware.map(hard => {
-                    // console.log(hardware.find(h => h.id === hard).model)
-                    const v = hardware.find(h => Number(hard) === h.id)
-                    return v ? v.model : undefined;
-                  })}
-                  serverId={el.serverId.map(serv => {
-                    // console.log(hardware.find(h => h.id === hard).model)
-                    const v = servers.find(s => Number(serv) === s.id)
-                    return v ? v.name : undefined;
-                  })}
-                  handleRemove={handleRemove}
-                  handleEdit={handleEdit}
-                />
-                <Outlet></Outlet>
-              </>
+              <SoftwareCard
+                key={el.id}
+                id={el.id}
+                name={el.name}
+                version={el.version}
+                category={el.category}
+                description={el.description}
+                status={el.status}
+                licenseId={el.licenseId}
+                installedOnHardware={el.installedOnHardware.map(hard => {
+                  // console.log(hardware.find(h => h.id === hard).model)
+                  const v = hardware.find(h => Number(hard) === h.id)
+                  return v ? v.model : undefined;
+                })}
+                serverId={el.serverId.map(serv => {
+                  // console.log(hardware.find(h => h.id === hard).model)
+                  const v = servers.find(s => Number(serv) === s.id)
+                  return v ? v.name : undefined;
+                })}
+                handleRemove={handleRemove}
+                handleEdit={handleEdit}
+              />
             )
           })}
+          <Outlet></Outlet>
         </div>
       </div>
     </>

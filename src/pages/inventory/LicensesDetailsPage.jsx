@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { DataContext } from "./../../context/DataContext"
+import { DataContext } from "./../../context/inventory/DataContext"
 
 function LicensesDetailsPage() {
   const { id } = useParams()

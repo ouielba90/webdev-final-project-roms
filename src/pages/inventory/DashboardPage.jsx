@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { DataContext } from "../../context/DataContext";
+import { DataContext } from "../../context/inventory/DataContext";
 
 function DashboardPage() {
   const { software, hardware, licenses, servers } = useContext(DataContext);
@@ -44,7 +44,7 @@ function DashboardPage() {
   const uniqueElements = Array.from(
     new Map(combined.map(item => [item.name, item])).values());
 
-  console.log(combined)
+  //console.log(combined)
   return (
     <>
       <h1 className="dashboard-title">Dashboard</h1>
@@ -227,20 +227,20 @@ function DashboardPage() {
               </tr>
             </thead>
             <tbody>
-              {uniqueElements.map((item) => {
+              {uniqueElements.map((item, index) => {
                 const issues = [];
                 item.cpuUsage > 90 && issues.push(`CPU: ${item.cpuUsage}%`);
                 item.ramUsage > 90 && issues.push(`RAM: ${item.ramUsage}%`);
                 item.diskUsage > 80 && issues.push(`Disk: ${item.diskUsage}%`);
 
                 if (issues.length !== 0) {
-                  return (<tr><td>{item.name}</td><td>{issues.join(" | ")}</td><td>🔴</td></tr>)
+                  return (<tr key={index}><td>{item.name}</td><td>{issues.join(" | ")}</td><td>🔴</td></tr>)
                 } else {
                   if (item.status === "active") {
-                    return (<tr><td>{item.name}</td><td>Todo normal</td><td>🟡</td></tr>)
+                    return (<tr key={index}><td>{item.name}</td><td>Todo normal</td><td>🟡</td></tr>)
                   }
                   else {
-                    return (<tr><td>{item.name}</td><td>El mantenimiento</td>🟠</tr>)
+                    return (<tr key={index}><td>{item.name}</td><td>El mantenimiento</td>🟠</tr>)
                   }
                 }
               }).slice(0, 6)}
@@ -258,20 +258,20 @@ function DashboardPage() {
               </tr>
             </thead>
             <tbody>
-              {uniqueElements.map((item) => {
+              {uniqueElements.map((item, index) => {
                 const issues = [];
                 item.cpuUsage > 90 && issues.push(`CPU: ${item.cpuUsage}%`);
                 item.ramUsage > 90 && issues.push(`RAM: ${item.ramUsage}%`);
                 item.diskUsage > 80 && issues.push(`Disk: ${item.diskUsage}%`);
 
                 if (issues.length !== 0) {
-                  return (<tr><td>{item.name}</td><td>{issues.join(" | ")}</td><td>🔴</td></tr>)
+                  return (<tr key={index}><td>{item.name}</td><td>{issues.join(" | ")}</td><td>🔴</td></tr>)
                 } else {
                   if (item.status === "active") {
-                    return (<tr><td>{item.name}</td><td>Todo normal</td><td>🟡</td></tr>)
+                    return (<tr key={index}><td>{item.name}</td><td>Todo normal</td><td>🟡</td></tr>)
                   }
                   else {
-                    return (<tr><td>{item.name}</td><td>El mantenimiento</td><td>🟠</td></tr>)
+                    return (<tr key={index}><td>{item.name}</td><td>El mantenimiento</td><td>🟠</td></tr>)
                   }
                 }
               }).slice(6, 13)}

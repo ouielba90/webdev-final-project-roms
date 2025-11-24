@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import ProviderInventory from './context/inventory/ProviderInventory'
 import App from './App.jsx'
 import Home from './pages/Home.jsx'
 import HomeInvPage from './pages/inventory/HomeInvPage.jsx'
@@ -124,6 +125,10 @@ const router = createBrowserRouter(
 )
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ProviderInventory>
+
+      <RouterProvider router={router} />
+    </ProviderInventory>
+
   </StrictMode>,
 )
