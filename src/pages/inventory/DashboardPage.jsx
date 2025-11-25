@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { DataContext } from "../../context/inventory/DataContext";
+import LoadingAnimation from "../../components/inventory/LoadingAnimation.jsx"
 import DashboardGeneralStatus from "../../components/inventory/DashboardGeneralStatus.jsx"
 import DashboardInsightsI from "../../components/inventory/DashboardInsightsI";
 import DashboardInsightsII from "../../components/inventory/DashboardInsightsII.jsx";
@@ -7,7 +8,13 @@ import DashboardInsightsII from "../../components/inventory/DashboardInsightsII.
 function DashboardPage() {
   const { software, hardware, licenses, servers } = useContext(DataContext);
   const totalNumRes = software.length + hardware.length + servers.length + licenses.length;
-  const subTotalRes = {
+  //const [subTotalRes, setSubTotalRes] = useState({
+  //  software: software.length,
+  //  hardware: hardware.length,
+  //  licenses: licenses.length,
+  //  servers: servers.length,
+  //})
+  let subTotalRes = {
     software: software.length,
     hardware: hardware.length,
     licenses: licenses.length,
@@ -45,31 +52,35 @@ function DashboardPage() {
   //console.log(combined)
   return (
     <>
-      <DashboardGeneralStatus
-        totalNumRes={totalNumRes}
-        sumActives={sumActives}
-        availableSoft={availableSoft}
-        inUseSoft={inUseSoft}
-        operatHard={operatHard}
-        maintHard={maintHard}
-        activeLic={activeLic}
-        expiredLic={expiredLic}
-        activeServers={activeServers}
-        maintServers={maintServers}
-        subTotalRes={subTotalRes}
-      />
-      <div className="insights-container">
-        <DashboardInsightsI
-          riskLicenses={riskLicenses}
-          highPopServer={highPopServer}
-          software={software}
-        />
-        <DashboardInsightsII
-          uniqueElements={uniqueElements}
-        />
-      </div>
+      {Object.values(subTotalRes).reduce((sum, value) => sum + value, 0) > 0 ?
+        <>
+          <DashboardGeneralStatus
+            totalNumRes={totalNumRes}
+            sumActives={sumActives}
+            availableSoft={availableSoft}
+            inUseSoft={inUseSoft}
+            operatHard={operatHard}
+            maintHard={maintHard}
+            activeLic={activeLic}
+            expiredLic={expiredLic}
+            activeServers={activeServers}
+            maintServers={maintServers}
+            subTotalRes={subTotalRes}
+          />
+          <div className="insights-container">
+            <DashboardInsightsI
+              riskLicenses={riskLicenses}
+              highPopServer={highPopServer}
+              software={software}
+            />
+            <DashboardInsightsII
+              uniqueElements={uniqueElements}
+            />
+          </div>
+        </>
+        : <LoadingAnimation />
+      }
     </>
-
   )
 }
 

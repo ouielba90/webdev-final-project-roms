@@ -531,6 +531,18 @@ table {
   margin: 0;
 }
 
+.loading-animation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px 0;
+}
+
+.loading-animation > p {
+  margin: 0;
+  font-size: 12px;
+}
+
 /* --------------------------------------------- */
 /* INPUTS Y SELECT */
 /* --------------------------------------------- */

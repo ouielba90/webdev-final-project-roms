@@ -1,0 +1,18 @@
+import Lottie from "lottie-react";
+import lockAnimation from './../../../public/animations/Hourglass.json'
+
+function LoadingAnimation() {
+  return (
+    <>
+      <div className="loading-animation" >
+        <Lottie
+          animationData={lockAnimation}
+          loop={true}
+          style={{ width: 100, height: 100 }}
+        />
+        <p>Cargando los datos...</p>
+      </div>
+    </>
+  );
+}
+export default LoadingAnimation

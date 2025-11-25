@@ -1,29 +1,25 @@
 export const servers = [
   {
-    "id": 3001,
-    "name": "OBS-01",
-    "ip": "192.168.10.11",
-    "location": "Datacenter-A",
-    "os": "Ubuntu 22.04",
-    "status": "active",
-    "numberOfNodes": 1,
-    "nodeSpecs": [
+    id: 3001,
+    name: "OBS-01",
+    ip: "192.168.10.11",
+    location: "Datacenter-A",
+    os: "Ubuntu 22.04",
+    status: "activo",
+    numberOfNodes: 1,
+    nodeSpecs: [
       {
-        "nodeId": "OBS-01-N1",
-        "cpu": 4,
-        "ram": "64GB",
-        "storage": "2TB",
-        "cpuUsage": 60,
-        "ramUsage": 6,
-        "diskUsage": 2
-      }
+        nodeId: "OBS-01-N1",
+        cpu: 4,
+        ram: "64GB",
+        storage: "2TB",
+        cpuUsage: 60,
+        ramUsage: 6,
+        diskUsage: 2,
+      },
     ],
-    "hostedSoftware": [
-      1006,
-      1067,
-      1068
-    ],
-    "usersWithAccess": [
+    hostedSoftware: [1006, 1067, 1068],
+    usersWithAccess: [
       "user1",
       "user2",
       "admin",
@@ -36,37 +32,31 @@ export const servers = [
       "user10",
       "user11",
       "user12",
-      "user13"
+      "user13",
     ],
-    "connectedUsers": 87
+    connectedUsers: 87,
   },
   {
-    "id": 3002,
-    "name": "SCAN-01",
-    "ip": "192.168.10.12",
-    "location": "Datacenter-B",
-    "os": "Rocky Linux 9",
-    "status": "active",
-    "numberOfNodes": 1,
-    "nodeSpecs": [
+    id: 3002,
+    name: "SCAN-01",
+    ip: "192.168.10.12",
+    location: "Datacenter-B",
+    os: "Rocky Linux 9",
+    status: "activo",
+    numberOfNodes: 1,
+    nodeSpecs: [
       {
-        "nodeId": "SCAN-01-N1",
-        "cpu": 8,
-        "ram": "64GB",
-        "storage": "4TB",
-        "cpuUsage": 51,
-        "ramUsage": 50,
-        "diskUsage": 44
-      }
+        nodeId: "SCAN-01-N1",
+        cpu: 8,
+        ram: "64GB",
+        storage: "4TB",
+        cpuUsage: 51,
+        ramUsage: 50,
+        diskUsage: 44,
+      },
     ],
-    "hostedSoftware": [
-      1021,
-      1056,
-      1090,
-      1095,
-      1100
-    ],
-    "usersWithAccess": [
+    hostedSoftware: [1021, 1056, 1090, 1095, 1100],
+    usersWithAccess: [
       "dev",
       "user2",
       "user3",
@@ -103,54 +93,49 @@ export const servers = [
       "user34",
       "user35",
       "user36",
-      "sec"
+      "sec",
     ],
-    "connectedUsers": 99
+    connectedUsers: 99,
   },
   {
-    "id": 3003,
-    "name": "K8S-MASTER-01",
-    "ip": "192.168.10.13",
-    "location": "Cloud",
-    "os": "CentOS 8",
-    "status": "active",
-    "numberOfNodes": 3,
-    "nodeSpecs": [
+    id: 3003,
+    name: "K8S-MASTER-01",
+    ip: "192.168.10.13",
+    location: "Cloud",
+    os: "CentOS 8",
+    status: "activo",
+    numberOfNodes: 3,
+    nodeSpecs: [
       {
-        "nodeId": "K8S-MASTER-01-N1",
-        "cpu": 16,
-        "ram": "64GB",
-        "storage": "1TB",
-        "cpuUsage": 76,
-        "ramUsage": 67,
-        "diskUsage": 85
+        nodeId: "K8S-MASTER-01-N1",
+        cpu: 16,
+        ram: "64GB",
+        storage: "1TB",
+        cpuUsage: 76,
+        ramUsage: 67,
+        diskUsage: 85,
       },
       {
-        "nodeId": "K8S-MASTER-01-N2",
-        "cpu": 16,
-        "ram": "64GB",
-        "storage": "1TB",
-        "cpuUsage": 19,
-        "ramUsage": 83,
-        "diskUsage": 57
+        nodeId: "K8S-MASTER-01-N2",
+        cpu: 16,
+        ram: "64GB",
+        storage: "1TB",
+        cpuUsage: 19,
+        ramUsage: 83,
+        diskUsage: 57,
       },
       {
-        "nodeId": "K8S-MASTER-01-N3",
-        "cpu": 16,
-        "ram": "64GB",
-        "storage": "1TB",
-        "cpuUsage": 95,
-        "ramUsage": 11,
-        "diskUsage": 41
-      }
+        nodeId: "K8S-MASTER-01-N3",
+        cpu: 16,
+        ram: "64GB",
+        storage: "1TB",
+        cpuUsage: 95,
+        ramUsage: 11,
+        diskUsage: 41,
+      },
     ],
-    "hostedSoftware": [
-      1061,
-      1062,
-      1063,
-      1077
-    ],
-    "usersWithAccess": [
+    hostedSoftware: [1061, 1062, 1063, 1077],
+    usersWithAccess: [
       "user1",
       "user2",
       "user3",
@@ -164,37 +149,31 @@ export const servers = [
       "user11",
       "user12",
       "user13",
-      "user14"
+      "user14",
     ],
-    "connectedUsers": 79
+    connectedUsers: 79,
   },
   {
-    "id": 3004,
-    "name": "CI-01",
-    "ip": "192.168.10.14",
-    "location": "Datacenter-A",
-    "os": "Rocky Linux 9",
-    "status": "active",
-    "numberOfNodes": 1,
-    "nodeSpecs": [
+    id: 3004,
+    name: "CI-01",
+    ip: "192.168.10.14",
+    location: "Datacenter-A",
+    os: "Rocky Linux 9",
+    status: "activo",
+    numberOfNodes: 1,
+    nodeSpecs: [
       {
-        "nodeId": "CI-01-N1",
-        "cpu": 8,
-        "ram": "32GB",
-        "storage": "1TB",
-        "cpuUsage": 91,
-        "ramUsage": 31,
-        "diskUsage": 3
-      }
+        nodeId: "CI-01-N1",
+        cpu: 8,
+        ram: "32GB",
+        storage: "1TB",
+        cpuUsage: 91,
+        ramUsage: 31,
+        diskUsage: 3,
+      },
     ],
-    "hostedSoftware": [
-      1064,
-      1070,
-      1071,
-      1072,
-      1082
-    ],
-    "usersWithAccess": [
+    hostedSoftware: [1064, 1070, 1071, 1072, 1082],
+    usersWithAccess: [
       "sec",
       "user2",
       "user3",
@@ -231,45 +210,40 @@ export const servers = [
       "sec",
       "user35",
       "qa",
-      "user37"
+      "user37",
     ],
-    "connectedUsers": 32
+    connectedUsers: 32,
   },
   {
-    "id": 3005,
-    "name": "DB-01",
-    "ip": "192.168.10.15",
-    "location": "Lab",
-    "os": "Debian 12",
-    "status": "maintenance",
-    "numberOfNodes": 2,
-    "nodeSpecs": [
+    id: 3005,
+    name: "DB-01",
+    ip: "192.168.10.15",
+    location: "Lab",
+    os: "Debian 12",
+    status: "mantenimiento",
+    numberOfNodes: 2,
+    nodeSpecs: [
       {
-        "nodeId": "DB-01-N1",
-        "cpu": 16,
-        "ram": "64GB",
-        "storage": "1TB",
-        "cpuUsage": 92,
-        "ramUsage": 45,
-        "diskUsage": 70
+        nodeId: "DB-01-N1",
+        cpu: 16,
+        ram: "64GB",
+        storage: "1TB",
+        cpuUsage: 92,
+        ramUsage: 45,
+        diskUsage: 70,
       },
       {
-        "nodeId": "DB-01-N2",
-        "cpu": 16,
-        "ram": "64GB",
-        "storage": "1TB",
-        "cpuUsage": 3,
-        "ramUsage": 19,
-        "diskUsage": 41
-      }
+        nodeId: "DB-01-N2",
+        cpu: 16,
+        ram: "64GB",
+        storage: "1TB",
+        cpuUsage: 3,
+        ramUsage: 19,
+        diskUsage: 41,
+      },
     ],
-    "hostedSoftware": [
-      1078,
-      1079,
-      1080,
-      1007
-    ],
-    "usersWithAccess": [
+    hostedSoftware: [1078, 1079, 1080, 1007],
+    usersWithAccess: [
       "user1",
       "user2",
       "user3",
@@ -282,48 +256,40 @@ export const servers = [
       "user10",
       "user11",
       "ops",
-      "analyst"
+      "analyst",
     ],
-    "connectedUsers": 0
+    connectedUsers: 0,
   },
   {
-    "id": 3006,
-    "name": "LOG-01",
-    "ip": "192.168.10.16",
-    "location": "Cloud",
-    "os": "CentOS 8",
-    "status": "active",
-    "numberOfNodes": 2,
-    "nodeSpecs": [
+    id: 3006,
+    name: "LOG-01",
+    ip: "192.168.10.16",
+    location: "Cloud",
+    os: "CentOS 8",
+    status: "activo",
+    numberOfNodes: 2,
+    nodeSpecs: [
       {
-        "nodeId": "LOG-01-N1",
-        "cpu": 16,
-        "ram": "64GB",
-        "storage": "1TB",
-        "cpuUsage": 29,
-        "ramUsage": 58,
-        "diskUsage": 16
+        nodeId: "LOG-01-N1",
+        cpu: 16,
+        ram: "64GB",
+        storage: "1TB",
+        cpuUsage: 29,
+        ramUsage: 58,
+        diskUsage: 16,
       },
       {
-        "nodeId": "LOG-01-N2",
-        "cpu": 16,
-        "ram": "64GB",
-        "storage": "1TB",
-        "cpuUsage": 94,
-        "ramUsage": 52,
-        "diskUsage": 55
-      }
+        nodeId: "LOG-01-N2",
+        cpu: 16,
+        ram: "64GB",
+        storage: "1TB",
+        cpuUsage: 94,
+        ramUsage: 52,
+        diskUsage: 55,
+      },
     ],
-    "hostedSoftware": [
-      1057,
-      1058,
-      1059,
-      1073,
-      1074,
-      1075,
-      1088
-    ],
-    "usersWithAccess": [
+    hostedSoftware: [1057, 1058, 1059, 1073, 1074, 1075, 1088],
+    usersWithAccess: [
       "user1",
       "dev",
       "user3",
@@ -345,44 +311,40 @@ export const servers = [
       "user19",
       "user20",
       "user21",
-      "user22"
+      "user22",
     ],
-    "connectedUsers": 17
+    connectedUsers: 17,
   },
   {
-    "id": 3007,
-    "name": "LB-01",
-    "ip": "192.168.11.17",
-    "location": "Cloud",
-    "os": "Debian 12",
-    "status": "active",
-    "numberOfNodes": 2,
-    "nodeSpecs": [
+    id: 3007,
+    name: "LB-01",
+    ip: "192.168.11.17",
+    location: "Cloud",
+    os: "Debian 12",
+    status: "activo",
+    numberOfNodes: 2,
+    nodeSpecs: [
       {
-        "nodeId": "LB-01-N1",
-        "cpu": 16,
-        "ram": "64GB",
-        "storage": "1TB",
-        "cpuUsage": 88,
-        "ramUsage": 62,
-        "diskUsage": 59
+        nodeId: "LB-01-N1",
+        cpu: 16,
+        ram: "64GB",
+        storage: "1TB",
+        cpuUsage: 88,
+        ramUsage: 62,
+        diskUsage: 59,
       },
       {
-        "nodeId": "LB-01-N2",
-        "cpu": 16,
-        "ram": "64GB",
-        "storage": "1TB",
-        "cpuUsage": 45,
-        "ramUsage": 97,
-        "diskUsage": 94
-      }
+        nodeId: "LB-01-N2",
+        cpu: 16,
+        ram: "64GB",
+        storage: "1TB",
+        cpuUsage: 45,
+        ramUsage: 97,
+        diskUsage: 94,
+      },
     ],
-    "hostedSoftware": [
-      1083,
-      1084,
-      1085
-    ],
-    "usersWithAccess": [
+    hostedSoftware: [1083, 1084, 1085],
+    usersWithAccess: [
       "analyst",
       "dev",
       "user3",
@@ -400,42 +362,40 @@ export const servers = [
       "user15",
       "root",
       "user17",
-      "user18"
+      "user18",
     ],
-    "connectedUsers": 70
+    connectedUsers: 70,
   },
   {
-    "id": 3008,
-    "name": "CACHE-01",
-    "ip": "192.168.11.18",
-    "location": "Lab",
-    "os": "Rocky Linux 9",
-    "status": "active",
-    "numberOfNodes": 2,
-    "nodeSpecs": [
+    id: 3008,
+    name: "CACHE-01",
+    ip: "192.168.11.18",
+    location: "Lab",
+    os: "Rocky Linux 9",
+    status: "activo",
+    numberOfNodes: 2,
+    nodeSpecs: [
       {
-        "nodeId": "CACHE-01-N1",
-        "cpu": 16,
-        "ram": "64GB",
-        "storage": "1TB",
-        "cpuUsage": 32,
-        "ramUsage": 2,
-        "diskUsage": 42
+        nodeId: "CACHE-01-N1",
+        cpu: 16,
+        ram: "64GB",
+        storage: "1TB",
+        cpuUsage: 32,
+        ramUsage: 2,
+        diskUsage: 42,
       },
       {
-        "nodeId": "CACHE-01-N2",
-        "cpu": 16,
-        "ram": "64GB",
-        "storage": "1TB",
-        "cpuUsage": 72,
-        "ramUsage": 59,
-        "diskUsage": 23
-      }
+        nodeId: "CACHE-01-N2",
+        cpu: 16,
+        ram: "64GB",
+        storage: "1TB",
+        cpuUsage: 72,
+        ramUsage: 59,
+        diskUsage: 23,
+      },
     ],
-    "hostedSoftware": [
-      1078
-    ],
-    "usersWithAccess": [
+    hostedSoftware: [1078],
+    usersWithAccess: [
       "sec",
       "user2",
       "ci",
@@ -485,34 +445,31 @@ export const servers = [
       "user47",
       "user48",
       "user49",
-      "root"
+      "root",
     ],
-    "connectedUsers": 49
+    connectedUsers: 49,
   },
   {
-    "id": 3009,
-    "name": "BACKUP-01",
-    "ip": "192.168.11.19",
-    "location": "Datacenter-A",
-    "os": "Ubuntu 22.04",
-    "status": "active",
-    "numberOfNodes": 1,
-    "nodeSpecs": [
+    id: 3009,
+    name: "BACKUP-01",
+    ip: "192.168.11.19",
+    location: "Datacenter-A",
+    os: "Ubuntu 22.04",
+    status: "activo",
+    numberOfNodes: 1,
+    nodeSpecs: [
       {
-        "nodeId": "BACKUP-01-N1",
-        "cpu": 8,
-        "ram": "32GB",
-        "storage": "10TB",
-        "cpuUsage": 51,
-        "ramUsage": 89,
-        "diskUsage": 34
-      }
+        nodeId: "BACKUP-01-N1",
+        cpu: 8,
+        ram: "32GB",
+        storage: "10TB",
+        cpuUsage: 51,
+        ramUsage: 89,
+        diskUsage: 34,
+      },
     ],
-    "hostedSoftware": [
-      1081,
-      1096
-    ],
-    "usersWithAccess": [
+    hostedSoftware: [1081, 1096],
+    usersWithAccess: [
       "user1",
       "user2",
       "user3",
@@ -559,34 +516,31 @@ export const servers = [
       "user44",
       "user45",
       "user46",
-      "user47"
+      "user47",
     ],
-    "connectedUsers": 36
+    connectedUsers: 36,
   },
   {
-    "id": 3010,
-    "name": "AUTH-01",
-    "ip": "192.168.11.20",
-    "location": "Datacenter-B",
-    "os": "Debian 12",
-    "status": "maintenance",
-    "numberOfNodes": 1,
-    "nodeSpecs": [
+    id: 3010,
+    name: "AUTH-01",
+    ip: "192.168.11.20",
+    location: "Datacenter-B",
+    os: "Debian 12",
+    status: "mantenimiento",
+    numberOfNodes: 1,
+    nodeSpecs: [
       {
-        "nodeId": "AUTH-01-N1",
-        "cpu": 8,
-        "ram": "32GB",
-        "storage": "1TB",
-        "cpuUsage": 69,
-        "ramUsage": 1,
-        "diskUsage": 97
-      }
+        nodeId: "AUTH-01-N1",
+        cpu: 8,
+        ram: "32GB",
+        storage: "1TB",
+        cpuUsage: 69,
+        ramUsage: 1,
+        diskUsage: 97,
+      },
     ],
-    "hostedSoftware": [
-      1086,
-      1087
-    ],
-    "usersWithAccess": [
+    hostedSoftware: [1086, 1087],
+    usersWithAccess: [
       "user1",
       "dev",
       "user3",
@@ -629,117 +583,112 @@ export const servers = [
       "user40",
       "user41",
       "qa",
-      "user43"
+      "user43",
     ],
-    "connectedUsers": 0
+    connectedUsers: 0,
   },
   {
-    "id": 3011,
-    "name": "DEV-VM-POOL",
-    "ip": "192.168.11.21",
-    "location": "Cloud",
-    "os": "Debian 12",
-    "status": "active",
-    "numberOfNodes": 10,
-    "nodeSpecs": [
+    id: 3011,
+    name: "DEV-VM-POOL",
+    ip: "192.168.11.21",
+    location: "Cloud",
+    os: "Debian 12",
+    status: "activo",
+    numberOfNodes: 10,
+    nodeSpecs: [
       {
-        "nodeId": "DEV-VM-POOL-N1",
-        "cpu": 16,
-        "ram": "64GB",
-        "storage": "1TB",
-        "cpuUsage": 11,
-        "ramUsage": 23,
-        "diskUsage": 75
+        nodeId: "DEV-VM-POOL-N1",
+        cpu: 16,
+        ram: "64GB",
+        storage: "1TB",
+        cpuUsage: 11,
+        ramUsage: 23,
+        diskUsage: 75,
       },
       {
-        "nodeId": "DEV-VM-POOL-N2",
-        "cpu": 16,
-        "ram": "64GB",
-        "storage": "1TB",
-        "cpuUsage": 58,
-        "ramUsage": 43,
-        "diskUsage": 79
+        nodeId: "DEV-VM-POOL-N2",
+        cpu: 16,
+        ram: "64GB",
+        storage: "1TB",
+        cpuUsage: 58,
+        ramUsage: 43,
+        diskUsage: 79,
       },
       {
-        "nodeId": "DEV-VM-POOL-N3",
-        "cpu": 16,
-        "ram": "64GB",
-        "storage": "1TB",
-        "cpuUsage": 64,
-        "ramUsage": 70,
-        "diskUsage": 65
+        nodeId: "DEV-VM-POOL-N3",
+        cpu: 16,
+        ram: "64GB",
+        storage: "1TB",
+        cpuUsage: 64,
+        ramUsage: 70,
+        diskUsage: 65,
       },
       {
-        "nodeId": "DEV-VM-POOL-N4",
-        "cpu": 16,
-        "ram": "64GB",
-        "storage": "1TB",
-        "cpuUsage": 29,
-        "ramUsage": 34,
-        "diskUsage": 56
+        nodeId: "DEV-VM-POOL-N4",
+        cpu: 16,
+        ram: "64GB",
+        storage: "1TB",
+        cpuUsage: 29,
+        ramUsage: 34,
+        diskUsage: 56,
       },
       {
-        "nodeId": "DEV-VM-POOL-N5",
-        "cpu": 16,
-        "ram": "64GB",
-        "storage": "1TB",
-        "cpuUsage": 1,
-        "ramUsage": 75,
-        "diskUsage": 44
+        nodeId: "DEV-VM-POOL-N5",
+        cpu: 16,
+        ram: "64GB",
+        storage: "1TB",
+        cpuUsage: 1,
+        ramUsage: 75,
+        diskUsage: 44,
       },
       {
-        "nodeId": "DEV-VM-POOL-N6",
-        "cpu": 16,
-        "ram": "64GB",
-        "storage": "1TB",
-        "cpuUsage": 23,
-        "ramUsage": 82,
-        "diskUsage": 17
+        nodeId: "DEV-VM-POOL-N6",
+        cpu: 16,
+        ram: "64GB",
+        storage: "1TB",
+        cpuUsage: 23,
+        ramUsage: 82,
+        diskUsage: 17,
       },
       {
-        "nodeId": "DEV-VM-POOL-N7",
-        "cpu": 16,
-        "ram": "64GB",
-        "storage": "1TB",
-        "cpuUsage": 44,
-        "ramUsage": 26,
-        "diskUsage": 43
+        nodeId: "DEV-VM-POOL-N7",
+        cpu: 16,
+        ram: "64GB",
+        storage: "1TB",
+        cpuUsage: 44,
+        ramUsage: 26,
+        diskUsage: 43,
       },
       {
-        "nodeId": "DEV-VM-POOL-N8",
-        "cpu": 16,
-        "ram": "64GB",
-        "storage": "1TB",
-        "cpuUsage": 45,
-        "ramUsage": 37,
-        "diskUsage": 96
+        nodeId: "DEV-VM-POOL-N8",
+        cpu: 16,
+        ram: "64GB",
+        storage: "1TB",
+        cpuUsage: 45,
+        ramUsage: 37,
+        diskUsage: 96,
       },
       {
-        "nodeId": "DEV-VM-POOL-N9",
-        "cpu": 16,
-        "ram": "64GB",
-        "storage": "1TB",
-        "cpuUsage": 41,
-        "ramUsage": 12,
-        "diskUsage": 91
+        nodeId: "DEV-VM-POOL-N9",
+        cpu: 16,
+        ram: "64GB",
+        storage: "1TB",
+        cpuUsage: 41,
+        ramUsage: 12,
+        diskUsage: 91,
       },
       {
-        "nodeId": "DEV-VM-POOL-N10",
-        "cpu": 16,
-        "ram": "64GB",
-        "storage": "1TB",
-        "cpuUsage": 6,
-        "ramUsage": 21,
-        "diskUsage": 14
-      }
+        nodeId: "DEV-VM-POOL-N10",
+        cpu: 16,
+        ram: "64GB",
+        storage: "1TB",
+        cpuUsage: 6,
+        ramUsage: 21,
+        diskUsage: 14,
+      },
     ],
-    "hostedSoftware": [
-      1061,
-      1066,
-      1098,
-      1078
-    ],
-    "usersWithAccess": [
+    hostedSoftware: [1061, 1066, 1098, 1078],
+    usersWithAccess: [
       "user1",
       "user2",
       "user3",
@@ -781,33 +730,31 @@ export const servers = [
       "user39",
       "user40",
       "user41",
-      "user42"
+      "user42",
     ],
-    "connectedUsers": 36
+    connectedUsers: 36,
   },
   {
-    "id": 3012,
-    "name": "TEST-ENV-01",
-    "ip": "192.168.11.22",
-    "location": "Cloud",
-    "os": "Debian 12",
-    "status": "active",
-    "numberOfNodes": 1,
-    "nodeSpecs": [
+    id: 3012,
+    name: "TEST-ENV-01",
+    ip: "192.168.11.22",
+    location: "Cloud",
+    os: "Debian 12",
+    status: "activo",
+    numberOfNodes: 1,
+    nodeSpecs: [
       {
-        "nodeId": "TEST-ENV-01-N1",
-        "cpu": 8,
-        "ram": "64GB",
-        "storage": "2TB",
-        "cpuUsage": 70,
-        "ramUsage": 48,
-        "diskUsage": 50
-      }
+        nodeId: "TEST-ENV-01-N1",
+        cpu: 8,
+        ram: "64GB",
+        storage: "2TB",
+        cpuUsage: 70,
+        ramUsage: 48,
+        diskUsage: 50,
+      },
     ],
-    "hostedSoftware": [
-      1100
-    ],
-    "usersWithAccess": [
+    hostedSoftware: [1100],
+    usersWithAccess: [
       "user1",
       "user2",
       "user3",
@@ -817,8 +764,8 @@ export const servers = [
       "user7",
       "user8",
       "user9",
-      "user10"
+      "user10",
     ],
-    "connectedUsers": 63
-  }
+    connectedUsers: 63,
+  },
 ];
