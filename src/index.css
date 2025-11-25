@@ -4,49 +4,57 @@
   ================================================*/
 
 /* Variables globales - colores reutilizables */
-:root {
-  --primary: #2563eb;        /* Azul corporativo principal */
-  --primary-light: #3b82f6;  /* Azul claro para hover */
-  --secondary: #0ea5e9;      /* Azul turquesa para acentos */
-  --danger: #dc2626;         /* Rojo corporativo para alertas */
-  --dark-bg: #0f172a;        /* Fondo oscuro principal */
-  --card-bg: #1e293b;        /* Fondo de tarjetas */
-  --text-light: #f1f5f9;     /* Texto claro */
-  --text-muted: #94a3b8;     /* Texto gris/muted */
-  --border-color: #334155;   /* Color de bordes */
-  --success: #16a34a;        /* Verde para éxito */
-  --warning: #f59e0b;        /* Naranja para advertencias */
-  --gradient-primary: linear-gradient(135deg, #2563eb, #0ea5e9);
-  --gradient-danger: linear-gradient(135deg, #dc2626, #ef4444);
-}
+/*:root {
+/*  --primary: #2563eb;        /* Azul corporativo principal */
+/*  --primary-light: #3b82f6;  /* Azul claro para hover */
+/*  --secondary: #0ea5e9;      /* Azul turquesa para acentos */
+/*  --danger: #dc2626;         /* Rojo corporativo para alertas */
+/*  --dark-bg: #0f172a;        /* Fondo oscuro principal */
+/*  --card-bg: #1e293b;        /* Fondo de tarjetas */
+/*  --text-light: #f1f5f9;     /* Texto claro */
+/*  --text-muted: #94a3b8;     /* Texto gris/muted */
+/*  --border-color: #334155;   /* Color de bordes */
+/*  --success: #16a34a;        /* Verde para éxito */
+/*  --warning: #f59e0b;        /* Naranja para advertencias */
+/*  --gradient-primary: linear-gradient(135deg, #2563eb, #0ea5e9);
+/*  --gradient-danger: linear-gradient(135deg, #dc2626, #ef4444);
+/*}
 
 /* Reset básico */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+/* {
+//  box-sizing: border-box;
+//  margin: 0;
+//  padding: 0;
+//}
 
-/* Fondo general corporativo */
+/* Fondo general corporativo 
 body {
   background: linear-gradient(135deg, var(--dark-bg), #1a1f2e);
   font-family: 'Inter', 'Segoe UI', sans-serif;
   color: var(--text-light);
-  line-height: 1.6;
-}
+ line-height: 1.6;
+}*/
 
+body {
+  background: #ffffff;
+  margin: 0;
+  font-family: "Inter", "Segoe UI", sans-serif;
+}
 
 /*=================================
   1. CONTENEDORES PRINCIPALES
   Diseño corporativo con elegancia y profesionalidad
   ==================================*/
-
 .container-messages,
 .container-notifications {
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 30px; /* Más aire lateral */
-  background: linear-gradient(135deg, #f9fafb 0%, #eef2f7 100%); /* Fondo claro corporativo */
+  background: linear-gradient(
+    135deg,
+    #f9fafb 0%,
+    #eef2f7 100%
+  ); /* Fondo claro corporativo */
   min-height: 100vh;
   animation: fadeIn 0.8s ease; /* Entrada más suave y elegante */
 }
@@ -71,7 +79,11 @@ body {
   align-items: center;
   margin-bottom: 36px;
   padding: 28px;
-  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); /* Azul corporativo más sobrio */
+  background: linear-gradient(
+    135deg,
+    #1e3a8a 0%,
+    #2563eb 100%
+  ); /* Azul corporativo más sobrio */
   border-radius: 18px;
   border: 2px solid rgba(96, 165, 250, 0.25);
   box-shadow: 0 12px 36px rgba(37, 99, 235, 0.25); /* Sombra más elegante */
@@ -82,20 +94,30 @@ body {
 /* Efecto shimmer más sutil y profesional */
 .messages-header::before,
 .notifications-header::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -50%;
   right: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.08) 0%,
+    transparent 70%
+  );
   animation: shimmer 4s infinite linear;
 }
 
 @keyframes shimmer {
-  0% { transform: translate(0, 0); }
-  50% { transform: translate(25px, 25px); }
-  100% { transform: translate(0, 0); }
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(25px, 25px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
 }
 
 /* Títulos */
@@ -108,9 +130,8 @@ body {
   letter-spacing: -0.5px;
   position: relative;
   z-index: 1;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.25); /* Refuerzo de legibilidad */
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.25); /* Refuerzo de legibilidad */
 }
-
 
 /*=================================
   MESSAGE CARD - Estilo corporativo moderno
@@ -122,12 +143,18 @@ body {
   border-radius: 16px;
   padding: 24px;
   margin: 20px 0;
-  background: linear-gradient(135deg, rgba(17, 24, 39, 0.9) 0%, rgba(31, 41, 55, 0.9) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(17, 24, 39, 0.9) 0%,
+    rgba(31, 41, 55, 0.9) 100%
+  );
   backdrop-filter: blur(12px);
   color: var(--text-light);
-  font-family: 'Inter', 'Segoe UI', sans-serif; /* Tipografía más corporativa */
+  font-family: "Inter", "Segoe UI", sans-serif; /* Tipografía más corporativa */
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
   animation: fadeInUp 0.6s ease;
@@ -141,13 +168,18 @@ body {
 
 /* Efecto de brillo sutil */
 .message-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
   transition: left 0.6s ease;
   pointer-events: none;
 }
@@ -159,7 +191,11 @@ body {
 /* Estados especiales */
 .message-card.alert {
   border-left-color: var(--danger);
-  background: linear-gradient(135deg, rgba(127, 29, 29, 0.7) 0%, rgba(153, 27, 27, 0.7) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(127, 29, 29, 0.7) 0%,
+    rgba(153, 27, 27, 0.7) 100%
+  );
 }
 
 .message-card.alert:hover {
@@ -175,7 +211,11 @@ body {
 .message-card.sent {
   border-left-color: var(--success);
   margin-left: 8%;
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(6, 78, 59, 0.15) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(16, 185, 129, 0.15) 0%,
+    rgba(6, 78, 59, 0.15) 100%
+  );
 }
 
 /* Elementos internos */
@@ -215,7 +255,7 @@ body {
   background-color: rgba(17, 24, 39, 0.75);
   border-radius: 10px;
   border-left: 4px solid var(--primary);
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.25);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 /* Fecha */
@@ -253,12 +293,14 @@ body {
   padding: 14px;
   border: 2px solid var(--border-color);
   border-radius: 10px;
-  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-family: "Inter", "Segoe UI", sans-serif;
   font-size: 15px;
   margin: 14px 0;
   background-color: rgba(17, 24, 39, 0.85);
   color: var(--text-light);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .message-text-edit:focus {
@@ -277,7 +319,10 @@ body {
 }
 
 /* Botones base */
-.btn-edit, .btn-delete, .btn-save-edit, .btn-cancel-edit {
+.btn-edit,
+.btn-delete,
+.btn-save-edit,
+.btn-cancel-edit {
   padding: 12px 20px;
   border: none;
   border-radius: 10px;
@@ -292,7 +337,10 @@ body {
 }
 
 /* Animación sutil en hover */
-.btn-edit:hover, .btn-delete:hover, .btn-save-edit:hover, .btn-cancel-edit:hover {
+.btn-edit:hover,
+.btn-delete:hover,
+.btn-save-edit:hover,
+.btn-cancel-edit:hover {
   transform: translateY(-2px);
 }
 
@@ -350,7 +398,6 @@ body {
   padding-left: 6px;
 }
 
-
 /*=================================
   NOTIFICATION CARD - Estilo corporativo moderno
   ==================================*/
@@ -363,7 +410,9 @@ body {
   border-radius: 16px;
   background: linear-gradient(135deg, #f9fafb 0%, #eef2f7 100%);
   box-shadow: 0 6px 24px rgba(59, 130, 246, 0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   backdrop-filter: blur(8px);
   animation: fadeInUp 0.6s ease;
 }
@@ -417,7 +466,7 @@ body {
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 10px;
   border-left: 4px solid var(--primary);
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.08);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 /* Fecha */
@@ -440,7 +489,6 @@ body {
     transform: translateY(0);
   }
 }
-
 
 /*=================================
   NAVEGACIÓN Y SECCIONES - Estilo corporativo
@@ -485,7 +533,7 @@ body {
 
 /* Efecto de brillo en hover */
 .nav-links a::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
@@ -591,7 +639,11 @@ body {
 /* Items de chat */
 .chat-list-item {
   cursor: pointer;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(16, 185, 129, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.08) 0%,
+    rgba(16, 185, 129, 0.05) 100%
+  );
   border-radius: 12px;
   border: 1px solid rgba(59, 130, 246, 0.25);
   padding: 18px;
@@ -633,7 +685,11 @@ body {
   padding: 50px 30px;
   color: var(--text-muted);
   font-size: 1em;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.05) 0%,
+    rgba(16, 185, 129, 0.05) 100%
+  );
   border-radius: 12px;
   border: 1px dashed rgba(59, 130, 246, 0.25);
 }

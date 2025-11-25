@@ -145,7 +145,6 @@ function LicensesInvPage() {
           />
         )}
       </Modal>
-      <h1>Licenses</h1>
       <div className="software-main-container">
         <div className="filters-container">
           <div className="filters-row-main">

@@ -55,7 +55,6 @@ function ServersInvPage() {
   }
   return (
     <>
-      <h1>Servers</h1>
       <div className="software-main-container">
         <div className="filters-container">
           <div className="filters-row-main">
