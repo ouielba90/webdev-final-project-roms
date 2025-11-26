@@ -64,7 +64,9 @@ function SoftwareDetailsPage() {
                 </div>
               ))
             ) : (
-              <p>Ninguno</p>
+              <div className="assoc-card">
+                <p>Ninguno</p>
+              </div>
             )}
           </div>
         </div>

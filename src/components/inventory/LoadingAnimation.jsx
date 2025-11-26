@@ -1,5 +1,7 @@
 import Lottie from "lottie-react";
-import lockAnimation from './../../../public/animations/Hourglass.json'
+//import lockAnimation from './../../../public/animations/Hourglass.json'
+import lockAnimation from './../../../public/animations/TrailLoading.json'
+//import lockAnimation from './../../../public/animations/MaterialWaveLoading.json'
 
 function LoadingAnimation() {
   return (

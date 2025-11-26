@@ -4,8 +4,10 @@ function CompactMainMenu() {
   return (
     <header className="compact-main-menu">
       <div className="logo">
-        <h1>CyberProject</h1>
-        <h3>Consultoría de ciberseguridad</h3>
+        <Link to="/">
+          <h1>CyberProject</h1>
+          <h3>Consultoría de ciberseguridad</h3>
+        </Link>
       </div>
       <nav className="main-nav">
         <Link to="/">HOME</Link>

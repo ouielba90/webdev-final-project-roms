@@ -4,10 +4,20 @@ import { inventorySections } from "../../sections/inventorySections.js";
 import "./../../indexOuissam.css"
 import CompactMainMenu from '../../components/homepage/CompactMainMenu'
 import { useContext } from 'react';
+import LoadingAnimation from '../../components/inventory/LoadingAnimation.jsx';
 
 function HomeInvPage() {
   const { software, hardware, servers } = useContext(DataContext);
   const currPath = useLocation()
+
+  if (!software.length || !hardware.length || !servers.length) {
+    return (
+      <>
+        <CompactMainMenu />
+        <LoadingAnimation />
+      </>)
+  }
+
   function getSection(path) {
     const parts = path.split("/").filter(Boolean);
     if (parts.length === 1) return "dashboard";

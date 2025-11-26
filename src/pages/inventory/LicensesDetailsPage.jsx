@@ -18,7 +18,9 @@ function LicensesDetailsPage() {
         <div>
           <h3>License {licenseItem.id}</h3>
           <p><strong>{softAssoc.name}</strong></p>
-          {daysBetweenDates(licenseItem.expiryDate) < 0 ? <p>Activo</p> : <p>Expirado</p>}
+          {daysBetweenDates(licenseItem.expiryDate) < 0 ?
+            <p className="status active">Activo</p>
+            : <p className="status expired">Expirado</p>}
         </div>
 
         <div>

@@ -126,7 +126,6 @@ const router = createBrowserRouter(
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ProviderInventory>
-
       <RouterProvider router={router} />
     </ProviderInventory>
 
