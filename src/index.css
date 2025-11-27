@@ -1,39 +1,4 @@
-/*===============================================
-  🎨 DISEÑO CORPORATIVO Y PROFESIONAL
-  Paleta sobria, confiable y moderna
-  ================================================*/
 
-/* Variables globales - colores reutilizables */
-/*:root {
-/*  --primary: #2563eb;        /* Azul corporativo principal */
-/*  --primary-light: #3b82f6;  /* Azul claro para hover */
-/*  --secondary: #0ea5e9;      /* Azul turquesa para acentos */
-/*  --danger: #dc2626;         /* Rojo corporativo para alertas */
-/*  --dark-bg: #0f172a;        /* Fondo oscuro principal */
-/*  --card-bg: #1e293b;        /* Fondo de tarjetas */
-/*  --text-light: #f1f5f9;     /* Texto claro */
-/*  --text-muted: #94a3b8;     /* Texto gris/muted */
-/*  --border-color: #334155;   /* Color de bordes */
-/*  --success: #16a34a;        /* Verde para éxito */
-/*  --warning: #f59e0b;        /* Naranja para advertencias */
-/*  --gradient-primary: linear-gradient(135deg, #2563eb, #0ea5e9);
-/*  --gradient-danger: linear-gradient(135deg, #dc2626, #ef4444);
-/*}
-
-/* Reset básico */
-/* {
-//  box-sizing: border-box;
-//  margin: 0;
-//  padding: 0;
-//}
-
-/* Fondo general corporativo 
-body {
-  background: linear-gradient(135deg, var(--dark-bg), #1a1f2e);
-  font-family: 'Inter', 'Segoe UI', sans-serif;
-  color: var(--text-light);
- line-height: 1.6;
-}*/
 
 body {
   background: #ffffff;
@@ -79,11 +44,8 @@ body {
   align-items: center;
   margin-bottom: 36px;
   padding: 28px;
-  background: linear-gradient(
-    135deg,
-    #1e3a8a 0%,
-    #2563eb 100%
-  ); /* Azul corporativo más sobrio */
+  background: blue;
+   
   border-radius: 18px;
   border: 2px solid rgba(96, 165, 250, 0.25);
   box-shadow: 0 12px 36px rgba(37, 99, 235, 0.25); /* Sombra más elegante */
