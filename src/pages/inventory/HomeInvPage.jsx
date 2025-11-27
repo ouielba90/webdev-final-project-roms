@@ -65,18 +65,16 @@ function HomeInvPage() {
   return (
     <>
       <CompactMainMenu></CompactMainMenu>
-      <h1 className="dashboard-title">{sectionData.title}</h1>
-      <h3 className="dashboard-subtitle">{sectionData.subtext}</h3>
-      <nav className="inventory-submenu">
+      <h1 className="general-title">{sectionData.title}</h1>
+      <h3 className="general-subtitle">{sectionData.subtext}</h3>
+      <nav className="general-submenu">
         <Link to="/inventory">Centro de inventario</Link>
         <Link to="/inventory/software">Software</Link>
         <Link to="/inventory/hardware">Hardware</Link>
         <Link to="/inventory/licenses">Licencias</Link>
         <Link to="/inventory/servers">Servidores</Link>
       </nav>
-      <div className="inventory-content">
-        <Outlet />
-      </div>
+      <Outlet />
     </>
   )
 }
