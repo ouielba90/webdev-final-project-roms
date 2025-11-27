@@ -289,7 +289,7 @@
   transform: translateY(-2px);
 }
 
-.inventory-submenu {
+.general-submenu {
   display: flex;
   justify-content: center;
   gap: 18px;
@@ -299,7 +299,7 @@
   margin-top: 75px;
 }
 
-.inventory-submenu a {
+.general-submenu a {
   padding: 8px 16px;
   border-radius: 10px;
   font-weight: 600;
@@ -309,7 +309,7 @@
   transition: all 0.25s ease;
 }
 
-.inventory-submenu a:hover {
+.general-submenu a:hover {
   background: #2563eb;
   color: #fff;
   box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
@@ -318,7 +318,7 @@
 /*****************************************************/
 /* ------------------- DASHBOARD ------------------- */
 /*****************************************************/
-.dashboard-title {
+.general-title {
   text-align: center;
   font-size: 42px;
   font-weight: 900;
@@ -326,7 +326,7 @@
   letter-spacing: -1px;
   margin-top: 60px;
 }
-.dashboard-subtitle {
+.general-subtitle {
   text-align: center;
   font-size: 18px;
   margin-top: 8px;
