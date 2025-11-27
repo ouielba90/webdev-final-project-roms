@@ -148,7 +148,6 @@ function SoftwareInvPage() {
           setSelectedServ={setSelectedServ}
         />
       </Modal>
-      <h1>Sofware</h1>
       <div className="software-main-container">
         <div className="filters-container">
           <div className="filters-row-main">

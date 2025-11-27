@@ -31,10 +31,10 @@ const router = createBrowserRouter(
       path: '/',
       element: <App />,
       children: [
-        {
-          index: true,
-          element: <Home />
-        },
+        //{
+        //  index: true,
+        //  element: <Home />
+        //},
         {
           path: '/inventory',
           element: <HomeInvPage />,
@@ -126,7 +126,6 @@ const router = createBrowserRouter(
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ProviderInventory>
-
       <RouterProvider router={router} />
     </ProviderInventory>
 

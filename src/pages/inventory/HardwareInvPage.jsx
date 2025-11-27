@@ -141,7 +141,6 @@ function HardwareInvPage() {
           />
         )}
       </Modal>
-      <h1>Hardware</h1>
       <div className="software-main-container">
         <div className="filters-container">
           <div className="filters-row-main">

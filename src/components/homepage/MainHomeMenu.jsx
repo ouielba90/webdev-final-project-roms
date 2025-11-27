@@ -1,0 +1,61 @@
+import { Link } from 'react-router-dom'
+import UnlockerPopup from './../../components/homepage/UnLockerPopup.jsx'
+
+function MainHomeMenu() {
+
+  return (
+    <>
+      <div className='main-home-page'>
+        <div className='main-home-page-header'>
+          <h1>CyberProject</h1>
+          <h3>Consultoría Ciberseguridad</h3>
+          <p className='welcome-message'>
+            Bienvenido a CyberProject. Gestiona tu inventario, comunicaciones, usuarios y proyectos de manera segura y eficiente.
+          </p>
+        </div>
+        <div className='main-nav-menu'>
+          <div className='card-menu'>
+            <Link to='/inventory' className="card-inner-link">
+              <div className="card-inner">
+                <span>Inventario</span>
+                <p>Todo tu hardware, ordenado y seguro</p>
+                <img src="./../public/icons/inventory.png" alt="" />
+              </div>
+            </Link>
+          </div>
+          <div className='card-menu'>
+            <Link to='/communications' className='card-inner-link'>
+              <div className="card-inner">
+                <span>Comunicaciones</span>
+                <p>Habla seguro, siempre y en cualquier lugar</p>
+                <img src="./../public/icons/communication.png" alt="" />
+              </div>
+            </Link>
+          </div>
+          <div className='card-menu'>
+            <Link to='/users' className='card-inner-link'>
+              <div className="card-inner">
+                <span>Usuarios</span>
+                <p>Identidades siempre bajo control</p>
+                <img src="./../public/icons/users.png" alt="" />
+              </div>
+            </Link>
+          </div>
+          <div className='card-menu'>
+            <Link to='/projects' className='card-inner-link'>
+              <div className="card-inner">
+                <span>Proyectos</span>
+                <p>Proyectos que avanzan sin riesgos</p>
+                <img src="./../public/icons/projects.png" alt="" />
+              </div>
+            </Link>
+          </div>
+          <UnlockerPopup />
+        </div>
+      </div>
+    </>
+  )
+
+}
+
+export default MainHomeMenu

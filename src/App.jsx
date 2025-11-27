@@ -1,26 +1,23 @@
-import { Link, Outlet, Route, Routes } from 'react-router-dom'
-import InternalChatsPage from './pages/communications/InternalChatsPage';
-import ClientChatsPage from './pages/communications/ClientChatsPage';
-import ChatViewPage from './pages/communications/ChatViewPage';
-import MessagesPages from './pages/communications/MessagesPage'
-import NotificationsPage from './pages/communications/NotificationsPage'
-import HomeCommPage from './pages/communications/HomeCommPage'
+
+
+import MainHomeMenu from './components/homepage/MainHomeMenu';
+import { Outlet, useLocation } from 'react-router-dom';
+import ScrollToTop from './components/homepage/ScrollToTop';
 
 function App() {
+  const currPath = useLocation()
   return (
     <>
-      <h3>Menú principal</h3>
-      <Link to='/'>Home</Link> |
-      <Link to='/inventory'>Inventory</Link> |
-      <Link to='/projects'>Projects</Link> |
-      <Link to='/users'>Users</Link> |
-      <Link to='/communications'>Comunicaciones</Link>
-      <hr />
+      <ScrollToTop />
+      {currPath.pathname === '/' &&
+        <MainHomeMenu></MainHomeMenu>
+      }
       <Outlet></Outlet>
+      <footer className='main-footer'>
+        <p>© 2025 CyberProject. Todos los derechos reservados.</p>
+      </footer>
     </>
   )
 }
 
 export default App
-
-
