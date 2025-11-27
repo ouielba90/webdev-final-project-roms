@@ -1,16 +1,16 @@
+import StatusAnimation from "./StatusAnimation.jsx"
+
 function DashboardInsightsII({ uniqueElements }) {
   return (
     <>
       <div className="insights-card insights-server-risk server-risk-structure">
-        <h2 className="section-title">Servidores en Riesgo</h2>
+        <h2 className="section-title">Estado de los servidores</h2>
 
         <table className="table-server-risk-1">
           <thead>
             <tr>
-              <th className="th-server">Server</th>
-              <th className="th-users">Alertas</th>
-              <th className="th-server"></th>
-              <th></th>
+              <th className="th-server">Servidor</th>
+              <th className="th-users">Estado</th>
               <th></th>
             </tr>
           </thead>
@@ -21,16 +21,26 @@ function DashboardInsightsII({ uniqueElements }) {
               item.ramUsage > 90 && issues.push(`RAM: ${item.ramUsage}%`);
               item.diskUsage > 80 && issues.push(`Disk: ${item.diskUsage}%`);
 
-              if (issues.length !== 0) {
-                return (<tr key={index}><td>{item.name}</td><td>{issues.join(" | ")}</td><td>🔴</td></tr>)
-              } else {
-                if (item.status === "active") {
-                  return (<tr key={index}><td>{item.name}</td><td>Todo normal</td><td>🟢</td></tr>)
-                }
-                else {
-                  return (<tr key={index}><td>{item.name}</td><td>El mantenimiento</td>🟠</tr>)
-                }
-              }
+              const isAlert = issues.length > 0;
+              const color = isAlert ?
+                <StatusAnimation color={"red"} />
+                : item.status === "active" ?
+                  <StatusAnimation color={"green"} />
+                  : <StatusAnimation color={"orange"} />;
+              return (
+                <tr key={index}>
+                  <td>
+                    {item.name}
+                  </td>
+                  <td className="issues">{color}</td>
+                  <td>{isAlert ? (
+                    <span className="issue-text">{issues.join(" | ")}</span>
+                  ) :
+                    (<span className="issue-text">Sin alertas</span>)
+                  }
+                  </td>
+                </tr>
+              );
             }).slice(0, 6)}
           </tbody>
         </table>
@@ -38,11 +48,8 @@ function DashboardInsightsII({ uniqueElements }) {
         <table className="table-server-risk-2">
           <thead>
             <tr>
-              <th className="th-server">Server</th>
-              <th className="th-users">Alertas</th>
-              <th className="th-server"></th>
-              <th></th>
-              <th></th>
+              <th className="th-server">Servidor</th>
+              <th className="th-users">Estado</th>
             </tr>
           </thead>
           <tbody>
@@ -52,19 +59,35 @@ function DashboardInsightsII({ uniqueElements }) {
               item.ramUsage > 90 && issues.push(`RAM: ${item.ramUsage}%`);
               item.diskUsage > 80 && issues.push(`Disk: ${item.diskUsage}%`);
 
-              if (issues.length !== 0) {
-                return (<tr key={index}><td>{item.name}</td><td>{issues.join(" | ")}</td><td>🔴</td></tr>)
-              } else {
-                if (item.status === "active") {
-                  return (<tr key={index}><td>{item.name}</td><td>Todo normal</td><td>   🟢</td></tr>)
-                }
-                else {
-                  return (<tr key={index}><td>{item.name}</td><td>El mantenimiento</td><td>   🟠</td></tr>)
-                }
-              }
+              const isAlert = issues.length > 0;
+              const color = isAlert ?
+                <StatusAnimation color={"red"} />
+                : item.status === "active" ?
+                  <StatusAnimation color={"green"} />
+                  : <StatusAnimation color={"orange"} />;
+              return (
+                <tr key={index}>
+                  <td>
+                    {item.name}
+                  </td>
+                  <td className="issues">{color}</td>
+                  <td>{isAlert ? (
+                    <span className="issue-text">{issues.join(" | ")}</span>
+                  ) :
+                    (<span className="issue-text">Sin alertas</span>)
+                  }
+                  </td>
+                </tr>
+              );
             }).slice(6, 13)}
           </tbody>
         </table>
+        <div className="legend">
+          <span>🟢 Normal</span>
+          <span> 🟠 Mantenimiento</span>
+          <span> 🔴 Problema</span>
+
+        </div>
       </div>
     </>
   )

@@ -397,6 +397,8 @@
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   padding: 12px 16px;
+  width: 160px;
+  height: 140px;
 }
 
 .software {
@@ -481,10 +483,22 @@
 
 /* -------------- SERVER TABLES ----------------- */
 
-table {
+.table-top-resources,
+.table-licenses {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
+}
+
+.table-licenses .issues {
+  text-align: center;
+}
+
+.legend {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #555;
+  text-align: center;
 }
 
 .th-server {
@@ -500,15 +514,43 @@ table {
   grid-template-columns: 1fr 1fr;
   grid-template-areas:
     "subtitle subtitle"
-    "table-server-risk-1 table-server-risk-2";
-  gap: 0 50px;
+    "table-server-risk-1 table-server-risk-2"
+    "legend legend";
+  gap: 0 20px;
 }
 
 .table-server-risk-1 {
   grid-area: table-server-risk-1;
+  border-collapse: collapse;
 }
+
 .table-server-risk-2 {
   grid-area: table-server-risk-2;
+  border-collapse: collapse;
+}
+
+.table-server-risk-1 .issues,
+.table-server-risk-2 .issues {
+  text-align: center;
+}
+
+.legend {
+  grid-area: legend;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: center;
+}
+
+.legend span {
+  align-items: center;
+  gap: 25px;
+}
+
+.dot-status-animation {
+  margin: -20px;
+  justify-content: center;
+  display: flex;
 }
 
 /*****************************************************/

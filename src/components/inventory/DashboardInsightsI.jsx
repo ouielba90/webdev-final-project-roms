@@ -1,3 +1,4 @@
+import StatusAnimation from "./StatusAnimation.jsx"
 function DashboardInsightsI({ riskLicenses, highPopServer, software }) {
   return (
     <>
@@ -9,44 +10,44 @@ function DashboardInsightsI({ riskLicenses, highPopServer, software }) {
           <thead>
             <tr>
               <th>Software</th>
+              <th></th>
               <th>Estado</th>
-              <th></th>
-              <th></th>
             </tr>
           </thead>
 
           <tbody>
             {riskLicenses.map((item) => {
-              if (item.daysLeft < 0) {
-                return (
-                  <tr key={item.softwareId}>
-                    <td>{software.filter(s => s.id === item.softwareId).map(s => s.name)}</td>
-                    <td>Expirada</td>
-                    <td>🔴</td>
-                  </tr>
-                );
-              } else if (item.daysLeft > 0 && item.daysLeft < 30) {
-                return (
-                  <tr key={item.softwareId}>
-                    <td>{software.filter(s => s.id === item.softwareId).map(s => s.name)}</td>
-                    <td>Expira en {item.daysLeft}</td>
-                    <td>🟡</td>
-                  </tr>
-                );
-              }
+              const isAlert = item.daysLeft < 0;
+              const color = isAlert ?
+                <StatusAnimation color={"red"} />
+                : item.daysLeft > 0 && item.daysLeft < 30 ?
+                  <StatusAnimation color={"orange"} />
+                  : undefined
+              return (
+                <tr key={item.softwareId}>
+                  <td>{software.filter(s => s.id === item.softwareId).map(s => s.name)}</td>
+                  <td></td>
+                  <td className="issues">{color}</td>
+                </tr>
+              );
             })}
           </tbody>
         </table>
+        <div className="legend">
+          <span>🟡 &lt; 30 días</span>
+          <span>🔴 Expirada</span>
+        </div>
+
       </div>
 
       <div className="insights-card insights-top-resources">
-        <h2 className="section-title">Recursos más utilizados</h2>
+        <h2 className="section-title">Servidores activos</h2>
 
         <table className="table-top-resources">
           <thead>
             <tr>
-              <th className="th-server">Server</th>
-              <th className="th-users">Usuarios conectados</th>
+              <th className="th-server">Servidor</th>
+              <th className="th-users">Usuarios</th>
               <th></th>
               <th></th>
             </tr>
@@ -61,6 +62,9 @@ function DashboardInsightsI({ riskLicenses, highPopServer, software }) {
             ))}
           </tbody>
         </table>
+        <div className="legend">
+          <span>* Usuarios conectados actualmente</span>
+        </div>
       </div>
 
     </>
