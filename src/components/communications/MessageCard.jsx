@@ -17,10 +17,8 @@ function MessageCard({ id, from, to, text, date, isAlert, edited, editedAt, onDe
     //Funcion que maneja los datos editados
     const handleEdit = (e) => {
         e.preventDefault()
-        console.log(e.target)
-        const formData = new FormData(e.target);
-        const data = Object.fromEntries(formData.entries());
-        console.log(data)
+        // llama a la funcion onSaveEdit con el id del mensaje
+        onSaveEdit(id)
     }
 
     //Renderizado

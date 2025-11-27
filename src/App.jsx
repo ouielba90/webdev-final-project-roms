@@ -2,6 +2,9 @@ import { Link, Outlet, Route, Routes } from 'react-router-dom'
 import InternalChatsPage from './pages/communications/InternalChatsPage';
 import ClientChatsPage from './pages/communications/ClientChatsPage';
 import ChatViewPage from './pages/communications/ChatViewPage';
+import MessagesPages from './pages/communications/MessagesPage'
+import NotificationsPage from './pages/communications/NotificationsPage'
+import HomeCommPage from './pages/communications/HomeCommPage'
 
 function App() {
   return (
