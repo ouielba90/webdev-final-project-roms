@@ -1,11 +1,13 @@
 import { Link, Outlet } from "react-router-dom"
 import './../../index.css'
+import CompactMainMenu from './../../components/homepage/CompactMainMenu'
 
 function HomeCommPage() {
   return (
     <>
-      <h1>Home Comunicaciones</h1>
-
+    <CompactMainMenu></CompactMainMenu>
+      <h1>Comunicaciones</h1>
+<h3>Lista</h3>
       <nav className="nav-section">
         <h3>📨 Mensajería</h3>
         <div className="nav-links">
