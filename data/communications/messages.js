@@ -1,6 +1,8 @@
 
 
 
+
+
 export const messages = [
   
   {
@@ -9,6 +11,8 @@ export const messages = [
     to: "Laura",
     text: "Revisa los resultados del escaneo de red.",
     date: "2025-10-27T09:18:00+02:00",
+    edited: false,
+    editedAt: null,
   },
   {
     id: 2,
@@ -16,6 +20,8 @@ export const messages = [
     to: "Carlos",
     text: "Informe de vulnerabilidades listo.",
     date: "2025-10-27T11:42:00+02:00",
+    edited: false,
+    editedAt: null,
   },
   {
     id: 3,
@@ -23,6 +29,8 @@ export const messages = [
     to: "Todos",
     text: "La licencia de Burp Suite expira en 7 días.",
     date: "2025-10-27T03:00:00+02:00",
+    edited: false,
+    editedAt: null,
   },
   {
     id: 4,
@@ -30,6 +38,8 @@ export const messages = [
     to: "Iván",
     text: "Configura el firewall en el proyecto DataSafe.",
     date: "2025-10-28T10:15:00+02:00",
+    edited: false,
+    editedAt: null,
   },
   {
     id: 5,
@@ -37,6 +47,8 @@ export const messages = [
     to: "Sara",
     text: "Configuración completada y verificada.",
     date: "2025-10-28T16:33:00+02:00",
+    edited: false,
+    editedAt: null,
   },
   {
     id: 6,
@@ -44,6 +56,8 @@ export const messages = [
     to: "Pablo",
     text: "Recuerda subir el informe de AlphaBank.",
     date: "2025-10-29T09:55:00+01:00",
+    edited: false,
+    editedAt: null,
   },
   {
     id: 7,
@@ -51,6 +65,8 @@ export const messages = [
     to: "Ana",
     text: "Tu auditoría está en fase final.",
     date: "2025-10-29T14:21:00+01:00",
+    edited: false,
+    editedAt: null,
   },
   {
     id: 8,
@@ -58,6 +74,8 @@ export const messages = [
     to: "Todos",
     text: "Nueva tarea asignada en el proyecto Cloudify.",
     date: "2025-10-29T03:00:00+01:00",
+    edited: false,
+    editedAt: null,
   },
   {
     id: 9,
@@ -65,6 +83,8 @@ export const messages = [
     to: "Marta",
     text: "Tu test de penetración comenzará el lunes.",
     date: "2025-10-30T13:17:00+01:00",
+    edited: false,
+    editedAt: null,
   },
   {
     id: 10,
@@ -72,6 +92,8 @@ export const messages = [
     to: "Sara",
     text: "Gracias por el resumen del informe de seguridad.",
     date: "2025-10-30T17:28:00+01:00",
+    edited: false,
+    editedAt: null,
   },
   {
     id: 11,
@@ -79,6 +101,8 @@ export const messages = [
     to: "Diego",
     text: "Te paso las credenciales del servidor de pruebas.",
     date: "2025-10-31T08:44:00+01:00",
+    edited: false,
+    editedAt: null,
   },
   {
     id: 12,
@@ -86,6 +110,8 @@ export const messages = [
     to: "Todos",
     text: "Se detectó un intento de acceso sospechoso en NetGuard.",
     date: "2025-10-31T03:00:00+01:00",
+    edited: false,
+    editedAt: null,
   },
   {
     id: 13,
@@ -93,6 +119,8 @@ export const messages = [
     to: "Elena",
     text: "Pendiente actualizar el IDS de Snort.",
     date: "2025-11-01T11:02:00+01:00",
+    edited: false,
+    editedAt: null,
   },
   {
     id: 14,
@@ -100,6 +128,8 @@ export const messages = [
     to: "Todos",
     text: "Backup completado correctamente.",
     date: "2025-11-01T03:00:00+01:00",
+    edited: false,
+    editedAt: null,
   },
   {
     id: 15,
@@ -107,6 +137,8 @@ export const messages = [
     to: "Carlos",
     text: "El informe de GDPR está aprobado por el cliente.",
     date: "2025-11-02T09:48:00+01:00",
+    edited: false,
+    editedAt: null,
   },
   {
     id: 16,
@@ -114,6 +146,8 @@ export const messages = [
     to: "Rocío",
     text: "Necesito autorización para usar OpenVAS.",
     date: "2025-11-03T10:25:00+01:00",
+    edited: false,
+    editedAt: null,
   },
   {
     id: 17,
@@ -121,6 +155,8 @@ export const messages = [
     to: "Todos",
     text: "Se creó un nuevo proyecto: Seguridad en IoT.",
     date: "2025-11-03T03:00:00+01:00",
+    edited: false,
+    editedAt: null,
   },
   {
     id: 18,
@@ -128,6 +164,8 @@ export const messages = [
     to: "Pablo",
     text: "Revisa las credenciales de la API DevLink.",
     date: "2025-11-04T15:12:00+01:00",
+    edited: false,
+    editedAt: null,
   },
   {
     id: 19,
@@ -135,6 +173,8 @@ export const messages = [
     to: "Todos",
     text: "Actualización pendiente en Metasploit Framework.",
     date: "2025-11-05T03:00:00+01:00",
+    edited: false,
+    editedAt: null,
   },
   {
     id: 20,
@@ -142,6 +182,8 @@ export const messages = [
     to: "Laura",
     text: "Buen trabajo en el informe de vulnerabilidades.",
     date: "2025-11-05T18:09:00+01:00",
+    edited: false,
+    editedAt: null,
   },
   {
     id: 21,
@@ -149,6 +191,8 @@ export const messages = [
     to: "Elena",
     text: "Tenemos reunión con Cloudify mañana.",
     date: "2025-11-06T09:30:00+01:00",
+    edited: false,
+    editedAt: null,
   },
   {
     id: 22,
@@ -156,6 +200,8 @@ export const messages = [
     to: "Todos",
     text: "Servidor NAS en mantenimiento preventivo.",
     date: "2025-11-06T03:00:00+01:00",
+    edited: false,
+    editedAt: null,
   },
   {
     id: 23,
@@ -163,6 +209,8 @@ export const messages = [
     to: "Iván",
     text: "Incluye los logs de Wazuh en el reporte.",
     date: "2025-11-07T10:58:00+01:00",
+    edited: false,
+    editedAt: null,
   },
   {
     id: 24,
@@ -170,6 +218,8 @@ export const messages = [
     to: "Todos",
     text: "Nueva versión de pfSense disponible.",
     date: "2025-11-07T03:00:00+01:00",
+    edited: false,
+    editedAt: null,
   },
   {
     id: 25,
@@ -177,5 +227,8 @@ export const messages = [
     to: "Pablo",
     text: "Confirma recepción del reporte de StreamNet.",
     date: "2025-11-08T09:41:00+01:00",
+    edited: false,
+    editedAt: null,
   },
 ];
+  

@@ -1,42 +1,43 @@
 import { useNavigate } from "react-router-dom";
-
+import ChatMessage from "./ChatMessage";
 
 // Formatear fecha del último mensaje
-function ChatListItem({ chat }) {
-    const navigate = useNavigate();  //para navegar a otra pagina
+function ChatListItem({
+    chat,
+    editingMessageId,
+    editText,
+    onStartEdit,
+    onSaveEdit,
+    onCancelEdit,
+    onDeleteMessage,
+    onEditTextChange,
+    currentUser
+}) {
+    const navigate = useNavigate();
 
-    //new Date(chat.lastMenssageDate) Convierte el valor chat.lastMenssageDate, string, en un objeto Date de JavaScript.(manipula fechas)
-    //.toLocaleString('es-ES', {...}) formato local de España 
-    //El método toLocaleString devuelve una cadena de texto con la fecha y hora formateadas según las opciones que se le pasen.
-
-    const fechaFormateada = new Date(chat.lastMessageDate).toLocaleString('es-Es', {
+    const fechaFormateada = new Date(chat.lastMessageDate).toLocaleString('es-ES', {
         day: '2-digit',
         month: '2-digit',
         hour: '2-digit',
         minute: '2-digit'
     });
 
-    //Mostrar los participantes
-
     const otherParticipant = chat.participants.join(" y ");
 
-    /*chat.participants, chat es un objeto que tiene una propiedad llamada participants, 
-    la cual es un array (lista) que contiene los nombres de los participantes del chat. */
-    /*El método .join() toma todos los elementos del array y los convierte en una sola cadena de texto, 
-    separando cada elemento con el texto que se le pase como argumento.*/
-
-    return (
-        <div 
-            className = {`chat-list-item ${chat.unreadCount > 0 ? 'unread' :''}`}
-            onClick = {() => navigate(`/communications/chat/${chat.chatId}`) } >{/*abre el chat*/ }
-    
-                <div className = "chat-avatar"> {/*avatar o icono*/ }
-                { chat.type === 'internal' ? '👥' : '🏢' } 
-                </div >
+    // Si no estamos en la vista de detalle del chat, solo mostrar el item de lista
+    if (!chat.isOpen) {
+        return (
+            <div
+                className={`chat-list-item ${chat.unreadCount > 0 ? 'unread' : ''}`}
+                onClick={() => navigate(`/communications/chat/${chat.chatId}`)}
+            >
+                <div className="chat-avatar">
+                    {chat.type === 'internal' ? '👥' : '🏢'}
+                </div>
 
                 <div className="chat-info">
-                 <h3 className="chat-participants">{otherParticipant}</h3>
-                 <p className="chat-last-message">{chat.messages[chat.messages.length -1 ].text}</p>
+                    <h3 className="chat-participants">{otherParticipant}</h3>
+                    <p className="chat-last-message">{chat.messages[chat.messages.length - 1]?.text}</p>
                 </div>
 
                 <div className="chat-meta">
@@ -46,15 +47,42 @@ function ChatListItem({ chat }) {
                     )}
                 </div>
                 <hr className="separador-chats-internos" />
-         </div>
-            );
+            </div>
+        );
+    }
+
+    // Si el chat está abierto, mostrar todos los mensajes con funcionalidad de edición
+    return (
+        <div className="chat-detail-container">
+            <div className="chat-header">
+                <h2>{otherParticipant}</h2>
+                <button
+                    className="btn-close-chat"
+                    onClick={() => navigate('/communications/chats')}
+                >
+                    ✕ Cerrar
+                </button>
+            </div>
+
+            <div className="chat-messages-container">
+                {chat.messages.map((message) => (
+                    <ChatMessage
+                        key={message.id}
+                        message={message}
+                        currentUser={currentUser}
+                        chatId={chat.chatId}
+                        editingMessageId={editingMessageId}
+                        editText={editText}
+                        onStartEdit={onStartEdit}
+                        onSaveEdit={onSaveEdit}
+                        onCancelEdit={onCancelEdit}
+                        onDeleteMessage={onDeleteMessage}
+                        onEditTextChange={onEditTextChange}
+                    />
+                ))}
+            </div>
+        </div>
+    );
 }
-
-   
-/*Este componente permite al usuario ver con quién está hablando, 
-cuándo fue el último mensaje, y si tiene mensajes sin leer.
-La función ChatListItem es un componente de React que se encarga 
-de mostrar un elemento de la lista de chats en una interfaz de usuario*/
-
 
 export default ChatListItem;

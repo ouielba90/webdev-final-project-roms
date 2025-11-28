@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { DataContext } from "./../../context/DataContext"
+import { DataContext } from "./../../context/inventory/DataContext"
 
 function HardwareDetailsPage() {
   const { id } = useParams()
@@ -25,6 +25,9 @@ function HardwareDetailsPage() {
         <div>
           <h3>{hardwareItem.model}</h3>
           <p>{hardwareItem.type}</p>
+          <p className={`status ${hardwareItem.status.replace(" ", "-").toLowerCase()}`}>
+            {hardwareItem.status}
+          </p>
         </div>
 
         <div>
@@ -38,7 +41,7 @@ function HardwareDetailsPage() {
               <p><strong>Especificaciones</strong></p>
               <p>CPU: {hardwareItem.specs.cpu}</p>
               <p>RAM: {hardwareItem.specs.ram}</p>
-              <p>Almacenamiento: {hardwareItem.specs.storage}</p>
+              <p>Disco: {hardwareItem.specs.storage}</p>
             </div>
             <div>
               <p><strong>Asignado a</strong></p>

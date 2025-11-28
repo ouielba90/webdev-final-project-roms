@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { DataContext } from "../../context/DataContext";
+import { DataContext } from "../../context/inventory/DataContext";
 import HardwareCard from "../../components/inventory/HardwareCard";
 import AddHardware from "../../components/inventory/AddHardware";
 import EditHardware from "../../components/inventory/EditHardware";
@@ -141,7 +141,6 @@ function HardwareInvPage() {
           />
         )}
       </Modal>
-      <h1>Hardware</h1>
       <div className="software-main-container">
         <div className="filters-container">
           <div className="filters-row-main">
