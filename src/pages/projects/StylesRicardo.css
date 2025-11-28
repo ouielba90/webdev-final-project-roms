@@ -1,3 +1,7 @@
+body{
+    background-color: rgb(241, 241, 241);
+}
+
 /*Estilos para la lista de projectos*/
 .list-projects {
     display: flex;
@@ -7,7 +11,9 @@
 
 /*Estilos para el componente project*/
 .box-project {
-    border: 1px, solid, black;
+    /*border: 2px, solid, rgb(196, 183, 255);*/
+    background-color: #ffffff;
+    border-radius: 20px;
     width: 800px;
     margin-bottom: 30px;
     display: flex;
@@ -16,20 +22,22 @@
 }
 
 .status-project {
-    border: 1px, solid, black;
     width: 110px;
     /*height: 50px;*/
+    border-radius: 10px;
     padding: 20px;
 }
 
 .client-project {
-    border: 1px, solid, black;
+    background-color: #f4f2ff;
+    border-radius: 10px;
     padding: 10px;
     width: 200px;
 }
 
 .description-project {
-    border: 1px, solid, black;
+    background-color: #f4f2ff;
+    border-radius: 10px;
     padding: 20px;
     width: 500px;
 }
@@ -37,7 +45,8 @@
 .box-list-tasks {
     display: flex;
     flex-direction: column;
-    border: 1px, solid, black;
+    border-radius: 10px;
+    background-color: #f4f2ff;
     width: 500px;
     padding: 20px;
     gap: 10px;
@@ -48,7 +57,8 @@
 }
 
 .box-users-project {
-    border: 1px, solid, black;
+    background-color: #f4f2ff;
+    border-radius: 10px;
     padding: 20px;
 }
 
@@ -107,6 +117,7 @@
 }
 
 .box-create-project {
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
     width: 400px;
@@ -138,4 +149,25 @@
     width: min(480px, 100%);
     box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
     border: 1px solid #d9e2ec;
+}
+
+/*diferentes colores para los estados del proyecto*/
+.status-green {
+    background-color: #4CAF50; /* Verde */
+    color: white;
+}
+
+.status-yellow {
+    background-color: #FFC107; /* Amarillo/Naranja */
+    color: black;
+}
+
+.status-red {
+    background-color: #F44336; /* Rojo */
+    color: white;
+}
+
+.status-gray {
+    background-color: #BDBDBD; /* Gris por defecto */
+    color: white;
 }

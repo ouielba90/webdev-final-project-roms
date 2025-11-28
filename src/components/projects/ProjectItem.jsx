@@ -21,6 +21,24 @@ function ProjectItem({ project, projectUsers, activeId, setActiveId, onEdit, onD
         }
     }
 
+    // cambia el class name del componente que imprime el estatus del proyecto
+    const getStatusClass = (status) => {
+    switch (status.toLowerCase()) {
+        case "completo":
+        case "completado":
+        case "finalizado":
+            return "status-green";
+        case "en progreso":
+        case "progreso":
+            return "status-yellow";
+        case "atrasado":
+        case "pendiente":
+            return "status-red";
+        default:
+            return "status-gray";
+    }
+};
+
     const isOpen = activeId === id;
 
     const toggleOpen = () => {
@@ -41,7 +59,7 @@ function ProjectItem({ project, projectUsers, activeId, setActiveId, onEdit, onD
                     )}
                 </div>
                 <div>
-                    <p className="status-project" >{status}</p>
+                    <p className={`status-project ${getStatusClass(status)}`}>{status}</p>
                     {isOpen && (
                         <div className="box-users-project">
                             <h4>Usuarios</h4>
