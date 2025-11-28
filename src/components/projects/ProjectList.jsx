@@ -15,7 +15,6 @@ function ProjectList() {
   //la siguiente linea es para usar datos locales
   /*const [useprojects, setUseProjects] = useState(listProjects)*/
   const [useprojects, setUseProjects] = useState([])
-
   const [activeId, setActiveId] = useState(null)
   const [createOpen, setCreateOpen] = useState(false)
   const [deleteProject, setDeleteProject] = useState(null)
