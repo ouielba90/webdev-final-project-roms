@@ -1,5 +1,7 @@
 import cors from "cors";
 import express from "express";
+import projects from "./data/projects.data.js";
+import projectsUsers from "./data/projectsUsers.data.js";
 import software from "./data/inventory/software.js";
 import hardware from "./data/inventory/hardware.js";
 import licenses from "./data/inventory/licenses.js";
@@ -33,6 +35,18 @@ api.get("/ouissam/servers", (req, res) => {
   res.json(servers);
 });
 /***************************************/
+
+/* API RICARDO */
+api.get("/projects", (req, res) => {
+  console.log("Extrayendo los datos de proyectos");
+  res.json(projects);
+});
+
+api.get("/projectsUsers", (req, res) => {
+  console.log("Extrayendo los datos de usuarios asignados a proyectos");
+  res.json(projectsUsers);
+});
+/**************/
 
 api.listen(PORT, () => {
   console.log(`API server running at http://localhost:${PORT}`);

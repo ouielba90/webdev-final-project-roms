@@ -1,9 +1,9 @@
 {
-  "name": "final-project-wd",
+  "name": "server-proyect-final",
   "version": "1.0.0",
   "description": "",
   "license": "ISC",
-  "author": "Ouissam",
+  "author": "",
   "type": "module",
   "main": "index.js",
   "scripts": {
