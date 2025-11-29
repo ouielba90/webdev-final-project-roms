@@ -1,6 +1,6 @@
 // Ricardo, modifica esto si lo crees necesario
 export const projectSections = {
-  archivados: {
+  projects: {
     title: "Proyectos Archivados",
     subtext: "Historial de proyectos completados",
   },

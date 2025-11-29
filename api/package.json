@@ -1,14 +1,14 @@
 {
-  "name": "api",
+  "name": "server-proyect-final",
   "version": "1.0.0",
   "description": "",
   "license": "ISC",
-  "author": "Marc",
+  "author": "",
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "cors": "^2.8.5",

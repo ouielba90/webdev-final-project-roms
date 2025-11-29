@@ -24,7 +24,7 @@ function DashboardInsightsII({ uniqueElements }) {
               const isAlert = issues.length > 0;
               const color = isAlert ?
                 <StatusAnimation color={"red"} />
-                : item.status === "active" ?
+                : item.status === "activo" ?
                   <StatusAnimation color={"green"} />
                   : <StatusAnimation color={"orange"} />;
               return (
@@ -62,7 +62,7 @@ function DashboardInsightsII({ uniqueElements }) {
               const isAlert = issues.length > 0;
               const color = isAlert ?
                 <StatusAnimation color={"red"} />
-                : item.status === "active" ?
+                : item.status === "activo" ?
                   <StatusAnimation color={"green"} />
                   : <StatusAnimation color={"orange"} />;
               return (

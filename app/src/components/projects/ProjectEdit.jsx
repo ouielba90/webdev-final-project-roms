@@ -54,7 +54,7 @@ function ProjectItem({ project, onClose, onSubmit }) {
                     <header>
                         <h3>Editar Projecto</h3>
                     </header>
-                    <div>
+                    <div className="content-modal">
                         <form onSubmit={handelSubmit}>
                             <label htmlFor={`edit-name-${project.id}`}>Nombre:</label>
                             <input
@@ -108,9 +108,9 @@ function ProjectItem({ project, onClose, onSubmit }) {
                             </div>
 
                             {/* Lista de tareas añadidas */}
-                            <ul>
+                            <ul className="ul-task-project-edit">
                                 {values.tasks.map((task, index) => (
-                                    <li key={index} style={{ display: "flex", justifyContent: "space-between", marginBottom: "5px" }}>
+                                    <li key={index}>
                                         {task}
                                         <button
                                             type="button"
@@ -126,9 +126,9 @@ function ProjectItem({ project, onClose, onSubmit }) {
                                     </li>
                                 ))}
                             </ul>
-                            <div>
-                                <button type="button" onClick={handleCancel}>Cancelar</button>
+                            <div className="div-button-form">
                                 <button type="submit">Guardar</button>
+                                <button type="button" onClick={handleCancel}>Cancelar</button>
                             </div>
                         </form>
                     </div>

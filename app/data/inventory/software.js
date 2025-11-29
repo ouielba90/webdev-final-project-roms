@@ -1098,6 +1098,7 @@ export const software = [
     status: "disponible",
     licenseId: 4019,
     installedOnHardware: [],
+    serverId: [3002, 3012],
     description: "Plataforma comercial de análisis de amenazas.",
   },
 ];

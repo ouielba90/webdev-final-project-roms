@@ -156,8 +156,8 @@ function SoftwareInvPage() {
               <p>Estado</p>
               <select onChange={handleStatus}>
                 <option>Todos</option>
-                <option>available</option>
-                <option>in-use</option>
+                <option>disponible</option>
+                <option>en-uso</option>
               </select>
             </div>
           </div>
@@ -173,6 +173,7 @@ function SoftwareInvPage() {
         </div>
         <div className="software-cards">
           {query.map((el) => {
+            console.log(el.id, el.serverId)
             //console.log("card", el.id, el.name, el.serverId)
             return (
               <SoftwareCard

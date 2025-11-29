@@ -7,9 +7,12 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+api/node_modules
+api/node_modules/package.json
+api/node_modules/package-lock.json
+app/node_modules
+app/dist
+app/dist-ssr
 *.local
 
 # Editor directories and files
@@ -22,4 +25,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-src/App.jsx
