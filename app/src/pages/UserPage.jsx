@@ -1,13 +1,16 @@
 import { Link, Outlet } from "react-router-dom"
 import { users } from "./../../data/users.js"
 import UserCard from "./users/UserCard.jsx"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import RegistroForm from "./users/formulario.jsx"
 import EditUserModal from "./users/EditUserModal.jsx"
+import getUsers from "../logic/getUsers.js"
 
 function UserPage() {
   const [usersState, setUsersState] = useState(users)
   const [editingUser, setEditingUser] = useState(null)
+
+  const [user, setUsers] = useState([])
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -43,6 +46,12 @@ function UserPage() {
   function onEditUser(user) {
     setEditingUser({ ...user })
   }
+
+  useEffect(() => {
+    getUsers()
+      .then((data) => setUsers(data))
+      .catch((error) => console.error("Error fetching users: ", error));
+  }, []);
 
   return (
     <>
