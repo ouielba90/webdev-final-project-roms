@@ -1,0 +1,1364 @@
+/*****************************************************/
+/* ------------------- MAIN MENU -------------------- */
+/*****************************************************/
+
+/* ------------- HEADER FOOTER ---------------- */
+
+.main-home-page-header {
+  text-align: center;
+  color: #111;
+  padding: 60px 0 40px 0;
+}
+
+.main-home-page-header h1 {
+  font-size: 64px;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -1px;
+  background: linear-gradient(180deg, #111 0%, #555 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.main-home-page-header h3 {
+  font-size: 18px;
+  font-weight: 400;
+  margin-top: 12px;
+  color: #777;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.welcome-message {
+  text-align: center;
+  font-size: 16px;
+  color: #555;
+  margin-top: 20px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
+}
+
+.main-footer {
+  text-align: center;
+  font-size: 12px;
+  color: #999;
+  margin-top: 80px;
+  padding-bottom: 30px;
+}
+
+/* ------------- RADIAL MENU WRAPPER ---------------- */
+
+.main-nav-menu {
+  position: relative;
+  width: 450px;
+  height: 450px;
+  margin: 0 auto;
+}
+
+.card-menu {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  margin: -100px 0 0 -100px;
+  border-radius: 22px;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.background-animation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250px;
+  height: 250px;
+  transform: translate(-50%, -50%);
+  z-index: 11;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.background-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  opacity: 0.15; /* efecto visual suave */
+}
+
+.background-side-animation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250px;
+  height: 250px;
+  transform: translate(-50%, -50%);
+  z-index: 11;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.card-inner-link {
+  display: contents; /* allows the link to fill the card */
+  text-decoration: none; /* remove underline */
+  color: inherit; /* keep original text color */
+}
+
+.card-inner-link .card-inner {
+  cursor: pointer; /* makes the whole card clickable */
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 60px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 5px;
+  cursor: pointer;
+  border: 4px solid transparent;
+  background-clip: padding-box;
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.08),
+    0 0 0px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.28s,
+    box-shadow 0.28s,
+    border 0.28s;
+  z-index: 90;
+}
+
+.card-inner:hover {
+  transform: scale(1.06);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.16),
+    0 0 25px rgba(66, 133, 244, 0.25);
+}
+
+.card-inner span {
+  text-decoration: none;
+  font-size: 19px;
+  font-weight: 600;
+  color: #333;
+}
+
+.card-inner p {
+  margin: 0 5px;
+  font-size: 12px;
+  color: #555;
+  opacity: 0;
+  transform: translateY(0px);
+  pointer-events: none; /* evita que interfiera */
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.card-inner:hover p {
+  opacity: 1;
+  transform: translateY(10px);
+}
+
+.card-inner img {
+  width: 50px;
+  height: 50px;
+  transform: translateY(-20px);
+  transition: transform 0.5s ease;
+}
+
+.card-inner:hover img {
+  opacity: 1;
+  margin-top: 0;
+  transform: translateY(20px);
+}
+.card-menu:nth-child(1) .card-inner {
+  border-color: #4285f4;
+}
+.card-menu:nth-child(2) .card-inner {
+  border-color: #ea4335;
+}
+.card-menu:nth-child(3) .card-inner {
+  border-color: #fbbc05;
+}
+.card-menu:nth-child(4) .card-inner {
+  border-color: #34a853;
+}
+
+.card-menu > .tune-unlocker {
+  width: 100px;
+  margin: -100px 0 0 -50px;
+}
+
+/* ------------- RADIAL POSITIONING ---------------- */
+
+.card-menu:nth-child(1) {
+  transform: rotate(-45deg) translate(200px) rotate(45deg);
+}
+.card-menu:nth-child(2) {
+  transform: rotate(45deg) translate(200px) rotate(-45deg);
+}
+.card-menu:nth-child(3) {
+  transform: rotate(135deg) translate(200px) rotate(-135deg);
+}
+.card-menu:nth-child(4) {
+  transform: rotate(-135deg) translate(200px) rotate(135deg);
+}
+
+.home-shield {
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  filter: opacity(0.15);
+  z-index: -1;
+}
+/*****************************************************/
+/* --------------- END MAIN MENU -------------------- */
+/*****************************************************/
+
+/*****************************************************/
+/* --------------- COMPACT MENUS -------------------- */
+/*****************************************************/
+.compact-main-menu {
+  background: #ffffff;
+  padding: 10px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(12px);
+  z-index: 100;
+  transition: all 0.25s ease;
+}
+
+.compact-main-menu .logo h1 {
+  font-size: 32px;
+  color: #000000;
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.compact-main-menu .logo h3 {
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  margin: 0;
+}
+
+.logo a {
+  text-decoration: none;
+}
+
+.main-nav a {
+  padding: 8px 14px;
+  margin-left: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #1f2937;
+  transition: all 0.25s ease;
+}
+
+.main-nav a:hover {
+  background: rgba(37, 99, 235, 0.14);
+  color: #2563eb;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+  transform: translateY(-2px);
+}
+
+.general-submenu {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  padding: 14px 0;
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  margin-top: 75px;
+}
+
+.general-submenu a {
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 14px;
+  color: #374151;
+  transition: all 0.25s ease;
+}
+
+.general-submenu a:hover {
+  background: #2563eb;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+  transform: translateY(-2px);
+}
+/*****************************************************/
+/* ------------------- DASHBOARD ------------------- */
+/*****************************************************/
+.general-title {
+  text-align: center;
+  font-size: 42px;
+  font-weight: 900;
+  color: #3b82f6;
+  letter-spacing: -1px;
+  margin-top: 60px;
+}
+.general-subtitle {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 8px;
+  color: #6b7280;
+  letter-spacing: 0.4px;
+  font-weight: 400;
+}
+/* ------------------- STATUS GRID ------------------- */
+
+.status-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 25px;
+  column-gap: 25px;
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  width: fit-content;
+  margin: 20px auto;
+  padding: 20px 25px;
+  color: #111827;
+  font-family: "Segoe UI", Roboto, sans-serif;
+
+  grid-template-areas:
+    "subtitle subtitle subtitle"
+    "status-summary software servers"
+    "status-summary hardware licenses";
+}
+
+.section-title {
+  grid-area: subtitle;
+  margin: 0 0 10px 0;
+  color: #374151;
+  text-align: center;
+  font-weight: 600;
+}
+
+.status-block-main {
+  grid-column: 1 / span 2;
+  grid-area: status-summary;
+  text-align: center;
+  align-content: center;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 10px;
+}
+
+.status-block-main h3,
+.status-block h3 {
+  margin: 0 0 10px 0;
+  text-align: center;
+}
+
+.status-block p {
+  margin: 5px;
+}
+.total-num-res {
+  font-size: 50px;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  padding-bottom: 10px;
+}
+
+/* ------------------- STATUS BLOCKS ------------------- */
+
+.status-block {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px 16px;
+  width: 160px;
+  height: 140px;
+}
+
+.software {
+  grid-area: software;
+}
+.hardware {
+  grid-area: hardware;
+}
+.servers {
+  grid-area: servers;
+}
+.licenses {
+  grid-area: licenses;
+}
+
+/* ------------------- BARS ------------------- */
+
+.bar-container {
+  background: #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 20px;
+  margin: 6px 0;
+}
+
+.bar {
+  height: 100%;
+  border-radius: 10px;
+}
+
+.bar-active {
+  background: #10b981;
+}
+.bar-inactive {
+  background: #6b7280;
+}
+.bar-inuse {
+  background: #3b82f6;
+}
+.bar-maintenance {
+  background: #f59e0b;
+}
+.bar-expired {
+  background: #ef4444;
+}
+
+/* ------------------- INSIGHTS ------------------- */
+
+.insights-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  width: fit-content;
+  margin: 20px auto;
+  padding: 20px 25px;
+  color: #111827;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  grid-template-areas:
+    "insights-licenses insights-top-resources"
+    "insights-server-risk insights-server-risk";
+}
+
+.insights-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.insights-licenses {
+  grid-area: insights-licenses;
+}
+.insights-top-resources {
+  grid-area: insights-top-resources;
+}
+.insights-server-risk {
+  grid-area: insights-server-risk;
+}
+
+/* -------------- SERVER TABLES ----------------- */
+
+.table-top-resources,
+.table-licenses {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table-licenses .issues {
+  text-align: center;
+}
+
+.legend {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #555;
+  text-align: center;
+}
+
+.th-server {
+  text-align: left;
+}
+
+.th-users {
+  text-align: center;
+}
+
+.server-risk-structure {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "subtitle subtitle"
+    "table-server-risk-1 table-server-risk-2"
+    "legend legend";
+  gap: 0 20px;
+}
+
+.table-server-risk-1 {
+  grid-area: table-server-risk-1;
+  border-collapse: collapse;
+}
+
+.table-server-risk-2 {
+  grid-area: table-server-risk-2;
+  border-collapse: collapse;
+}
+
+.table-server-risk-1 .issues,
+.table-server-risk-2 .issues {
+  text-align: center;
+}
+
+.legend {
+  grid-area: legend;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: center;
+}
+
+.legend span {
+  align-items: center;
+  gap: 25px;
+}
+
+.dot-status-animation {
+  margin: -20px;
+  justify-content: center;
+  display: flex;
+}
+
+/*****************************************************/
+/* --------------- END OF DASHBOARD ---------------- */
+/*****************************************************/
+
+/* --------------------------------------------- */
+/* SOFTWARE - CONTENEDOR PRINCIPAL */
+/* --------------------------------------------- */
+
+.software-main-container {
+  max-width: 550px;
+  margin: 40px auto;
+  padding: 25px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+}
+
+.software-main-container p {
+  margin: 0;
+}
+
+.loading-animation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px 0;
+}
+
+.loading-animation > p {
+  margin: 0;
+  font-size: 12px;
+}
+
+/* --------------------------------------------- */
+/* INPUTS Y SELECT */
+/* --------------------------------------------- */
+
+.software-main-container input[type="text"],
+.software-main-container select {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  background: white;
+  font-size: 15px;
+  transition:
+    border 0.2s,
+    box-shadow 0.2s;
+}
+
+.software-main-container input[type="text"]:focus,
+.software-main-container select:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.3);
+  outline: none;
+}
+
+/* --------------------------------------------- */
+/* BOTONES */
+/* --------------------------------------------- */
+
+.software-main-container .details-btn-link,
+.software-main-container button {
+  background: #1f2937;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+}
+
+.add-btn {
+  background: #2563eb;
+  padding: 10px 16px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  height: 42px;
+  align-self: end;
+}
+
+/* --------------------------------------------- */
+/* SECCIÓN DE FILTROS */
+/* --------------------------------------------- */
+
+.filters-container {
+  margin-bottom: 20px;
+}
+
+.filters-row-main {
+  display: grid;
+  grid-template-columns: 2fr 1fr auto;
+  gap: 18px;
+  align-items: end;
+}
+
+.filter-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.filter-field label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.filters-btn-combined {
+  display: flex;
+  justify-content: space-around;
+  padding: 15px 0;
+}
+
+.filters-row-sort {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* --------------------------------------------- */
+/* TARJETAS */
+/* --------------------------------------------- */
+
+.software-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.software-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 18px 22px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition:
+    box-shadow 0.2s,
+    border-color 0.2s;
+}
+
+.software-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
+}
+
+.software-card-first-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.software-card-name {
+  font-size: 19px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+/* ESTADOS (reemplazo de :contains) */
+.software-status {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: capitalize;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+.status-activo,
+.status-operativo,
+.status-disponible {
+  background: #dcfce7;
+  color: #166534;
+}
+.status-en-uso {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-mantenimiento {
+  background: #f5b36d;
+  color: white;
+}
+
+.status-expirado {
+  background: #fecaca;
+  color: #b91c1c;
+}
+
+.software-card > div:nth-child(2) {
+  margin: 6px 0 14px 0;
+  font-size: 14px;
+  color: #475569;
+}
+
+.software-card-second-section {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 10px;
+  align-items: center;
+}
+
+.software-card-details-btn .details-btn-link {
+  background: #2563eb;
+  text-decoration: none;
+  font-weight: unset;
+}
+
+.software-card-details-btn .details-btn-link:hover {
+  background: #1d4ed8;
+}
+
+.software-card-edit-btn button {
+  background: #f59e0b;
+}
+
+.software-card-edit-btn button:hover {
+  background: #d97706;
+}
+
+.software-card-delete-btn button {
+  background: #dc2626;
+}
+
+.software-card-delete-btn button:hover {
+  background: #b91c1c;
+}
+
+/* No usadas en los JSX que enviaste, pero necesarias para otros componentes */
+
+/* Wrapper general para agregar software */
+/*.software-add-wrapper {
+  text-align: center;
+  margin: 15px 0;
+}*/
+
+/* Sub-información dentro de una tarjeta */
+/*.software-card-subinfo {
+  margin: 3px 0;
+  font-size: 14px;
+  color: #475569;
+}*/
+
+/* Contenedor principal de info adicional */
+/*.software-card-main {
+  margin: 10px 0 14px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+  color: #374151;
+}*/
+
+/* Sección extra para hardware, licencias y servidores */
+.software-card-third-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  font-size: 14px;
+  color: #475569;
+}
+
+.software-card-third-section p {
+  margin: 0;
+}
+
+.software-card-third-section p:first-child {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.software-card-third-section p:last-child {
+  color: #6b7280;
+}
+
+/* Grid original de filtros */
+/*.software-filters {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto 1fr;
+  gap: 12px;
+  align-items: center;
+}*/
+
+/* ------------------------------------------------------ */
+/* -----------------------------Modal---------------------*/
+/* ------------------------------------------------------ */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  width: 485px;
+  max-width: 90%;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ------------------------------------------------------ */
+/* Add Software Form – Contenedor General */
+/* ------------------------------------------------------ */
+.addsoft-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: #fff;
+  padding: 16px 18px;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+}
+
+.addsoft-title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 4px 0;
+  color: #111827;
+}
+
+.addsoft-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.addsoft-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.addsoft-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.addsoft-group input,
+.addsoft-group select,
+.addsoft-group textarea {
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #f9fafb;
+  transition: all 0.15s ease;
+}
+
+.addsoft-group textarea {
+  min-height: 10px;
+  resize: vertical;
+}
+
+.addsoft-group input:focus,
+.addsoft-group select:focus,
+.addsoft-group textarea:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15);
+  outline: none;
+  background: #fff;
+}
+
+/* (NO USADO en JSX actual) */
+/*.addsoft-input-disabled {
+  background: #f3f4f6;
+  opacity: 0.6;
+}*/
+
+/* Botón enviar */
+.addsoft-submit {
+  margin-top: 8px;
+  background: #1f2937;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.addsoft-submit:hover {
+  background: #111827;
+}
+
+/* ayuda */
+.hint {
+  font-size: 11px;
+  color: #6b7280;
+  opacity: 0.7;
+}
+
+/* ------------------------------------------------------ */
+/* Final de Add Software Form – Contenedor General */
+/* ------------------------------------------------------ */
+
+/* IDK I created them
+.hardware-filters {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 15px;
+  align-items: center;
+}
+.hardware-filters-ii {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto;
+  align-items: center;
+}
+.hardware-filters label {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.hardware-add-wrapper {
+  text-align: center;
+  margin: 15px 0;
+}
+*/
+/*.btn-link {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #2563eb;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  text-align: center;
+}
+
+.btn-link:hover {
+  background-color: #1d4ed8;
+}*/
+
+/* ==========================
+   Main Details Pages
+========================== */
+.details-main {
+  display: flex;
+  flex-direction: column;
+  margin: 40px auto;
+  min-width: 360px;
+  max-width: fit-content;
+  gap: 30px;
+  padding: 25px 30px;
+  background: linear-gradient(145deg, #f8fafc, #e2e8f0);
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+  color: #1f2937;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.details-main h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.details-main p {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #374151;
+}
+
+.details-main p.status {
+  font-weight: 600;
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 8px;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #fff;
+}
+
+.details-main p.status.activo,
+.details-main p.status.disponible,
+.details-main p.status.operativo {
+  background: #10b981;
+}
+.details-main p.status.en-uso {
+  background: #3b82f6;
+}
+.details-main p.status.mantenimiento {
+  background: #f59e0b;
+}
+.details-main p.status.expirado {
+  background: #ef4444;
+}
+
+/* ==========================
+   Quick Stats / Cards
+========================== */
+.details-quick-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 15px 0;
+}
+
+.details-quick-stats div {
+  flex: 1;
+  min-width: 120px;
+  max-width: 175px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px 20px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  cursor: default;
+}
+
+.details-quick-stats div p {
+  margin: 0;
+  color: #1f2937;
+}
+
+.details-quick-stats div span {
+  background: #f3f4f6;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #4b5563;
+  transition: background 0.2s ease;
+}
+
+/* ==========================
+   Back Button
+========================== */
+.server-details button,
+.details-main button {
+  align-self: end;
+  background: #6366f1;
+  color: white;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  transition:
+    background 0.3s ease,
+    transform 0.2s ease;
+}
+
+.details-main button:hover {
+  background: #4f46e5;
+  transform: translateY(-2px);
+}
+
+/* ==========================
+   Hardware & Software Cards
+========================== */
+.assoc-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px 18px;
+  min-width: 140px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  cursor: default;
+}
+
+.assoc-name {
+  font-weight: 600;
+  font-size: 16px;
+  color: #1f2937;
+}
+
+.assoc-type {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.assoc-status {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.assoc-status.operational {
+  background: #10b981;
+}
+.assoc-status.in-use {
+  background: #3b82f6;
+}
+.assoc-status.maintenance {
+  background: #f59e0b;
+}
+.assoc-status.expired {
+  background: #ef4444;
+}
+.assoc-status.available {
+  background: #16a34a;
+}
+
+/* ==========================
+   Server Details
+========================== */
+.server-details {
+  display: flex;
+  flex-direction: column;
+  margin: 40px auto;
+  min-width: 360px;
+  max-width: 500px;
+  gap: 30px;
+  padding: 25px 30px;
+  background: linear-gradient(145deg, #f8fafc, #e2e8f0);
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+  color: #1f2937;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* HERO */
+.server-hero {
+  background: #fff;
+  padding: 22px 26px;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: baseline;
+  position: relative;
+}
+
+.server-hero .ip {
+  font-size: 14px;
+  color: #64748b;
+}
+.server-hero .small {
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 13px;
+}
+
+.status-badge.activo {
+  background: #10b981;
+}
+.status-badge.mantenimiento {
+  background: #f59e0b;
+}
+
+.connected-users {
+  grid-column: 1 / span 2;
+  color: #334155;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* SUMMARY */
+.server-summary {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.server-summary > div {
+  background: #fff;
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  text-align: center;
+  align-content: center;
+}
+
+.server-summary .big {
+  font-size: 29px;
+  font-weight: 700;
+  margin: 6px 0;
+}
+
+.bar-specs {
+  background: #e5e7eb;
+  border-radius: 10px;
+  height: 10px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.bar-specs div {
+  height: 100%;
+  background: #3b82f6;
+  border-radius: 10px;
+  transition: width 0.4s ease;
+}
+
+/* GRID DE NODOS */
+.nodes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.node-card {
+  background: white;
+  padding: 16px 18px;
+  border-radius: 16px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.node-card h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.node-spec-line {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.4;
+  margin: 2px 0;
+}
+
+.node-usage {
+  padding-top: 10px;
+  border-top: 1px solid #eef2f6;
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.node-usage label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* MINI CARDS */
+.small-card-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.small-card-list.scrollable {
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.mini-card {
+  background: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  font-size: 14px;
+  color: #374151;
+}
