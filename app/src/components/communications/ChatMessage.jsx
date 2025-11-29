@@ -1,31 +1,92 @@
 
 //Componente para un mensaje dentro del chat
 
-function ChatMessage ({ message, currentUser }) {
+// Componente para un mensaje dentro del chat
 
-    //¿de quien es el mensaje ? const isMine =(true o false)
-    //message.from: es el remitente || currentUser: representa al usuario 
-    const isMine = message.from === currentUser;
+function ChatMessage({
+  message,
+  currentUser,
+  chatId,
+  editingMessageId,
+  editText,
+  onStartEdit,
+  onSaveEdit,
+  onCancelEdit,
+  onDeleteMessage,
+  onEditTextChange
+}) {
 
+  const isMine = message.from === currentUser;
 
-    //new Date(message.date) Convierte el valor message.date, string, en un objeto Date de JavaScript.(manipula fechas)
-    //.toLocaleString('es-ES', {...}) formato local de España 
-    //El método toLocaleString devuelve una cadena de texto con la fecha y hora formateadas según las opciones que se le pasen.
+  const handleEditClick = () => {
+    onStartEdit(message.id, message.text);
+  };
 
-    
+  const handleSaveClick = () => {
+    onSaveEdit(message.id);
+  };
 
-  {/*representa un mensaje individual en una conversación de chat*/}
-  return ( 
+  return (
     <div className={`chat-message ${isMine ? 'mine' : 'theirs'}`}>
       <div className="message-bubble">
-        <p>Author: {message.from}</p>
-        <p className="message-text">{message.text}</p>
+        <p className="message-author">
+          Author: {message.from}
+          {message.edited && (
+            <span className="edited-badge"> (Editado {message.editedAt})</span>
+          )}
+        </p>
+
+        {/* Renderizado condicional - mostrar textarea si está editando */}
+        {editingMessageId === message.id ? (
+          <textarea
+            value={editText}
+            onChange={(e) => onEditTextChange(e.target.value)}
+            className="message-text-edit"
+            rows="3"
+          />
+        ) : (
+          <p className="message-text">{message.text}</p>
+        )}
+
+        {/* Botones de acción - solo mostrar si es mi mensaje */}
+        {isMine && (
+          <div className="message-actions">
+            {editingMessageId === message.id ? (
+              <>
+                <button
+                  onClick={handleSaveClick}
+                  className="btn-save-edit-msg"
+                >
+                  ✓ Guardar
+                </button>
+                <button
+                  onClick={onCancelEdit}
+                  className="btn-cancel-edit-msg"
+                >
+                  ✕ Cancelar
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={handleEditClick}
+                  className="btn-edit-msg"
+                >
+                  ✏️ Editar
+                </button>
+                <button
+                  onClick={() => onDeleteMessage(message.id)}
+                  className="btn-delete-msg"
+                >
+                  🗑️ Eliminar
+                </button>
+              </>
+            )}
+          </div>
+        )}
       </div>
     </div>
-  )
+  );
 }
 
-/*Necesitamos saber si es isMine, Para ponerlo a la derecha (míos) 
-o izquierda (de otros), como WhatsApp.*/
-
-export default ChatMessage
+export default ChatMessage;

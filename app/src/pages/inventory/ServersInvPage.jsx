@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { DataContext } from "../../context/DataContext";
+import { DataContext } from "../../context/inventory/DataContext";
 import ServerCard from "../../components/inventory/ServerCard";
 
 function ServersInvPage() {
@@ -55,7 +55,6 @@ function ServersInvPage() {
   }
   return (
     <>
-      <h1>Servers</h1>
       <div className="software-main-container">
         <div className="filters-container">
           <div className="filters-row-main">

@@ -1,6 +1,6 @@
 
 //lo que recibe la funcion
-function MessageCard({id, from, to, text, date, isAlert, onDeleteMessage }) {
+function MessageCard({ id, from, to, text, date, isAlert, edited, editedAt, onDeleteMessage, onStartEdit, onSaveEdit, onCancelEdit, isEditing, editText, onEditTextChange }) {
 
     //formateo de fecha a hora local
     const fechaFormateada = new Date(date).toLocaleString('es-ES');
@@ -9,8 +9,17 @@ function MessageCard({id, from, to, text, date, isAlert, onDeleteMessage }) {
     //Operador ternario
     const mensajeTernario = isAlert ? `⚠️ ${text}` : text
 
-    
+    //Funcion obtiene el objeto del  mensaje para pasar a onStartEdit
+    const handleEditClick = () => {
+        onStartEdit({ id, from, to, text, date, isAlert })
+    }
 
+    //Funcion que maneja los datos editados
+    const handleEdit = (e) => {
+        e.preventDefault()
+        // llama a la funcion onSaveEdit con el id del mensaje
+        onSaveEdit(id)
+    }
 
     //Renderizado
     return (
@@ -21,13 +30,67 @@ function MessageCard({id, from, to, text, date, isAlert, onDeleteMessage }) {
             <p className="message-to">  {/*muestra el destinatario*/}
                 📧 Para: {to}
             </p>
-            <p className="message-text">  {/*muestra texto de mensaje*/}
-                {mensajeTernario}
-            </p>
+
+            {/*renderizado condicional - mostrar input si esta editado*/}
+            {isEditing ? (
+                <form onSubmit={handleEdit}>
+                    <textarea
+                        value={editText}
+                        onChange={(e) => onEditTextChange(e.target.value)}
+                        className="message-text-edit"
+                        name="mensaje-editado"
+                        rows="4"
+                    />
+                    <button
+                        type="submit"
+                        className="btn-save-edit"
+                    >
+                        ✓ Guardar
+                    </button>
+                </form>
+            ) : (
+                <p className="message-text">
+                    {mensajeTernario}
+                </p>
+            )}
+
             <p className="message-date">  {/*fecha formateada*/}
                 🕒 {fechaFormateada}
+                {edited && <span className="edited-indicator"> (Editado {editedAt})</span>}
+
+                {/*renderizacion condicional - mostrar botones de fuardar/cancelar*/}
+                <div className="messasge-actions">
+                    {isEditing ? (
+                        <>
+
+                            <button
+                                onClick={onCancelEdit}
+                                className="btn-cancel-edit"
+                            >
+                                ✕ Cancelar
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <button
+                                onClick={handleEditClick}
+                                className="btn-edit"
+                            >
+                                ✏️ Editar
+                            </button>
+
+                            <button
+                                onClick={() => onDeleteMessage(id)}
+                                className="btn-delete"
+                            >
+                                🗑️ Borrar
+                            </button>
+                        </>
+                    )}
+                </div>
+
             </p>
-            <button onClick={() => onDeleteMessage(id)}>Borrar Mensaje</button>
+
         </div>
     );
 
@@ -35,3 +98,11 @@ function MessageCard({id, from, to, text, date, isAlert, onDeleteMessage }) {
 
 
 export default MessageCard
+
+
+
+
+//En MessageCard.jsx para actualizar:
+//El mensaje ahora muestra un textarea cuando está en modo edición
+//Agrego un indicador (Editado...) si el mensaje fue editado
+//Los botones cambian: muestra "Editar" y "Borrar" normalmente, "Guardar" y "Cancelar" en modo edición

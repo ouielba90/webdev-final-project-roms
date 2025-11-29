@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { DataContext } from "./../../context/DataContext"
+import { DataContext } from "./../../context/inventory/DataContext"
 
 function SoftwareDetailsPage() {
   const { id } = useParams()
@@ -64,7 +64,9 @@ function SoftwareDetailsPage() {
                 </div>
               ))
             ) : (
-              <p>Ninguno</p>
+              <div className="assoc-card">
+                <p>Ninguno</p>
+              </div>
             )}
           </div>
         </div>
