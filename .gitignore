@@ -10,6 +10,9 @@ lerna-debug.log*
 api/node_modules
 api/package-lock.json
 api/package.json
+api/node_modules
+api/node_modules/package.json
+api/node_modules/package-lock.json
 app/node_modules
 app/dist
 app/dist-ssr

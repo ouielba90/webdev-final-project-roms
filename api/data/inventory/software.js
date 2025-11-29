@@ -1102,3 +1102,5 @@ export const software = [
     description: "Plataforma comercial de análisis de amenazas.",
   },
 ];
+
+export default software;

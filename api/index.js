@@ -1,31 +1,53 @@
-import cors from "cors"
-import express from "express"
+import cors from "cors";
+import express from "express";
+import projects from "./data/projects.data.js";
+import projectsUsers from "./data/projectsUsers.data.js";
+import software from "./data/inventory/software.js";
+import hardware from "./data/inventory/hardware.js";
+import licenses from "./data/inventory/licenses.js";
+import servers from "./data/inventory/servers.js";
 
 const api = express();
-const PORT = 3000
+const PORT = 3000;
 
-api.use(cors())
+api.use(cors());
 
-api.get("/", (req, res) => {
-    res.send("Hello World!")
-})
+/* API OUISSAM FALTA MANEJO DE ERRORES */
+api.get("/ouissam", (req, res) => {
+  res.send(
+    "Esta es la API de Ouissam, los datos se encuentran en /hardware, /software, /licenses o /servers.",
+  );
+});
 
-api.listen(PORT, () => {
-    console.log(`API server running at http:localhost:${PORT}`)
-})
+api.get("/ouissam/software", (req, res) => {
+  res.json(software);
+});
 
-import projects from "./data/projects.data.js"
-import projectsUsers from "./data/projectsUsers.data.js"
+api.get("/ouissam/hardware", (req, res) => {
+  res.json(hardware);
+});
 
-console.log("Datos de posts cargados", projects)
-console.log("Datos de projectsUsers cargados", projectsUsers)
+api.get("/ouissam/licenses", (req, res) => {
+  res.json(licenses);
+});
 
+api.get("/ouissam/servers", (req, res) => {
+  res.json(servers);
+});
+/***************************************/
+
+/* API RICARDO */
 api.get("/projects", (req, res) => {
-    console.log("Extrayendo los datos de proyectos")
-    res.json(projects)
-})
+  console.log("Extrayendo los datos de proyectos");
+  res.json(projects);
+});
 
 api.get("/projectsUsers", (req, res) => {
-    console.log("Extrayendo los datos de usuarios asignados a proyectos")
-    res.json(projectsUsers)
-})
+  console.log("Extrayendo los datos de usuarios asignados a proyectos");
+  res.json(projectsUsers);
+});
+/**************/
+
+api.listen(PORT, () => {
+  console.log(`API server running at http://localhost:${PORT}`);
+});

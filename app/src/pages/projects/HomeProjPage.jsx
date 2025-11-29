@@ -1,9 +1,8 @@
-import { useState } from 'react'
-import ProjectList from './../../components/projects/ProjectList'
-import './StylesRicardo.css'
 import { projectSections } from '../../sections/projectSections.js'
 import { useLocation } from 'react-router-dom'
 import CompactMainMenu from './../../components/homepage/CompactMainMenu'
+import ProjectList from './../../components/projects/ProjectList'
+import './StylesRicardo.css'
 
 function HomeProjPage() {
 
@@ -27,9 +26,7 @@ function HomeProjPage() {
       <h1 className="general-title">{sectionData.title}</h1>
       <h3 className="general-subtitle">{sectionData.subtext}</h3>
       <nav className="general-submenu">
-
       </nav>
-
       <ProjectList />
     </>
   )

@@ -11,7 +11,7 @@ function LicensesInvPage() {
     const sw = software.find(s => s.id === lic.softwareId);
     lic.softwareName = sw ? sw.name : 'Unknown';
     const diff = daysBetweenDates(lic.expiryDate);
-    lic.status = diff < 0 ? "active" : "expired";
+    lic.status = diff < 0 ? "activo" : "expirado";
   });
 
   const [query, setQuery] = useState(licenses)

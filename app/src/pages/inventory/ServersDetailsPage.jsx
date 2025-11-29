@@ -10,9 +10,7 @@ function ServersDetailsPage() {
   const softAssocList = serverItem.hostedSoftware.map(sId => {
     return software.find(s => s.id === sId).name
   })
-  console.log(softAssocList)
   const servAvgPropNodes = getServerAverages(serverItem.nodeSpecs)
-  console.log(servAvgPropNodes)
   if (!serverItem) return <p>Servidor no encontrado.</p>;
 
   return (

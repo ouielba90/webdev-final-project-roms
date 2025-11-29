@@ -20,12 +20,12 @@ function DashboardPage() {
     licenses: licenses.length,
     servers: servers.length,
   }
-  const availableSoft = software.filter(el => el.status === "available").length;
-  const inUseSoft = software.filter(el => el.status === "in-use").length;
-  const operatHard = hardware.filter(el => el.status === "operational").length;
-  const maintHard = hardware.filter(el => el.status === "maintenance").length;
-  const activeServers = servers.filter(el => el.status === "active").length;
-  const maintServers = servers.filter(el => el.status === "maintenance").length;
+  const availableSoft = software.filter(el => el.status === "disponible").length;
+  const inUseSoft = software.filter(el => el.status === "en-uso").length;
+  const operatHard = hardware.filter(el => el.status === "operativo").length;
+  const maintHard = hardware.filter(el => el.status === "mantenimiento").length;
+  const activeServers = servers.filter(el => el.status === "activo").length;
+  const maintServers = servers.filter(el => el.status === "mantenimiento").length;
   const activeLic = licenses.filter(el => daysBetweenDates(el.expiryDate) > 0).length;
   const expiredLic = licenses.filter(el => daysBetweenDates(el.expiryDate) < 0).length;
   const sumActives = availableSoft + operatHard + activeServers + activeLic

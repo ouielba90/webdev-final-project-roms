@@ -34,7 +34,7 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
   }
   return (
     <form onSubmit={handleSubmitEdit} className="addsoft-form">
-      <h2 className="addsoft-title">Edit Hardware</h2>
+      <h2 className="addsoft-title">Editar Hardware</h2>
 
       <div className="addsoft-row">
         <div className="addsoft-group">
@@ -44,28 +44,28 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
       </div>
       <div className="addsoft-row">
         <div className="addsoft-group">
-          <label htmlFor="type">Type</label>
+          <label htmlFor="type">Tipo</label>
           <select id="type" name="type" value={type} onChange={(e) => setType(e.target.value)}>
-            <option>Desktop</option>
-            <option>Laptop</option>
+            <option>Sobremesa</option>
+            <option>Portátil</option>
           </select>
         </div>
         <div className="addsoft-group">
-          <label htmlFor="model">Model</label>
+          <label htmlFor="model">Modelo</label>
           <input type="text" id="model" name="model" value={model} onChange={(e) => setModel(e.target.value)} required />
         </div>
       </div>
 
       <div className="addsoft-row">
         <div className="addsoft-group">
-          <label htmlFor="status">Status</label>
+          <label htmlFor="status">Estado</label>
           <select id="status" name="status" value={status} onChange={(e) => setStatus(e.target.value)}>
-            <option>Operational</option>
-            <option>Maintenance</option>
+            <option>Operativo</option>
+            <option>Mantenimiento</option>
           </select>
         </div>
         <div className="addsoft-group">
-          <label htmlFor="purchaseDate">Purchase Date</label>
+          <label htmlFor="purchaseDate">Fecha de compra</label>
           <input
             type="date"
             id="purchaseDate"
@@ -87,22 +87,22 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
           <input type="text" id="ram" name="ram" value={specsRAM} onChange={(e) => setSpecsRAM(e.target.value)} />
         </div>
         <div className="addsoft-group">
-          <label htmlFor="storage">Storage</label>
+          <label htmlFor="storage">Disco</label>
           <input type="text" id="storage" name="storage" value={specsStorage} onChange={(e) => setSpecsStorage(e.target.value)} />
         </div>
       </div>
 
       <div className="addsoft-group">
-        <label htmlFor="installedSoftware">Installed Software</label>
+        <label htmlFor="installedSoftware">Software instalado</label>
         <select multiple id="installedSoftware" name="installedSoftware" value={selectedSoft} onChange={handleSelectedSoftware}>
           {softList.map((s, i) => (
             <option key={i} value={s.name}>{s.name}</option>
           ))}
         </select>
-        <small className="hint">Hold CTRL to select multiple</small>
+        <small className="hint">Mantén pulsado CTRL para seleccionar varios</small>
       </div>
 
-      <button type="submit" className="addsoft-submit">Edit Hardware</button>
+      <button type="submit" className="addsoft-submit">Editar</button>
     </form>
   )
 }
