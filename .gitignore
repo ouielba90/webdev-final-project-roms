@@ -7,6 +7,9 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+api/node_modules
+api/package-lock.json
+api/package.json
 app/node_modules
 app/dist
 app/dist-ssr
