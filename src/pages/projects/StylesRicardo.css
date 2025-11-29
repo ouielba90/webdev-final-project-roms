@@ -150,6 +150,23 @@ body{
     box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
     border: 1px solid #d9e2ec;
 }
+/*Estilos para los elementos de la ventana Editar proyecto*/
+.content-modal form{
+    display: flex;
+    flex-direction: column;
+}
+.div-button-form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+}
+.ul-task-project-edit li{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
 
 /*diferentes colores para los estados del proyecto*/
 .status-green {

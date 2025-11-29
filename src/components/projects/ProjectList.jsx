@@ -10,8 +10,10 @@ import FetchData from "./FetchData"
 
 function ProjectList() {
   //URLs de las APIs
-  const apiProjects = import.meta.env.VITE_API_URL_PROJECTS;
-  const apiProjectsUsers = import.meta.env.VITE_API_URL_PROJECTS_USERS;
+  const apiProjects = import.meta.env.VITE_API_URL_PROJECTS
+  const apiProjectsUsers = import.meta.env.VITE_API_URL_PROJECTS_USERS
+  const apiProjectsLocalData = import.meta.env.VITE_API_URL_PROJECTS_LOCAL_DATA
+  const apiProjectsUsersLocalData = import.meta.env.VITE_API_URL_PROJECTSUSERS_LOCAL_DATA
   //la siguiente linea es para usar datos locales
   /*const [useprojects, setUseProjects] = useState(listProjects)*/
   const [useprojects, setUseProjects] = useState([])
@@ -22,8 +24,9 @@ function ProjectList() {
   const [projectsUsers, setProjectsUsers] = useState([])
 
   useEffect(() => {
+    //funcion para conectar con la base de datos y extraer la informacion de los projectos
     async function loadProjects() {
-      const data = await FetchData(apiProjects);
+      const data = await FetchData(apiProjectsLocalData);
       if (Array.isArray(data)) {
         setUseProjects(data);
       } else {
@@ -33,8 +36,9 @@ function ProjectList() {
     }
     loadProjects()
 
+    //funcion para conectar con la base de datos y extraer la informacion de usuarios asignados a proyectos
     async function loadProjectsUsers() {
-      const dataUsers = await FetchData(apiProjectsUsers);
+      const dataUsers = await FetchData(apiProjectsUsersLocalData);
       if (Array.isArray(dataUsers)) {
         setProjectsUsers(dataUsers);
       } else {
