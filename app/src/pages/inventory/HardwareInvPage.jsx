@@ -149,16 +149,16 @@ function HardwareInvPage() {
               <p>Tipo</p>
               <select onClick={handleType}>
                 <option>Todos</option>
-                <option>Laptop</option>
-                <option>Desktop</option>
+                <option>Portátil</option>
+                <option>Sobremesa</option>
               </select>
             </div>
             <div className="filter-field">
               <p>Estado</p>
               <select onClick={handleStatus}>
                 <option>Todos</option>
-                <option>operational</option>
-                <option>maintenance</option>
+                <option>operativo</option>
+                <option>mantenimiento</option>
               </select>
             </div>
           </div>

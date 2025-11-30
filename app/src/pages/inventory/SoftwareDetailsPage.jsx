@@ -27,7 +27,7 @@ function SoftwareDetailsPage() {
         <div>
           <h3>{softwareItem.name}</h3>
           <p>{softwareItem.description}</p>
-          <p className={`status ${softwareItem.status.replace(" ", "-").toLowerCase()}`}>
+          <p className={`status ${softwareItem.status.toLowerCase()}`}>
             {softwareItem.status}
           </p>
         </div>

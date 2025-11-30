@@ -43,23 +43,23 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit }) {
             </select>
           </div>
           <div className="addsoft-group">
-            <label htmlFor="vendor">Vendor:</label>
+            <label htmlFor="vendor">Proveedor:</label>
             <input type="text" id="vendor" name="vendor" value={vendor} onChange={(e) => setVendor(e.target.value)} />
           </div>
         </div>
         <div className="addsoft-row">
           <div className="addsoft-group">
-            <label htmlFor="seats">Seats:</label>
+            <label htmlFor="seats">Asignaciones:</label>
             <input type="number" id="seats" name="seats" value={seats} onChange={(e) => setSeats(e.target.value)} />
           </div>
           <div className="addsoft-group">
-            <label htmlFor="licenseKey">License key:</label>
+            <label htmlFor="licenseKey">Clave de licencia:</label>
             <input type="text" id="licenseKey" name="licenseKey" value={licenseKey} onChange={(e) => setLicenseKey(e.target.value)} />
           </div>
         </div>
         <div className="addsoft-row">
           <div className="addsoft-group">
-            <label htmlFor="purchaseDate">Purchase date:</label>
+            <label htmlFor="purchaseDate">Fecha de compra:</label>
             <input
               type="date"
               id="purchaseDate"
@@ -70,7 +70,7 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit }) {
 
           </div>
           <div className="addsoft-group">
-            <label htmlFor="expiryDate">Expiring date:</label>
+            <label htmlFor="expiryDate">Fecha de expiración:</label>
             <input
               type="date"
               id="expiryDate"
@@ -82,11 +82,11 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit }) {
         </div>
         <div className="addsoft-row">
           <div className="addsoft-group">
-            <label htmlFor="cost">Cost:</label>
+            <label htmlFor="cost">Precio:</label>
             <input type="number" id="cost" name="cost" value={cost} onChange={(e) => setCost(e.target.value)} />
           </div>
         </div>
-        <button type="submit" className="addsoft-submit">Edit</button>
+        <button type="submit" className="addsoft-submit">Editar</button>
       </form>
     </>
   )

@@ -1,13 +1,13 @@
 {
-  "name": "api",
+  "name": "server-proyect-final",
   "version": "1.0.0",
-  "description": "Mi primera api",
+  "description": "",
   "license": "ISC",
-  "author": "Santos",
-  "type":"module",
+  "author": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "start":"node index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

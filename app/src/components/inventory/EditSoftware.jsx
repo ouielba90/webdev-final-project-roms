@@ -29,7 +29,7 @@ function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmi
   return (
     <form id="softwareForm" onSubmit={handleSubmitEdit} className="addsoft-form">
 
-      <h2 className="addsoft-title">Edit Software</h2>
+      <h2 className="addsoft-title">Editar Software</h2>
 
       <div className="addsoft-row">
         <div className="addsoft-group">
@@ -39,30 +39,30 @@ function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmi
       </div>
       <div className="addsoft-row">
         <div className="addsoft-group">
-          <label htmlFor="name">Name *</label>
+          <label htmlFor="name">Nombre*</label>
           <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} required />
         </div>
         <div className="addsoft-group">
-          <label htmlFor="version">Version *</label>
+          <label htmlFor="version">Versión*</label>
           <input type="text" id="version" name="version" value={version} onChange={(e) => setVersion(e.target.value)} required />
         </div>
       </div>
 
       <div className="addsoft-row">
         <div className="addsoft-group">
-          <label htmlFor="category">Category</label>
+          <label htmlFor="category">Categoria</label>
           <select id="category" name="category" value={category} onChange={(e) => setCategory(e.target.value)}>
-            <option value="">Select category</option>
+            <option value="">Seleccione categoria</option>
             {categList.map((cat, i) => (
               <option key={i} value={cat}>{cat}</option>
             ))}
           </select>
         </div>
         <div className="addsoft-group">
-          <label htmlFor="status">Status</label>
+          <label htmlFor="status">Estado</label>
           <select id="status" name="status" value={status} onChange={(e) => setStatus(e.target.value)}>
-            <option value="in-use">In use</option>
-            <option value="available">Available</option>
+            <option value="in-use">En-uso</option>
+            <option value="available">Disponible</option>
           </select>
         </div>
       </div>
@@ -81,25 +81,25 @@ function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmi
               <option key={i} value={h.id}>{h.model}</option>
             ))}
           </select>
-          <small className="hint">Hold CTRL to select multiple</small>
+          <small className="hint">Mantén pulsado CTRL para seleccionar varios</small>
         </div>
         <div className="addsoft-group">
-          <label htmlFor="serverId">Server</label>
+          <label htmlFor="serverId">Servidor</label>
           <select multiple id="serverId" name="serverId" value={selectedServ} onChange={handleSelectedServers}>
             {serverList.map((srv, i) => (
               <option key={i} value={srv.id}>{srv.name}</option>
             ))}
           </select>
-          <small className="hint">Hold CTRL to select multiple</small>
+          <small className="hint">Mantén pulsado CTRL para seleccionar varios</small>
         </div>
       </div>
 
       <div className="addsoft-group">
-        <label htmlFor="description">Description</label>
+        <label htmlFor="description">Descripción</label>
         <textarea id="description" name="description" rows="2" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
       </div>
 
-      <button type="submit" className="addsoft-submit">Edit</button>
+      <button type="submit" className="addsoft-submit">Editar</button>
     </form>
 
   );

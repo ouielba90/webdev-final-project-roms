@@ -1,6 +1,6 @@
 import Lottie from "lottie-react";
 import "./UnLockerPopup.css";
-import lockAnimation from './../../components/homepage/shieldproject.json'
+import lockAnimation from './shieldproject.json'
 
 export default function UnlockerPopup() {
   return (
