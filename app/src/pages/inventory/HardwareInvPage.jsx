@@ -81,7 +81,7 @@ function HardwareInvPage() {
       type: data.type,
       model: data.model,
       status: data.status,
-      purchaseDate: isoToeuDate(data.purchaseDate),
+      purchaseDate: data.purchaseDate,
       specs: { cpu: data.cpu, ram: data.ram, storage: data.storage },
       installedSoftware: selectedSoft.map(soft_name => software.find(s => s.name === soft_name).id),
     };
@@ -110,7 +110,7 @@ function HardwareInvPage() {
           type: data.type,
           model: data.model,
           status: data.status,
-          purchaseDate: isoToeuDate(data.purchaseDate),
+          purchaseDate: data.purchaseDate,
           specs: { cpu: data.cpu, ram: data.ram, storage: data.storage },
           installedSoftware: selectedSoft,
         } : item));
@@ -195,10 +195,4 @@ function HardwareInvPage() {
   )
 }
 
-function isoToeuDate(isoDateStr) {
-  console.log('in1', isoDateStr)
-  const [year, month, day] = isoDateStr.split("-"); // Month index begin with 0
-  console.log(`${day}/${month}/${year}`)
-  return `${day}/${month}/${year}`;
-}
 export default HardwareInvPage

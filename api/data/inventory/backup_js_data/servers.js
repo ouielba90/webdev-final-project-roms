@@ -1,4 +1,4 @@
-const servers = [
+export const servers = [
   {
     id: 3001,
     name: "OBS-01",
@@ -773,5 +773,3 @@ const servers = [
     connectedUsers: 63,
   },
 ];
-
-export default servers;

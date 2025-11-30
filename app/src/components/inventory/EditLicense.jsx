@@ -5,20 +5,20 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit }) {
   const [vendor, setVendor] = useState(toBeEdited.vendor)
   const [seats, setSeats] = useState(toBeEdited.seats)
   const [licenseKey, setLicenseKey] = useState(toBeEdited.licenseKey)
-  const [purchaseDate, setPurchaseDate] = useState(toBeEdited.purchaseDate)
-  const [expiryDate, setExpiryDate] = useState(toBeEdited.expiryDate)
+  const [purchaseDate, setPurchaseDate] = useState(toBeEdited.purchaseDate.split("T")[0])
+  const [expiryDate, setExpiryDate] = useState(toBeEdited.expiryDate.split("T")[0])
   const [cost, setCost] = useState(toBeEdited.cost)
   const [softwareId, setSoftwareId] = useState(toBeEdited.softwareId)
 
-  function euToISO(euDateStr) {
-    const [day, month, year] = euDateStr.split("/"); // Month index begin with 0
-    console.log('kkkkkk', year, month, day)
-    return `${year}-${month}-${day}`;
-  }
-  function isoToEU(isoDateStr) {
-    const [year, month, day] = isoDateStr.split("-"); // Month index begin with 0
-    return `${day}/${month}/${year}`;
-  }
+  //  function euToISO(euDateStr) {
+  //    const [day, month, year] = euDateStr.split("/"); // Month index begin with 0
+  //    console.log('kkkkkk', year, month, day)
+  //    return `${year}-${month}-${day}`;
+  //  }
+  //  function isoToEU(isoDateStr) {
+  //    const [year, month, day] = isoDateStr.split("-"); // Month index begin with 0
+  //    return `${day}/${month}/${year}`;
+  //  }
 
   return (
     <>
@@ -64,8 +64,8 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit }) {
               type="date"
               id="purchaseDate"
               name="purchaseDate"
-              value={euToISO(purchaseDate)}
-              onChange={(e) => setPurchaseDate(isoToEU(e.target.value))}
+              value={purchaseDate}
+              onChange={(e) => setPurchaseDate(e.target.value)}
             />
 
           </div>
@@ -75,8 +75,8 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit }) {
               type="date"
               id="expiryDate"
               name="expiryDate"
-              value={euToISO(expiryDate)}
-              onChange={(e) => setExpiryDate(isoToEU(e.target.value))}
+              value={expiryDate}
+              onChange={(e) => setExpiryDate(e.target.value)}
             />
           </div>
         </div>

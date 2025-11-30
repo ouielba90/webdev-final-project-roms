@@ -16,11 +16,11 @@ function LicensesDetailsPage() {
     <>
       <div className="details-main">
         <div>
-          <h3>License {licenseItem.id}</h3>
+          <h2>License {licenseItem.id}</h2>
           <p><strong>{softAssoc.name}</strong></p>
           {daysBetweenDates(licenseItem.expiryDate) < 0 ?
-            <p className="status activo">Activo</p>
-            : <p className="status expirado">Expirado</p>}
+            <p className="status activa">Activa</p>
+            : <p className="status expirada">Expirada</p>}
         </div>
 
         <div>
@@ -32,11 +32,11 @@ function LicensesDetailsPage() {
             </div>
             <div>
               <p><strong>Fecha de compra</strong></p>
-              <p>{licenseItem.purchaseDate}</p>
+              <p>{(licenseItem.purchaseDate)}</p>
             </div>
             <div>
               <p><strong>Fecha de expiración</strong></p>
-              <p>{licenseItem.expiryDate}</p>
+              <p>{isoToeuDate(licenseItem.expiryDate)}</p>
             </div>
           </div>
         </div>
@@ -67,11 +67,15 @@ function LicensesDetailsPage() {
   )
 }
 
-function daysBetweenDates(euDateStr) {
-  const [day, month, year] = euDateStr.split("/");
-  const formattedDate = `${year}-${month}-${day}`;
+function isoToeuDate(isoDateStr) {
+  console.log('in1', isoDateStr)
+  const [year, month, day] = isoDateStr.split("T")[0].split("-"); // Month index begin with 0
+  console.log(`${day}-${month}-${year}`)
+  return `${day}-${month}-${year}`;
+}
 
-  const givenDate = new Date(formattedDate);
+function daysBetweenDates(isoDateStr) {
+  const givenDate = new Date(isoDateStr);
   const today = new Date();
 
   const diffDays = Math.floor((today - givenDate) / (1000 * 60 * 60 * 24));

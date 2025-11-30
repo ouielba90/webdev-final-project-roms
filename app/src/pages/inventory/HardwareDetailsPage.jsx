@@ -17,13 +17,14 @@ function HardwareDetailsPage() {
   //  return { name: serverInfo.name, location: serverInfo.location, status: serverInfo.status }
   //})
 
+  console.log("s", hardwareItem.purchaseDate)
   if (!hardwareItem) return <p>Hardware no encontrado.</p>;
 
   return (
     <>
       <div className="details-main">
         <div>
-          <h3>{hardwareItem.model}</h3>
+          <h2>{hardwareItem.model}</h2>
           <p>{hardwareItem.type}</p>
           <p className={`status ${hardwareItem.status.replace(" ", "-").toLowerCase()}`}>
             {hardwareItem.status}
@@ -35,7 +36,7 @@ function HardwareDetailsPage() {
           <div className="details-quick-stats">
             <div>
               <p><strong>Fecha de compra</strong></p>
-              <p>{hardwareItem.purchaseDate}</p>
+              <p>{isoToeuDate(hardwareItem.purchaseDate)}</p>
             </div>
             <div>
               <p><strong>Especificaciones</strong></p>
@@ -72,6 +73,13 @@ function HardwareDetailsPage() {
       </div>
     </>
   )
+}
+
+function isoToeuDate(isoDateStr) {
+  console.log('in1', isoDateStr)
+  const [year, month, day] = isoDateStr.split("T")[0].split("-"); // Month index begin with 0
+  console.log(`${day}-${month}-${year}`)
+  return `${day}-${month}-${year}`;
 }
 
 export default HardwareDetailsPage

@@ -20,18 +20,20 @@ function ServersDetailsPage() {
         {/* HERO */}
         <div className="server-hero">
           <div>
-            <h2>{serverItem.name}</h2>
-            <p className="ip">{serverItem.ip}</p>
-            <p className="small">{serverItem.location} · {serverItem.os}</p>
+            <div className="server-header-container">
+              <h2>{serverItem.name}</h2>
+              <p className="ip">{serverItem.ip}</p>
+              <p className="small">{serverItem.location} · {serverItem.os}</p>
+              <div className="connected-users">
+                👥 {serverItem.connectedUsers} usuarios conectados
+              </div>
+            </div>
+            <div className={`status-badge ${serverItem.status}`}>
+              {serverItem.status}
+            </div>
           </div>
 
-          <div className={`status-badge ${serverItem.status}`}>
-            {serverItem.status}
-          </div>
 
-          <div className="connected-users">
-            👥 {serverItem.connectedUsers} usuarios conectados
-          </div>
         </div>
 
         {/* MÉTRICAS GENERALES */}

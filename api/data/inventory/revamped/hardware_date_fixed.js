@@ -1,4 +1,4 @@
-const hardware = [
+export const hardware = [
   {
     id: 2001,
     type: "Portátil",

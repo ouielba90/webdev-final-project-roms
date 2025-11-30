@@ -1,4 +1,4 @@
-const servers = [
+export const servers = [
   {
     id: 3001,
     name: "OBS-01",
@@ -18,7 +18,7 @@ const servers = [
         diskUsage: 2,
       },
     ],
-    hostedSoftware: [1006, 1067, 1068, 1069, 1076, 1086, 1089],
+    hostedSoftware: [1006, 1067, 1068],
     usersWithAccess: [
       "user1",
       "user2",
@@ -55,9 +55,7 @@ const servers = [
         diskUsage: 44,
       },
     ],
-    hostedSoftware: [
-      1021, 1027, 1055, 1056, 1086, 1090, 1091, 1095, 1097, 1100,
-    ],
+    hostedSoftware: [1021, 1056, 1090, 1095, 1100],
     usersWithAccess: [
       "dev",
       "user2",
@@ -136,7 +134,7 @@ const servers = [
         diskUsage: 41,
       },
     ],
-    hostedSoftware: [1021, 1061, 1062, 1063, 1077, 1086],
+    hostedSoftware: [1061, 1062, 1063, 1077],
     usersWithAccess: [
       "user1",
       "user2",
@@ -174,7 +172,7 @@ const servers = [
         diskUsage: 3,
       },
     ],
-    hostedSoftware: [1064, 1070, 1071, 1072, 1082, 1086],
+    hostedSoftware: [1064, 1070, 1071, 1072, 1082],
     usersWithAccess: [
       "sec",
       "user2",
@@ -244,7 +242,7 @@ const servers = [
         diskUsage: 41,
       },
     ],
-    hostedSoftware: [1007, 1078, 1079, 1080, 1086],
+    hostedSoftware: [1078, 1079, 1080, 1007],
     usersWithAccess: [
       "user1",
       "user2",
@@ -290,9 +288,7 @@ const servers = [
         diskUsage: 55,
       },
     ],
-    hostedSoftware: [
-      1020, 1057, 1058, 1059, 1065, 1073, 1074, 1075, 1086, 1088, 1093, 1094,
-    ],
+    hostedSoftware: [1057, 1058, 1059, 1073, 1074, 1075, 1088],
     usersWithAccess: [
       "user1",
       "dev",
@@ -347,7 +343,7 @@ const servers = [
         diskUsage: 94,
       },
     ],
-    hostedSoftware: [1083, 1084, 1085, 1086],
+    hostedSoftware: [1083, 1084, 1085],
     usersWithAccess: [
       "analyst",
       "dev",
@@ -398,7 +394,7 @@ const servers = [
         diskUsage: 23,
       },
     ],
-    hostedSoftware: [1078, 1086],
+    hostedSoftware: [1078],
     usersWithAccess: [
       "sec",
       "user2",
@@ -472,7 +468,7 @@ const servers = [
         diskUsage: 34,
       },
     ],
-    hostedSoftware: [1081, 1086, 1096, 1099],
+    hostedSoftware: [1081, 1096],
     usersWithAccess: [
       "user1",
       "user2",
@@ -691,7 +687,7 @@ const servers = [
         diskUsage: 14,
       },
     ],
-    hostedSoftware: [1061, 1066, 1078, 1086, 1092, 1098],
+    hostedSoftware: [1061, 1066, 1098, 1078],
     usersWithAccess: [
       "user1",
       "user2",
@@ -757,7 +753,7 @@ const servers = [
         diskUsage: 50,
       },
     ],
-    hostedSoftware: [1086, 1100],
+    hostedSoftware: [1100],
     usersWithAccess: [
       "user1",
       "user2",

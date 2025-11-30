@@ -25,7 +25,7 @@ function SoftwareDetailsPage() {
     <>
       <div className="details-main">
         <div>
-          <h3>{softwareItem.name}</h3>
+          <h2>{softwareItem.name}</h2>
           <p>{softwareItem.description}</p>
           <p className={`status ${softwareItem.status.toLowerCase()}`}>
             {softwareItem.status}
@@ -59,7 +59,7 @@ function SoftwareDetailsPage() {
                   <p className="assoc-name">{h.model}</p>
                   <p className="assoc-type">{h.type}</p>
                   <p className={`assoc-status ${h.status.replace(" ", "-").toLowerCase()}`}>
-                    {h.status}
+                    {h.status.charAt(0).toUpperCase() + h.status.slice(1)}
                   </p>
                 </div>
               ))
