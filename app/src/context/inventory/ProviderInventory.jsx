@@ -1,8 +1,8 @@
 import { DataContext } from "./DataContext.js";
-import useSoftwareApi from "../../../app-old/src/hooks/inventory/useSoftwareApi.js";
-import useHardwareApi from "../../../app-old/src/hooks/inventory/useHardwareApi.js";
-import useLicensesApi from "../../../app-old/src/hooks/inventory/useLicensesApi.js";
-import useServersApi from "../../../app-old/src/hooks/inventory/useServersApi.js";
+import useSoftwareApi from "./../../hooks/inventory/useSoftwareApi.js";
+import useHardwareApi from "./../../hooks/inventory/useHardwareApi.js";
+import useLicensesApi from "./../../hooks/inventory/useLicensesApi.js";
+import useServersApi from "./../../hooks/inventory/useServersApi.js";
 import { useEffect, useState } from "react";
 
 function ProviderInventory({ children }) {
