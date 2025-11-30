@@ -680,6 +680,12 @@
   justify-content: center;
 }
 
+.filters-row-sort .filter-activation {
+  background: grey;
+  color: black;
+  border: 1px solid black;
+  margin: -1px;
+}
 /* --------------------------------------------- */
 /* TARJETAS */
 /* --------------------------------------------- */

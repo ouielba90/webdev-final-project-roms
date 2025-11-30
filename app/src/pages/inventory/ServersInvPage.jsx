@@ -80,8 +80,8 @@ function ServersInvPage() {
           </div>
           <div className="filters-btn-combined">
             <div className="filters-row-sort">
-              <button onClick={handleSortAZ}>A-Z</button>
-              <button onClick={handleSortZA}>Z-A</button>
+              <button className={az ? "filter-activation" : ""} onClick={handleSortAZ}>A-Z</button>
+              <button className={za ? "filter-activation" : ""} onClick={handleSortZA}>Z-A</button>
             </div>
           </div>
         </div>
