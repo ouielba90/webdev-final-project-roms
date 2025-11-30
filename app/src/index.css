@@ -105,11 +105,7 @@ body {
   border-radius: 16px;
   padding: 24px;
   margin: 20px 0;
-  background: linear-gradient(
-    135deg,
-    rgba(17, 24, 39, 0.9) 0%,
-    rgba(31, 41, 55, 0.9) 100%
-  );
+  background: rgb(89, 197, 233);
   backdrop-filter: blur(12px);
   color: var(--text-light);
   font-family: "Inter", "Segoe UI", sans-serif; /* Tipografía más corporativa */
@@ -214,7 +210,7 @@ body {
   font-size: 1em;
   line-height: 1.6;
   padding: 14px;
-  background-color: rgba(17, 24, 39, 0.75);
+  background-color: white;
   border-radius: 10px;
   border-left: 4px solid var(--primary);
   box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.25);
@@ -258,7 +254,7 @@ body {
   font-family: "Inter", "Segoe UI", sans-serif;
   font-size: 15px;
   margin: 14px 0;
-  background-color: rgba(17, 24, 39, 0.85);
+  background-color: whitesmoke;
   color: var(--text-light);
   transition:
     border-color 0.3s ease,
@@ -308,8 +304,8 @@ body {
 
 /* Botón Editar */
 .btn-edit {
-  background: var(--gradient-primary);
-  color: white;
+  background: white;
+  color: blue;
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
 }
 
@@ -319,8 +315,8 @@ body {
 
 /* Botón Eliminar */
 .btn-delete {
-  background: var(--gradient-danger);
-  color: white;
+  background: white;
+  color: black;
   box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
 }
 
@@ -330,8 +326,8 @@ body {
 
 /* Botón Guardar */
 .btn-save-edit {
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-  color: white;
+  background: white;
+  color: green;
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
 }
 
@@ -341,8 +337,8 @@ body {
 
 /* Botón Cancelar */
 .btn-cancel-edit {
-  background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
-  color: white;
+  background: white;
+  color: grey;
   box-shadow: 0 4px 12px rgba(108, 117, 125, 0.25);
 }
 
@@ -370,7 +366,7 @@ body {
   padding: 22px;
   margin: 20px 0;
   border-radius: 16px;
-  background: linear-gradient(135deg, #f9fafb 0%, #eef2f7 100%);
+  background: orange;
   box-shadow: 0 6px 24px rgba(59, 130, 246, 0.15);
   transition:
     transform 0.3s ease,
@@ -527,7 +523,7 @@ body {
   ==================================*/
 
 .container-chats {
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  background: yellowgreen;
   border-radius: 18px;
   border: 1px solid rgba(59, 130, 246, 0.25);
   overflow: hidden;
@@ -575,7 +571,7 @@ body {
 .header-chats-internos input,
 .header-chats-clientes input {
   padding: 10px 16px;
-  border: 1px solid var(--border-color);
+  border: 1px solid;
   border-radius: 8px;
   font-size: 14px;
   transition: all 0.3s ease;
@@ -601,11 +597,7 @@ body {
 /* Items de chat */
 .chat-list-item {
   cursor: pointer;
-  background: linear-gradient(
-    135deg,
-    rgba(59, 130, 246, 0.08) 0%,
-    rgba(16, 185, 129, 0.05) 100%
-  );
+  background: greenyellow;
   border-radius: 12px;
   border: 1px solid rgba(59, 130, 246, 0.25);
   padding: 18px;
