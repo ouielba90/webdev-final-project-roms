@@ -75,6 +75,9 @@ api.get("/messages", (req, res) => {
 api.get("/chat-messages", (req, res) => {
     res.json(chatMessages);
 })
+api.get("/posts", (req, res) => {
+    res.json(chatMessages);
+})
 /**************/
 
 api.listen(PORT, () => {
