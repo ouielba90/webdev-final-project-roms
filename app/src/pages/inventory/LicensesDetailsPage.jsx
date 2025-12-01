@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { DataContext } from "./../../context/inventory/DataContext"
 
 function LicensesDetailsPage() {
@@ -16,8 +16,12 @@ function LicensesDetailsPage() {
     <>
       <div className="details-main">
         <div>
+
           <h2>License {licenseItem.id}</h2>
-          <p><strong>{softAssoc.name}</strong></p>
+          <p><strong>Asociado a: </strong>
+            <Link to={`/inventory/software/${softAssoc.id}`} className="details-links">
+              {softAssoc.name}
+            </Link></p>
           {daysBetweenDates(licenseItem.expiryDate) < 0 ?
             <p className="status activa">Activa</p>
             : <p className="status expirada">Expirada</p>}
@@ -32,7 +36,7 @@ function LicensesDetailsPage() {
             </div>
             <div>
               <p><strong>Fecha de compra</strong></p>
-              <p>{(licenseItem.purchaseDate)}</p>
+              <p>{isoToeuDate(licenseItem.purchaseDate)}</p>
             </div>
             <div>
               <p><strong>Fecha de expiración</strong></p>
@@ -62,7 +66,7 @@ function LicensesDetailsPage() {
         <button onClick={() => navigate("/inventory/licenses")}>
           Volver a la lista
         </button>
-      </div>
+      </div >
     </>
   )
 }

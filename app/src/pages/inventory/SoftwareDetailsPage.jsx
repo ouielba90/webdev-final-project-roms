@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { DataContext } from "./../../context/inventory/DataContext"
 
 function SoftwareDetailsPage() {
@@ -11,7 +11,7 @@ function SoftwareDetailsPage() {
   const hardAssocList = softwareItem.installedOnHardware.map((hardId) => {
     let hardwareInfo = hardware.find(h => h.id === hardId)
     console.log(hardwareInfo)
-    return { model: hardwareInfo.model, type: hardwareInfo.type, status: hardwareInfo.status }
+    return { id: hardwareInfo.id, model: hardwareInfo.model, type: hardwareInfo.type, status: hardwareInfo.status }
   })
   const serversAssocList = softwareItem.serverId.map((servId) => {
     let serverInfo = servers.find(h => h.id === servId)
@@ -55,13 +55,15 @@ function SoftwareDetailsPage() {
           <div className="details-quick-stats">
             {hardAssocList.length ? (
               hardAssocList.map((h, i) => (
-                <div key={i} className="assoc-card">
-                  <p className="assoc-name">{h.model}</p>
-                  <p className="assoc-type">{h.type}</p>
-                  <p className={`assoc-status ${h.status.replace(" ", "-").toLowerCase()}`}>
-                    {h.status.charAt(0).toUpperCase() + h.status.slice(1)}
-                  </p>
-                </div>
+                <Link to={`/inventory/hardware/${h.id}`} className="details-links">
+                  <div key={i} className="assoc-card">
+                    <p className="assoc-name">{h.model}</p>
+                    <p className="assoc-type">{h.type}</p>
+                    <p className={`assoc-status ${h.status.replace(" ", "-").toLowerCase()}`}>
+                      {h.status.charAt(0).toUpperCase() + h.status.slice(1)}
+                    </p>
+                  </div>
+                </Link>
               ))
             ) : (
               <div className="assoc-card">

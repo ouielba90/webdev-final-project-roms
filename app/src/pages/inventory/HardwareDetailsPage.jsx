@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { DataContext } from "./../../context/inventory/DataContext"
 
 function HardwareDetailsPage() {
@@ -9,7 +9,7 @@ function HardwareDetailsPage() {
   const hardwareItem = hardware.find(s => s.id === Number(id));
   const softAssocList = hardwareItem.installedSoftware.map((softId) => {
     let softwareInfo = software.find(h => h.id === softId)
-    return { name: softwareInfo.name, version: softwareInfo.version }
+    return { id: softwareInfo.id, name: softwareInfo.name, version: softwareInfo.version }
   })
   //const serversAssocList = softwareItem.serverId.map((servId) => {
   //  let serverInfo = servers.find(h => h.id === servId)
@@ -56,10 +56,12 @@ function HardwareDetailsPage() {
           <div className="details-quick-stats">
             {softAssocList.length ? (
               softAssocList.map((h, i) => (
-                <div key={i} className="assoc-card">
-                  <p className="assoc-name">{h.name}</p>
-                  <p className="assoc-type">{h.version}</p>
-                </div>
+                <Link to={`/inventory/software/${h.id}`} className="details-links">
+                  <div key={i} className="assoc-card">
+                    <p className="assoc-name">{h.name}</p>
+                    <p className="assoc-type">{h.version}</p>
+                  </div>
+                </Link>
               ))
             ) : (
               <p>Ninguno</p>

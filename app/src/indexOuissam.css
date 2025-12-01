@@ -1061,6 +1061,7 @@
   margin: 2px 0;
   font-size: 14px;
   color: #475569;
+  width: fit-content;
 }
 
 /* ---------- Estado principal ---------- */
@@ -1116,6 +1117,10 @@
   margin-bottom: 3px;
 }
 
+.details-links {
+  text-decoration: none;
+  color: #475569;
+}
 /* ---------- Asociación de elementos ---------- */
 .assoc-card {
   background: #ffffff;
@@ -1464,7 +1469,7 @@
 /* ---------- SOFTWARE y USUARIOS ---------- */
 .small-card-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
   gap: 10px;
 }
 

@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { DataContext } from "./../../context/inventory/DataContext"
 
 function ServersDetailsPage() {
@@ -8,7 +8,7 @@ function ServersDetailsPage() {
   const { software, servers } = useContext(DataContext)
   const serverItem = servers.find(serv => serv.id === Number(id));
   const softAssocList = serverItem.hostedSoftware.map(sId => {
-    return software.find(s => s.id === sId).name
+    return software.find(s => s.id === sId)
   })
   const servAvgPropNodes = getServerAverages(serverItem.nodeSpecs)
   if (!serverItem) return <p>Servidor no encontrado.</p>;
@@ -88,7 +88,9 @@ function ServersDetailsPage() {
         <h3>Software instalado</h3>
         <div className="small-card-list">
           {softAssocList.map((soft, i) => (
-            <div key={i} className="mini-card">{soft}</div>
+            <Link to={`/inventory/software/${soft.id}`} className="details-links">
+              <div key={i} className="mini-card">{soft.name}</div>
+            </Link>
           ))}
         </div>
 
