@@ -24,10 +24,10 @@ function ProviderInventory({ children }) {
   }, []);
 
   const dataToShare = {
-    software,
-    hardware,
-    licenses,
-    servers,
+    software, setSoftware,
+    hardware, setHardware,
+    licenses, setLicenses,
+    servers, setServers,
     softwareApi,
     hardwareApi,
     licensesApi,
