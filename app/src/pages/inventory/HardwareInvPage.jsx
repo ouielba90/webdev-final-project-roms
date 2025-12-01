@@ -81,7 +81,7 @@ function HardwareInvPage() {
       type: data.type,
       model: data.model,
       status: data.status,
-      purchaseDate: isoToeuDate(data.purchaseDate),
+      purchaseDate: data.purchaseDate,
       specs: { cpu: data.cpu, ram: data.ram, storage: data.storage },
       installedSoftware: selectedSoft.map(soft_name => software.find(s => s.name === soft_name).id),
     };
@@ -110,7 +110,7 @@ function HardwareInvPage() {
           type: data.type,
           model: data.model,
           status: data.status,
-          purchaseDate: isoToeuDate(data.purchaseDate),
+          purchaseDate: data.purchaseDate,
           specs: { cpu: data.cpu, ram: data.ram, storage: data.storage },
           installedSoftware: selectedSoft,
         } : item));
@@ -164,8 +164,8 @@ function HardwareInvPage() {
           </div>
           <div className="filters-btn-combined">
             <div className="filters-row-sort">
-              <button onClick={handleSortAZ}>A-Z</button>
-              <button onClick={handleSortZA}>Z-A</button>
+              <button className={az ? "filter-activation" : ""} onClick={handleSortAZ}>A-Z</button>
+              <button className={za ? "filter-activation" : ""} onClick={handleSortZA}>Z-A</button>
             </div>
             <div className="filters-row-sort">
               <button onClick={() => setAddFormOpen(!addFormOpen)}>Añadir hardware</button>
@@ -195,10 +195,4 @@ function HardwareInvPage() {
   )
 }
 
-function isoToeuDate(isoDateStr) {
-  console.log('in1', isoDateStr)
-  const [year, month, day] = isoDateStr.split("-"); // Month index begin with 0
-  console.log(`${day}/${month}/${year}`)
-  return `${day}/${month}/${year}`;
-}
 export default HardwareInvPage

@@ -16,17 +16,89 @@ Propiedades
 id, name, client, status, description, tasks, collabs
 
 
-2. Gestión de recursos (InventoryPage)
-- Lista de recursos (software, hardware, ...)
-- Crear, editar, pedir y eliminar.
+Aquí tienes una **versión más corta, más técnica y centrada únicamente en el inventario**:
 
-Ejemplos:
-- Wireshark – Software – Disponible – Analiza tráfico de red
-- Firewall Cisco ASA – Hardware – En uso – Protege la red
-- BurpSuite – Software – Mantenimiento – Audita sitios web
+---
 
-Propiedades
-name, type, status, description
+# 📦 Inventario
+
+Este subpágina implementa la gestión completa de activos tecnológicos del sistema: **hardware, software, licencias y servidores**, utilizando React, Context API y un conjunto de componentes modulares.
+
+---
+
+## 🧱 Arquitectura
+
+* **Contexto global** (`ProviderInventory.jsx` + `DataContext.js`):
+  Centraliza software, hardware, licencias y servidores, exponiendo los datos a todas las páginas del inventario.
+
+* **APIs dedicadas** (`useHardwareApi`, `useSoftwareApi`, `useLicensesApi`, `useServersApi`):
+  Hooks personalizados que encapsulan las llamadas a las distintas rutas del backend mediante `fetch()`.
+
+* **Estructura modular** en `/components/inventory` y `/pages/inventory`.
+  Cada tipo de recurso tiene:
+
+  * Página de listado
+  * Página de detalles
+  * Formularios de alta y edición
+  * Tarjetas reutilizables
+  * Modales para CRUD
+
+---
+
+## 📊 Dashboard 
+
+Incluye:
+
+* Conteo total de recursos y estado global.
+* Métricas por categoría (software/hardware/licencias/servidores).
+* Detección automática de:
+
+  * licencias próximas a expirar
+  * servidores con mayor carga de usuarios
+  * alertas por uso de CPU/RAM/Disco
+* Uso de animaciones Lottie para estados.
+
+---
+
+## 💿 Software
+
+* Alta, edición y eliminación con validaciones básicas.
+* Asignación a hardware y servidores.
+* Filtros por categoría/estado y búsqueda por nombre.
+* Vista detallada con relaciones y metadatos.
+
+---
+
+## 🖥️ Hardware
+
+Funcionalidad:
+
+* CRUD completo (add/edit/delete) con formularios estructurados.
+* Filtrado por tipo/estado, búsqueda por modelo y ordenación A–Z/Z–A.
+* Asociación de software mediante `select` múltiple.
+* Vista detallada con specs, fecha de compra y software instalado.
+
+---
+
+## 🔑 Licencias
+
+* Relación automática con el software asociado.
+* Cálculo de estado (activa/expirada) en función de la fecha.
+* CRUD con campos técnicos: vendor, licenseKey, seats, fechas, coste.
+* Filtros + búsqueda por software.
+
+---
+
+## 🖧 Servidores
+
+* Card con estado, ubicación, OS, usuarios y software alojado.
+* Vista detallada con:
+
+  * Cálculo de promedios por CPU/RAM/Disco
+  * Grid de nodos individuales
+  * Listado de software y usuarios con acceso
+
+---
 
 
 3. Usuarios y clientes (UserPage)

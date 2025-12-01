@@ -11,8 +11,11 @@ function LicensesInvPage() {
     const sw = software.find(s => s.id === lic.softwareId);
     lic.softwareName = sw ? sw.name : 'Unknown';
     const diff = daysBetweenDates(lic.expiryDate);
-    lic.status = diff < 0 ? "activo" : "expirado";
+    console.log(diff, lic.expiryDate
+    )
+    lic.status = diff < 0 ? "activa" : "expirada";
   });
+
 
   const [query, setQuery] = useState(licenses)
   const [search, setSearch] = useState("")
@@ -114,8 +117,8 @@ function LicensesInvPage() {
           ...item,
           softwareId: software.find(s => s.name === data.softwareId).id,
           seats: data.seats,
-          purchaseDate: isoToeuDate(data.purchaseDate),
-          expiryDate: isoToeuDate(data.expiryDate),
+          purchaseDate: data.purchaseDate,
+          expiryDate: data.expiryDate,
           licenseKey: data.licenseKey,
           vendor: data.vendor,
           cost: 3100,
@@ -148,23 +151,23 @@ function LicensesInvPage() {
       <div className="software-main-container">
         <div className="filters-container">
           <div className="filters-row-main">
-            <input type="text" id="searchForm" onChange={handleSearch} />
+            <input type="text" id="searchForm" placeholder="Buscar licencia..." onChange={handleSearch} />
             <div className="filter-field">
               <p>Estado</p>
               <select onClick={handleStatus}>
                 <option>Todos</option>
-                <option>active</option>
-                <option>expired</option>
+                <option>activa</option>
+                <option>expirada</option>
               </select>
             </div>
           </div>
           <div className="filters-btn-combined">
             <div className="filters-row-sort">
-              <button onClick={handleSortAZ}>A-Z</button>
-              <button onClick={handleSortZA}>Z-A</button>
+              <button className={az ? "filter-activation" : ""} onClick={handleSortAZ}>A-Z</button>
+              <button className={za ? "filter-activation" : ""} onClick={handleSortZA}>Z-A</button>
             </div>
             <div className="filters-row-combined">
-              <button onClick={() => setAddFormOpen(!addFormOpen)}>Añadir license</button>
+              <button onClick={() => setAddFormOpen(!addFormOpen)}>Añadir licencia</button>
             </div>
           </div>
         </div>
@@ -176,8 +179,8 @@ function LicensesInvPage() {
                 id={el.id}
                 softwareName={software.find((s) => el.softwareId === s.id)?.name}
                 seats={el.seats}
-                purchaseDate={el.purchaseDate}
-                expiryDate={el.expiryDate}
+                purchaseDate={isoToeuDate(el.purchaseDate)}
+                expiryDate={isoToeuDate(el.expiryDate)}
                 status={el.status}
                 vendor={el.vendor}
                 handleRemove={handleRemove}
@@ -191,21 +194,16 @@ function LicensesInvPage() {
   )
 }
 
-function daysBetweenDates(euDateStr) {
-  const [day, month, year] = euDateStr.split("/");
-  const formattedDate = `${year}-${month}-${day}`;
-
-  const givenDate = new Date(formattedDate);
+function daysBetweenDates(isoDateStr) {
+  const givenDate = new Date(isoDateStr);
   const today = new Date();
-
   const diffDays = Math.floor((today - givenDate) / (1000 * 60 * 60 * 24));
-
   return diffDays;
 }
 function isoToeuDate(isoDateStr) {
   console.log('in1', isoDateStr)
-  const [year, month, day] = isoDateStr.split("-"); // Month index begin with 0
-  console.log(`${day}/${month}/${year}`)
-  return `${day}/${month}/${year}`;
+  const [year, month, day] = isoDateStr.split("T")[0].split("-"); // Month index begin with 0
+  console.log(`${day}-${month}-${year}`)
+  return `${day}-${month}-${year}`;
 }
 export default LicensesInvPage

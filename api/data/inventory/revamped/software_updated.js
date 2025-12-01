@@ -1,4 +1,4 @@
-const software = [
+export const software = [
   {
     id: 1001,
     name: "Wireshark",
@@ -1104,5 +1104,3 @@ const software = [
     description: "Plataforma comercial de análisis de amenazas.",
   },
 ];
-
-export default software;

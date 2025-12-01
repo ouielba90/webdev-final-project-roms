@@ -1,10 +1,10 @@
-const hardware = [
+export const hardware = [
   {
     id: 2001,
     type: "Portátil",
     model: "HP EliteBook 850 G9",
     status: "operativo",
-    purchaseDate: "2024-03-12T00:00:00.000Z",
+    purchaseDate: "12/03/2024",
     specs: {
       cpu: "Intel i7-1265U",
       ram: "16GB",
@@ -19,7 +19,7 @@ const hardware = [
     type: "Sobremesa",
     model: "Dell OptiPlex 7090",
     status: "operativo",
-    purchaseDate: "2022-02-01T00:00:00.000Z",
+    purchaseDate: "01/02/2022",
     specs: {
       cpu: "Intel i7-10700",
       ram: "16GB",
@@ -34,7 +34,7 @@ const hardware = [
     type: "Portátil",
     model: "Dell XPS 15",
     status: "operativo",
-    purchaseDate: "2023-05-05T00:00:00.000Z",
+    purchaseDate: "05/05/2023",
     specs: {
       cpu: "Intel i7-12700H",
       ram: "16GB",
@@ -49,7 +49,7 @@ const hardware = [
     type: "Portátil",
     model: "Lenovo ThinkPad X1 Carbon",
     status: "operativo",
-    purchaseDate: "2023-11-11T00:00:00.000Z",
+    purchaseDate: "11/11/2023",
     specs: {
       cpu: "Intel i7-1165G7",
       ram: "16GB",
@@ -64,7 +64,7 @@ const hardware = [
     type: "Portátil",
     model: "MacBook Pro 16 (M1)",
     status: "operativo",
-    purchaseDate: "2024-02-15T00:00:00.000Z",
+    purchaseDate: "15/02/2024",
     specs: {
       cpu: "Apple M1 Pro",
       ram: "16GB",
@@ -79,7 +79,7 @@ const hardware = [
     type: "Sobremesa",
     model: "Custom Workstation i9",
     status: "operativo",
-    purchaseDate: "2024-06-15T00:00:00.000Z",
+    purchaseDate: "15/06/2024",
     specs: {
       cpu: "Intel i9-12900K",
       ram: "32GB",
@@ -94,7 +94,7 @@ const hardware = [
     type: "Portátil",
     model: "ThinkPad P1",
     status: "mantenimiento",
-    purchaseDate: "2023-05-29T00:00:00.000Z",
+    purchaseDate: "29/05/2023",
     specs: {
       cpu: "Intel i7",
       ram: "32GB",
@@ -109,7 +109,7 @@ const hardware = [
     type: "Portátil",
     model: "MacBook Air (M2)",
     status: "operativo",
-    purchaseDate: "2023-12-12T00:00:00.000Z",
+    purchaseDate: "12/12/2023",
     specs: {
       cpu: "Apple M2",
       ram: "16GB",
@@ -124,7 +124,7 @@ const hardware = [
     type: "Portátil",
     model: "Dell Latitude 7420",
     status: "operativo",
-    purchaseDate: "2024-04-04T00:00:00.000Z",
+    purchaseDate: "04/04/2024",
     specs: {
       cpu: "Intel i7",
       ram: "16GB",
@@ -139,7 +139,7 @@ const hardware = [
     type: "Portátil",
     model: "Asus ZenBook",
     status: "operativo",
-    purchaseDate: "2023-08-18T00:00:00.000Z",
+    purchaseDate: "18/08/2023",
     specs: {
       cpu: "Intel i7",
       ram: "16GB",
@@ -154,7 +154,7 @@ const hardware = [
     type: "Sobremesa",
     model: "Workstation AMD Ryzen",
     status: "operativo",
-    purchaseDate: "2024-08-22T00:00:00.000Z",
+    purchaseDate: "22/08/2024",
     specs: {
       cpu: "AMD Ryzen 9 5900X",
       ram: "64GB",
@@ -169,7 +169,7 @@ const hardware = [
     type: "Portátil",
     model: "HP ZBook",
     status: "mantenimiento",
-    purchaseDate: "2022-10-01T00:00:00.000Z",
+    purchaseDate: "01/10/2022",
     specs: {
       cpu: "Intel i9",
       ram: "32GB",
@@ -184,7 +184,7 @@ const hardware = [
     type: "Portátil",
     model: "MacBook Pro 14",
     status: "operativo",
-    purchaseDate: "2024-04-12T00:00:00.000Z",
+    purchaseDate: "12/04/2024",
     specs: {
       cpu: "Apple M1 Pro",
       ram: "16GB",
@@ -199,7 +199,7 @@ const hardware = [
     type: "Portátil",
     model: "Lenovo ThinkPad P16",
     status: "operativo",
-    purchaseDate: "2024-02-28T00:00:00.000Z",
+    purchaseDate: "28/02/2024",
     specs: {
       cpu: "Intel i9",
       ram: "64GB",
@@ -214,7 +214,7 @@ const hardware = [
     type: "Portátil",
     model: "Dell Precision",
     status: "operativo",
-    purchaseDate: "2023-08-07T00:00:00.000Z",
+    purchaseDate: "07/08/2023",
     specs: {
       cpu: "Intel i7",
       ram: "32GB",
@@ -229,7 +229,7 @@ const hardware = [
     type: "Sobremesa",
     model: "HP Z4 G4",
     status: "operativo",
-    purchaseDate: "2023-11-19T00:00:00.000Z",
+    purchaseDate: "19/11/2023",
     specs: {
       cpu: "Intel i9",
       ram: "32GB",
@@ -244,7 +244,7 @@ const hardware = [
     type: "Portátil",
     model: "HP EliteBook 850 G9",
     status: "operativo",
-    purchaseDate: "2024-03-01T00:00:00.000Z",
+    purchaseDate: "01/03/2024",
     specs: {
       cpu: "Intel i7",
       ram: "16GB",
@@ -259,7 +259,7 @@ const hardware = [
     type: "Portátil",
     model: "Dell XPS 13",
     status: "operativo",
-    purchaseDate: "2023-12-09T00:00:00.000Z",
+    purchaseDate: "09/12/2023",
     specs: {
       cpu: "Intel i7",
       ram: "16GB",
@@ -274,7 +274,7 @@ const hardware = [
     type: "Portátil",
     model: "Lenovo ThinkPad T14",
     status: "operativo",
-    purchaseDate: "2022-08-18T00:00:00.000Z",
+    purchaseDate: "18/08/2022",
     specs: {
       cpu: "Intel i5",
       ram: "16GB",
@@ -289,7 +289,7 @@ const hardware = [
     type: "Sobremesa",
     model: "Custom GPU-Workstation",
     status: "operativo",
-    purchaseDate: "2024-06-30T00:00:00.000Z",
+    purchaseDate: "30/06/2024",
     specs: {
       cpu: "AMD Ryzen Threadripper",
       ram: "128GB",
@@ -305,7 +305,7 @@ const hardware = [
     type: "Portátil",
     model: "MacBook Air",
     status: "operativo",
-    purchaseDate: "2024-01-05T00:00:00.000Z",
+    purchaseDate: "05/01/2024",
     specs: {
       cpu: "Apple M2",
       ram: "16GB",
@@ -320,7 +320,7 @@ const hardware = [
     type: "Portátil",
     model: "ThinkPad X1 Yoga",
     status: "operativo",
-    purchaseDate: "2023-02-21T00:00:00.000Z",
+    purchaseDate: "21/02/2023",
     specs: {
       cpu: "Intel i7",
       ram: "16GB",
@@ -335,7 +335,7 @@ const hardware = [
     type: "Portátil",
     model: "Acer Swift",
     status: "operativo",
-    purchaseDate: "2023-07-13T00:00:00.000Z",
+    purchaseDate: "13/07/2023",
     specs: {
       cpu: "Intel i7",
       ram: "16GB",
@@ -350,7 +350,7 @@ const hardware = [
     type: "Portátil",
     model: "Asus ROG",
     status: "mantenimiento",
-    purchaseDate: "2023-08-08T00:00:00.000Z",
+    purchaseDate: "08/08/2023",
     specs: {
       cpu: "AMD Ryzen 9",
       ram: "32GB",
@@ -365,7 +365,7 @@ const hardware = [
     type: "Sobremesa",
     model: "HP ProLiant DL380 Gen10",
     status: "operativo",
-    purchaseDate: "2024-06-01T00:00:00.000Z",
+    purchaseDate: "01/06/2024",
     specs: {
       cpu: "Intel Xeon",
       ram: "64GB",
@@ -380,7 +380,7 @@ const hardware = [
     type: "Portátil",
     model: "Dell G15",
     status: "operativo",
-    purchaseDate: "2023-11-11T00:00:00.000Z",
+    purchaseDate: "11/11/2023",
     specs: {
       cpu: "Intel i7",
       ram: "32GB",
@@ -395,7 +395,7 @@ const hardware = [
     type: "Sobremesa",
     model: "Workstation Pro",
     status: "operativo",
-    purchaseDate: "2023-12-12T00:00:00.000Z",
+    purchaseDate: "12/12/2023",
     specs: {
       cpu: "Intel i9",
       ram: "64GB",
@@ -410,7 +410,7 @@ const hardware = [
     type: "Portátil",
     model: "MSI Creator",
     status: "operativo",
-    purchaseDate: "2024-04-02T00:00:00.000Z",
+    purchaseDate: "02/04/2024",
     specs: {
       cpu: "Intel i9",
       ram: "32GB",
@@ -425,7 +425,7 @@ const hardware = [
     type: "Portátil",
     model: "Surface Portátil",
     status: "operativo",
-    purchaseDate: "2022-09-10T00:00:00.000Z",
+    purchaseDate: "10/09/2022",
     specs: {
       cpu: "Intel i5",
       ram: "16GB",
@@ -440,7 +440,7 @@ const hardware = [
     type: "Sobremesa",
     model: "Dell Precision",
     status: "operativo",
-    purchaseDate: "2023-03-18T00:00:00.000Z",
+    purchaseDate: "18/03/2023",
     specs: {
       cpu: "Intel Xeon",
       ram: "64GB",
@@ -455,7 +455,7 @@ const hardware = [
     type: "Portátil",
     model: "HP ZBook Studio",
     status: "operativo",
-    purchaseDate: "2023-05-14T00:00:00.000Z",
+    purchaseDate: "14/05/2023",
     specs: {
       cpu: "Intel i9",
       ram: "32GB",
@@ -470,7 +470,7 @@ const hardware = [
     type: "Sobremesa",
     model: "Lenovo ThinkStation",
     status: "operativo",
-    purchaseDate: "2023-07-24T00:00:00.000Z",
+    purchaseDate: "24/07/2023",
     specs: {
       cpu: "Intel Xeon",
       ram: "64GB",
@@ -485,7 +485,7 @@ const hardware = [
     type: "Sobremesa",
     model: "Workstation X",
     status: "operativo",
-    purchaseDate: "2023-08-01T00:00:00.000Z",
+    purchaseDate: "01/08/2023",
     specs: {
       cpu: "AMD Ryzen 9",
       ram: "64GB",
@@ -500,7 +500,7 @@ const hardware = [
     type: "Portátil",
     model: "Dell Inspiron",
     status: "operativo",
-    purchaseDate: "2022-09-07T00:00:00.000Z",
+    purchaseDate: "07/09/2022",
     specs: {
       cpu: "Intel i5",
       ram: "16GB",
@@ -515,7 +515,7 @@ const hardware = [
     type: "Portátil",
     model: "Lenovo Yoga",
     status: "operativo",
-    purchaseDate: "2022-10-20T00:00:00.000Z",
+    purchaseDate: "20/10/2022",
     specs: {
       cpu: "Intel i5",
       ram: "8GB",
@@ -530,7 +530,7 @@ const hardware = [
     type: "Sobremesa",
     model: "Rendering Workstation",
     status: "operativo",
-    purchaseDate: "2023-11-19T00:00:00.000Z",
+    purchaseDate: "19/11/2023",
     specs: {
       cpu: "Intel i9",
       ram: "64GB",
@@ -545,7 +545,7 @@ const hardware = [
     type: "Portátil",
     model: "Acer Predator",
     status: "operativo",
-    purchaseDate: "2024-02-11T00:00:00.000Z",
+    purchaseDate: "11/02/2024",
     specs: {
       cpu: "Intel i9",
       ram: "32GB",
@@ -560,7 +560,7 @@ const hardware = [
     type: "Sobremesa",
     model: "HP Elite Workstation",
     status: "operativo",
-    purchaseDate: "2024-03-03T00:00:00.000Z",
+    purchaseDate: "03/03/2024",
     specs: {
       cpu: "Intel Xeon",
       ram: "64GB",
@@ -575,7 +575,7 @@ const hardware = [
     type: "Portátil",
     model: "Razer Blade",
     status: "mantenimiento",
-    purchaseDate: "2024-04-22T00:00:00.000Z",
+    purchaseDate: "22/04/2024",
     specs: {
       cpu: "Intel i7",
       ram: "32GB",
@@ -590,7 +590,7 @@ const hardware = [
     type: "Sobremesa",
     model: "Rack Server (lab)",
     status: "operativo",
-    purchaseDate: "2024-04-30T00:00:00.000Z",
+    purchaseDate: "30/04/2024",
     specs: {
       cpu: "Dual Intel Xeon",
       ram: "128GB",
@@ -601,5 +601,3 @@ const hardware = [
     os: "Linux Debian",
   },
 ];
-
-export default hardware;

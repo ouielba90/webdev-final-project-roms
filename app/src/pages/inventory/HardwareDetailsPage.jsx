@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { DataContext } from "./../../context/inventory/DataContext"
 
 function HardwareDetailsPage() {
@@ -9,7 +9,7 @@ function HardwareDetailsPage() {
   const hardwareItem = hardware.find(s => s.id === Number(id));
   const softAssocList = hardwareItem.installedSoftware.map((softId) => {
     let softwareInfo = software.find(h => h.id === softId)
-    return { name: softwareInfo.name, version: softwareInfo.version }
+    return { id: softwareInfo.id, name: softwareInfo.name, version: softwareInfo.version }
   })
   //const serversAssocList = softwareItem.serverId.map((servId) => {
   //  let serverInfo = servers.find(h => h.id === servId)
@@ -17,13 +17,14 @@ function HardwareDetailsPage() {
   //  return { name: serverInfo.name, location: serverInfo.location, status: serverInfo.status }
   //})
 
+  console.log("s", hardwareItem.purchaseDate)
   if (!hardwareItem) return <p>Hardware no encontrado.</p>;
 
   return (
     <>
       <div className="details-main">
         <div>
-          <h3>{hardwareItem.model}</h3>
+          <h2>{hardwareItem.model}</h2>
           <p>{hardwareItem.type}</p>
           <p className={`status ${hardwareItem.status.replace(" ", "-").toLowerCase()}`}>
             {hardwareItem.status}
@@ -35,7 +36,7 @@ function HardwareDetailsPage() {
           <div className="details-quick-stats">
             <div>
               <p><strong>Fecha de compra</strong></p>
-              <p>{hardwareItem.purchaseDate}</p>
+              <p>{isoToeuDate(hardwareItem.purchaseDate)}</p>
             </div>
             <div>
               <p><strong>Especificaciones</strong></p>
@@ -55,10 +56,12 @@ function HardwareDetailsPage() {
           <div className="details-quick-stats">
             {softAssocList.length ? (
               softAssocList.map((h, i) => (
-                <div key={i} className="assoc-card">
-                  <p className="assoc-name">{h.name}</p>
-                  <p className="assoc-type">{h.version}</p>
-                </div>
+                <Link to={`/inventory/software/${h.id}`} className="details-links">
+                  <div key={i} className="assoc-card">
+                    <p className="assoc-name">{h.name}</p>
+                    <p className="assoc-type">{h.version}</p>
+                  </div>
+                </Link>
               ))
             ) : (
               <p>Ninguno</p>
@@ -72,6 +75,13 @@ function HardwareDetailsPage() {
       </div>
     </>
   )
+}
+
+function isoToeuDate(isoDateStr) {
+  console.log('in1', isoDateStr)
+  const [year, month, day] = isoDateStr.split("T")[0].split("-"); // Month index begin with 0
+  console.log(`${day}-${month}-${year}`)
+  return `${day}-${month}-${year}`;
 }
 
 export default HardwareDetailsPage

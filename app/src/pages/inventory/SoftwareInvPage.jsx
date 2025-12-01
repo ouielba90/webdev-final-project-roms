@@ -163,8 +163,8 @@ function SoftwareInvPage() {
           </div>
           <div className="filters-btn-combined">
             <div className="filters-row-sort">
-              <button onClick={handleSortAZ}>A-Z</button>
-              <button onClick={handleSortZA}>Z-A</button>
+              <button className={az ? "filter-activation" : ""} onClick={handleSortAZ}>A-Z</button>
+              <button className={za ? "filter-activation" : ""} onClick={handleSortZA}>Z-A</button>
             </div>
             <div className="filters-row-sort">
               <button onClick={() => setAddFormOpen(!addFormOpen)}>Añadir software</button>
@@ -173,7 +173,7 @@ function SoftwareInvPage() {
         </div>
         <div className="software-cards">
           {query.map((el) => {
-            console.log(el.id, el.serverId)
+            //console.log(el.id, el.serverId)
             //console.log("card", el.id, el.name, el.serverId)
             return (
               <SoftwareCard

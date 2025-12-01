@@ -84,10 +84,8 @@ function DashboardPage() {
   )
 }
 
-function daysBetweenDates(euDateStr) {
-  const [day, month, year] = euDateStr.split("/");
-  const formattedDate = `${year}-${month}-${day}`;
-  const givenDate = new Date(formattedDate);
+function daysBetweenDates(isoDateStr) {
+  const givenDate = new Date(isoDateStr);
   const today = new Date();
   const diffDays = Math.floor((today - givenDate) / (1000 * 60 * 60 * 24));
   return diffDays;

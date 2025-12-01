@@ -1,4 +1,4 @@
-const licenses = [
+export const licenses = [
   {
     id: 4001,
     softwareId: 1005,

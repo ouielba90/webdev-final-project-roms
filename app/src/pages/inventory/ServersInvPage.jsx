@@ -58,7 +58,7 @@ function ServersInvPage() {
       <div className="software-main-container">
         <div className="filters-container">
           <div className="filters-row-main">
-            <input type="text" id="searchForm" onChange={handleSearch} />
+            <input type="text" id="searchForm" placeholder="Buscar servidor..." onChange={handleSearch} />
             <div className="filter-field">
               <p>OS</p>
               <select onClick={handleOS}>
@@ -80,8 +80,8 @@ function ServersInvPage() {
           </div>
           <div className="filters-btn-combined">
             <div className="filters-row-sort">
-              <button onClick={handleSortAZ}>A-Z</button>
-              <button onClick={handleSortZA}>Z-A</button>
+              <button className={az ? "filter-activation" : ""} onClick={handleSortAZ}>A-Z</button>
+              <button className={za ? "filter-activation" : ""} onClick={handleSortZA}>Z-A</button>
             </div>
           </div>
         </div>

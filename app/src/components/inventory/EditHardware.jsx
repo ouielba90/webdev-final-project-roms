@@ -4,7 +4,7 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
   const [type, setType] = useState(toBeEdited.type)
   const [model, setModel] = useState(toBeEdited.model)
   const [status, setStatus] = useState(toBeEdited.status)
-  const [purchaseDate, setPurchaseDate] = useState(toBeEdited.purchaseDate)
+  const [purchaseDate, setPurchaseDate] = useState(toBeEdited.purchaseDate.split("T")[0])
   const [specsCPU, setSpecsCPU] = useState(toBeEdited.specs.cpu)
   const [specsRAM, setSpecsRAM] = useState(toBeEdited.specs.ram)
   const [specsStorage, setSpecsStorage] = useState(toBeEdited.specs.storage)
@@ -23,15 +23,6 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
     setSelectedSoft(toBeEdited.installedSoftware)
   }, [toBeEdited, setSelectedSoft])
 
-  function euToISO(euDateStr) {
-    const [day, month, year] = euDateStr.split("/"); // Month index begin with 0
-    console.log('kkkkkk', year, month, day)
-    return `${year}-${month}-${day}`;
-  }
-  function isoToEU(isoDateStr) {
-    const [year, month, day] = isoDateStr.split("-"); // Month index begin with 0
-    return `${day}/${month}/${year}`;
-  }
   return (
     <form onSubmit={handleSubmitEdit} className="addsoft-form">
       <h2 className="addsoft-title">Editar Hardware</h2>
@@ -70,8 +61,8 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
             type="date"
             id="purchaseDate"
             name="purchaseDate"
-            value={euToISO(purchaseDate)}
-            onChange={(e) => setPurchaseDate(isoToEU(e.target.value))}
+            value={purchaseDate}
+            onChange={(e) => setPurchaseDate(e.target.value)}
           />
         </div>
       </div>
