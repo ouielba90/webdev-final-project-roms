@@ -166,6 +166,36 @@ body{
     justify-content: space-between;
     margin-bottom: 5px;
 }
+.content-modal header{
+    color: #3b82f6;
+}
+.content-modal label{
+    color: #3b82f6;
+}
+.content-modal input {
+    border: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 2);
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+}
+.content-modal select {
+    border: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 2);
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+}
+.content-modal textarea {
+    border: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 2);
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+}
+.modal-title {
+    color: #3b82f6;
+}
 
 
 /*diferentes colores para los estados del proyecto*/

@@ -88,7 +88,6 @@ function ProjectList() {
 
   return (
     <>
-      <h1>Project list</h1>
       <button className="btn-new-project" onClick={() => setCreateOpen(true)}>Crear projecto</button>
       {createOpen && (
         <ProjectCreate
