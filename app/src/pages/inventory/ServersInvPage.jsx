@@ -1,39 +1,29 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { DataContext } from "../../context/inventory/DataContext";
 import ServerCard from "../../components/inventory/ServerCard";
 
 function ServersInvPage() {
   const { servers, software } = useContext(DataContext)
-  const [query, setQuery] = useState(servers)
   const [az, setAZ] = useState(false)
   const [za, setZA] = useState(false)
   const [search, setSearch] = useState("")
   const [status, setStatus] = useState("")
   const [os, setOs] = useState("")
 
-  useEffect(() => {
-    let filtered = servers.filter(
-      (el) => {
-        const matchesSearch = el.name.toLowerCase().includes(search.toLowerCase()) ||
-          el.ip.includes(search)
-        const marchesOs = os === "" || os === "Todos" || el.os.includes(os)
-        const matchesStatus = status === "" || status === "Todos" || el.status === status
+  let filtered = servers.filter(
+    (el) => {
+      const matchesSearch = el.name.toLowerCase().includes(search.toLowerCase()) ||
+        el.ip.includes(search)
+      const marchesOs = os === "" || os === "Todos" || el.os.includes(os)
+      const matchesStatus = status === "" || status === "Todos" || el.status === status
 
-        return matchesSearch && marchesOs && matchesStatus
-      })
-    if (az) {
-      filtered = [...filtered].sort((a, b) =>
-        a.name.toLowerCase().localeCompare(b.name.toLowerCase())
-      );
-    }
-    if (za) {
-      filtered = [...filtered].sort((a, b) =>
-        b.name.toLowerCase().localeCompare(a.name.toLowerCase())
-      );
-    }
-
-    setQuery(filtered);
-  }, [servers, os, search, status, az, za]);
+      return matchesSearch && marchesOs && matchesStatus
+    })
+    .sort((a, b) => {
+      if (az) return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+      if (za) return b.name.toLowerCase().localeCompare(a.name.toLowerCase());
+      return 0;
+    })
 
   function handleSearch(e) {
     setSearch(e.target.value)
@@ -62,8 +52,8 @@ function ServersInvPage() {
               <p>Estado</p>
               <select onClick={handleStatus}>
                 <option>Todos</option>
-                <option>active</option>
-                <option>maintenance</option>
+                <option>activo</option>
+                <option>mantenimiento</option>
               </select>
             </div>
           </div>
@@ -75,7 +65,7 @@ function ServersInvPage() {
           </div>
         </div>
         <div className="software-cards">
-          {query.map((el) => {
+          {filtered.map((el) => {
             return (
               <ServerCard
                 key={el.id}

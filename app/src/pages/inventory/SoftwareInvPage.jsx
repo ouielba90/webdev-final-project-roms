@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { DataContext } from "../../context/inventory/DataContext";
 import SoftwareCard from "../../components/inventory/SoftwareCard";
 import AddSoftware from "../../components/inventory/AddSoftware";
@@ -7,37 +7,26 @@ import Modal from "../../components/inventory/Modal.jsx"
 import { Outlet } from "react-router-dom";
 
 function SoftwareInvPage() {
-  const { software, hardware, servers } = useContext(DataContext);
+  const { software, setSoftware, hardware, servers } = useContext(DataContext);
 
-  const [query, setQuery] = useState(software)
   const [search, setSearch] = useState("")
   const [az, setAZ] = useState(false)
   const [za, setZA] = useState(false)
   const [status, setStatus] = useState("")
 
-  useEffect(() => {
-    let filtered = software.filter(
-      (el) => {
-        const matchesSearch = el.name.toLowerCase().includes(search.toLowerCase()) ||
-          el.description.toLowerCase().includes(search.toLowerCase())
-        const matchesStatus = status === "" || status === "Todos" || el.status === status
+  let filtered = software.filter(
+    (el) => {
+      const matchesSearch = el.name.toLowerCase().includes(search.toLowerCase()) ||
+        el.description.toLowerCase().includes(search.toLowerCase())
+      const matchesStatus = status === "" || status === "Todos" || el.status === status
 
-        return matchesSearch && matchesStatus
-      })
-
-    if (az) {
-      filtered = [...filtered].sort((a, b) =>
-        a.name.toLowerCase().localeCompare(b.name.toLowerCase())
-      );
-    }
-    if (za) {
-      filtered = [...filtered].sort((a, b) =>
-        b.name.toLowerCase().localeCompare(a.name.toLowerCase())
-      );
-    }
-
-    setQuery(filtered);
-  }, [search, software, az, za, status]);
+      return matchesSearch && matchesStatus
+    })
+    .sort((a, b) => {
+      if (az) return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+      if (za) return b.name.toLowerCase().localeCompare(a.name.toLowerCase());
+      return 0;
+    })
 
   function handleSearch(e) {
     setSearch(e.target.value)
@@ -48,7 +37,7 @@ function SoftwareInvPage() {
   }
 
   function handleRemove(id) {
-    setQuery(prev => prev.filter(el => el.id !== id))
+    setSoftware(prev => prev.filter(el => el.id !== id))
   }
 
   const [addFormOpen, setAddFormOpen] = useState(false)
@@ -66,7 +55,7 @@ function SoftwareInvPage() {
     const data = Object.fromEntries(formData.entries());
     //console.log('handle', selectedHard)
     const newItem = {
-      id: query.length ? query.at(-1).id + 1 : 1001,
+      id: software.length ? software.at(-1).id + 1 : 1001,
       name: data.name,
       version: data.version,
       category: data.category,
@@ -77,7 +66,7 @@ function SoftwareInvPage() {
       description: data.description,
     };
 
-    setQuery(prev => [...prev, newItem]);
+    setSoftware(prev => [...prev, newItem]);
     e.target.reset()
     setSelectedHard([])
     setSelectedServ([])
@@ -93,8 +82,7 @@ function SoftwareInvPage() {
     e.preventDefault()
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    //console.log('data from edit', data, selectedHard)
-    setQuery(prev =>
+    setSoftware(prev =>
       prev.map(item =>
         item.id === Number(data.id) ? {
           ...item,
@@ -109,12 +97,11 @@ function SoftwareInvPage() {
     setEditFormOpen(false)
   }
 
-
   return (
     <>
       <Modal open={editFormOpen} onClose={() => setEditFormOpen(false)}>
         <EditSoftware
-          toBeEdited={query.find(s => s.id === currEditId)}
+          toBeEdited={software.find(s => s.id === currEditId)}
           categList={categList}
           serverList={serverList}
           hardList={hardList}
@@ -127,7 +114,7 @@ function SoftwareInvPage() {
       </Modal>
       <Modal open={addFormOpen} onClose={() => setAddFormOpen(false)}>
         <AddSoftware
-          query={query}
+          software={software}
           categList={categList}
           serverList={serverList}
           hardList={hardList}
@@ -162,9 +149,7 @@ function SoftwareInvPage() {
           </div>
         </div>
         <div className="software-cards">
-          {query.map((el) => {
-            //console.log(el.id, el.serverId)
-            //console.log("card", el.id, el.name, el.serverId)
+          {filtered.map((el) => {
             return (
               <SoftwareCard
                 key={el.id}
@@ -176,12 +161,10 @@ function SoftwareInvPage() {
                 status={el.status}
                 licenseId={el.licenseId}
                 installedOnHardware={el.installedOnHardware.map(hard => {
-                  // console.log(hardware.find(h => h.id === hard).model)
                   const v = hardware.find(h => Number(hard) === h.id)
                   return v ? v.model : undefined;
                 })}
                 serverId={el.serverId.map(serv => {
-                  // console.log(hardware.find(h => h.id === hard).model)
                   const v = servers.find(s => Number(serv) === s.id)
                   return v ? v.name : undefined;
                 })}

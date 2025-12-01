@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { DataContext } from "../../context/inventory/DataContext";
 import LicenseCard from "../../components/inventory/LicenseCard";
 import AddLicense from "../../components/inventory/AddLicense";
@@ -7,48 +7,33 @@ import Modal from "../../components/inventory/Modal.jsx"
 import { isoToeuDate, daysBetweenDates } from "./../../utils/inventory/date.js";
 
 function LicensesInvPage() {
-  let { licenses, software } = useContext(DataContext)
-  licenses.forEach(lic => {
-    const sw = software.find(s => s.id === lic.softwareId);
-    lic.softwareName = sw ? sw.name : 'Unknown';
-    const diff = daysBetweenDates(lic.expiryDate);
-    console.log(diff, lic.expiryDate
-    )
-    lic.status = diff < 0 ? "activa" : "expirada";
-  });
+  let { licenses, setLicenses, software } = useContext(DataContext)
 
-
-  const [query, setQuery] = useState(licenses)
   const [search, setSearch] = useState("")
   const [az, setAZ] = useState(false)
   const [za, setZA] = useState(false)
   const [status, setStatus] = useState("")
 
-
-  useEffect(() => {
-    let filtered = licenses.filter(
-      (el) => {
-        const softQueryName = software.find((s) => el.softwareName === s.name).name
-        const matchesSearch = softQueryName.toLowerCase().includes(search.toLowerCase())
-
-        const matchesStatus = status === "" || status === "Todos" || el.status === status
-
-        return matchesSearch && matchesStatus
-      })
-
-    if (az) {
-      filtered = [...filtered].sort((a, b) =>
-        String(a.softwareName).toLowerCase().localeCompare(String(b.softwareName).toLowerCase())
-      );
-    }
-    if (za) {
-      filtered = [...filtered].sort((a, b) =>
-        String(b.softwareName).toLowerCase().localeCompare(String(a.softwareName).toLowerCase())
-      );
-    }
-
-    setQuery(filtered);
-  }, [search, licenses, az, za, status, software]);
+  const filtered = licenses
+    .map(lic => {
+      const sw = software.find(s => s.id === lic.softwareId);
+      const diff = daysBetweenDates(lic.expiryDate);
+      return {
+        ...lic,
+        softwareName: sw ? sw.name : "Unknown",
+        status: diff < 0 ? "activa" : "expirada",
+      };
+    })
+    .filter(lic => {
+      const matchesSearch = lic.softwareName.toLowerCase().includes(search.toLowerCase());
+      const matchesStatus = status === "" || status === "Todos" || lic.status === status;
+      return matchesSearch && matchesStatus;
+    })
+    .sort((a, b) => {
+      if (az) return a.softwareName.toLowerCase().localeCompare(b.softwareName.toLowerCase());
+      if (za) return b.softwareName.toLowerCase().localeCompare(a.softwareName.toLowerCase());
+      return 0;
+    });
 
   function handleSearch(e) {
     setSearch(e.target.value)
@@ -59,7 +44,7 @@ function LicensesInvPage() {
   }
 
   function handleRemove(id) {
-    setQuery(prev => prev.filter(el => el.id !== id))
+    setLicenses(prev => prev.filter(el => el.id !== id))
   }
 
   const [addFormOpen, setAddFormOpen] = useState(false)
@@ -77,7 +62,7 @@ function LicensesInvPage() {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
     const newItem = {
-      id: query.length ? query.at(-1).id + 1 : 2001,
+      id: licenses.length ? licenses.at(-1).id + 1 : 2001,
       softwareId: software.find(s => s.name === data.software).id,
       seats: data.seats,
       purchaseDate: isoToeuDate(data.purchaseDate),
@@ -87,7 +72,7 @@ function LicensesInvPage() {
       cost: data.cost,
     };
 
-    setQuery(prev => [...prev, newItem]);
+    setLicenses(prev => [...prev, newItem]);
     e.target.reset()
     setAddFormOpen(false)
   }
@@ -100,9 +85,7 @@ function LicensesInvPage() {
     e.preventDefault()
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    console.log('data from edit', data, data.softwareId)
-    console.log('sssssssss', isoToeuDate(data.expiryDate), isoToeuDate(data.purchaseDate))
-    setQuery(prev =>
+    setLicenses(prev =>
       prev.map(item =>
         item.id === Number(data.id) ? {
           ...item,
@@ -121,8 +104,8 @@ function LicensesInvPage() {
       <Modal open={editFormOpen} onClose={() => setEditFormOpen(false)}>
         {editFormOpen && (
           <EditLicense
-            toBeEdited={query.find(s => s.id === currEditId)}
-            query={query}
+            toBeEdited={licenses.find(s => s.id === currEditId)}
+            licenses={licenses}
             softList={softList}
             handleSubmitEdit={handleSubmitEdit}
           />
@@ -131,7 +114,7 @@ function LicensesInvPage() {
       <Modal open={addFormOpen} onClose={() => setAddFormOpen(false)}>
         {addFormOpen && (
           <AddLicense
-            query={query}
+            licenses={licenses}
             softList={softList}
             handleSubmit={handleSubmit}
             selectedSoft={selectedSoft}
@@ -163,7 +146,7 @@ function LicensesInvPage() {
           </div>
         </div>
         <div className="software-cards">
-          {query.map((el) => {
+          {filtered.map((el) => {
             return (
               <LicenseCard
                 key={el.id}
