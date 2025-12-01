@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { DataContext } from "./../../context/inventory/DataContext"
+import OSImage from "../../components/inventory/OSImage"
 
 function ServersDetailsPage() {
   const { id } = useParams()
@@ -28,8 +29,11 @@ function ServersDetailsPage() {
                 👥 {serverItem.connectedUsers} usuarios conectados
               </div>
             </div>
-            <div className={`status-badge ${serverItem.status}`}>
-              {serverItem.status}
+            <div className="subheader-status-os">
+              <div className={`status-badge ${serverItem.status}`}>
+                {serverItem.status}
+              </div>
+              <OSImage osName={serverItem.os} />
             </div>
           </div>
 

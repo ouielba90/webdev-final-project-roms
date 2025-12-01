@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { DataContext } from "./../../context/inventory/DataContext"
+import OSImage from "../../components/inventory/OSImage"
 
 function HardwareDetailsPage() {
   const { id } = useParams()
@@ -23,12 +24,17 @@ function HardwareDetailsPage() {
   return (
     <>
       <div className="details-main">
-        <div>
-          <h2>{hardwareItem.model}</h2>
-          <p>{hardwareItem.type}</p>
-          <p className={`status ${hardwareItem.status.replace(" ", "-").toLowerCase()}`}>
-            {hardwareItem.status}
-          </p>
+        <div className="header-for-os">
+          <div>
+            <h2>{hardwareItem.model}</h2>
+            <p>{hardwareItem.type} · {hardwareItem.os}</p>
+            <p className={`status ${hardwareItem.status.replace(" ", "-").toLowerCase()}`}>
+              {hardwareItem.status}
+            </p>
+          </div>
+          <div>
+            <OSImage osName={hardwareItem.os} />
+          </div>
         </div>
 
         <div>

@@ -1198,6 +1198,17 @@
   background: #1d4ed8;
 }
 
+.header-for-os {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header-os-img {
+  width: 60px;
+  height: 60px;
+}
+
 /* ===================================================
    Servers details — estilos alineados con .details-main
    =================================================== */
@@ -1295,6 +1306,13 @@
   width: fit-content;
 }
 
+.subheader-status-os {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 35px;
+}
+
 .status-badge {
   padding: 8px 12px;
   border-radius: 10px;
@@ -1303,6 +1321,7 @@
   font-size: 13px;
   display: inline-block;
   height: fit-content;
+  width: fit-content;
 }
 
 .status-badge.activo,
