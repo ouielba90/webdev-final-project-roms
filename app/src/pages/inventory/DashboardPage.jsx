@@ -4,6 +4,7 @@ import LoadingAnimation from "../../components/inventory/LoadingAnimation.jsx"
 import DashboardGeneralStatus from "../../components/inventory/DashboardGeneralStatus.jsx"
 import DashboardInsightsI from "../../components/inventory/DashboardInsightsI";
 import DashboardInsightsII from "../../components/inventory/DashboardInsightsII.jsx";
+import { daysBetweenDates } from "./../../utils/inventory/date.js";
 
 function DashboardPage() {
   const { software, hardware, licenses, servers } = useContext(DataContext);
@@ -82,13 +83,6 @@ function DashboardPage() {
       }
     </>
   )
-}
-
-function daysBetweenDates(isoDateStr) {
-  const givenDate = new Date(isoDateStr);
-  const today = new Date();
-  const diffDays = Math.floor((today - givenDate) / (1000 * 60 * 60 * 24));
-  return diffDays;
 }
 
 function getServerAverages(servers) {

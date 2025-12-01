@@ -1,16 +1,16 @@
 import { useContext } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { DataContext } from "./../../context/inventory/DataContext"
+import { isoToeuDate, daysBetweenDates } from "./../../utils/inventory/date.js";
 
 function LicensesDetailsPage() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { software, licenses } = useContext(DataContext)
   const licenseItem = licenses.find(l => l.id === Number(id));
-  console.log(licenseItem)
-  const softAssoc = software.find(s => s.id === licenseItem.softwareId)
-
   if (!licenseItem) return <p>Licencia no encontrada.</p>;
+
+  const softAssoc = software.find(s => s.id === licenseItem.softwareId)
 
   return (
     <>
@@ -71,19 +71,4 @@ function LicensesDetailsPage() {
   )
 }
 
-function isoToeuDate(isoDateStr) {
-  console.log('in1', isoDateStr)
-  const [year, month, day] = isoDateStr.split("T")[0].split("-"); // Month index begin with 0
-  console.log(`${day}-${month}-${year}`)
-  return `${day}-${month}-${year}`;
-}
-
-function daysBetweenDates(isoDateStr) {
-  const givenDate = new Date(isoDateStr);
-  const today = new Date();
-
-  const diffDays = Math.floor((today - givenDate) / (1000 * 60 * 60 * 24));
-
-  return diffDays;
-}
 export default LicensesDetailsPage

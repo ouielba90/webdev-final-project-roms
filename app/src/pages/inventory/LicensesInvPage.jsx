@@ -4,6 +4,7 @@ import LicenseCard from "../../components/inventory/LicenseCard";
 import AddLicense from "../../components/inventory/AddLicense";
 import EditLicense from "../../components/inventory/EditLicense";
 import Modal from "../../components/inventory/Modal.jsx"
+import { isoToeuDate, daysBetweenDates } from "./../../utils/inventory/date.js";
 
 function LicensesInvPage() {
   let { licenses, software } = useContext(DataContext)
@@ -51,16 +52,6 @@ function LicensesInvPage() {
 
   function handleSearch(e) {
     setSearch(e.target.value)
-  }
-
-  function handleSortAZ() {
-    setAZ(!az)
-    setZA(false)
-  }
-
-  function handleSortZA() {
-    setZA(!za)
-    setAZ(false)
   }
 
   function handleStatus(e) {
@@ -163,8 +154,8 @@ function LicensesInvPage() {
           </div>
           <div className="filters-btn-combined">
             <div className="filters-row-sort">
-              <button className={az ? "filter-activation" : ""} onClick={handleSortAZ}>A-Z</button>
-              <button className={za ? "filter-activation" : ""} onClick={handleSortZA}>Z-A</button>
+              <button className={az ? "filter-activation" : ""} onClick={() => { setAZ(!az); setZA(false); }}>A-Z</button>
+              <button className={za ? "filter-activation" : ""} onClick={() => { setZA(!za); setAZ(false); }}>Z-A</button>
             </div>
             <div className="filters-row-combined">
               <button onClick={() => setAddFormOpen(!addFormOpen)}>Añadir licencia</button>
@@ -194,16 +185,4 @@ function LicensesInvPage() {
   )
 }
 
-function daysBetweenDates(isoDateStr) {
-  const givenDate = new Date(isoDateStr);
-  const today = new Date();
-  const diffDays = Math.floor((today - givenDate) / (1000 * 60 * 60 * 24));
-  return diffDays;
-}
-function isoToeuDate(isoDateStr) {
-  console.log('in1', isoDateStr)
-  const [year, month, day] = isoDateStr.split("T")[0].split("-"); // Month index begin with 0
-  console.log(`${day}-${month}-${year}`)
-  return `${day}-${month}-${year}`;
-}
 export default LicensesInvPage

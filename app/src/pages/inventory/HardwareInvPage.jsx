@@ -43,16 +43,6 @@ function HardwareInvPage() {
     setSearch(e.target.value)
   }
 
-  function handleSortAZ() {
-    setAZ(!az)
-    setZA(false)
-  }
-
-  function handleSortZA() {
-    setZA(!za)
-    setAZ(false)
-  }
-
   function handleType(e) {
     console.log(e.target.value)
     setType(e.target.value)
@@ -164,8 +154,8 @@ function HardwareInvPage() {
           </div>
           <div className="filters-btn-combined">
             <div className="filters-row-sort">
-              <button className={az ? "filter-activation" : ""} onClick={handleSortAZ}>A-Z</button>
-              <button className={za ? "filter-activation" : ""} onClick={handleSortZA}>Z-A</button>
+              <button className={az ? "filter-activation" : ""} onClick={() => { setAZ(!az); setZA(false); }}>A-Z</button>
+              <button className={za ? "filter-activation" : ""} onClick={() => { setZA(!za); setAZ(false); }}>Z-A</button>
             </div>
             <div className="filters-row-sort">
               <button onClick={() => setAddFormOpen(!addFormOpen)}>Añadir hardware</button>

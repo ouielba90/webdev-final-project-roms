@@ -43,16 +43,6 @@ function SoftwareInvPage() {
     setSearch(e.target.value)
   }
 
-  function handleSortAZ() {
-    setAZ(!az)
-    setZA(false)
-  }
-
-  function handleSortZA() {
-    setZA(!za)
-    setAZ(false)
-  }
-
   function handleStatus(e) {
     setStatus(e.target.value)
   }
@@ -66,8 +56,8 @@ function SoftwareInvPage() {
   const [currEditId, setCurrEditId] = useState(0)
   const [selectedHard, setSelectedHard] = useState([]);
   const [selectedServ, setSelectedServ] = useState([]);
-  const hardList = Array.from(new Set(hardware.map(el => { return { id: el.id, model: el.model } })))
   const categList = Array.from(new Set(software.map(el => el.category)))
+  const hardList = Array.from(new Set(hardware.map(el => { return { id: el.id, model: el.model } })))
   const serverList = Array.from(new Set(servers.map(el => { return { id: el.id, name: el.name } })))
 
   function handleSubmit(e) {
@@ -163,8 +153,8 @@ function SoftwareInvPage() {
           </div>
           <div className="filters-btn-combined">
             <div className="filters-row-sort">
-              <button className={az ? "filter-activation" : ""} onClick={handleSortAZ}>A-Z</button>
-              <button className={za ? "filter-activation" : ""} onClick={handleSortZA}>Z-A</button>
+              <button className={az ? "filter-activation" : ""} onClick={() => { setAZ(!az); setZA(false); }}>A-Z</button>
+              <button className={za ? "filter-activation" : ""} onClick={() => { setZA(!za); setAZ(false); }}>Z-A</button>
             </div>
             <div className="filters-row-sort">
               <button onClick={() => setAddFormOpen(!addFormOpen)}>Añadir software</button>

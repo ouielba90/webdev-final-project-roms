@@ -8,11 +8,13 @@ function ServersDetailsPage() {
   const navigate = useNavigate()
   const { software, servers } = useContext(DataContext)
   const serverItem = servers.find(serv => serv.id === Number(id));
-  const softAssocList = serverItem.hostedSoftware.map(sId => {
-    return software.find(s => s.id === sId)
-  })
-  const servAvgPropNodes = getServerAverages(serverItem.nodeSpecs)
   if (!serverItem) return <p>Servidor no encontrado.</p>;
+
+  const softwareMap = Object.fromEntries(software.map(s => [s.id, s]));
+
+  const softAssocList = serverItem.hostedSoftware.map(id => softwareMap[id]);
+
+  const servAvgPropNodes = getServerAverages(serverItem.nodeSpecs)
 
   return (
     <>

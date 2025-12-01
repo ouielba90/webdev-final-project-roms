@@ -2,24 +2,18 @@ import { useContext } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { DataContext } from "./../../context/inventory/DataContext"
 import OSImage from "../../components/inventory/OSImage"
+import { isoToeuDate } from "./../../utils/inventory/date.js";
 
 function HardwareDetailsPage() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { software, hardware } = useContext(DataContext)
   const hardwareItem = hardware.find(s => s.id === Number(id));
-  const softAssocList = hardwareItem.installedSoftware.map((softId) => {
-    let softwareInfo = software.find(h => h.id === softId)
-    return { id: softwareInfo.id, name: softwareInfo.name, version: softwareInfo.version }
-  })
-  //const serversAssocList = softwareItem.serverId.map((servId) => {
-  //  let serverInfo = servers.find(h => h.id === servId)
-  //  console.log(serverInfo)
-  //  return { name: serverInfo.name, location: serverInfo.location, status: serverInfo.status }
-  //})
-
-  console.log("s", hardwareItem.purchaseDate)
   if (!hardwareItem) return <p>Hardware no encontrado.</p>;
+
+  const softwareMap = Object.fromEntries(software.map(s => [s.id, s]));
+
+  const softAssocList = hardwareItem.installedSoftware.map(id => softwareMap[id]);
 
   return (
     <>
@@ -81,13 +75,6 @@ function HardwareDetailsPage() {
       </div>
     </>
   )
-}
-
-function isoToeuDate(isoDateStr) {
-  console.log('in1', isoDateStr)
-  const [year, month, day] = isoDateStr.split("T")[0].split("-"); // Month index begin with 0
-  console.log(`${day}-${month}-${year}`)
-  return `${day}-${month}-${year}`;
 }
 
 export default HardwareDetailsPage

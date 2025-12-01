@@ -38,18 +38,7 @@ function ServersInvPage() {
   function handleSearch(e) {
     setSearch(e.target.value)
   }
-  function handleSortAZ() {
-    setAZ(!az)
-    setZA(false)
-  }
 
-  function handleSortZA() {
-    setZA(!za)
-    setAZ(false)
-  }
-  function handleOS(e) {
-    setOs(e.target.value)
-  }
   function handleStatus(e) {
     setStatus(e.target.value)
   }
@@ -61,7 +50,7 @@ function ServersInvPage() {
             <input type="text" id="searchForm" placeholder="Buscar servidor..." onChange={handleSearch} />
             <div className="filter-field">
               <p>OS</p>
-              <select onClick={handleOS}>
+              <select onClick={(e) => setOs(e.target.value)}>
                 <option>Todos</option>
                 <option>CentOS</option>
                 <option>Debian</option>
@@ -80,8 +69,8 @@ function ServersInvPage() {
           </div>
           <div className="filters-btn-combined">
             <div className="filters-row-sort">
-              <button className={az ? "filter-activation" : ""} onClick={handleSortAZ}>A-Z</button>
-              <button className={za ? "filter-activation" : ""} onClick={handleSortZA}>Z-A</button>
+              <button className={az ? "filter-activation" : ""} onClick={() => { setAZ(!az); setZA(false); }}>A-Z</button>
+              <button className={za ? "filter-activation" : ""} onClick={() => { setZA(!za); setAZ(false); }}>Z-A</button>
             </div>
           </div>
         </div>

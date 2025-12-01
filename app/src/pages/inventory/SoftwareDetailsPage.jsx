@@ -7,19 +7,13 @@ function SoftwareDetailsPage() {
   const navigate = useNavigate()
   const { software, hardware, servers } = useContext(DataContext)
   const softwareItem = software.find(s => s.id === Number(id));
-  console.log(softwareItem.installedOnHardware)
-  const hardAssocList = softwareItem.installedOnHardware.map((hardId) => {
-    let hardwareInfo = hardware.find(h => h.id === hardId)
-    console.log(hardwareInfo)
-    return { id: hardwareInfo.id, model: hardwareInfo.model, type: hardwareInfo.type, status: hardwareInfo.status }
-  })
-  const serversAssocList = softwareItem.serverId.map((servId) => {
-    let serverInfo = servers.find(h => h.id === servId)
-    console.log(serverInfo)
-    return { name: serverInfo.name, location: serverInfo.location, status: serverInfo.status }
-  })
-
   if (!softwareItem) return <p>Software no encontrado.</p>;
+
+  const hardwareMap = Object.fromEntries(hardware.map(h => [h.id, h]));
+  const serverMap = Object.fromEntries(servers.map(s => [s.id, s]));
+
+  const hardAssocList = softwareItem.installedOnHardware.map(id => hardwareMap[id]);
+  const serversAssocList = softwareItem.serverId.map(id => serverMap[id]);
 
   return (
     <>
