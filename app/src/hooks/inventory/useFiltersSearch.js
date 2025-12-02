@@ -6,12 +6,13 @@ function useFiltersSearch(data, currFilter) {
   const [za, setZA] = useState(false);
   const [status, setStatus] = useState("");
   const [type, setType] = useState("");
+  const [os, setOs] = useState("");
 
   const handleSearch = (e) => setSearch(e.target.value);
   const handleStatus = (e) => setStatus(e.target.value);
   const handleType = (e) => setType(e.target.value);
+  const handleOs = (e) => setOs(e.target.value);
 
-  // Configuración por tipo
   const filterConfig = {
     software: { searchFields: ["name", "description"], statusField: "status" },
     hardware: {
@@ -20,15 +21,19 @@ function useFiltersSearch(data, currFilter) {
       typeField: "type",
     },
     licenses: { searchFields: ["softwareName"], statusField: "status" },
-    servers: { searchFields: ["name", "ip"], statusField: "status" },
+    servers: {
+      searchFields: ["name"], //, "ip"],
+      statusField: "status",
+      osField: "os",
+    },
   };
 
   const config = filterConfig[currFilter];
 
   const filtered = data
     .filter((item) => {
-      const matchesSearch = config.searchFields.some((field) =>
-        item[field].toString().toLowerCase().includes(search.toLowerCase()),
+      const matchesSearch = config.searchFields.some(
+        (field) => item[field]?.toLowerCase().includes(search.toLowerCase()), // Cuando se haya modificado licenses en el useEffect se pueda usar
       );
       const matchesStatus =
         status === "" ||
@@ -40,7 +45,14 @@ function useFiltersSearch(data, currFilter) {
         type === "" ||
         type === "Todos" ||
         item[config.typeField] === type;
-      return matchesSearch && matchesStatus && matchesType;
+
+      const matchesOs =
+        !config.osField ||
+        os === "" ||
+        os === "Todos" ||
+        item[config.osField].includes(os);
+
+      return matchesSearch && matchesStatus && matchesType && matchesOs;
     })
     .sort((a, b) => {
       const nameA = a[config.searchFields[0]].toString().toLowerCase();
@@ -54,6 +66,7 @@ function useFiltersSearch(data, currFilter) {
     filtered,
     search,
     status,
+    os,
     az,
     za,
     setAZ,
@@ -61,6 +74,7 @@ function useFiltersSearch(data, currFilter) {
     handleSearch,
     handleStatus,
     handleType,
+    handleOs,
   };
 }
 

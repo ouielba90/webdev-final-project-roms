@@ -1,37 +1,13 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { DataContext } from "../../context/inventory/DataContext";
 import ServerCard from "../../components/inventory/ServerCard";
+import useFiltersSearch from "../../hooks/inventory/useFiltersSearch";
 
 function ServersInvPage() {
   const { servers, software } = useContext(DataContext)
-  const [az, setAZ] = useState(false)
-  const [za, setZA] = useState(false)
-  const [search, setSearch] = useState("")
-  const [status, setStatus] = useState("")
-  const [os, setOs] = useState("")
 
-  let filtered = servers.filter(
-    (el) => {
-      const matchesSearch = el.name.toLowerCase().includes(search.toLowerCase()) ||
-        el.ip.includes(search)
-      const marchesOs = os === "" || os === "Todos" || el.os.includes(os)
-      const matchesStatus = status === "" || status === "Todos" || el.status === status
-
-      return matchesSearch && marchesOs && matchesStatus
-    })
-    .sort((a, b) => {
-      if (az) return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
-      if (za) return b.name.toLowerCase().localeCompare(a.name.toLowerCase());
-      return 0;
-    })
-
-  function handleSearch(e) {
-    setSearch(e.target.value)
-  }
-
-  function handleStatus(e) {
-    setStatus(e.target.value)
-  }
+  const { filtered, az, za, setAZ, setZA, handleSearch, handleStatus, handleOs } =
+    useFiltersSearch(servers, "servers");
 
   return (
     <>
@@ -41,7 +17,7 @@ function ServersInvPage() {
             <input type="text" id="searchForm" placeholder="Buscar servidor..." onChange={handleSearch} />
             <div className="filter-field">
               <p>OS</p>
-              <select onClick={(e) => setOs(e.target.value)}>
+              <select onClick={handleOs}>
                 <option>Todos</option>
                 <option>CentOS</option>
                 <option>Debian</option>

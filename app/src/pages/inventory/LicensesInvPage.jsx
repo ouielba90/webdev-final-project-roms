@@ -1,47 +1,31 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../../context/inventory/DataContext";
 import LicenseCard from "../../components/inventory/LicenseCard";
 import AddLicense from "../../components/inventory/AddLicense";
 import EditLicense from "../../components/inventory/EditLicense";
 import Modal from "../../components/inventory/Modal.jsx"
 import { isoToeuDate, daysBetweenDates } from "./../../utils/inventory/date.js";
+import useFiltersSearch from "../../hooks/inventory/useFiltersSearch.js";
 
 function LicensesInvPage() {
   let { licenses, setLicenses, software } = useContext(DataContext)
 
-  const [search, setSearch] = useState("")
-  const [az, setAZ] = useState(false)
-  const [za, setZA] = useState(false)
-  const [status, setStatus] = useState("")
+  useEffect(() => {
+    setLicenses((prev) =>
+      prev.map((lic) => {
+        const sw = software.find((s) => s.id === lic.softwareId);
+        const diff = daysBetweenDates(lic.expiryDate);
+        return {
+          ...lic,
+          softwareName: sw ? sw.name : "Unknown",
+          status: diff < 0 ? "activa" : "expirada",
+        };
+      })
+    );
+  }, [software]);
 
-  const filtered = licenses
-    .map(lic => {
-      const sw = software.find(s => s.id === lic.softwareId);
-      const diff = daysBetweenDates(lic.expiryDate);
-      return {
-        ...lic,
-        softwareName: sw ? sw.name : "Unknown",
-        status: diff < 0 ? "activa" : "expirada",
-      };
-    })
-    .filter(lic => {
-      const matchesSearch = lic.softwareName.toLowerCase().includes(search.toLowerCase());
-      const matchesStatus = status === "" || status === "Todos" || lic.status === status;
-      return matchesSearch && matchesStatus;
-    })
-    .sort((a, b) => {
-      if (az) return a.softwareName.toLowerCase().localeCompare(b.softwareName.toLowerCase());
-      if (za) return b.softwareName.toLowerCase().localeCompare(a.softwareName.toLowerCase());
-      return 0;
-    });
-
-  function handleSearch(e) {
-    setSearch(e.target.value)
-  }
-
-  function handleStatus(e) {
-    setStatus(e.target.value)
-  }
+  const { filtered, az, za, setAZ, setZA, handleSearch, handleStatus } =
+    useFiltersSearch(licenses, "licenses");
 
   function handleEdit(id) {
     setEditFormOpen(true)
