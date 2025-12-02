@@ -24,7 +24,7 @@ function NotificationsPage() {
     <>
       <div className="container-notifications">
         <h1>Notificaciones</h1>
-        <div className="notification-list">
+        <div className="notifications-list">
           {/*recorremos todas las notificaciones*/}
           {notifications.map((notification) => (
             <NotificationCard
