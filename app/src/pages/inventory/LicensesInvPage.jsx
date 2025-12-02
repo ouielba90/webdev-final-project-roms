@@ -43,6 +43,11 @@ function LicensesInvPage() {
     setStatus(e.target.value)
   }
 
+  function handleEdit(id) {
+    setEditFormOpen(true)
+    setCurrEditId(id)
+  }
+
   function handleRemove(id) {
     setLicenses(prev => prev.filter(el => el.id !== id))
   }
@@ -51,11 +56,8 @@ function LicensesInvPage() {
   const [editFormOpen, setEditFormOpen] = useState(false)
   const [currEditId, setCurrEditId] = useState(0)
   const [selectedSoft, setSelectedSoft] = useState("");
-  const softList = Array.from(new Set(software.filter(el => {
-    if (el.licenseId === null) {
-      return { id: el.id, name: el.name }
-    }
-  })))
+  const softList = software.filter(s => s.licenseId === null)
+    .map(s => ({ id: s.id, name: s.name }));
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -76,11 +78,6 @@ function LicensesInvPage() {
     e.target.reset()
     setAddFormOpen(false)
   }
-  function handleEdit(id) {
-    setEditFormOpen(true)
-    console.log("id", id)
-    setCurrEditId(id)
-  }
   function handleSubmitEdit(e) {
     e.preventDefault()
     const formData = new FormData(e.target);
@@ -95,10 +92,11 @@ function LicensesInvPage() {
           expiryDate: data.expiryDate,
           licenseKey: data.licenseKey,
           vendor: data.vendor,
-          cost: 3100,
+          cost: data.cost,
         } : item));
     setEditFormOpen(false)
   }
+
   return (
     <>
       <Modal open={editFormOpen} onClose={() => setEditFormOpen(false)}>
@@ -128,7 +126,7 @@ function LicensesInvPage() {
             <input type="text" id="searchForm" placeholder="Buscar licencia..." onChange={handleSearch} />
             <div className="filter-field">
               <p>Estado</p>
-              <select onClick={handleStatus}>
+              <select onChange={handleStatus}>
                 <option>Todos</option>
                 <option>activa</option>
                 <option>expirada</option>

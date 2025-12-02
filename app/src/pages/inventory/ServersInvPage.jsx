@@ -32,6 +32,7 @@ function ServersInvPage() {
   function handleStatus(e) {
     setStatus(e.target.value)
   }
+
   return (
     <>
       <div className="software-main-container">
@@ -50,7 +51,7 @@ function ServersInvPage() {
             </div>
             <div className="filter-field">
               <p>Estado</p>
-              <select onClick={handleStatus}>
+              <select onChange={handleStatus}>
                 <option>Todos</option>
                 <option>activo</option>
                 <option>mantenimiento</option>

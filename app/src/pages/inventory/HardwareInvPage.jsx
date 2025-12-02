@@ -4,42 +4,13 @@ import HardwareCard from "../../components/inventory/HardwareCard";
 import AddHardware from "../../components/inventory/AddHardware";
 import EditHardware from "../../components/inventory/EditHardware";
 import Modal from "../../components/inventory/Modal.jsx"
-
+import useFiltersSearch from "../../hooks/inventory/useFiltersSearch.js";
 
 function HardwareInvPage() {
   const { hardware, setHardware, software } = useContext(DataContext)
-  const [search, setSearch] = useState("")
-  const [az, setAZ] = useState(false)
-  const [za, setZA] = useState(false)
-  const [type, setType] = useState("")
-  const [status, setStatus] = useState("")
 
-  let filtered = hardware.filter(
-    (el) => {
-      const matchesSearch = el.model.toLowerCase().includes(search.toLowerCase())
-      const matchesType = type === "" || type === "Todos" || el.type === type
-      const matchesStatus = status === "" || status === "Todos" || el.status === status
-
-      return matchesSearch && matchesType && matchesStatus
-    })
-    .sort((a, b) => {
-      if (az) return a.model.toLowerCase().localeCompare(b.model.toLowerCase());
-      if (za) return b.model.toLowerCase().localeCompare(a.model.toLowerCase());
-      return 0;
-    })
-
-
-  function handleSearch(e) {
-    setSearch(e.target.value)
-  }
-
-  function handleType(e) {
-    console.log(e.target.value)
-    setType(e.target.value)
-  }
-  function handleStatus(e) {
-    setStatus(e.target.value)
-  }
+  const { filtered, az, za, setAZ, setZA, handleSearch, handleStatus, handleType } =
+    useFiltersSearch(hardware, "hardware");
 
   function handleRemove(id) {
     console.log(id)
@@ -50,7 +21,7 @@ function HardwareInvPage() {
   const [editFormOpen, setEditFormOpen] = useState(false)
   const [currEditId, setCurrEditId] = useState(0)
   const [selectedSoft, setSelectedSoft] = useState([]);
-  const softList = Array.from(new Set(software.map(el => { return { id: el.id, name: el.name } })))
+  const softList = software.map(el => { return { id: el.id, name: el.name } })
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -135,7 +106,7 @@ function HardwareInvPage() {
             </div>
             <div className="filter-field">
               <p>Estado</p>
-              <select onClick={handleStatus}>
+              <select onChange={handleStatus}>
                 <option>Todos</option>
                 <option>operativo</option>
                 <option>mantenimiento</option>
@@ -161,9 +132,7 @@ function HardwareInvPage() {
                 type={el.type}
                 model={el.model}
                 status={el.status}
-                purchaseDate={el.purchaseDate}
                 specs={el.specs}
-                installedSoftware={el.installedSoftware.map(soft_id => hardware.find(s => s.id === soft_id))}
                 handleRemove={handleRemove}
                 handleEdit={handleEdit}
               />
