@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
 
-function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmitEdit, selectedHard, setSelectedHard, selectedServ, setSelectedServ }) {
-  console.log('Im in edit', toBeEdited)
+function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmitEdit, selectedHard, setSelectedHard, selectedServ, setSelectedServ, setEditFormOpen }) {
   const [name, setName] = useState(toBeEdited.name)
   const [version, setVersion] = useState(toBeEdited.version)
   const [category, setCategory] = useState(toBeEdited.category)
   const [status, setStatus] = useState(toBeEdited.status)
-  //const [installedOnHardware, setInstalledOnHardware] = useState(toBeEdited.installedOnHardware || [])
-  //const [serverId, setServerId] = useState(toBeEdited.serverId || [])
   const [description, setDescription] = useState(toBeEdited.description)
-
+  console.log("status", status)
   function handleSelectedHardware(e) {
     const selected = Array.from(e.target.selectedOptions, option => option.value);
     console.log("sel hard", selected)
@@ -61,8 +58,8 @@ function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmi
         <div className="addsoft-group">
           <label htmlFor="status">Estado</label>
           <select id="status" name="status" value={status} onChange={(e) => setStatus(e.target.value)}>
-            <option value="in-use">En-uso</option>
-            <option value="available">Disponible</option>
+            <option value="en-uso">En-uso</option>
+            <option value="disponible">Disponible</option>
           </select>
         </div>
       </div>
@@ -99,7 +96,10 @@ function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmi
         <textarea id="description" name="description" rows="2" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
       </div>
 
-      <button type="submit" className="addsoft-submit">Editar</button>
+      <div className="addsoft-row">
+        <button className="addsoft-cancel" type="button" onClick={() => setEditFormOpen(false)}>Cancel</button>
+        <button type="submit" className="addsoft-submit">Aplicar cambios</button>
+      </div>
     </form>
 
   );

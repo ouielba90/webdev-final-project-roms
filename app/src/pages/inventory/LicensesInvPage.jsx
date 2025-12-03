@@ -18,7 +18,7 @@ function LicensesInvPage() {
         return {
           ...lic,
           softwareName: sw ? sw.name : "Unknown",
-          status: diff < 0 ? "activa" : "expirada",
+          status: diff > 0 ? "activa" : "expirada",
         };
       })
     );
@@ -90,6 +90,7 @@ function LicensesInvPage() {
             licenses={licenses}
             softList={softList}
             handleSubmitEdit={handleSubmitEdit}
+            setEditFormOpen={setEditFormOpen}
           />
         )}
       </Modal>
@@ -101,6 +102,7 @@ function LicensesInvPage() {
             handleSubmit={handleSubmit}
             selectedSoft={selectedSoft}
             setSelectedSoft={setSelectedSoft}
+            setAddFormOpen={setAddFormOpen}
           />
         )}
       </Modal>

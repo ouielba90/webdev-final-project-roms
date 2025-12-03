@@ -46,7 +46,7 @@ function SoftwareDetailsPage() {
 
         <div>
           <h3>Hardware asociado</h3>
-          <div className="details-quick-stats">
+          <div className="details-quick-stats-ii">
             {hardAssocList.length ? (
               hardAssocList.map((h, i) => (
                 <Link to={`/inventory/hardware/${h.id}`} className="details-links">

@@ -48,12 +48,16 @@ function HardwareDetailsPage() {
               <p><strong>Asignado a</strong></p>
               <p>{hardwareItem.assignedToUserId || "Ninguna"}</p>
             </div>
+            <div>
+              <p><strong>Última actualización</strong></p>
+              <p>{isoToeuDate(hardwareItem.lastMaintenance)}</p>
+            </div>
           </div>
         </div>
 
         <div>
           <h3>Software asociado</h3>
-          <div className="details-quick-stats">
+          <div className="details-quick-stats-ii">
             {softAssocList.length ? (
               softAssocList.map((h, i) => (
                 <Link to={`/inventory/software/${h.id}`} className="details-links">
@@ -69,7 +73,7 @@ function HardwareDetailsPage() {
           </div>
         </div>
 
-        <button onClick={() => navigate("/inventory/software")}>
+        <button onClick={() => navigate("/inventory/hardware")}>
           Volver a la lista
         </button>
       </div>

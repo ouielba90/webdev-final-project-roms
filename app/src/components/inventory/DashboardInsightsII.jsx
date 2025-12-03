@@ -9,17 +9,17 @@ function DashboardInsightsII({ uniqueElements }) {
         <table className="table-server-risk-1">
           <thead>
             <tr>
-              <th className="th-server">Servidor</th>
-              <th className="th-users">Estado</th>
-              <th></th>
+              <th>Servidor</th>
+              <th className="th-state">Estado</th>
+              <th>Comentarios</th>
             </tr>
           </thead>
           <tbody>
             {uniqueElements.map((item, index) => {
               const issues = [];
-              item.cpuUsage > 90 && issues.push(`CPU: ${item.cpuUsage}%`);
+              //item.cpuUsage > 90 && issues.push(`CPU: ${item.cpuUsage}%`);
               item.ramUsage > 90 && issues.push(`RAM: ${item.ramUsage}%`);
-              item.diskUsage > 80 && issues.push(`Disk: ${item.diskUsage}%`);
+              item.diskUsage > 80 && issues.push(`Disco: ${item.diskUsage}%`);
 
               const isAlert = issues.length > 0;
               const color = isAlert ?
@@ -49,13 +49,14 @@ function DashboardInsightsII({ uniqueElements }) {
           <thead>
             <tr>
               <th className="th-server">Servidor</th>
-              <th className="th-users">Estado</th>
+              <th className="th-state">Estado</th>
+              <th>Comentarios</th>
             </tr>
           </thead>
           <tbody>
             {uniqueElements.map((item, index) => {
               const issues = [];
-              item.cpuUsage > 90 && issues.push(`CPU: ${item.cpuUsage}%`);
+              //item.cpuUsage > 90 && issues.push(`CPU: ${item.cpuUsage}%`);
               item.ramUsage > 90 && issues.push(`RAM: ${item.ramUsage}%`);
               item.diskUsage > 80 && issues.push(`Disk: ${item.diskUsage}%`);
 
@@ -83,9 +84,18 @@ function DashboardInsightsII({ uniqueElements }) {
           </tbody>
         </table>
         <div className="legend">
-          <span>🟢 Normal</span>
-          <span> 🟠 Mantenimiento</span>
-          <span> 🔴 Problema</span>
+          <span>
+            <svg width="14" height="14" viewBox="0 0 20 20">
+              <circle cx="10" cy="10" r="10" fill="#00C400" />
+            </svg> Normal</span>
+          <span>
+            <svg width="14" height="14" viewBox="0 0 20 20">
+              <circle cx="10" cy="10" r="10" fill="#FFA500" />
+            </svg> Mantenmiento</span>
+          <span>
+            <svg width="14" height="14" viewBox="0 0 20 20">
+              <circle cx="10" cy="10" r="10" fill="#FF0000" />
+            </svg> Problema</span>
 
         </div>
       </div>

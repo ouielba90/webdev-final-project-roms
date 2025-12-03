@@ -14,13 +14,11 @@ function ServersDetailsPage() {
 
   const softAssocList = serverItem.hostedSoftware.map(id => softwareMap[id]);
 
-  const servAvgPropNodes = getServerAverages(serverItem.nodeSpecs)
+  const servAvgPropNodes = getNodeAverages(serverItem.nodeSpecs)
 
   return (
     <>
       <div className="server-details">
-
-        {/* HERO */}
         <div className="server-hero">
           <div>
             <div className="server-header-container">
@@ -38,8 +36,6 @@ function ServersDetailsPage() {
               <OSImage osName={serverItem.os} />
             </div>
           </div>
-
-
         </div>
 
         {/* MÉTRICAS GENERALES */}
@@ -117,15 +113,12 @@ function ServersDetailsPage() {
   )
 }
 
-function getServerAverages(serverNodes) {
+function getNodeAverages(serverNodes) {
   const avgCpu = serverNodes.reduce((sum, n) => sum + n.cpuUsage, 0) / serverNodes.length;
   const avgRam = serverNodes.reduce((sum, n) => sum + n.ramUsage, 0) / serverNodes.length;
   const avgDisk = serverNodes.reduce((sum, n) => sum + n.diskUsage, 0) / serverNodes.length;
 
-  return {
-    cpuUsage: avgCpu,
-    ramUsage: avgRam,
-    diskUsage: avgDisk,
-  };
+  return { cpuUsage: avgCpu, ramUsage: avgRam, diskUsage: avgDisk };
 }
+
 export default ServersDetailsPage

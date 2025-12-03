@@ -35,6 +35,8 @@ function HardwareInvPage() {
       purchaseDate: data.purchaseDate,
       specs: { cpu: data.cpu, ram: data.ram, storage: data.storage },
       installedSoftware: selectedSoft.map(soft_name => software.find(s => s.name === soft_name).id),
+      os: data.os,
+      lastMaintenance: data.lastMaintenance
     };
 
     setHardware(prev => [...prev, newItem]);
@@ -64,6 +66,8 @@ function HardwareInvPage() {
           purchaseDate: data.purchaseDate,
           specs: { cpu: data.cpu, ram: data.ram, storage: data.storage },
           installedSoftware: selectedSoft,
+          os: data.os,
+          lastMaintenance: data.lastMaintenance
         } : item));
     setEditFormOpen(false)
   }
@@ -78,6 +82,7 @@ function HardwareInvPage() {
             handleSubmitEdit={handleSubmitEdit}
             selectedSoft={selectedSoft}
             setSelectedSoft={setSelectedSoft}
+            setEditFormOpen={setEditFormOpen}
           />
         )}
       </Modal>
@@ -89,6 +94,7 @@ function HardwareInvPage() {
             handleSubmit={handleSubmit}
             selectedSoft={selectedSoft}
             setSelectedSoft={setSelectedSoft}
+            setAddFormOpen={setAddFormOpen}
           />
         )}
       </Modal>

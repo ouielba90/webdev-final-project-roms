@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, setSelectedSoft }) {
+function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, setSelectedSoft, setEditFormOpen }) {
   const [type, setType] = useState(toBeEdited.type)
   const [model, setModel] = useState(toBeEdited.model)
   const [status, setStatus] = useState(toBeEdited.status)
@@ -8,11 +8,10 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
   const [specsCPU, setSpecsCPU] = useState(toBeEdited.specs.cpu)
   const [specsRAM, setSpecsRAM] = useState(toBeEdited.specs.ram)
   const [specsStorage, setSpecsStorage] = useState(toBeEdited.specs.storage)
+  const [os, setOs] = useState(toBeEdited.os)
+  const [lastMaintenance, setLastMaintenance] = useState(toBeEdited.lastMaintenance.split("T")[0])
 
-  console.log("raw purchaseDate:", purchaseDate, " type:", typeof purchaseDate, "len:", (purchaseDate || "").length);
-  console.log("json:", JSON.stringify(purchaseDate));
-  console.log("charCodes:", (purchaseDate || "").split("").map(c => c.charCodeAt(0)));
-  console.log("new Date ->", new Date(purchaseDate), "isNaN:", isNaN(new Date(purchaseDate)));
+  console.log("Mantenimiento", lastMaintenance)
 
   function handleSelectedSoftware(e) {
     const selected = Array.from(e.target.selectedOptions, option => option.value);
@@ -51,8 +50,8 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
         <div className="addsoft-group">
           <label htmlFor="status">Estado</label>
           <select id="status" name="status" value={status} onChange={(e) => setStatus(e.target.value)}>
-            <option>Operativo</option>
-            <option>Mantenimiento</option>
+            <option value={"operativo"}>Operativo</option>
+            <option value={"mantenimiento"}>Mantenimiento</option>
           </select>
         </div>
         <div className="addsoft-group">
@@ -67,9 +66,15 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
         </div>
       </div>
 
-      <div className="addsoft-group">
-        <label htmlFor="cpu">CPU</label>
-        <input type="text" id="cpu" name="cpu" value={specsCPU} onChange={(e) => setSpecsCPU(e.target.value)} />
+      <div className="addsoft-row">
+        <div className="addsoft-group">
+          <label htmlFor="os">Sistema operativo</label>
+          <input type="text" id="os" name="os" value={os} onChange={(e) => setOs(e.target.value)} />
+        </div>
+        <div className="addsoft-group">
+          <label htmlFor="cpu">CPU</label>
+          <input type="text" id="cpu" name="cpu" value={specsCPU} onChange={(e) => setSpecsCPU(e.target.value)} />
+        </div>
       </div>
 
       <div className="addsoft-row">
@@ -83,6 +88,18 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
         </div>
       </div>
 
+      <div className="addsoft-row">
+        <div className="addsoft-group">
+          <label htmlFor="lastMaintenance">Último mantenimiento</label>
+          <input
+            type="date"
+            id="lastMaintenance"
+            name="lastMaintenance"
+            value={lastMaintenance}
+            onChange={(e) => setLastMaintenance(e.target.value)}
+          />
+        </div>
+      </div>
       <div className="addsoft-group">
         <label htmlFor="installedSoftware">Software instalado</label>
         <select multiple id="installedSoftware" name="installedSoftware" value={selectedSoft} onChange={handleSelectedSoftware}>
@@ -93,7 +110,10 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
         <small className="hint">Mantén pulsado CTRL para seleccionar varios</small>
       </div>
 
-      <button type="submit" className="addsoft-submit">Editar</button>
+      <div className="addsoft-row">
+        <button className="addsoft-cancel" type="button" onClick={() => setEditFormOpen(false)}>Cancel</button>
+        <button type="submit" className="addsoft-submit">Aplicar cambios</button>
+      </div>
     </form>
   )
 }

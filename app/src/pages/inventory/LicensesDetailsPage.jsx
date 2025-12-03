@@ -22,7 +22,7 @@ function LicensesDetailsPage() {
             <Link to={`/inventory/software/${softAssoc.id}`} className="details-links">
               {softAssoc.name}
             </Link></p>
-          {daysBetweenDates(licenseItem.expiryDate) < 0 ?
+          {daysBetweenDates(licenseItem.expiryDate) > 0 ?
             <p className="status activa">Activa</p>
             : <p className="status expirada">Expirada</p>}
         </div>

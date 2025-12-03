@@ -34,6 +34,7 @@ function SoftwareInvPage() {
     e.preventDefault()
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
+    console.log(data.status)
     const newItem = {
       id: software.length ? software.at(-1).id + 1 : 1001,
       name: data.name,
@@ -59,6 +60,7 @@ function SoftwareInvPage() {
   }
 
   function handleSubmitEdit(e) {
+    console.log("handleeeeeeeeee")
     e.preventDefault()
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
@@ -90,6 +92,7 @@ function SoftwareInvPage() {
           setSelectedHard={setSelectedHard}
           selectedServ={selectedServ}
           setSelectedServ={setSelectedServ}
+          setEditFormOpen={setEditFormOpen}
         />
       </Modal>
       <Modal open={addFormOpen} onClose={() => setAddFormOpen(false)}>
@@ -103,6 +106,7 @@ function SoftwareInvPage() {
           setSelectedHard={setSelectedHard}
           selectedServ={selectedServ}
           setSelectedServ={setSelectedServ}
+          setAddFormOpen={setAddFormOpen}
         />
       </Modal>
       <div className="software-main-container">

@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function EditLicense({ toBeEdited, softList, handleSubmitEdit }) {
+function EditLicense({ toBeEdited, softList, handleSubmitEdit, setEditFormOpen }) {
 
   const [vendor, setVendor] = useState(toBeEdited.vendor)
   const [seats, setSeats] = useState(toBeEdited.seats)
@@ -9,16 +9,6 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit }) {
   const [expiryDate, setExpiryDate] = useState(toBeEdited.expiryDate.split("T")[0])
   const [cost, setCost] = useState(toBeEdited.cost)
   const [softwareId, setSoftwareId] = useState(toBeEdited.softwareId)
-
-  //  function euToISO(euDateStr) {
-  //    const [day, month, year] = euDateStr.split("/"); // Month index begin with 0
-  //    console.log('kkkkkk', year, month, day)
-  //    return `${year}-${month}-${day}`;
-  //  }
-  //  function isoToEU(isoDateStr) {
-  //    const [year, month, day] = isoDateStr.split("-"); // Month index begin with 0
-  //    return `${day}/${month}/${year}`;
-  //  }
 
   return (
     <>
@@ -32,7 +22,7 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit }) {
         </div>
         <div className="addsoft-row">
           <div className="addsoft-group">
-            <label htmlFor="software">Software:</label>
+            <label htmlFor="software">Software</label>
             <select id="softwareId" name="softwareId" value={softwareId}
               onChange={(e) => setSoftwareId(e.target.value)}>
               {softList.map((software, i) => {
@@ -43,23 +33,23 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit }) {
             </select>
           </div>
           <div className="addsoft-group">
-            <label htmlFor="vendor">Proveedor:</label>
+            <label htmlFor="vendor">Proveedor</label>
             <input type="text" id="vendor" name="vendor" value={vendor} onChange={(e) => setVendor(e.target.value)} />
           </div>
         </div>
         <div className="addsoft-row">
           <div className="addsoft-group">
-            <label htmlFor="seats">Asignaciones:</label>
+            <label htmlFor="seats">Asignaciones</label>
             <input type="number" id="seats" name="seats" value={seats} onChange={(e) => setSeats(e.target.value)} />
           </div>
           <div className="addsoft-group">
-            <label htmlFor="licenseKey">Clave de licencia:</label>
+            <label htmlFor="licenseKey">Clave de licencia</label>
             <input type="text" id="licenseKey" name="licenseKey" value={licenseKey} onChange={(e) => setLicenseKey(e.target.value)} />
           </div>
         </div>
         <div className="addsoft-row">
           <div className="addsoft-group">
-            <label htmlFor="purchaseDate">Fecha de compra:</label>
+            <label htmlFor="purchaseDate">Fecha de compra</label>
             <input
               type="date"
               id="purchaseDate"
@@ -70,7 +60,7 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit }) {
 
           </div>
           <div className="addsoft-group">
-            <label htmlFor="expiryDate">Fecha de expiración:</label>
+            <label htmlFor="expiryDate">Fecha de expiración</label>
             <input
               type="date"
               id="expiryDate"
@@ -82,11 +72,15 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit }) {
         </div>
         <div className="addsoft-row">
           <div className="addsoft-group">
-            <label htmlFor="cost">Precio:</label>
+            <label htmlFor="cost">Precio (€)</label>
             <input type="number" id="cost" name="cost" value={cost} onChange={(e) => setCost(e.target.value)} />
           </div>
         </div>
-        <button type="submit" className="addsoft-submit">Editar</button>
+
+        <div className="addsoft-row">
+          <button className="addsoft-cancel" type="button" onClick={() => setEditFormOpen(false)}>Cancel</button>
+          <button type="submit" className="addsoft-submit">Aplicar cambios</button>
+        </div>
       </form>
     </>
   )

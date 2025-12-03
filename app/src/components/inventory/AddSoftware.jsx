@@ -1,35 +1,35 @@
-function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHard, setSelectedHard, selectedServ, setSelectedServ }) {
+function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHard, setSelectedHard, selectedServ, setSelectedServ, setAddFormOpen }) {
   return (
     <form id="softwareForm" onSubmit={handleSubmit} className="addsoft-form">
 
-      <h2 className="addsoft-title">Add New Software</h2>
+      <h2 className="addsoft-title">Añadir Software</h2>
 
       <div className="addsoft-row">
         <div className="addsoft-group">
-          <label htmlFor="name">Name *</label>
+          <label htmlFor="name">Nombre</label>
           <input type="text" id="name" name="name" required />
         </div>
         <div className="addsoft-group">
-          <label htmlFor="version">Version *</label>
+          <label htmlFor="version">Versión</label>
           <input type="text" id="version" name="version" required />
         </div>
       </div>
 
       <div className="addsoft-row">
         <div className="addsoft-group">
-          <label htmlFor="category">Category</label>
+          <label htmlFor="category">Categoria</label>
           <select id="category" name="category">
-            <option value="">Select category</option>
+            <option value="">Seleccionar categoria</option>
             {categList.map((cat, i) => (
               <option key={i} value={cat}>{cat}</option>
             ))}
           </select>
         </div>
         <div className="addsoft-group">
-          <label htmlFor="status">Status</label>
+          <label htmlFor="status">Estado</label>
           <select id="status" name="status">
-            <option value="in-use">In use</option>
-            <option value="available">Available</option>
+            <option value="en-uso">En-uso</option>
+            <option value="disponible">Disponible</option>
           </select>
         </div>
       </div>
@@ -48,10 +48,10 @@ function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHa
               <option key={i} value={h.id}>{h.model}</option>
             ))}
           </select>
-          <small className="hint">Hold CTRL to select multiple</small>
+          <small className="hint">Mantén pulsado CTRL para seleccionar varios</small>
         </div>
         <div className="addsoft-group">
-          <label htmlFor="serverId">Server</label>
+          <label htmlFor="serverId">Servidor</label>
           <select multiple id="serverId" name="serverId" value={selectedServ}
             onChange={(e) => setSelectedServ(Array.from(e.target.selectedOptions, o => o.value))}
           >
@@ -59,16 +59,19 @@ function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHa
               <option key={i} value={srv.id}>{srv.name}</option>
             ))}
           </select>
-          <small className="hint">Hold CTRL to select multiple</small>
+          <small className="hint">Mantén pulsado CTRL para seleccionar varios</small>
         </div>
       </div>
 
       <div className="addsoft-group">
-        <label htmlFor="description">Description</label>
+        <label htmlFor="description">Descripción</label>
         <textarea id="description" name="description" rows="2"></textarea>
       </div>
 
-      <button type="submit" className="addsoft-submit">Add</button>
+      <div className="addsoft-row">
+        <button className="addsoft-cancel" type="button" onClick={() => setAddFormOpen(false)}>Cancel</button>
+        <button type="submit" className="addsoft-submit">Añadir</button>
+      </div>
     </form>
 
   );

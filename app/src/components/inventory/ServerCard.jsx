@@ -12,7 +12,7 @@ function ServerCard({ id, name, location, os, status, hostedSoftware, connectedU
           <div>Usuarios conectados: {connectedUsers}</div>
           <div>Software alojado: {hostedSoftware.length}</div>
         </div>
-        <div className="software-card-second-section">
+        <div className="software-card-second-section-for-servers">
           <div className="software-card-details-btn">
             <Link to={`/inventory/servers/${id}`} className="details-btn-link">
               Ver detalles

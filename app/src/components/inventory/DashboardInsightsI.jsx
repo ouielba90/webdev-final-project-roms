@@ -1,5 +1,5 @@
 import StatusAnimation from "./StatusAnimation.jsx"
-function DashboardInsightsI({ riskLicenses, highPopServer, software }) {
+function DashboardInsightsI({ riskLicenses, lastMaintHard, software }) {
   return (
     <>
 
@@ -10,8 +10,7 @@ function DashboardInsightsI({ riskLicenses, highPopServer, software }) {
           <thead>
             <tr>
               <th>Software</th>
-              <th></th>
-              <th>Estado</th>
+              <th className="th-state">Estado</th>
             </tr>
           </thead>
 
@@ -26,7 +25,6 @@ function DashboardInsightsI({ riskLicenses, highPopServer, software }) {
               return (
                 <tr key={item.softwareId}>
                   <td>{software.filter(s => s.id === item.softwareId).map(s => s.name)}</td>
-                  <td></td>
                   <td className="issues">{color}</td>
                 </tr>
               );
@@ -34,36 +32,59 @@ function DashboardInsightsI({ riskLicenses, highPopServer, software }) {
           </tbody>
         </table>
         <div className="legend">
-          <span>🟡 &lt; 30 días</span>
-          <span>🔴 Expirada</span>
+          <span>
+            <svg width="14" height="14" viewBox="0 0 20 20">
+              <circle cx="10" cy="10" r="10" fill="#FFA500" />
+            </svg>
+            &lt;30 días para expirar</span>
+          <span>
+            <svg width="14" height="14" viewBox="0 0 20 20">
+              <circle cx="10" cy="10" r="10" fill="#FF0000" />
+            </svg> Expirada</span>
         </div>
 
       </div>
 
       <div className="insights-card insights-top-resources">
-        <h2 className="section-title">Servidores activos</h2>
+        <h2 className="section-title">Estado del hardware</h2>
 
         <table className="table-top-resources">
           <thead>
             <tr>
-              <th className="th-server">Servidor</th>
-              <th className="th-users">Usuarios</th>
-              <th></th>
-              <th></th>
+              <th>Hardware</th>
+              <th className="th-state">Estado</th>
             </tr>
           </thead>
 
           <tbody>
-            {highPopServer.map((item) => (
-              <tr key={item.serverId}>
-                <td>{item.name}</td>
-                <td className="th-users">{item.connectedUsers}</td>
-              </tr>
-            ))}
+            {lastMaintHard.map((item) => {
+              const isAlert = item.daysLastMaintenance < -365;
+              const color = isAlert ?
+                <StatusAnimation color={"red"} />
+                : item.daysLastMaintenance >= -365 && item.daysLastMaintenance < -305 ?
+                  <StatusAnimation color={"orange"} />
+                  : undefined
+              return (
+                <tr key={item.id}>
+                  <td>{item.model}</td>
+                  <td className="th-state">{color}</td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
         <div className="legend">
-          <span>* Usuarios conectados actualmente</span>
+          <span>
+            <svg width="14" height="14" viewBox="0 0 20 20">
+              <circle cx="10" cy="10" r="10" fill="#FFA500" />
+            </svg>
+            &lt;60 días para revisión
+            <span>
+              <svg width="14" height="14" viewBox="0 0 20 20">
+                <circle cx="10" cy="10" r="10" fill="#FF0000" />
+              </svg>
+              &gt;1 año sin mantenimiento </span>
+          </span>
         </div>
       </div>
 

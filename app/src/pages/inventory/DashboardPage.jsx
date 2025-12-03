@@ -32,14 +32,21 @@ function DashboardPage() {
   const sumActives = availableSoft + operatHard + activeServers + activeLic
 
   let riskLicenses = licenses
-    .map(item => ({ softwareId: item.softwareId, daysLeft: daysBetweenDates(item.expiryDate) }))
+    .map(item => ({ id: item.id, softwareId: item.softwareId, daysLeft: daysBetweenDates(item.expiryDate) }))
     .sort((a, b) => a.daysLeft - b.daysLeft)
     .slice(0, 6);
 
-  let highPopServer = servers
-    .map(item => ({ serverId: item.id, connectedUsers: item.connectedUsers, name: item.name }))
-    .sort((a, b) => b.connectedUsers - a.connectedUsers)
-    .slice(0, 6)
+  let lastMaintHard = hardware
+    .map(item => ({ id: item.id, model: item.model, daysLastMaintenance: daysBetweenDates(item.lastMaintenance) }))
+    .sort((a, b) => a.daysLastMaintenance - b.daysLastMaintenance)
+    .slice(0, 6);
+
+  console.log(lastMaintHard)
+
+  //  let highPopServer = servers
+  //    .map(item => ({ serverId: item.id, connectedUsers: item.connectedUsers, name: item.name }))
+  //    .sort((a, b) => b.connectedUsers - a.connectedUsers)
+  //    .slice(0, 6)
 
   const aggregated = getServerAverages(servers);
   let ramUse = aggregated.sort((a, b) => b.ramUsage - a.ramUsage)//.slice(0, 4);
@@ -71,7 +78,7 @@ function DashboardPage() {
           <div className="insights-container">
             <DashboardInsightsI
               riskLicenses={riskLicenses}
-              highPopServer={highPopServer}
+              lastMaintHard={lastMaintHard}
               software={software}
             />
             <DashboardInsightsII
