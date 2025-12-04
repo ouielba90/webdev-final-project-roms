@@ -1006,12 +1006,24 @@
 .addsoft-submit:hover {
   background: #111827;
 }
+.addsoft-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #ccccdc;
+}
 
 /* ayuda */
 .hint {
   font-size: 11px;
   color: #6b7280;
   opacity: 0.7;
+}
+
+.error-msg {
+  color: #d9534f;
+  font-size: 10px;
+  margin-top: 4px;
+  display: block;
 }
 
 /* ------------------------------------------------------ */

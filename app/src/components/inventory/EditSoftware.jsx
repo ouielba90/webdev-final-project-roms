@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import useSoftwareValidation from "../../hooks/inventory/useSoftwareValidation";
 
 function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmitEdit, selectedHard, setSelectedHard, selectedServ, setSelectedServ, setEditFormOpen }) {
   const [name, setName] = useState(toBeEdited.name)
@@ -21,6 +22,20 @@ function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmi
     setSelectedHard(toBeEdited.installedOnHardware)
     setSelectedServ(toBeEdited.serverId)
   }, [toBeEdited, setSelectedHard, setSelectedServ])
+
+  const [form, setForm] = useState({
+    name: toBeEdited.name,
+    version: toBeEdited.version,
+    description: toBeEdited.description
+  });
+
+  useEffect(() => {
+    setForm({ name, version, description });
+  }, [name, version, description]);
+
+
+  const { errors, canSubmit } = useSoftwareValidation(form);
+
   return (
     <form id="softwareForm" onSubmit={handleSubmitEdit} className="addsoft-form">
 
@@ -36,10 +51,12 @@ function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmi
         <div className="addsoft-group">
           <label htmlFor="name">Nombre*</label>
           <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} required />
+          {errors.name && <small className="error-msg">{errors.name}</small>}
         </div>
         <div className="addsoft-group">
           <label htmlFor="version">Versión*</label>
           <input type="text" id="version" name="version" value={version} onChange={(e) => setVersion(e.target.value)} required />
+          {errors.version && <small className="error-msg">{errors.version}</small>}
         </div>
       </div>
 
@@ -92,11 +109,12 @@ function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmi
       <div className="addsoft-group">
         <label htmlFor="description">Descripción</label>
         <textarea id="description" name="description" rows="2" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+        {errors.description && <small className="error-msg">{errors.description}</small>}
       </div>
 
       <div className="addsoft-row">
         <button className="addsoft-cancel" type="button" onClick={() => setEditFormOpen(false)}>Cancel</button>
-        <button type="submit" className="addsoft-submit">Aplicar cambios</button>
+        <button type="submit" className="addsoft-submit" disabled={!canSubmit}>Aplicar cambios</button>
       </div>
     </form>
 

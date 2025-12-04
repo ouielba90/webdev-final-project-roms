@@ -1,4 +1,22 @@
+import { useState } from "react";
+import useSoftwareValidation from "../../hooks/inventory/useSoftwareValidation";
+
 function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHard, setSelectedHard, selectedServ, setSelectedServ, setAddFormOpen }) {
+  const [form, setForm] = useState({
+    name: "",
+    version: "",
+    description: ""
+  });
+
+  const { errors, canSubmit } = useSoftwareValidation(form);
+
+  function handleChange(e) {
+    setForm(prev => ({
+      ...prev,
+      [e.target.id]: e.target.value
+    }));
+  }
+
   return (
     <form id="softwareForm" onSubmit={handleSubmit} className="addsoft-form">
 
@@ -7,19 +25,20 @@ function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHa
       <div className="addsoft-row">
         <div className="addsoft-group">
           <label htmlFor="name">Nombre</label>
-          <input type="text" id="name" name="name" required />
+          <input type="text" id="name" name="name" onChange={handleChange} required />
+          {errors.name && <small className="error-msg">{errors.name}</small>}
         </div>
         <div className="addsoft-group">
           <label htmlFor="version">Versión</label>
-          <input type="text" id="version" name="version" required />
+          <input type="text" id="version" name="version" onChange={handleChange} required />
+          {errors.version && <small className="error-msg">{errors.version}</small>}
         </div>
       </div>
 
       <div className="addsoft-row">
         <div className="addsoft-group">
           <label htmlFor="category">Categoria</label>
-          <select id="category" name="category">
-            <option value="">Seleccionar categoria</option>
+          <select id="category" name="category" onChange={handleChange}>
             {categList.map((cat, i) => (
               <option key={i} value={cat}>{cat}</option>
             ))}
@@ -27,7 +46,7 @@ function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHa
         </div>
         <div className="addsoft-group">
           <label htmlFor="status">Estado</label>
-          <select id="status" name="status">
+          <select id="status" name="status" onChange={handleChange}>
             <option value="en-uso">En-uso</option>
             <option value="disponible">Disponible</option>
           </select>
@@ -65,12 +84,14 @@ function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHa
 
       <div className="addsoft-group">
         <label htmlFor="description">Descripción</label>
-        <textarea id="description" name="description" rows="2"></textarea>
+        <textarea id="description" name="description" rows="2" onChange={handleChange}></textarea>
+        {errors.description && <small className="error-msg">{errors.description}</small>}
+
       </div>
 
       <div className="addsoft-row">
         <button className="addsoft-cancel" type="button" onClick={() => setAddFormOpen(false)}>Cancel</button>
-        <button type="submit" className="addsoft-submit">Añadir</button>
+        <button type="submit" className="addsoft-submit" disabled={!canSubmit}>Añadir</button>
       </div>
     </form>
 
