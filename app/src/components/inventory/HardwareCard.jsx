@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function HardwareCard({ id, type, model, status, specs, handleRemove, handleEdit }) {
+function HardwareCard({ id, type, model, os, status, specs, handleRemove, handleEdit }) {
   return (
     <div className="software-card">
       <div className="software-card-first-section">
@@ -8,7 +8,7 @@ function HardwareCard({ id, type, model, status, specs, handleRemove, handleEdit
         <span className={`software-status status-${status}`}>{status}</span>
       </div>
 
-      <div>{type}</div>
+      <div>{type} · {os}</div>
       <div className="software-card-third-section">
         <div>{specs.cpu} - {specs.ram} - {specs.storage}</div>
       </div>

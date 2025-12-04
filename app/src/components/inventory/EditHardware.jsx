@@ -11,8 +11,6 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
   const [os, setOs] = useState(toBeEdited.os)
   const [lastMaintenance, setLastMaintenance] = useState(toBeEdited.lastMaintenance.split("T")[0])
 
-  console.log("Mantenimiento", lastMaintenance)
-
   function handleSelectedSoftware(e) {
     const selected = Array.from(e.target.selectedOptions, option => option.value);
     setSelectedSoft(selected)

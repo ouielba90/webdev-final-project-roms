@@ -10,6 +10,7 @@ function ProviderInventory({ children }) {
   const [hardware, setHardware] = useState([]);
   const [licenses, setLicenses] = useState([]);
   const [servers, setServers] = useState([]);
+  const [error, setError] = useState([])
 
   const softwareApi = useSoftwareApi();
   const hardwareApi = useHardwareApi();
@@ -17,10 +18,18 @@ function ProviderInventory({ children }) {
   const serversApi = useServersApi();
 
   useEffect(() => {
-    softwareApi.getSoftware().then((incData) => setSoftware(incData));
-    hardwareApi.getHardware().then((incData) => setHardware(incData));
-    licensesApi.getLicenses().then((incData) => setLicenses(incData));
-    serversApi.getServers().then((incData) => setServers(incData));
+    softwareApi.getSoftware()
+      .then((incData) => { setSoftware(incData) })
+      .catch((err) => setError(prev => [...prev, err]));
+    hardwareApi.getHardware()
+      .then((incData) => setHardware(incData))
+      .catch((err) => setError(prev => [...prev, err]));
+    licensesApi.getLicenses().
+      then((incData) => setLicenses(incData))
+      .catch((err) => setError(prev => [...prev, err]));
+    serversApi.getServers().
+      then((incData) => setServers(incData))
+      .catch((err) => setError(prev => [...prev, err]));
   }, []);
 
   const dataToShare = {
@@ -28,6 +37,7 @@ function ProviderInventory({ children }) {
     hardware, setHardware,
     licenses, setLicenses,
     servers, setServers,
+    error,
     softwareApi,
     hardwareApi,
     licensesApi,

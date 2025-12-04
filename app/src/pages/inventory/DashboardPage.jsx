@@ -9,12 +9,6 @@ import { daysBetweenDates } from "./../../utils/inventory/date.js";
 function DashboardPage() {
   const { software, hardware, licenses, servers } = useContext(DataContext);
   const totalNumRes = software.length + hardware.length + servers.length + licenses.length;
-  //const [subTotalRes, setSubTotalRes] = useState({
-  //  software: software.length,
-  //  hardware: hardware.length,
-  //  licenses: licenses.length,
-  //  servers: servers.length,
-  //})
   let subTotalRes = {
     software: software.length,
     hardware: hardware.length,
@@ -41,13 +35,6 @@ function DashboardPage() {
     .sort((a, b) => a.daysLastMaintenance - b.daysLastMaintenance)
     .slice(0, 6);
 
-  console.log(lastMaintHard)
-
-  //  let highPopServer = servers
-  //    .map(item => ({ serverId: item.id, connectedUsers: item.connectedUsers, name: item.name }))
-  //    .sort((a, b) => b.connectedUsers - a.connectedUsers)
-  //    .slice(0, 6)
-
   const aggregated = getServerAverages(servers);
   let ramUse = aggregated.sort((a, b) => b.ramUsage - a.ramUsage)//.slice(0, 4);
   let diskUse = aggregated.sort((a, b) => b.diskUsage - a.diskUsage)//.slice(0, 4);
@@ -57,7 +44,6 @@ function DashboardPage() {
   const uniqueElements = Array.from(
     new Map(combined.map(item => [item.name, item])).values());
 
-  //console.log(combined)
   return (
     <>
       {Object.values(subTotalRes).reduce((sum, value) => sum + value, 0) > 0 ?

@@ -6,16 +6,14 @@ function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmi
   const [category, setCategory] = useState(toBeEdited.category)
   const [status, setStatus] = useState(toBeEdited.status)
   const [description, setDescription] = useState(toBeEdited.description)
-  console.log("status", status)
+
   function handleSelectedHardware(e) {
     const selected = Array.from(e.target.selectedOptions, option => option.value);
-    console.log("sel hard", selected)
     setSelectedHard(selected);
   }
 
   function handleSelectedServers(e) {
     const selected = Array.from(e.target.selectedOptions, option => option.value);
-    console.log("sel serv", selected)
     setSelectedServ(selected)
   }
 

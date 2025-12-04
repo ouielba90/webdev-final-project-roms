@@ -49,7 +49,7 @@ function HardwareDetailsPage() {
               <p>{hardwareItem.assignedToUserId || "Ninguna"}</p>
             </div>
             <div>
-              <p><strong>Última actualización</strong></p>
+              <p><strong>Último mantenimiento</strong></p>
               <p>{isoToeuDate(hardwareItem.lastMaintenance)}</p>
             </div>
           </div>

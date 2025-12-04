@@ -137,6 +137,7 @@ function HardwareInvPage() {
                 id={el.id}
                 type={el.type}
                 model={el.model}
+                os={el.os}
                 status={el.status}
                 specs={el.specs}
                 handleRemove={handleRemove}

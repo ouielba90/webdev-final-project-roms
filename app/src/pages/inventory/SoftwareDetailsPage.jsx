@@ -49,8 +49,8 @@ function SoftwareDetailsPage() {
           <div className="details-quick-stats-ii">
             {hardAssocList.length ? (
               hardAssocList.map((h, i) => (
-                <Link to={`/inventory/hardware/${h.id}`} className="details-links">
-                  <div key={i} className="assoc-card">
+                <Link key={i} to={`/inventory/hardware/${h.id}`} className="details-links">
+                  <div className="assoc-card">
                     <p className="assoc-name">{h.model}</p>
                     <p className="assoc-type">{h.type}</p>
                     <p className={`assoc-status ${h.status.replace(" ", "-").toLowerCase()}`}>
