@@ -121,8 +121,7 @@
   width: 500px;
 }
 
-.form-group > input,
-select {
+.form-group > input, .user-edit-selects {
   height: 50px;
 }
 

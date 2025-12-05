@@ -24,7 +24,7 @@ function EditUserModal({ editingUser, setEditingUser, handleUpdate }) {
         </div>
 
         <div className="user-edit-selects">
-          <select
+          <select className="edit-select-user"
             value={editingUser.role ?? ""}
             onChange={(e) =>
               setEditingUser({ ...editingUser, role: e.target.value })
@@ -36,7 +36,7 @@ function EditUserModal({ editingUser, setEditingUser, handleUpdate }) {
             <option value="Cliente">Cliente</option>
           </select>
 
-          <select
+          <select className="edit-select-user"
             value={editingUser.status ?? ""}
             onChange={(e) =>
               setEditingUser({ ...editingUser, status: e.target.value })

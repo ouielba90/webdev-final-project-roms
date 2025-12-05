@@ -1,19 +1,17 @@
-<<<<<<< HEAD
+
 import { useState } from 'react'
-=======
+
 import { projectSections } from '../../sections/projectSections.js'
 import { useLocation } from 'react-router-dom'
 import CompactMainMenu from './../../components/homepage/CompactMainMenu'
->>>>>>> a5f838f86d45b573f085550cc3e38001cefd6a15
 import ProjectList from './../../components/projects/ProjectList'
 import './StylesRicardo.css'
 
 function HomeProjPage() {
 
-<<<<<<< HEAD
-  return (
-    <>
-=======
+
+ 
+
   const currPath = useLocation() // Se obtiene la ruta actual
   function getSection(path) { // Determinar qué contenido se debe mostrar según la ruta
     console.log(path)
@@ -35,7 +33,7 @@ function HomeProjPage() {
       <h3 className="general-subtitle">{sectionData.subtext}</h3>
       <nav className="general-submenu">
       </nav>
->>>>>>> a5f838f86d45b573f085550cc3e38001cefd6a15
+
       <ProjectList />
     </>
   )
