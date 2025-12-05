@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import useHardwareValidation from "../../hooks/inventory/useLicensesValidation"
 
 function EditLicense({ toBeEdited, softList, handleSubmitEdit, setEditFormOpen }) {
 
@@ -9,6 +10,22 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit, setEditFormOpen }
   const [expiryDate, setExpiryDate] = useState(toBeEdited.expiryDate.split("T")[0])
   const [cost, setCost] = useState(toBeEdited.cost)
   const [softwareId, setSoftwareId] = useState(toBeEdited.softwareId)
+
+  const [form, setForm] = useState({
+    vendor: toBeEdited.vendor,
+    seats: toBeEdited.seats,
+    licenseKey: toBeEdited.licenseKey,
+    purchaseDate: toBeEdited.purchaseDate,
+    expiryDate: toBeEdited.expiryDate,
+    cost: toBeEdited.cost,
+  });
+
+  useEffect(() => {
+    setForm({ vendor, seats, licenseKey, purchaseDate, expiryDate, cost });
+  }, [vendor, seats, licenseKey, purchaseDate, expiryDate, cost]);
+
+
+  const { errors, canSubmit } = useHardwareValidation(form);
 
   return (
     <>
@@ -35,16 +52,19 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit, setEditFormOpen }
           <div className="addsoft-group">
             <label htmlFor="vendor">Proveedor</label>
             <input type="text" id="vendor" name="vendor" value={vendor} onChange={(e) => setVendor(e.target.value)} />
+            {errors.vendor && <small className="error-msg">{errors.vendor}</small>}
           </div>
         </div>
         <div className="addsoft-row">
           <div className="addsoft-group">
             <label htmlFor="seats">Asignaciones</label>
             <input type="number" id="seats" name="seats" value={seats} onChange={(e) => setSeats(e.target.value)} />
+            {errors.seats && <small className="error-msg">{errors.seats}</small>}
           </div>
           <div className="addsoft-group">
             <label htmlFor="licenseKey">Clave de licencia</label>
             <input type="text" id="licenseKey" name="licenseKey" value={licenseKey} onChange={(e) => setLicenseKey(e.target.value)} />
+            {errors.licenseKey && <small className="error-msg">{errors.licenseKey}</small>}
           </div>
         </div>
         <div className="addsoft-row">
@@ -57,6 +77,7 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit, setEditFormOpen }
               value={purchaseDate}
               onChange={(e) => setPurchaseDate(e.target.value)}
             />
+            {errors.purchaseDate && <small className="error-msg">{errors.purchaseDate}</small>}
 
           </div>
           <div className="addsoft-group">
@@ -68,18 +89,20 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit, setEditFormOpen }
               value={expiryDate}
               onChange={(e) => setExpiryDate(e.target.value)}
             />
+            {errors.compareDates && <small className="error-msg">{errors.compareDates}</small>}
           </div>
         </div>
         <div className="addsoft-row">
           <div className="addsoft-group">
             <label htmlFor="cost">Precio (€)</label>
             <input type="number" id="cost" name="cost" value={cost} onChange={(e) => setCost(e.target.value)} />
+            {errors.cost && <small className="error-msg">{errors.cost}</small>}
           </div>
         </div>
 
         <div className="addsoft-row">
           <button className="addsoft-cancel" type="button" onClick={() => setEditFormOpen(false)}>Cancel</button>
-          <button type="submit" className="addsoft-submit">Aplicar cambios</button>
+          <button type="submit" className="addsoft-submit" disabled={!canSubmit}>Aplicar cambios</button>
         </div>
       </form>
     </>

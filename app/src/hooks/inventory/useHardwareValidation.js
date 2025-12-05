@@ -36,11 +36,11 @@ export default function useHardwareValidation(form) {
         "Disco inválido: solo letras, números y espacios intermedios.";
     }
 
-    if (form.purchaseDate && form.purchaseDate > today) {
+    if (form.purchaseDate && form.purchaseDate >= today) {
       newErrors.purchaseDate = "La fecha de compra no puede ser futura.";
     }
 
-    if (form.lastMaintenance && form.lastMaintenance > today) {
+    if (form.lastMaintenance && form.lastMaintenance >= today) {
       newErrors.lastMaintenance =
         "El último mantenimiento no puede ser futuro.";
     }
