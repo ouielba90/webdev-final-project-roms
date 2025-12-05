@@ -34,7 +34,7 @@ function SoftwareInvPage() {
     e.preventDefault()
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    console.log(data.status)
+    //console.log(data.status)
     const newItem = {
       id: software.length ? software.at(-1).id + 1 : 1001,
       name: data.name,
@@ -60,7 +60,7 @@ function SoftwareInvPage() {
   }
 
   function handleSubmitEdit(e) {
-    console.log("handleeeeeeeeee")
+    //console.log("handleeeeeeeeee")
     e.preventDefault()
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());

@@ -4,7 +4,6 @@ export default function useHardwareValidation(form) {
   const [errors, setErrors] = useState({});
   const [canSubmit, setCanSubmit] = useState(false);
 
-  console.log(form);
   useEffect(() => {
     const textRegex = /^[A-Za-z0-9-]+(?: [A-Za-z0-9-]+)*$/;
 

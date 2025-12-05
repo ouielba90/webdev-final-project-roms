@@ -13,7 +13,7 @@ function AddHardware({ softList, handleSubmit, selectedSoft, setSelectedSoft, se
   });
 
   const { errors, canSubmit } = useHardwareValidation(form);
-  console.log("errors", errors)
+
   const handleChange = (e) => {
     const { id, value } = e.target;
     setForm(prev => ({ ...prev, [id]: value }));

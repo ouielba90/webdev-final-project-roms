@@ -95,7 +95,7 @@ function DashboardInsightsII({ uniqueElements }) {
           <span>
             <svg width="14" height="14" viewBox="0 0 20 20">
               <circle cx="10" cy="10" r="10" fill="#FF0000" />
-            </svg> Problema</span>
+            </svg> En riesgo</span>
 
         </div>
       </div>

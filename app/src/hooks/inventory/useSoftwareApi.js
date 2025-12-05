@@ -5,10 +5,10 @@ function useSoftwareApi() {
 
   async function getSoftware() {
     return fetch(apiUrl).then((response) => {
-      if (!response.ok) {
-        throw new Error(`Error: status ${response.status}`);
-      }
-      response.ok && console.log(`Status: ${response.status}`);
+      response.ok &&
+        console.log(
+          `Status: ${response.status}. Software data fetched correctly.`,
+        );
       return response.json();
     });
   }

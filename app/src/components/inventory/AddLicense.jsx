@@ -11,6 +11,7 @@ function AddLicense({ softList, handleSubmit, selectedSoft, setSelectedSoft, set
     compareDates: "",
     cost: ""
   });
+
   const { errors, canSubmit } = useLicensesValidation(form);
 
   function handleChange(e) {
@@ -20,7 +21,6 @@ function AddLicense({ softList, handleSubmit, selectedSoft, setSelectedSoft, set
     }));
   }
 
-  console.log("errores", errors)
   return (
     <>
       <form className="addsoft-form" onSubmit={handleSubmit}>

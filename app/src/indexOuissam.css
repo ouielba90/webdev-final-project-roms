@@ -603,6 +603,7 @@
 
 .software-main-container p {
   margin: 0;
+  padding-left: 6px;
 }
 
 .loading-animation {

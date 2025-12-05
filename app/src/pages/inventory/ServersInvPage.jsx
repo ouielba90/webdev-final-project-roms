@@ -16,7 +16,7 @@ function ServersInvPage() {
           <div className="filters-row-main">
             <input type="text" id="searchForm" placeholder="Buscar servidor..." onChange={handleSearch} />
             <div className="filter-field">
-              <p>OS</p>
+              <p>S.O.</p>
               <select onClick={handleOs}>
                 <option>Todos</option>
                 <option>CentOS</option>

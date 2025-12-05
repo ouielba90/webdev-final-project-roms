@@ -4,7 +4,10 @@ function useLicensesApi() {
   async function getLicenses() {
     return fetch(apiUrl)
       .then((response) => {
-        response.ok && console.log(`Status: ${response.status}`);
+        response.ok &&
+          console.log(
+            `Status: ${response.status}. Licenses data fetched correctly.`,
+          );
         return response.json();
       })
       .catch((error) => console.log(`Error while fetching the data: ${error}`));

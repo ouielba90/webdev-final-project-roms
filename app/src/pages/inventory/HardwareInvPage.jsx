@@ -13,7 +13,7 @@ function HardwareInvPage() {
     useFiltersSearch(hardware, "hardware");
 
   function handleRemove(id) {
-    console.log(id)
+    //console.log(id)
     setHardware(prev => prev.filter(el => el.id !== id))
   }
 
@@ -47,7 +47,7 @@ function HardwareInvPage() {
 
   function handleEdit(id) {
     setEditFormOpen(true)
-    console.log("id", id)
+    //console.log("id", id)
     setCurrEditId(id)
   }
 
