@@ -121,8 +121,7 @@
   width: 500px;
 }
 
-.form-group > input,
-/*select*/ {
+.form-group > input {
   height: 50px;
 }
 
