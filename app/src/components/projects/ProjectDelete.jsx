@@ -13,12 +13,12 @@ function ProjectDelete({ project, onCancel, onConfirm }) {
             <div className="modal-overlay" onMouseDown={handleOverlay}>
                 <div className="modal-content">
                     <header>
-                        <h3>Eliminar Projecto</h3>
+                        <h3 className="modal-title">Eliminar Projecto</h3>
                     </header>
-                    <p>¿Estás seguro de que deseas eliminar el proyecto <strong> {project.name} </strong>?</p>
-                    <div>
-                        <button onClick={handleCancel}>Cancelar</button>
+                    <p>¿Estás seguro de que deseas eliminar el proyecto <strong className="modal-title"> {project.name} </strong>?</p>
+                    <div className="div-button-form">
                         <button onClick={() => onConfirm?.(project.id)}>Eliminar</button>
+                        <button onClick={handleCancel}>Cancelar</button>
                     </div>
                 </div>
             </div>

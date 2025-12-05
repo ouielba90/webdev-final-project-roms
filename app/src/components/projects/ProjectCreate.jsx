@@ -39,10 +39,14 @@ export default function ProjectCreate({ onClose, onSumit }) {
 
     return (
         <>
-            <div className="create-project-container">
-                <div className="box-create-project">
-                    <form onSubmit={handleSubmit}>
-                        <div className="div-create">
+            <div className="modal-overlay">
+                <div className="modal-content">
+                    <header>
+                        <h3 className="modal-title">Crear Projecto</h3>
+                    </header>
+                    <div className="content-modal">
+                        <form onSubmit={handleSubmit}>
+
                             <label>Nombre del proyecto:</label>
                             <input
                                 type="text"
@@ -53,8 +57,7 @@ export default function ProjectCreate({ onClose, onSumit }) {
                                 autoFocus
                                 required
                             />
-                        </div>
-                        <div className="div-create">
+
                             <label>Cliente:</label>
                             <input
                                 type="text"
@@ -64,8 +67,7 @@ export default function ProjectCreate({ onClose, onSumit }) {
                                 onChange={updatefield("client")}
                                 required
                             />
-                        </div>
-                        <div className="div-create">
+
                             <label>Descripción:</label>
                             <textarea
                                 id="create-description"
@@ -74,10 +76,13 @@ export default function ProjectCreate({ onClose, onSumit }) {
                                 onChange={updatefield("description")}
                                 required
                             />
-                        </div>
-                        <button className="btn-standard" type="submit">Crear Proyecto</button>
-                        <button className="btn-cancel" onClick={closeModal} type="button">Cancelar</button>
-                    </form>
+                            <div className="div-button-form">
+                                <button className="btn-standard" type="submit">Crear Proyecto</button>
+                                <button className="btn-cancel" onClick={closeModal} type="button">Cancelar</button>
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
             </div>
         </>
