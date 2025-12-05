@@ -4,11 +4,11 @@ export const inventorySections = {
     subtext: "Resumen general de activos, estados y actividad reciente",
   },
   software: {
-    title: "🧩 Inventario de Software",
+    title: "📦 Inventario de Software",
     subtext: "Gestión y seguimiento de licencias e instalaciones",
   },
   hardware: {
-    title: "🖥️ Inventario de Hardware",
+    title: "💻 Inventario de Hardware",
     subtext: "Control de dispositivos y equipamiento físico",
   },
   licenses: {

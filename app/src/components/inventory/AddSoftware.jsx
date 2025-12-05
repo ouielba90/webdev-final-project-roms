@@ -1,35 +1,54 @@
-function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHard, setSelectedHard, selectedServ, setSelectedServ }) {
+import { useState } from "react";
+import useSoftwareValidation from "../../hooks/inventory/useSoftwareValidation";
+
+function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHard, setSelectedHard, selectedServ, setSelectedServ, setAddFormOpen }) {
+  const [form, setForm] = useState({
+    name: "",
+    version: "",
+    description: ""
+  });
+
+  const { errors, canSubmit } = useSoftwareValidation(form);
+
+  function handleChange(e) {
+    setForm(prev => ({
+      ...prev,
+      [e.target.id]: e.target.value
+    }));
+  }
+
   return (
     <form id="softwareForm" onSubmit={handleSubmit} className="addsoft-form">
 
-      <h2 className="addsoft-title">Add New Software</h2>
+      <h2 className="addsoft-title">Añadir Software</h2>
 
       <div className="addsoft-row">
         <div className="addsoft-group">
-          <label htmlFor="name">Name *</label>
-          <input type="text" id="name" name="name" required />
+          <label htmlFor="name">Nombre</label>
+          <input type="text" id="name" name="name" onChange={handleChange} required />
+          {errors.name && <small className="error-msg">{errors.name}</small>}
         </div>
         <div className="addsoft-group">
-          <label htmlFor="version">Version *</label>
-          <input type="text" id="version" name="version" required />
+          <label htmlFor="version">Versión</label>
+          <input type="text" id="version" name="version" onChange={handleChange} required />
+          {errors.version && <small className="error-msg">{errors.version}</small>}
         </div>
       </div>
 
       <div className="addsoft-row">
         <div className="addsoft-group">
-          <label htmlFor="category">Category</label>
-          <select id="category" name="category">
-            <option value="">Select category</option>
+          <label htmlFor="category">Categoria</label>
+          <select id="category" name="category" onChange={handleChange}>
             {categList.map((cat, i) => (
               <option key={i} value={cat}>{cat}</option>
             ))}
           </select>
         </div>
         <div className="addsoft-group">
-          <label htmlFor="status">Status</label>
-          <select id="status" name="status">
-            <option value="in-use">In use</option>
-            <option value="available">Available</option>
+          <label htmlFor="status">Estado</label>
+          <select id="status" name="status" onChange={handleChange}>
+            <option value="en-uso">En-uso</option>
+            <option value="disponible">Disponible</option>
           </select>
         </div>
       </div>
@@ -48,10 +67,10 @@ function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHa
               <option key={i} value={h.id}>{h.model}</option>
             ))}
           </select>
-          <small className="hint">Hold CTRL to select multiple</small>
+          <small className="hint">Mantén pulsado CTRL para seleccionar varios</small>
         </div>
         <div className="addsoft-group">
-          <label htmlFor="serverId">Server</label>
+          <label htmlFor="serverId">Servidor</label>
           <select multiple id="serverId" name="serverId" value={selectedServ}
             onChange={(e) => setSelectedServ(Array.from(e.target.selectedOptions, o => o.value))}
           >
@@ -59,16 +78,21 @@ function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHa
               <option key={i} value={srv.id}>{srv.name}</option>
             ))}
           </select>
-          <small className="hint">Hold CTRL to select multiple</small>
+          <small className="hint">Mantén pulsado CTRL para seleccionar varios</small>
         </div>
       </div>
 
       <div className="addsoft-group">
-        <label htmlFor="description">Description</label>
-        <textarea id="description" name="description" rows="2"></textarea>
+        <label htmlFor="description">Descripción</label>
+        <textarea id="description" name="description" rows="2" onChange={handleChange}></textarea>
+        {errors.description && <small className="error-msg">{errors.description}</small>}
+
       </div>
 
-      <button type="submit" className="addsoft-submit">Add</button>
+      <div className="addsoft-row">
+        <button className="addsoft-cancel" type="button" onClick={() => setAddFormOpen(false)}>Cancel</button>
+        <button type="submit" className="addsoft-submit" disabled={!canSubmit}>Añadir</button>
+      </div>
     </form>
 
   );

@@ -7,6 +7,10 @@ import software from "./data/inventory/software.js";
 import hardware from "./data/inventory/hardware.js";
 import licenses from "./data/inventory/licenses.js";
 import servers from "./data/inventory/servers.js";
+import notifications from "./data/notifications.data.js";
+import messages from "./data/messages.data.js"
+import chatMessages from "./data/chatMessages.data.js";
+import posts from "./data/post.data.js";
 
 const api = express();
 const PORT = 3000;
@@ -60,6 +64,20 @@ api.get("/projectsUsers", (req, res) => {
   console.log("Extrayendo los datos de usuarios asignados a proyectos");
   res.json(projectsUsers);
 });
+
+/*API Santos*/
+api.get("/notifications", (req, res) => {
+    res.json(notifications);
+})
+api.get("/messages", (req, res) => {
+    res.json(messages);
+})
+api.get("/chat-messages", (req, res) => {
+    res.json(chatMessages);
+})
+api.get("/posts", (req, res) => {
+    res.json(chatMessages);
+})
 /**************/
 
 api.listen(PORT, () => {

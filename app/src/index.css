@@ -1,5 +1,3 @@
-
-
 body {
   /*background: #ffffff;*/
   margin: 0;
@@ -14,14 +12,15 @@ body {
 .container-notifications {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 30px; /* Más aire lateral */
-  background: linear-gradient(
-    135deg,
-    #f9fafb 0%,
-    #eef2f7 100%
-  ); /* Fondo claro corporativo */
+  padding: 40px 30px;
+  /* Más aire lateral */
+  background: linear-gradient(135deg,
+      #f9fafb 0%,
+      #eef2f7 100%);
+  /* Fondo claro corporativo */
   min-height: 100vh;
-  animation: fadeIn 0.8s ease; /* Entrada más suave y elegante */
+  animation: fadeIn 0.8s ease;
+  /* Entrada más suave y elegante */
 }
 
 /* Animación de entrada */
@@ -30,6 +29,7 @@ body {
     opacity: 0;
     transform: translateY(25px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -45,15 +45,16 @@ body {
   margin-bottom: 36px;
   padding: 28px;
   background: blue;
-   
+
   border-radius: 18px;
   border: 2px solid rgba(96, 165, 250, 0.25);
-  box-shadow: 0 12px 36px rgba(37, 99, 235, 0.25); /* Sombra más elegante */
+  box-shadow: 0 12px 36px rgba(37, 99, 235, 0.25);
+  /* Sombra más elegante */
   position: relative;
   overflow: hidden;
 }
 
-/* Efecto shimmer más sutil y profesional */
+/* Efecto shimmer(crea un brillo simulando reflejo luz dinamico)*/
 .messages-header::before,
 .notifications-header::before {
   content: "";
@@ -62,11 +63,9 @@ body {
   right: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.08) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      rgba(255, 255, 255, 0.08) 0%,
+      transparent 70%);
   animation: shimmer 4s infinite linear;
 }
 
@@ -74,9 +73,11 @@ body {
   0% {
     transform: translate(0, 0);
   }
+
   50% {
     transform: translate(25px, 25px);
   }
+
   100% {
     transform: translate(0, 0);
   }
@@ -86,13 +87,16 @@ body {
 .messages-header h1,
 .notifications-header h1 {
   color: #ffffff;
-  font-size: 2.2em; /* Un poco más sobrio */
+  font-size: 2.2em;
+  /* Un poco más sobrio */
   margin: 0;
-  font-weight: 700; /* Bold pero no excesivo */
+  font-weight: 700;
+  /* Bold pero no excesivo */
   letter-spacing: -0.5px;
   position: relative;
   z-index: 1;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.25); /* Refuerzo de legibilidad */
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  /* Refuerzo de legibilidad */
 }
 
 /*=================================
@@ -105,18 +109,13 @@ body {
   border-radius: 16px;
   padding: 24px;
   margin: 20px 0;
-  background: linear-gradient(
-    135deg,
-    rgba(17, 24, 39, 0.9) 0%,
-    rgba(31, 41, 55, 0.9) 100%
-  );
+  background: whitesmoke;
   backdrop-filter: blur(12px);
   color: var(--text-light);
-  font-family: "Inter", "Segoe UI", sans-serif; /* Tipografía más corporativa */
+  font-family: "Inter", "Segoe UI", sans-serif;
+  /* Tipografía más corporativa */
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
   animation: fadeInUp 0.6s ease;
@@ -136,12 +135,10 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.08),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.08),
+      transparent);
   transition: left 0.6s ease;
   pointer-events: none;
 }
@@ -153,11 +150,9 @@ body {
 /* Estados especiales */
 .message-card.alert {
   border-left-color: var(--danger);
-  background: linear-gradient(
-    135deg,
-    rgba(127, 29, 29, 0.7) 0%,
-    rgba(153, 27, 27, 0.7) 100%
-  );
+  background: linear-gradient(135deg,
+      rgba(127, 29, 29, 0.7) 0%,
+      rgba(153, 27, 27, 0.7) 100%);
 }
 
 .message-card.alert:hover {
@@ -165,19 +160,10 @@ body {
   border-left-color: #ff6b6b;
 }
 
-.message-card.received {
-  border-left-color: var(--primary);
-  margin-right: 8%;
-}
-
+.message-card.received,
 .message-card.sent {
-  border-left-color: var(--success);
-  margin-left: 8%;
-  background: linear-gradient(
-    135deg,
-    rgba(16, 185, 129, 0.15) 0%,
-    rgba(6, 78, 59, 0.15) 100%
-  );
+  margin-left: 0;
+  margin-right: 0;
 }
 
 /* Elementos internos */
@@ -214,7 +200,7 @@ body {
   font-size: 1em;
   line-height: 1.6;
   padding: 14px;
-  background-color: rgba(17, 24, 39, 0.75);
+  background-color: white;
   border-radius: 10px;
   border-left: 4px solid var(--primary);
   box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.25);
@@ -240,6 +226,7 @@ body {
     opacity: 0;
     transform: translateY(12px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -250,6 +237,17 @@ body {
   EDICIÓN Y ACCIONES - Estilo corporativo
   ==================================*/
 
+/* Contenedor de la lista de mensajes en dos columnas */
+.messages-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Estilos para edición de mensajes */
 .message-text-edit {
   width: 100%;
   padding: 14px;
@@ -258,11 +256,9 @@ body {
   font-family: "Inter", "Segoe UI", sans-serif;
   font-size: 15px;
   margin: 14px 0;
-  background-color: rgba(17, 24, 39, 0.85);
+  background-color: whitesmoke;
   color: var(--text-light);
-  transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .message-text-edit:focus {
@@ -274,10 +270,20 @@ body {
 /* Contenedor de acciones */
 .message-actions {
   display: flex;
-  gap: 14px;
+  gap: 30px;
   margin-top: 16px;
   flex-wrap: wrap;
-  justify-content: flex-end; /* Alineación más corporativa */
+  justify-content: flex-end;
+  /* Alineación más corporativa */
+}
+
+/* Márgenes entre botones */
+.btn-edit,
+.btn-delete,
+.btn-save-edit,
+.btn-cancel-edit {
+  margin: 0 5px;
+  /* Añade 5px a cada lado de cada botón */
 }
 
 /* Botones base */
@@ -308,8 +314,8 @@ body {
 
 /* Botón Editar */
 .btn-edit {
-  background: var(--gradient-primary);
-  color: white;
+  background: white;
+  color: blue;
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
 }
 
@@ -319,8 +325,8 @@ body {
 
 /* Botón Eliminar */
 .btn-delete {
-  background: var(--gradient-danger);
-  color: white;
+  background: white;
+  color: black;
   box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
 }
 
@@ -330,8 +336,8 @@ body {
 
 /* Botón Guardar */
 .btn-save-edit {
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-  color: white;
+  background: white;
+  color: green;
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
 }
 
@@ -341,8 +347,8 @@ body {
 
 /* Botón Cancelar */
 .btn-cancel-edit {
-  background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
-  color: white;
+  background: white;
+  color: grey;
   box-shadow: 0 4px 12px rgba(108, 117, 125, 0.25);
 }
 
@@ -360,6 +366,30 @@ body {
   padding-left: 6px;
 }
 
+/* RESPONSIVE: En tablets, mantener 2 columnas pero ajustar el gap */
+@media (max-width: 1024px) {
+  .messages-list {
+    gap: 16px;
+    max-width: 900px;
+  }
+}
+
+/* RESPONSIVE: En móviles, cambiar a 1 columna */
+@media (max-width: 768px) {
+  .messages-list {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 10px;
+  }
+}
+
+/* Opcional: Si quieres que las columnas tengan un ancho máximo específico */
+@media (min-width: 1400px) {
+  .messages-list {
+    max-width: 1600px;
+  }
+}
+
 /*=================================
   NOTIFICATION CARD - Estilo corporativo moderno
   ==================================*/
@@ -370,13 +400,21 @@ body {
   padding: 22px;
   margin: 20px 0;
   border-radius: 16px;
-  background: linear-gradient(135deg, #f9fafb 0%, #eef2f7 100%);
+  background: whitesmoke;
   box-shadow: 0 6px 24px rgba(59, 130, 246, 0.15);
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   backdrop-filter: blur(8px);
   animation: fadeInUp 0.6s ease;
+}
+
+/* Contenedor de la lista de notificaciones en dos columnas */
+.notifications-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .notification-card:hover {
@@ -405,7 +443,8 @@ body {
 /* Elementos internos */
 .notification-from {
   font-weight: 700;
-  color: #1e3a8a; /* Azul corporativo */
+  color: #1e3a8a;
+  /* Azul corporativo */
   font-size: 0.95em;
   margin-bottom: 6px;
   text-transform: uppercase;
@@ -413,7 +452,8 @@ body {
 }
 
 .notification-to {
-  color: #475569; /* Gris más sobrio */
+  color: #475569;
+  /* Gris más sobrio */
   font-size: 0.9em;
   margin-bottom: 12px;
 }
@@ -446,9 +486,40 @@ body {
     opacity: 0;
     transform: translateY(12px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE: En tablets, mantener 2 columnas pero ajustar el gap */
+@media (max-width: 1024px) {
+
+  .messages-list,
+  .notifications-list {
+    gap: 16px;
+    max-width: 900px;
+  }
+}
+
+/* RESPONSIVE: En móviles, cambiar a 1 columna */
+@media (max-width: 768px) {
+
+  .messages-list,
+  .notifications-list {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 10px;
+  }
+}
+
+/* Opcional: Si quieres que las columnas tengan un ancho máximo específico */
+@media (min-width: 1400px) {
+
+  .messages-list,
+  .notifications-list {
+    max-width: 1600px;
   }
 }
 
@@ -527,9 +598,9 @@ body {
   ==================================*/
 
 .container-chats {
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  background: whitesmoke;
   border-radius: 18px;
-  border: 1px solid rgba(59, 130, 246, 0.25);
+  border: 1px solid black;
   overflow: hidden;
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
 }
@@ -575,7 +646,7 @@ body {
 .header-chats-internos input,
 .header-chats-clientes input {
   padding: 10px 16px;
-  border: 1px solid var(--border-color);
+  border: 1px solid;
   border-radius: 8px;
   font-size: 14px;
   transition: all 0.3s ease;
@@ -592,22 +663,20 @@ body {
 /* Grid de chats */
 .chat-list-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   padding: 28px;
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  background: #ffffff;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Items de chat */
 .chat-list-item {
   cursor: pointer;
-  background: linear-gradient(
-    135deg,
-    rgba(59, 130, 246, 0.08) 0%,
-    rgba(16, 185, 129, 0.05) 100%
-  );
+  background: whitesmoke;
   border-radius: 12px;
-  border: 1px solid rgba(59, 130, 246, 0.25);
+  border: none;
   padding: 18px;
   transition: all 0.3s ease;
   border-left: 5px solid var(--primary);
@@ -647,11 +716,9 @@ body {
   padding: 50px 30px;
   color: var(--text-muted);
   font-size: 1em;
-  background: linear-gradient(
-    135deg,
-    rgba(59, 130, 246, 0.05) 0%,
-    rgba(16, 185, 129, 0.05) 100%
-  );
+  background: linear-gradient(135deg,
+      rgba(59, 130, 246, 0.05) 0%,
+      rgba(16, 185, 129, 0.05) 100%);
   border-radius: 12px;
   border: 1px dashed rgba(59, 130, 246, 0.25);
 }
@@ -743,6 +810,7 @@ body {
 
 /* Tablets grandes y pantallas medianas */
 @media (max-width: 1024px) {
+
   .container-messages,
   .container-notifications {
     padding: 20px;
@@ -750,7 +818,8 @@ body {
 
   .messages-header h1,
   .notifications-header h1 {
-    font-size: clamp(1.8rem, 2vw, 2.2rem); /* Adaptativo */
+    font-size: clamp(1.8rem, 2vw, 2.2rem);
+    /* Adaptativo */
   }
 
   .chat-list-grid {
@@ -761,6 +830,7 @@ body {
 
 /* Tablets pequeñas y móviles grandes */
 @media (max-width: 768px) {
+
   .container-messages,
   .container-notifications {
     padding: 16px;
@@ -787,7 +857,8 @@ body {
 
   .message-card.received,
   .message-card.sent {
-    margin: 0; /* Se eliminan márgenes laterales en móvil */
+    margin: 0;
+    /* Se eliminan márgenes laterales en móvil */
   }
 
   .nav-links {
@@ -798,13 +869,15 @@ body {
   .nav-links a {
     padding: 10px 16px;
     font-size: 0.9em;
-    flex: 1; /* Ocupan mismo ancho */
+    flex: 1;
+    /* Ocupan mismo ancho */
     text-align: center;
   }
 }
 
 /* Móviles pequeños */
 @media (max-width: 480px) {
+
   .messages-header h1,
   .notifications-header h1 {
     font-size: clamp(1.2rem, 5vw, 1.3rem);
@@ -832,4 +905,137 @@ body {
     gap: 14px;
     padding: 14px;
   }
+}
+
+/* Estilos para el componente FetchExample */
+
+.fetch-example-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.fetch-example-container h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.data-section {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.data-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.data-section h2 {
+    color: #34495e;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+.data-section button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.data-section button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.data-section button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.error-message {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    font-weight: 500;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.data-list {
+    margin-top: 15px;
+}
+
+.data-list>p {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.data-item {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    border-left: 4px solid #3498db;
+    transition: all 0.2s;
+}
+
+.data-item:hover {
+    transform: translateX(5px);
+    border-left-color: #667eea;
+}
+
+.data-item strong {
+    color: #2c3e50;
+    display: inline-block;
+    min-width: 80px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .fetch-example-container {
+        padding: 10px;
+    }
+
+    .data-section {
+        padding: 15px;
+    }
+
+    .fetch-example-container h1 {
+        font-size: 1.5rem;
+    }
+
+    .data-section h2 {
+        font-size: 1.2rem;
+    }
 }

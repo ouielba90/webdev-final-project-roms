@@ -52,7 +52,7 @@ function ProjectItem({ project, onClose, onSubmit }) {
             <div className="modal-overlay">
                 <div className="modal-content">
                     <header>
-                        <h3>Editar Projecto</h3>
+                        <h3 className="modal-title">Editar Projecto</h3>
                     </header>
                     <div className="content-modal">
                         <form onSubmit={handelSubmit}>

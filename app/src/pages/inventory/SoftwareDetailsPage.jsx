@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { DataContext } from "./../../context/inventory/DataContext"
 
 function SoftwareDetailsPage() {
@@ -7,25 +7,19 @@ function SoftwareDetailsPage() {
   const navigate = useNavigate()
   const { software, hardware, servers } = useContext(DataContext)
   const softwareItem = software.find(s => s.id === Number(id));
-  console.log(softwareItem.installedOnHardware)
-  const hardAssocList = softwareItem.installedOnHardware.map((hardId) => {
-    let hardwareInfo = hardware.find(h => h.id === hardId)
-    console.log(hardwareInfo)
-    return { model: hardwareInfo.model, type: hardwareInfo.type, status: hardwareInfo.status }
-  })
-  const serversAssocList = softwareItem.serverId.map((servId) => {
-    let serverInfo = servers.find(h => h.id === servId)
-    console.log(serverInfo)
-    return { name: serverInfo.name, location: serverInfo.location, status: serverInfo.status }
-  })
-
   if (!softwareItem) return <p>Software no encontrado.</p>;
+
+  const hardwareMap = Object.fromEntries(hardware.map(h => [h.id, h]));
+  const serverMap = Object.fromEntries(servers.map(s => [s.id, s]));
+
+  const hardAssocList = softwareItem.installedOnHardware.map(id => hardwareMap[id]);
+  const serversAssocList = softwareItem.serverId.map(id => serverMap[id]);
 
   return (
     <>
       <div className="details-main">
         <div>
-          <h3>{softwareItem.name}</h3>
+          <h2>{softwareItem.name}</h2>
           <p>{softwareItem.description}</p>
           <p className={`status ${softwareItem.status.toLowerCase()}`}>
             {softwareItem.status}
@@ -52,16 +46,18 @@ function SoftwareDetailsPage() {
 
         <div>
           <h3>Hardware asociado</h3>
-          <div className="details-quick-stats">
+          <div className="details-quick-stats-ii">
             {hardAssocList.length ? (
               hardAssocList.map((h, i) => (
-                <div key={i} className="assoc-card">
-                  <p className="assoc-name">{h.model}</p>
-                  <p className="assoc-type">{h.type}</p>
-                  <p className={`assoc-status ${h.status.replace(" ", "-").toLowerCase()}`}>
-                    {h.status}
-                  </p>
-                </div>
+                <Link key={i} to={`/inventory/hardware/${h.id}`} className="details-links">
+                  <div className="assoc-card">
+                    <p className="assoc-name">{h.model}</p>
+                    <p className="assoc-type">{h.type}</p>
+                    <p className={`assoc-status ${h.status.replace(" ", "-").toLowerCase()}`}>
+                      {h.status.charAt(0).toUpperCase() + h.status.slice(1)}
+                    </p>
+                  </div>
+                </Link>
               ))
             ) : (
               <div className="assoc-card">

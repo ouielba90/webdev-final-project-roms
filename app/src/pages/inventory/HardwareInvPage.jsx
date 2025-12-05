@@ -1,92 +1,45 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { DataContext } from "../../context/inventory/DataContext";
 import HardwareCard from "../../components/inventory/HardwareCard";
 import AddHardware from "../../components/inventory/AddHardware";
 import EditHardware from "../../components/inventory/EditHardware";
 import Modal from "../../components/inventory/Modal.jsx"
-
+import useFiltersSearch from "../../hooks/inventory/useFiltersSearch.js";
 
 function HardwareInvPage() {
-  const { hardware, software } = useContext(DataContext)
-  const [query, setQuery] = useState(hardware)
-  const [search, setSearch] = useState("")
-  const [az, setAZ] = useState(false)
-  const [za, setZA] = useState(false)
-  const [type, setType] = useState("")
-  const [status, setStatus] = useState("")
+  const { hardware, setHardware, software } = useContext(DataContext)
 
-  useEffect(() => {
-    let filtered = hardware.filter(
-      (el) => {
-        const matchesSearch = el.model.toLowerCase().includes(search.toLowerCase())
-        const matchesType = type === "" || type === "Todos" || el.type === type
-        const matchesStatus = status === "" || status === "Todos" || el.status === status
-
-        return matchesSearch && matchesType && matchesStatus
-      })
-
-    if (az) {
-      filtered = [...filtered].sort((a, b) =>
-        a.model.toLowerCase().localeCompare(b.model.toLowerCase())
-      );
-    }
-    if (za) {
-      filtered = [...filtered].sort((a, b) =>
-        b.model.toLowerCase().localeCompare(a.model.toLowerCase())
-      );
-    }
-
-    setQuery(filtered);
-  }, [search, hardware, az, za, type, status]);
-
-  function handleSearch(e) {
-    setSearch(e.target.value)
-  }
-
-  function handleSortAZ() {
-    setAZ(!az)
-    setZA(false)
-  }
-
-  function handleSortZA() {
-    setZA(!za)
-    setAZ(false)
-  }
-
-  function handleType(e) {
-    console.log(e.target.value)
-    setType(e.target.value)
-  }
-  function handleStatus(e) {
-    setStatus(e.target.value)
-  }
+  const { filtered, az, za, setAZ, setZA, handleSearch, handleStatus, handleType } =
+    useFiltersSearch(hardware, "hardware");
 
   function handleRemove(id) {
-    console.log(id)
-    setQuery(prev => prev.filter(el => el.id !== id))
+    //console.log(id)
+    setHardware(prev => prev.filter(el => el.id !== id))
   }
 
   const [addFormOpen, setAddFormOpen] = useState(false)
   const [editFormOpen, setEditFormOpen] = useState(false)
   const [currEditId, setCurrEditId] = useState(0)
   const [selectedSoft, setSelectedSoft] = useState([]);
-  const softList = Array.from(new Set(software.map(el => { return { id: el.id, name: el.name } })))
+  const softList = software.map(el => { return { id: el.id, name: el.name } })
 
   function handleSubmit(e) {
     e.preventDefault()
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
     const newItem = {
-      id: query.length ? query.at(-1).id + 1 : 2001,
+      id: hardware.length ? hardware.at(-1).id + 1 : 2001,
       type: data.type,
       model: data.model,
       status: data.status,
-      purchaseDate: isoToeuDate(data.purchaseDate),
+      purchaseDate: data.purchaseDate,
       specs: { cpu: data.cpu, ram: data.ram, storage: data.storage },
       installedSoftware: selectedSoft.map(soft_name => software.find(s => s.name === soft_name).id),
+      os: data.os,
+      lastMaintenance: data.lastMaintenance
     };
 
-    setQuery(prev => [...prev, newItem]);
+    setHardware(prev => [...prev, newItem]);
     e.target.reset()
     setSelectedSoft([]);
     setAddFormOpen(false)
@@ -94,7 +47,7 @@ function HardwareInvPage() {
 
   function handleEdit(id) {
     setEditFormOpen(true)
-    console.log("id", id)
+    //console.log("id", id)
     setCurrEditId(id)
   }
 
@@ -103,16 +56,18 @@ function HardwareInvPage() {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
     //console.log('data from edit', data)
-    setQuery(prev =>
+    setHardware(prev =>
       prev.map(item =>
         item.id === Number(data.id) ? {
           ...item,
           type: data.type,
           model: data.model,
           status: data.status,
-          purchaseDate: isoToeuDate(data.purchaseDate),
+          purchaseDate: data.purchaseDate,
           specs: { cpu: data.cpu, ram: data.ram, storage: data.storage },
           installedSoftware: selectedSoft,
+          os: data.os,
+          lastMaintenance: data.lastMaintenance
         } : item));
     setEditFormOpen(false)
   }
@@ -121,23 +76,25 @@ function HardwareInvPage() {
       <Modal open={editFormOpen} onClose={() => setEditFormOpen(false)}>
         {editFormOpen && (
           <EditHardware
-            toBeEdited={query.find(s => s.id === currEditId)}
-            query={query}
+            toBeEdited={hardware.find(s => s.id === currEditId)}
+            hardware={hardware}
             softList={softList}
             handleSubmitEdit={handleSubmitEdit}
             selectedSoft={selectedSoft}
             setSelectedSoft={setSelectedSoft}
+            setEditFormOpen={setEditFormOpen}
           />
         )}
       </Modal>
       <Modal open={addFormOpen} onClose={() => setAddFormOpen(false)}>
         {addFormOpen && (
           <AddHardware
-            query={query}
+            hardware={hardware}
             softList={softList}
             handleSubmit={handleSubmit}
             selectedSoft={selectedSoft}
             setSelectedSoft={setSelectedSoft}
+            setAddFormOpen={setAddFormOpen}
           />
         )}
       </Modal>
@@ -155,7 +112,7 @@ function HardwareInvPage() {
             </div>
             <div className="filter-field">
               <p>Estado</p>
-              <select onClick={handleStatus}>
+              <select onChange={handleStatus}>
                 <option>Todos</option>
                 <option>operativo</option>
                 <option>mantenimiento</option>
@@ -164,8 +121,8 @@ function HardwareInvPage() {
           </div>
           <div className="filters-btn-combined">
             <div className="filters-row-sort">
-              <button onClick={handleSortAZ}>A-Z</button>
-              <button onClick={handleSortZA}>Z-A</button>
+              <button className={az ? "filter-activation" : ""} onClick={() => { setAZ(!az); setZA(false); }}>A-Z</button>
+              <button className={za ? "filter-activation" : ""} onClick={() => { setZA(!za); setAZ(false); }}>Z-A</button>
             </div>
             <div className="filters-row-sort">
               <button onClick={() => setAddFormOpen(!addFormOpen)}>Añadir hardware</button>
@@ -173,17 +130,16 @@ function HardwareInvPage() {
           </div>
         </div>
         <div className="software-cards">
-          {query.map((el) => {
+          {filtered.map((el) => {
             return (
               <HardwareCard
                 key={el.id}
                 id={el.id}
                 type={el.type}
                 model={el.model}
+                os={el.os}
                 status={el.status}
-                purchaseDate={el.purchaseDate}
                 specs={el.specs}
-                installedSoftware={el.installedSoftware.map(soft_id => query.find(s => s.id === soft_id))}
                 handleRemove={handleRemove}
                 handleEdit={handleEdit}
               />
@@ -195,10 +151,4 @@ function HardwareInvPage() {
   )
 }
 
-function isoToeuDate(isoDateStr) {
-  console.log('in1', isoDateStr)
-  const [year, month, day] = isoDateStr.split("-"); // Month index begin with 0
-  console.log(`${day}/${month}/${year}`)
-  return `${day}/${month}/${year}`;
-}
 export default HardwareInvPage

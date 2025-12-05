@@ -4,16 +4,11 @@ import LoadingAnimation from "../../components/inventory/LoadingAnimation.jsx"
 import DashboardGeneralStatus from "../../components/inventory/DashboardGeneralStatus.jsx"
 import DashboardInsightsI from "../../components/inventory/DashboardInsightsI";
 import DashboardInsightsII from "../../components/inventory/DashboardInsightsII.jsx";
+import { daysBetweenDates } from "./../../utils/inventory/date.js";
 
 function DashboardPage() {
   const { software, hardware, licenses, servers } = useContext(DataContext);
   const totalNumRes = software.length + hardware.length + servers.length + licenses.length;
-  //const [subTotalRes, setSubTotalRes] = useState({
-  //  software: software.length,
-  //  hardware: hardware.length,
-  //  licenses: licenses.length,
-  //  servers: servers.length,
-  //})
   let subTotalRes = {
     software: software.length,
     hardware: hardware.length,
@@ -31,14 +26,14 @@ function DashboardPage() {
   const sumActives = availableSoft + operatHard + activeServers + activeLic
 
   let riskLicenses = licenses
-    .map(item => ({ softwareId: item.softwareId, daysLeft: daysBetweenDates(item.expiryDate) }))
+    .map(item => ({ id: item.id, softwareId: item.softwareId, daysLeft: daysBetweenDates(item.expiryDate) }))
     .sort((a, b) => a.daysLeft - b.daysLeft)
     .slice(0, 6);
 
-  let highPopServer = servers
-    .map(item => ({ serverId: item.id, connectedUsers: item.connectedUsers, name: item.name }))
-    .sort((a, b) => b.connectedUsers - a.connectedUsers)
-    .slice(0, 6)
+  let lastMaintHard = hardware
+    .map(item => ({ id: item.id, model: item.model, daysLastMaintenance: daysBetweenDates(item.lastMaintenance) }))
+    .sort((a, b) => a.daysLastMaintenance - b.daysLastMaintenance)
+    .slice(0, 6);
 
   const aggregated = getServerAverages(servers);
   let ramUse = aggregated.sort((a, b) => b.ramUsage - a.ramUsage)//.slice(0, 4);
@@ -49,7 +44,6 @@ function DashboardPage() {
   const uniqueElements = Array.from(
     new Map(combined.map(item => [item.name, item])).values());
 
-  //console.log(combined)
   return (
     <>
       {Object.values(subTotalRes).reduce((sum, value) => sum + value, 0) > 0 ?
@@ -70,7 +64,7 @@ function DashboardPage() {
           <div className="insights-container">
             <DashboardInsightsI
               riskLicenses={riskLicenses}
-              highPopServer={highPopServer}
+              lastMaintHard={lastMaintHard}
               software={software}
             />
             <DashboardInsightsII
@@ -82,15 +76,6 @@ function DashboardPage() {
       }
     </>
   )
-}
-
-function daysBetweenDates(euDateStr) {
-  const [day, month, year] = euDateStr.split("/");
-  const formattedDate = `${year}-${month}-${day}`;
-  const givenDate = new Date(formattedDate);
-  const today = new Date();
-  const diffDays = Math.floor((today - givenDate) / (1000 * 60 * 60 * 24));
-  return diffDays;
 }
 
 function getServerAverages(servers) {

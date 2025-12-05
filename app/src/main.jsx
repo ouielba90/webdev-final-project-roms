@@ -128,6 +128,5 @@ createRoot(document.getElementById('root')).render(
     <ProviderInventory>
       <RouterProvider router={router} />
     </ProviderInventory>
-
   </StrictMode>,
 )

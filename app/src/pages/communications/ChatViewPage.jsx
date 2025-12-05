@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { useParams } from "react-router-dom";
 import { allChats } from '../../../data/communications/chats';
 import ChatMessage from "../../components/communications/ChatMessage";
+import getPosts from "../../logic/getPosts";
 
 function ChatViewPage() {
   const { chatId } = useParams();
@@ -10,8 +11,15 @@ function ChatViewPage() {
   const [newMessageText, setNewMessageText] = useState('');
   const [editingMessageId, setEditingMessageId] = useState(null);
   const [editText, setEditText] = useState('');
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    getPosts()
+    .then(data => setPosts(data))
+    .catch(error => console.error("Error loading posts:", error));
+  }, []);
   
-  // Obtener el usuario actual desde localStorage o usar valor por defecto
+  // Obtener el usuario actual desde el almacenamiento local
   const currentUser = localStorage.getItem('currentUser') || "Carlos";
 
   // Cargar los mensajes del chat

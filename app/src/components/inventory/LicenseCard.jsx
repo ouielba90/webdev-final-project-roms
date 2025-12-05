@@ -11,7 +11,7 @@ function LicenseCard({ id, softwareName, seats, vendor, expiryDate, status, hand
         <div>{vendor}</div>
         <div className="software-card-third-section">
           <div>Licencias: {seats}</div>
-          <div>Expiry date: {expiryDate}</div>
+          <div>Fecha de expiración: {expiryDate}</div>
         </div>
         <div className="software-card-second-section">
           <div className="software-card-details-btn">

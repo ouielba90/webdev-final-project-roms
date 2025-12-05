@@ -1,36 +1,40 @@
 import { useContext } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { DataContext } from "./../../context/inventory/DataContext"
+import OSImage from "../../components/inventory/OSImage"
 
 function ServersDetailsPage() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { software, servers } = useContext(DataContext)
   const serverItem = servers.find(serv => serv.id === Number(id));
-  const softAssocList = serverItem.hostedSoftware.map(sId => {
-    return software.find(s => s.id === sId).name
-  })
-  const servAvgPropNodes = getServerAverages(serverItem.nodeSpecs)
   if (!serverItem) return <p>Servidor no encontrado.</p>;
+
+  const softwareMap = Object.fromEntries(software.map(s => [s.id, s]));
+
+  const softAssocList = serverItem.hostedSoftware.map(id => softwareMap[id]);
+
+  const servAvgPropNodes = getNodeAverages(serverItem.nodeSpecs)
 
   return (
     <>
       <div className="server-details">
-
-        {/* HERO */}
         <div className="server-hero">
           <div>
-            <h2>{serverItem.name}</h2>
-            <p className="ip">{serverItem.ip}</p>
-            <p className="small">{serverItem.location} · {serverItem.os}</p>
-          </div>
-
-          <div className={`status-badge ${serverItem.status}`}>
-            {serverItem.status}
-          </div>
-
-          <div className="connected-users">
-            👥 {serverItem.connectedUsers} usuarios conectados
+            <div className="server-header-container">
+              <h2>{serverItem.name}</h2>
+              <p className="ip">{serverItem.ip}</p>
+              <p className="small">{serverItem.location} · {serverItem.os}</p>
+              <div className="connected-users">
+                👥 {serverItem.connectedUsers} usuarios conectados
+              </div>
+            </div>
+            <div className="subheader-status-os">
+              <div className={`status-badge ${serverItem.status}`}>
+                {serverItem.status}
+              </div>
+              <OSImage osName={serverItem.os} />
+            </div>
           </div>
         </div>
 
@@ -86,7 +90,9 @@ function ServersDetailsPage() {
         <h3>Software instalado</h3>
         <div className="small-card-list">
           {softAssocList.map((soft, i) => (
-            <div key={i} className="mini-card">{soft}</div>
+            <Link to={`/inventory/software/${soft.id}`} className="details-links">
+              <div key={i} className="mini-card">{soft.name}</div>
+            </Link>
           ))}
         </div>
 
@@ -107,15 +113,12 @@ function ServersDetailsPage() {
   )
 }
 
-function getServerAverages(serverNodes) {
+function getNodeAverages(serverNodes) {
   const avgCpu = serverNodes.reduce((sum, n) => sum + n.cpuUsage, 0) / serverNodes.length;
   const avgRam = serverNodes.reduce((sum, n) => sum + n.ramUsage, 0) / serverNodes.length;
   const avgDisk = serverNodes.reduce((sum, n) => sum + n.diskUsage, 0) / serverNodes.length;
 
-  return {
-    cpuUsage: avgCpu,
-    ramUsage: avgRam,
-    diskUsage: avgDisk,
-  };
+  return { cpuUsage: avgCpu, ramUsage: avgRam, diskUsage: avgDisk };
 }
+
 export default ServersDetailsPage

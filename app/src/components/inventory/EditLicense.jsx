@@ -1,24 +1,31 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import useHardwareValidation from "../../hooks/inventory/useLicensesValidation"
 
-function EditLicense({ toBeEdited, softList, handleSubmitEdit }) {
+function EditLicense({ toBeEdited, softList, handleSubmitEdit, setEditFormOpen }) {
 
   const [vendor, setVendor] = useState(toBeEdited.vendor)
   const [seats, setSeats] = useState(toBeEdited.seats)
   const [licenseKey, setLicenseKey] = useState(toBeEdited.licenseKey)
-  const [purchaseDate, setPurchaseDate] = useState(toBeEdited.purchaseDate)
-  const [expiryDate, setExpiryDate] = useState(toBeEdited.expiryDate)
+  const [purchaseDate, setPurchaseDate] = useState(toBeEdited.purchaseDate.split("T")[0])
+  const [expiryDate, setExpiryDate] = useState(toBeEdited.expiryDate.split("T")[0])
   const [cost, setCost] = useState(toBeEdited.cost)
   const [softwareId, setSoftwareId] = useState(toBeEdited.softwareId)
 
-  function euToISO(euDateStr) {
-    const [day, month, year] = euDateStr.split("/"); // Month index begin with 0
-    console.log('kkkkkk', year, month, day)
-    return `${year}-${month}-${day}`;
-  }
-  function isoToEU(isoDateStr) {
-    const [year, month, day] = isoDateStr.split("-"); // Month index begin with 0
-    return `${day}/${month}/${year}`;
-  }
+  const [form, setForm] = useState({
+    vendor: toBeEdited.vendor,
+    seats: toBeEdited.seats,
+    licenseKey: toBeEdited.licenseKey,
+    purchaseDate: toBeEdited.purchaseDate,
+    expiryDate: toBeEdited.expiryDate,
+    cost: toBeEdited.cost,
+  });
+
+  useEffect(() => {
+    setForm({ vendor, seats, licenseKey, purchaseDate, expiryDate, cost });
+  }, [vendor, seats, licenseKey, purchaseDate, expiryDate, cost]);
+
+
+  const { errors, canSubmit } = useHardwareValidation(form);
 
   return (
     <>
@@ -32,7 +39,7 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit }) {
         </div>
         <div className="addsoft-row">
           <div className="addsoft-group">
-            <label htmlFor="software">Software:</label>
+            <label htmlFor="software">Software</label>
             <select id="softwareId" name="softwareId" value={softwareId}
               onChange={(e) => setSoftwareId(e.target.value)}>
               {softList.map((software, i) => {
@@ -43,50 +50,60 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit }) {
             </select>
           </div>
           <div className="addsoft-group">
-            <label htmlFor="vendor">Proveedor:</label>
+            <label htmlFor="vendor">Proveedor</label>
             <input type="text" id="vendor" name="vendor" value={vendor} onChange={(e) => setVendor(e.target.value)} />
+            {errors.vendor && <small className="error-msg">{errors.vendor}</small>}
           </div>
         </div>
         <div className="addsoft-row">
           <div className="addsoft-group">
-            <label htmlFor="seats">Asignaciones:</label>
+            <label htmlFor="seats">Asignaciones</label>
             <input type="number" id="seats" name="seats" value={seats} onChange={(e) => setSeats(e.target.value)} />
+            {errors.seats && <small className="error-msg">{errors.seats}</small>}
           </div>
           <div className="addsoft-group">
-            <label htmlFor="licenseKey">Clave de licencia:</label>
+            <label htmlFor="licenseKey">Clave de licencia</label>
             <input type="text" id="licenseKey" name="licenseKey" value={licenseKey} onChange={(e) => setLicenseKey(e.target.value)} />
+            {errors.licenseKey && <small className="error-msg">{errors.licenseKey}</small>}
           </div>
         </div>
         <div className="addsoft-row">
           <div className="addsoft-group">
-            <label htmlFor="purchaseDate">Fecha de compra:</label>
+            <label htmlFor="purchaseDate">Fecha de compra</label>
             <input
               type="date"
               id="purchaseDate"
               name="purchaseDate"
-              value={euToISO(purchaseDate)}
-              onChange={(e) => setPurchaseDate(isoToEU(e.target.value))}
+              value={purchaseDate}
+              onChange={(e) => setPurchaseDate(e.target.value)}
             />
+            {errors.purchaseDate && <small className="error-msg">{errors.purchaseDate}</small>}
 
           </div>
           <div className="addsoft-group">
-            <label htmlFor="expiryDate">Fecha de expiración:</label>
+            <label htmlFor="expiryDate">Fecha de expiración</label>
             <input
               type="date"
               id="expiryDate"
               name="expiryDate"
-              value={euToISO(expiryDate)}
-              onChange={(e) => setExpiryDate(isoToEU(e.target.value))}
+              value={expiryDate}
+              onChange={(e) => setExpiryDate(e.target.value)}
             />
+            {errors.compareDates && <small className="error-msg">{errors.compareDates}</small>}
           </div>
         </div>
         <div className="addsoft-row">
           <div className="addsoft-group">
-            <label htmlFor="cost">Precio:</label>
+            <label htmlFor="cost">Precio (€)</label>
             <input type="number" id="cost" name="cost" value={cost} onChange={(e) => setCost(e.target.value)} />
+            {errors.cost && <small className="error-msg">{errors.cost}</small>}
           </div>
         </div>
-        <button type="submit" className="addsoft-submit">Editar</button>
+
+        <div className="addsoft-row">
+          <button className="addsoft-cancel" type="button" onClick={() => setEditFormOpen(false)}>Cancel</button>
+          <button type="submit" className="addsoft-submit" disabled={!canSubmit}>Aplicar cambios</button>
+        </div>
       </form>
     </>
   )

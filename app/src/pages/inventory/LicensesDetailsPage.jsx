@@ -1,26 +1,30 @@
 import { useContext } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { DataContext } from "./../../context/inventory/DataContext"
+import { isoToeuDate, daysBetweenDates } from "./../../utils/inventory/date.js";
 
 function LicensesDetailsPage() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { software, licenses } = useContext(DataContext)
   const licenseItem = licenses.find(l => l.id === Number(id));
-  console.log(licenseItem)
-  const softAssoc = software.find(s => s.id === licenseItem.softwareId)
-
   if (!licenseItem) return <p>Licencia no encontrada.</p>;
+
+  const softAssoc = software.find(s => s.id === licenseItem.softwareId)
 
   return (
     <>
       <div className="details-main">
         <div>
-          <h3>License {licenseItem.id}</h3>
-          <p><strong>{softAssoc.name}</strong></p>
-          {daysBetweenDates(licenseItem.expiryDate) < 0 ?
-            <p className="status activo">Activo</p>
-            : <p className="status expirado">Expirado</p>}
+
+          <h2>License {licenseItem.id}</h2>
+          <p><strong>Asociado a: </strong>
+            <Link to={`/inventory/software/${softAssoc.id}`} className="details-links">
+              {softAssoc.name}
+            </Link></p>
+          {daysBetweenDates(licenseItem.expiryDate) > 0 ?
+            <p className="status activa">Activa</p>
+            : <p className="status expirada">Expirada</p>}
         </div>
 
         <div>
@@ -32,11 +36,11 @@ function LicensesDetailsPage() {
             </div>
             <div>
               <p><strong>Fecha de compra</strong></p>
-              <p>{licenseItem.purchaseDate}</p>
+              <p>{isoToeuDate(licenseItem.purchaseDate)}</p>
             </div>
             <div>
               <p><strong>Fecha de expiración</strong></p>
-              <p>{licenseItem.expiryDate}</p>
+              <p>{isoToeuDate(licenseItem.expiryDate)}</p>
             </div>
           </div>
         </div>
@@ -62,20 +66,9 @@ function LicensesDetailsPage() {
         <button onClick={() => navigate("/inventory/licenses")}>
           Volver a la lista
         </button>
-      </div>
+      </div >
     </>
   )
 }
 
-function daysBetweenDates(euDateStr) {
-  const [day, month, year] = euDateStr.split("/");
-  const formattedDate = `${year}-${month}-${day}`;
-
-  const givenDate = new Date(formattedDate);
-  const today = new Date();
-
-  const diffDays = Math.floor((today - givenDate) / (1000 * 60 * 60 * 24));
-
-  return diffDays;
-}
 export default LicensesDetailsPage

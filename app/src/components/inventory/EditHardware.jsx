@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react"
+import useHardwareValidation from "../../hooks/inventory/useHardwareValidation";
 
-function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, setSelectedSoft }) {
+function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, setSelectedSoft, setEditFormOpen }) {
   const [type, setType] = useState(toBeEdited.type)
   const [model, setModel] = useState(toBeEdited.model)
   const [status, setStatus] = useState(toBeEdited.status)
-  const [purchaseDate, setPurchaseDate] = useState(toBeEdited.purchaseDate)
-  const [specsCPU, setSpecsCPU] = useState(toBeEdited.specs.cpu)
-  const [specsRAM, setSpecsRAM] = useState(toBeEdited.specs.ram)
-  const [specsStorage, setSpecsStorage] = useState(toBeEdited.specs.storage)
-
-  console.log("raw purchaseDate:", purchaseDate, " type:", typeof purchaseDate, "len:", (purchaseDate || "").length);
-  console.log("json:", JSON.stringify(purchaseDate));
-  console.log("charCodes:", (purchaseDate || "").split("").map(c => c.charCodeAt(0)));
-  console.log("new Date ->", new Date(purchaseDate), "isNaN:", isNaN(new Date(purchaseDate)));
+  const [purchaseDate, setPurchaseDate] = useState(toBeEdited.purchaseDate.split("T")[0])
+  const [cpu, setCpu] = useState(toBeEdited.specs.cpu)
+  const [ram, setRam] = useState(toBeEdited.specs.ram)
+  const [storage, setStorage] = useState(toBeEdited.specs.storage)
+  const [os, setOs] = useState(toBeEdited.os)
+  const [lastMaintenance, setLastMaintenance] = useState(toBeEdited.lastMaintenance.split("T")[0])
 
   function handleSelectedSoftware(e) {
     const selected = Array.from(e.target.selectedOptions, option => option.value);
@@ -23,15 +21,22 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
     setSelectedSoft(toBeEdited.installedSoftware)
   }, [toBeEdited, setSelectedSoft])
 
-  function euToISO(euDateStr) {
-    const [day, month, year] = euDateStr.split("/"); // Month index begin with 0
-    console.log('kkkkkk', year, month, day)
-    return `${year}-${month}-${day}`;
-  }
-  function isoToEU(isoDateStr) {
-    const [year, month, day] = isoDateStr.split("-"); // Month index begin with 0
-    return `${day}/${month}/${year}`;
-  }
+  const [form, setForm] = useState({
+    model: toBeEdited.model,
+    purchaseDate: toBeEdited.purchaseDate,
+    lastMaintenance: toBeEdited.lastMaintenance,
+    os: toBeEdited.os,
+    cpu: toBeEdited.cpu,
+    ram: toBeEdited.ram,
+    storage: toBeEdited.storage
+  });
+
+  useEffect(() => {
+    setForm({ model, purchaseDate, lastMaintenance, os, cpu, ram, storage });
+  }, [model, purchaseDate, lastMaintenance, os, cpu, ram, storage]);
+
+  const { errors, canSubmit } = useHardwareValidation(form);
+
   return (
     <form onSubmit={handleSubmitEdit} className="addsoft-form">
       <h2 className="addsoft-title">Editar Hardware</h2>
@@ -39,7 +44,7 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
       <div className="addsoft-row">
         <div className="addsoft-group">
           <label htmlFor="id">ID</label>
-          <input type="text" id="id" name="id" value={toBeEdited.id} readOnly />
+          <input type="text" id="id" name="id" value={toBeEdited.id} disabled />
         </div>
       </div>
       <div className="addsoft-row">
@@ -53,6 +58,7 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
         <div className="addsoft-group">
           <label htmlFor="model">Modelo</label>
           <input type="text" id="model" name="model" value={model} onChange={(e) => setModel(e.target.value)} required />
+          {errors.model && <small className="error-msg">{errors.model}</small>}
         </div>
       </div>
 
@@ -60,8 +66,8 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
         <div className="addsoft-group">
           <label htmlFor="status">Estado</label>
           <select id="status" name="status" value={status} onChange={(e) => setStatus(e.target.value)}>
-            <option>Operativo</option>
-            <option>Mantenimiento</option>
+            <option value={"operativo"}>Operativo</option>
+            <option value={"mantenimiento"}>Mantenimiento</option>
           </select>
         </div>
         <div className="addsoft-group">
@@ -70,28 +76,52 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
             type="date"
             id="purchaseDate"
             name="purchaseDate"
-            value={euToISO(purchaseDate)}
-            onChange={(e) => setPurchaseDate(isoToEU(e.target.value))}
+            value={purchaseDate}
+            onChange={(e) => setPurchaseDate(e.target.value)}
           />
+          {errors.purchaseDate && <small className="error-msg">{errors.purchaseDate}</small>}
         </div>
       </div>
 
-      <div className="addsoft-group">
-        <label htmlFor="cpu">CPU</label>
-        <input type="text" id="cpu" name="cpu" value={specsCPU} onChange={(e) => setSpecsCPU(e.target.value)} />
+      <div className="addsoft-row">
+        <div className="addsoft-group">
+          <label htmlFor="os">Sistema operativo</label>
+          <input type="text" id="os" name="os" value={os} onChange={(e) => setOs(e.target.value)} />
+          {errors.os && <small className="error-msg">{errors.os}</small>}
+        </div>
+        <div className="addsoft-group">
+          <label htmlFor="cpu">CPU</label>
+          <input type="text" id="cpu" name="cpu" value={cpu} onChange={(e) => setCpu(e.target.value)} />
+          {errors.cpu && <small className="error-msg">{errors.cpu}</small>}
+        </div>
       </div>
 
       <div className="addsoft-row">
         <div className="addsoft-group">
           <label htmlFor="ram">RAM</label>
-          <input type="text" id="ram" name="ram" value={specsRAM} onChange={(e) => setSpecsRAM(e.target.value)} />
+          <input type="text" id="ram" name="ram" value={ram} onChange={(e) => setRam(e.target.value)} />
+          {errors.ram && <small className="error-msg">{errors.ram}</small>}
         </div>
         <div className="addsoft-group">
           <label htmlFor="storage">Disco</label>
-          <input type="text" id="storage" name="storage" value={specsStorage} onChange={(e) => setSpecsStorage(e.target.value)} />
+          <input type="text" id="storage" name="storage" value={storage} onChange={(e) => setStorage(e.target.value)} />
+          {errors.storage && <small className="error-msg">{errors.storage}</small>}
         </div>
       </div>
 
+      <div className="addsoft-row">
+        <div className="addsoft-group">
+          <label htmlFor="lastMaintenance">Último mantenimiento</label>
+          <input
+            type="date"
+            id="lastMaintenance"
+            name="lastMaintenance"
+            value={lastMaintenance}
+            onChange={(e) => setLastMaintenance(e.target.value)}
+          />
+          {errors.lastMaintenance && <small className="error-msg">{errors.lastMaintenance}</small>}
+        </div>
+      </div>
       <div className="addsoft-group">
         <label htmlFor="installedSoftware">Software instalado</label>
         <select multiple id="installedSoftware" name="installedSoftware" value={selectedSoft} onChange={handleSelectedSoftware}>
@@ -100,9 +130,13 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
           ))}
         </select>
         <small className="hint">Mantén pulsado CTRL para seleccionar varios</small>
+        {errors.compareDates && <small className="error-msg">{errors.compareDates}</small>}
       </div>
 
-      <button type="submit" className="addsoft-submit">Editar</button>
+      <div className="addsoft-row">
+        <button className="addsoft-cancel" type="button" onClick={() => setEditFormOpen(false)}>Cancel</button>
+        <button type="submit" className="addsoft-submit" disabled={!canSubmit}>Aplicar cambios</button>
+      </div>
     </form>
   )
 }

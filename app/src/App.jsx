@@ -1,7 +1,5 @@
-
-
-import MainHomeMenu from './components/homepage/MainHomeMenu';
 import { Outlet, useLocation } from 'react-router-dom';
+import MainHomeMenu from './components/homepage/MainHomeMenu';
 import ScrollToTop from './components/homepage/ScrollToTop';
 
 function App() {

@@ -4,7 +4,10 @@ function useServersApi() {
   async function getServers() {
     return fetch(apiUrl)
       .then((response) => {
-        response.ok && console.log(`Status: ${response.status}`);
+        response.ok &&
+          console.log(
+            `Status: ${response.status}. Servers data fetched correctly.`,
+          );
         return response.json();
       })
       .catch((error) => console.log(`Error while fetching the data: ${error}`));

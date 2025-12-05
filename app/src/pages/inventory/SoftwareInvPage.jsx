@@ -1,82 +1,42 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { DataContext } from "../../context/inventory/DataContext";
 import SoftwareCard from "../../components/inventory/SoftwareCard";
 import AddSoftware from "../../components/inventory/AddSoftware";
 import EditSoftware from "../../components/inventory/EditSoftware.jsx"
 import Modal from "../../components/inventory/Modal.jsx"
 import { Outlet } from "react-router-dom";
+import useFiltersSearch from "../../hooks/inventory/useFiltersSearch.js";
 
 function SoftwareInvPage() {
-  const { software, hardware, servers } = useContext(DataContext);
+  const { software, setSoftware, hardware, servers } = useContext(DataContext);
 
-  const [query, setQuery] = useState(software)
-  const [search, setSearch] = useState("")
-  const [az, setAZ] = useState(false)
-  const [za, setZA] = useState(false)
-  const [status, setStatus] = useState("")
+  const { filtered, az, za, setAZ, setZA, handleSearch, handleStatus } =
+    useFiltersSearch(software, "software");
 
-  useEffect(() => {
-    let filtered = software.filter(
-      (el) => {
-        const matchesSearch = el.name.toLowerCase().includes(search.toLowerCase()) ||
-          el.description.toLowerCase().includes(search.toLowerCase())
-        const matchesStatus = status === "" || status === "Todos" || el.status === status
-
-        return matchesSearch && matchesStatus
-      })
-
-    if (az) {
-      filtered = [...filtered].sort((a, b) =>
-        a.name.toLowerCase().localeCompare(b.name.toLowerCase())
-      );
-    }
-    if (za) {
-      filtered = [...filtered].sort((a, b) =>
-        b.name.toLowerCase().localeCompare(a.name.toLowerCase())
-      );
-    }
-
-    setQuery(filtered);
-  }, [search, software, az, za, status]);
-
-  function handleSearch(e) {
-    setSearch(e.target.value)
-  }
-
-  function handleSortAZ() {
-    setAZ(!az)
-    setZA(false)
-  }
-
-  function handleSortZA() {
-    setZA(!za)
-    setAZ(false)
-  }
-
-  function handleStatus(e) {
-    setStatus(e.target.value)
-  }
+  const hardwareById = Object.fromEntries(hardware.map(h => [h.id, h]));
+  const serversById = Object.fromEntries(servers.map(s => [s.id, s]));
 
   function handleRemove(id) {
-    setQuery(prev => prev.filter(el => el.id !== id))
+    setSoftware(prev => prev.filter(el => el.id !== id))
   }
 
+  // Forms
   const [addFormOpen, setAddFormOpen] = useState(false)
   const [editFormOpen, setEditFormOpen] = useState(false)
   const [currEditId, setCurrEditId] = useState(0)
   const [selectedHard, setSelectedHard] = useState([]);
   const [selectedServ, setSelectedServ] = useState([]);
-  const hardList = Array.from(new Set(hardware.map(el => { return { id: el.id, model: el.model } })))
   const categList = Array.from(new Set(software.map(el => el.category)))
-  const serverList = Array.from(new Set(servers.map(el => { return { id: el.id, name: el.name } })))
+  const hardList = hardware.map(el => { return { id: el.id, model: el.model } })
+  const serverList = servers.map(el => { return { id: el.id, name: el.name } })
 
   function handleSubmit(e) {
     e.preventDefault()
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    //console.log('handle', selectedHard)
+    //console.log(data.status)
     const newItem = {
-      id: query.length ? query.at(-1).id + 1 : 1001,
+      id: software.length ? software.at(-1).id + 1 : 1001,
       name: data.name,
       version: data.version,
       category: data.category,
@@ -87,7 +47,7 @@ function SoftwareInvPage() {
       description: data.description,
     };
 
-    setQuery(prev => [...prev, newItem]);
+    setSoftware(prev => [...prev, newItem]);
     e.target.reset()
     setSelectedHard([])
     setSelectedServ([])
@@ -100,11 +60,11 @@ function SoftwareInvPage() {
   }
 
   function handleSubmitEdit(e) {
+    //console.log("handleeeeeeeeee")
     e.preventDefault()
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    //console.log('data from edit', data, selectedHard)
-    setQuery(prev =>
+    setSoftware(prev =>
       prev.map(item =>
         item.id === Number(data.id) ? {
           ...item,
@@ -119,12 +79,11 @@ function SoftwareInvPage() {
     setEditFormOpen(false)
   }
 
-
   return (
     <>
       <Modal open={editFormOpen} onClose={() => setEditFormOpen(false)}>
         <EditSoftware
-          toBeEdited={query.find(s => s.id === currEditId)}
+          toBeEdited={software.find(s => s.id === currEditId)}
           categList={categList}
           serverList={serverList}
           hardList={hardList}
@@ -133,11 +92,12 @@ function SoftwareInvPage() {
           setSelectedHard={setSelectedHard}
           selectedServ={selectedServ}
           setSelectedServ={setSelectedServ}
+          setEditFormOpen={setEditFormOpen}
         />
       </Modal>
       <Modal open={addFormOpen} onClose={() => setAddFormOpen(false)}>
         <AddSoftware
-          query={query}
+          software={software}
           categList={categList}
           serverList={serverList}
           hardList={hardList}
@@ -146,6 +106,7 @@ function SoftwareInvPage() {
           setSelectedHard={setSelectedHard}
           selectedServ={selectedServ}
           setSelectedServ={setSelectedServ}
+          setAddFormOpen={setAddFormOpen}
         />
       </Modal>
       <div className="software-main-container">
@@ -163,8 +124,8 @@ function SoftwareInvPage() {
           </div>
           <div className="filters-btn-combined">
             <div className="filters-row-sort">
-              <button onClick={handleSortAZ}>A-Z</button>
-              <button onClick={handleSortZA}>Z-A</button>
+              <button className={az ? "filter-activation" : ""} onClick={() => { setAZ(!az); setZA(false); }}>A-Z</button>
+              <button className={za ? "filter-activation" : ""} onClick={() => { setZA(!za); setAZ(false); }}>Z-A</button>
             </div>
             <div className="filters-row-sort">
               <button onClick={() => setAddFormOpen(!addFormOpen)}>Añadir software</button>
@@ -172,9 +133,7 @@ function SoftwareInvPage() {
           </div>
         </div>
         <div className="software-cards">
-          {query.map((el) => {
-            console.log(el.id, el.serverId)
-            //console.log("card", el.id, el.name, el.serverId)
+          {filtered.map((el) => {
             return (
               <SoftwareCard
                 key={el.id}
@@ -185,16 +144,8 @@ function SoftwareInvPage() {
                 description={el.description}
                 status={el.status}
                 licenseId={el.licenseId}
-                installedOnHardware={el.installedOnHardware.map(hard => {
-                  // console.log(hardware.find(h => h.id === hard).model)
-                  const v = hardware.find(h => Number(hard) === h.id)
-                  return v ? v.model : undefined;
-                })}
-                serverId={el.serverId.map(serv => {
-                  // console.log(hardware.find(h => h.id === hard).model)
-                  const v = servers.find(s => Number(serv) === s.id)
-                  return v ? v.name : undefined;
-                })}
+                installedOnHardware={el.installedOnHardware.map(hid => hardwareById[Number(hid)]?.model).filter(Boolean)}
+                serverId={el.serverId.map(sid => serversById[Number(sid)]?.name).filter(Boolean)}
                 handleRemove={handleRemove}
                 handleEdit={handleEdit}
               />

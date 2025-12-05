@@ -5,18 +5,11 @@ import "./../../indexOuissam.css"
 import CompactMainMenu from '../../components/homepage/CompactMainMenu'
 import { useContext } from 'react';
 import LoadingAnimation from '../../components/inventory/LoadingAnimation.jsx';
+import ErrorAnimation from '../../components/inventory/ErrorAnimation.jsx';
 
 function HomeInvPage() {
-  const { software, hardware, servers } = useContext(DataContext);
+  const { software, hardware, licenses, servers, error } = useContext(DataContext);
   const currPath = useLocation()
-
-  if (!software.length || !hardware.length || !servers.length) {
-    return (
-      <>
-        <CompactMainMenu />
-        <LoadingAnimation />
-      </>)
-  }
 
   function getSection(path) {
     const parts = path.split("/").filter(Boolean);
@@ -74,7 +67,12 @@ function HomeInvPage() {
         <Link to="/inventory/licenses">Licencias</Link>
         <Link to="/inventory/servers">Servidores</Link>
       </nav>
-      <Outlet />
+      {error.length > 0 ?
+        <ErrorAnimation />
+        : [software, hardware, licenses, servers].some(arr => arr.length === 0) ?
+          <LoadingAnimation />
+          : <Outlet />
+      }
     </>
   )
 }

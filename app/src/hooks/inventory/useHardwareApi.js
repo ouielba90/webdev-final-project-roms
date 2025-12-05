@@ -4,7 +4,10 @@ function useHardwareApi() {
   async function getHardware() {
     return fetch(apiUrl)
       .then((response) => {
-        response.ok && console.log(`Status: ${response.status}`);
+        response.ok &&
+          console.log(
+            `Status: ${response.status}. Hardware data fetched correctly.`,
+          );
         return response.json();
       })
       .catch((error) => console.log(`Error while fetching the data: ${error}`));

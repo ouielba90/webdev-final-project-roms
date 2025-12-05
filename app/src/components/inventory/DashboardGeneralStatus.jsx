@@ -25,7 +25,7 @@ function DashboardGeneralStatus({ totalNumRes, subTotalRes, sumActives, availabl
         </div>
 
         <div className="status-block software">
-          <h3>Software</h3>
+          <h3>📦 Software</h3>
           <p>Activos {availableSoft}</p>
           <div className="bar-container">
             <div
@@ -44,7 +44,7 @@ function DashboardGeneralStatus({ totalNumRes, subTotalRes, sumActives, availabl
         </div>
 
         <div className="status-block hardware">
-          <h3>Hardware</h3>
+          <h3>💻 Hardware</h3>
           <p>Operativos: {operatHard}</p>
 
           <div className="bar-container">
@@ -64,7 +64,7 @@ function DashboardGeneralStatus({ totalNumRes, subTotalRes, sumActives, availabl
         </div>
 
         <div className="status-block licenses">
-          <h3>Licencias</h3>
+          <h3>🔑 Licencias</h3>
           <p>Activas: {activeLic}</p>
 
           <div className="bar-container">
@@ -84,7 +84,7 @@ function DashboardGeneralStatus({ totalNumRes, subTotalRes, sumActives, availabl
         </div>
 
         <div className="status-block servers">
-          <h3>Servidores</h3>
+          <h3>🗄️ Servidores</h3>
           <p>Activos: {activeServers}</p>
 
           <div className="bar-container">
