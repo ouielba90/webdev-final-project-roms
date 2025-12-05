@@ -94,7 +94,7 @@ function ProjectItem({ project, onClose, onSubmit }) {
                                 required
                             />
                             <label htmlFor={`edit-task-${project.id}`}>Nueva tarea:</label>
-                            <div style={{ display: "flex", gap: "8px", marginBottom: "10px" }}>
+                            <div className="task-edit-button-add">
                                 <input
                                     id={`edit-task-${project.id}`}
                                     type="text"

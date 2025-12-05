@@ -116,16 +116,6 @@ body{
     align-items: center;
 }
 
-.box-create-project {
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-    border: 1px, solid, black;
-    padding: 20px;
-    margin-bottom: 30px;
-}
-
 .div-create {
     display: flex;
     flex-direction: column;
@@ -170,6 +160,7 @@ body{
     color: #3b82f6;
 }
 .content-modal label{
+    font-weight: bold;
     color: #3b82f6;
 }
 .content-modal input {
@@ -195,6 +186,11 @@ body{
 }
 .modal-title {
     color: #3b82f6;
+}
+.task-edit-button-add{
+    display: flex; 
+    gap: 8px;
+    margin-bottom: 10px;
 }
 
 
