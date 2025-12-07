@@ -21,7 +21,7 @@ function HardwareInvPage() {
   const [editFormOpen, setEditFormOpen] = useState(false)
   const [currEditId, setCurrEditId] = useState(0)
   const [selectedSoft, setSelectedSoft] = useState([]);
-  const softList = software.map(el => { return { id: el.id, name: el.name } })
+  const softList = software.map(el => { return { id: el._id, name: el.name } })
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -76,7 +76,7 @@ function HardwareInvPage() {
       <Modal open={editFormOpen} onClose={() => setEditFormOpen(false)}>
         {editFormOpen && (
           <EditHardware
-            toBeEdited={hardware.find(s => s.id === currEditId)}
+            toBeEdited={hardware.find(s => s._id === currEditId)}
             hardware={hardware}
             softList={softList}
             handleSubmitEdit={handleSubmitEdit}
@@ -133,8 +133,8 @@ function HardwareInvPage() {
           {filtered.map((el) => {
             return (
               <HardwareCard
-                key={el.id}
-                id={el.id}
+                key={el._id}
+                id={el._id}
                 type={el.type}
                 model={el.model}
                 os={el.os}

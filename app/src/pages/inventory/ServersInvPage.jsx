@@ -45,8 +45,8 @@ function ServersInvPage() {
           {filtered.map((el) => {
             return (
               <ServerCard
-                key={el.id}
-                id={el.id}
+                key={el._id}
+                id={el._id}
                 name={el.name}
                 ip={el.ip}
                 location={el.location}
@@ -54,7 +54,7 @@ function ServersInvPage() {
                 status={el.status}
                 numberOfNodes={el.numberOfNodes}
                 hostedSoftware={el.hostedSoftware.map((hS) =>
-                  software.find((s) => hS === s.id).name)}
+                  software.find((s) => hS === s._id).name)}
                 connectedUsers={el.connectedUsers}
               />
             )

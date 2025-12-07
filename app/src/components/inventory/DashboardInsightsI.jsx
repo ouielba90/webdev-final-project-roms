@@ -24,7 +24,7 @@ function DashboardInsightsI({ riskLicenses, lastMaintHard, software }) {
                   : undefined
               return (
                 <tr key={item.softwareId}>
-                  <td>{software.filter(s => s.id === item.softwareId).map(s => s.name)}</td>
+                  <td>{software.filter(s => s._id === item.softwareId).map(s => s.name)}</td>
                   <td className="issues">{color}</td>
                 </tr>
               );
