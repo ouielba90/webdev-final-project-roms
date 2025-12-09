@@ -8,6 +8,7 @@ import ProjectDelete from "./ProjectDelete"
 import ProjectEdit from "./ProjectEdit"
 import FetchData from "./FetchData"
 
+// funcion para renderizar la lista de proyectos
 function ProjectList() {
   //URLs de las APIs
   const apiProjects = import.meta.env.VITE_API_URL_PROJECTS

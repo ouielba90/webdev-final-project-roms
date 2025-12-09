@@ -1,5 +1,5 @@
 
-
+// Función para obtener datos de proyectos desde una API
 function fetchData(apiUrl) {
     console.log("Cargando proyectos desde la API...");
     return fetch(apiUrl)

@@ -1,4 +1,5 @@
 
+// funcion para renderizar cada item de proyecto
 function ProjectItem({ project, projectUsers, activeId, setActiveId, onEdit, onDelete}) {
 
     const {id, name, client, status, description, tasks} = project
@@ -38,9 +39,8 @@ function ProjectItem({ project, projectUsers, activeId, setActiveId, onEdit, onD
             return "status-gray";
     }
 };
-
+    // evento para abrir o cerrar el proyecto
     const isOpen = activeId === id;
-
     const toggleOpen = () => {
         setActiveId(isOpen ? null : id);
     };
