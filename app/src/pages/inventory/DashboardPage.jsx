@@ -26,12 +26,12 @@ function DashboardPage() {
   const sumActives = availableSoft + operatHard + activeServers + activeLic
 
   let riskLicenses = licenses
-    .map(item => ({ id: item.id, softwareId: item.softwareId, daysLeft: daysBetweenDates(item.expiryDate) }))
+    .map(item => ({ id: item._id, softwareId: item.softwareId, daysLeft: daysBetweenDates(item.expiryDate) }))
     .sort((a, b) => a.daysLeft - b.daysLeft)
     .slice(0, 6);
 
   let lastMaintHard = hardware
-    .map(item => ({ id: item.id, model: item.model, daysLastMaintenance: daysBetweenDates(item.lastMaintenance) }))
+    .map(item => ({ id: item._id, model: item.model, daysLastMaintenance: daysBetweenDates(item.lastMaintenance) }))
     .sort((a, b) => a.daysLastMaintenance - b.daysLastMaintenance)
     .slice(0, 6);
 

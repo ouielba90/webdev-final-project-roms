@@ -13,7 +13,7 @@ function LicensesInvPage() {
   useEffect(() => {
     setLicenses((prev) =>
       prev.map((lic) => {
-        const sw = software.find((s) => s.id === lic.softwareId);
+        const sw = software.find((s) => s._id === lic.softwareId);
         const diff = daysBetweenDates(lic.expiryDate);
         return {
           ...lic,
@@ -41,7 +41,7 @@ function LicensesInvPage() {
   const [currEditId, setCurrEditId] = useState(0)
   const [selectedSoft, setSelectedSoft] = useState("");
   const softList = software.filter(s => s.licenseId === null)
-    .map(s => ({ id: s.id, name: s.name }));
+    .map(s => ({ id: s._id, name: s.name }));
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -86,7 +86,7 @@ function LicensesInvPage() {
       <Modal open={editFormOpen} onClose={() => setEditFormOpen(false)}>
         {editFormOpen && (
           <EditLicense
-            toBeEdited={licenses.find(s => s.id === currEditId)}
+            toBeEdited={licenses.find(s => s._id === currEditId)}
             licenses={licenses}
             softList={softList}
             handleSubmitEdit={handleSubmitEdit}
@@ -133,9 +133,9 @@ function LicensesInvPage() {
           {filtered.map((el) => {
             return (
               <LicenseCard
-                key={el.id}
-                id={el.id}
-                softwareName={software.find((s) => el.softwareId === s.id)?.name}
+                key={el._id}
+                id={el._id}
+                softwareName={software.find((s) => el.softwareId === s._id)?.name}
                 seats={el.seats}
                 purchaseDate={isoToeuDate(el.purchaseDate)}
                 expiryDate={isoToeuDate(el.expiryDate)}

@@ -6,14 +6,15 @@ function SoftwareDetailsPage() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { software, hardware, servers } = useContext(DataContext)
-  const softwareItem = software.find(s => s.id === Number(id));
+
+  const softwareItem = software.find(s => s._id === id);
   if (!softwareItem) return <p>Software no encontrado.</p>;
 
-  const hardwareMap = Object.fromEntries(hardware.map(h => [h.id, h]));
-  const serverMap = Object.fromEntries(servers.map(s => [s.id, s]));
+  const hardwareMap = Object.fromEntries(hardware.map(h => [h._id, h]));
+  const serverMap = Object.fromEntries(servers.map(s => [s._id, s]));
 
-  const hardAssocList = softwareItem.installedOnHardware.map(id => hardwareMap[id]);
-  const serversAssocList = softwareItem.serverId.map(id => serverMap[id]);
+  const hardAssocList = softwareItem.installedOnHardware.map(id => hardwareMap[id]).filter(Boolean);
+  const serversAssocList = softwareItem.serverId.map(id => serverMap[id]).filter(Boolean);
 
   return (
     <>
@@ -49,7 +50,7 @@ function SoftwareDetailsPage() {
           <div className="details-quick-stats-ii">
             {hardAssocList.length ? (
               hardAssocList.map((h, i) => (
-                <Link key={i} to={`/inventory/hardware/${h.id}`} className="details-links">
+                <Link key={i} to={`/inventory/hardware/${h._id}`} className="details-links">
                   <div className="assoc-card">
                     <p className="assoc-name">{h.model}</p>
                     <p className="assoc-type">{h.type}</p>

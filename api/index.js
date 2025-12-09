@@ -1,5 +1,11 @@
 import cors from 'cors';
 import express from 'express';
+import dotenv from "dotenv"
+import connectDB from "./src/config/db.js"
+import SoftwarePost from "./src/models/inventory.software.model.js"
+import HardwarePost from "./src/models/inventory.hardware.model.js"
+import LicensesPost from "./src/models/inventory.licenses.model.js"
+import ServersPost from "./src/models/inventory.servers.model.js"
 import users from './data/users.data.js';
 import projects from "./data/projects.data.js";
 import projectsUsers from "./data/projectsUsers.data.js";
@@ -12,22 +18,28 @@ import messages from "./data/messages.data.js"
 import chatMessages from "./data/chatMessages.data.js";
 import posts from "./data/post.data.js";
 
+dotenv.config();
+const PORT = process.env.PORT || 3000;
+
+await connectDB();
 const api = express();
-const PORT = 3000;
 
 api.use(cors());
 
+api.use(express.json());
+
+
 /* API MARC */
 api.get("/", (req, res) => {
-    res.send("Hello, World!");
+  res.send("Hello, World!");
 });
 
 api.get("/marc", (req, res) => {
-    res.send("Esta es la API de Marc, los datos se encuentran en /users.");
+  res.send("Esta es la API de Marc, los datos se encuentran en /users.");
 });
 
 api.get("/marc/users", (req, res) => {
-    res.json(users)
+  res.json(users)
 })
 
 /* API OUISSAM FALTA MANEJO DE ERRORES */
@@ -37,20 +49,44 @@ api.get("/ouissam", (req, res) => {
   );
 });
 
-api.get("/ouissam/software", (req, res) => {
-  res.json(software);
+api.get("/ouissam/software", async (req, res) => {
+  try {
+    const posts = await SoftwarePost.find().lean();
+    res.json(posts);
+  } catch (err) {
+    console.error("[ERROR] GET /ouissam/software:", err);
+    res.json({ error: "DB_ERROR" });
+  }
 });
 
-api.get("/ouissam/hardware", (req, res) => {
-  res.json(hardware);
+api.get("/ouissam/hardware", async (req, res) => {
+  try {
+    const posts = await HardwarePost.find().lean();
+    res.json(posts);
+  } catch (err) {
+    console.error("[ERROR] GET /ouissam/hardware:", err);
+    res.json({ error: "DB_ERROR" });
+  }
 });
 
-api.get("/ouissam/licenses", (req, res) => {
-  res.json(licenses);
+api.get("/ouissam/licenses", async (req, res) => {
+  try {
+    const posts = await LicensesPost.find().lean();
+    res.json(posts);
+  } catch (err) {
+    console.error("[ERROR] GET /ouissam/licenses:", err);
+    res.json({ error: "DB_ERROR" });
+  }
 });
 
-api.get("/ouissam/servers", (req, res) => {
-  res.json(servers);
+api.get("/ouissam/servers", async (req, res) => {
+  try {
+    const posts = await ServersPost.find().lean();
+    res.json(posts);
+  } catch (err) {
+    console.error("[ERROR] GET /ouissam/servers:", err);
+    res.json({ error: "DB_ERROR" });
+  }
 });
 /***************************************/
 
@@ -67,19 +103,19 @@ api.get("/projectsUsers", (req, res) => {
 
 /*API Santos*/
 api.get("/notifications", (req, res) => {
-    res.json(notifications);
+  res.json(notifications);
 })
 api.get("/messages", (req, res) => {
-    res.json(messages);
+  res.json(messages);
 })
 api.get("/chat-messages", (req, res) => {
-    res.json(chatMessages);
+  res.json(chatMessages);
 })
 api.get("/posts", (req, res) => {
-    res.json(chatMessages);
+  res.json(chatMessages);
 })
 /**************/
 
 api.listen(PORT, () => {
-    console.log(`API is running at [http://localhost:${PORT}](http://localhost:${PORT})`);
+  console.log(`API is running at [http://localhost:${PORT}](http://localhost:${PORT})`);
 });

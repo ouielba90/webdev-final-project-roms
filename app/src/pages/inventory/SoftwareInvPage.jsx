@@ -13,22 +13,22 @@ function SoftwareInvPage() {
   const { filtered, az, za, setAZ, setZA, handleSearch, handleStatus } =
     useFiltersSearch(software, "software");
 
-  const hardwareById = Object.fromEntries(hardware.map(h => [h.id, h]));
-  const serversById = Object.fromEntries(servers.map(s => [s.id, s]));
+  const hardwareById = Object.fromEntries(hardware.map(h => [h._id, h]));
+  const serversById = Object.fromEntries(servers.map(s => [s._id, s]));
 
   function handleRemove(id) {
-    setSoftware(prev => prev.filter(el => el.id !== id))
+    setSoftware(prev => prev.filter(el => el._id !== id))
   }
 
   // Forms
   const [addFormOpen, setAddFormOpen] = useState(false)
   const [editFormOpen, setEditFormOpen] = useState(false)
-  const [currEditId, setCurrEditId] = useState(0)
+  const [currEditId, setCurrEditId] = useState(null)
   const [selectedHard, setSelectedHard] = useState([]);
   const [selectedServ, setSelectedServ] = useState([]);
   const categList = Array.from(new Set(software.map(el => el.category)))
-  const hardList = hardware.map(el => { return { id: el.id, model: el.model } })
-  const serverList = servers.map(el => { return { id: el.id, name: el.name } })
+  const hardList = hardware.map(el => { return { id: el._id, model: el.model } })
+  const serverList = servers.map(el => { return { id: el._id, name: el.name } })
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -83,7 +83,7 @@ function SoftwareInvPage() {
     <>
       <Modal open={editFormOpen} onClose={() => setEditFormOpen(false)}>
         <EditSoftware
-          toBeEdited={software.find(s => s.id === currEditId)}
+          toBeEdited={software.find(s => s._id === currEditId)}
           categList={categList}
           serverList={serverList}
           hardList={hardList}
@@ -136,16 +136,16 @@ function SoftwareInvPage() {
           {filtered.map((el) => {
             return (
               <SoftwareCard
-                key={el.id}
-                id={el.id}
+                key={el._id}
+                id={el._id}
                 name={el.name}
                 version={el.version}
                 category={el.category}
                 description={el.description}
                 status={el.status}
                 licenseId={el.licenseId}
-                installedOnHardware={el.installedOnHardware.map(hid => hardwareById[Number(hid)]?.model).filter(Boolean)}
-                serverId={el.serverId.map(sid => serversById[Number(sid)]?.name).filter(Boolean)}
+                installedOnHardware={el.installedOnHardware.map(hid => hardwareById[hid]?.model).filter(Boolean)}
+                serverId={el.serverId.map(sid => serversById[sid]?.name).filter(Boolean)}
                 handleRemove={handleRemove}
                 handleEdit={handleEdit}
               />

@@ -7,19 +7,19 @@ function LicensesDetailsPage() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { software, licenses } = useContext(DataContext)
-  const licenseItem = licenses.find(l => l.id === Number(id));
+  const licenseItem = licenses.find(l => l._id === id);
   if (!licenseItem) return <p>Licencia no encontrada.</p>;
 
-  const softAssoc = software.find(s => s.id === licenseItem.softwareId)
+  const softAssoc = software.find(s => s._id === licenseItem.softwareId)
 
   return (
     <>
       <div className="details-main">
         <div>
 
-          <h2>License {licenseItem.id}</h2>
-          <p><strong>Asociado a: </strong>
-            <Link to={`/inventory/software/${softAssoc.id}`} className="details-links">
+          <h2>ID de licencia: {softAssoc._id.slice(-5)}</h2>
+          <p><strong>Asociada a: </strong>
+            <Link to={`/inventory/software/${softAssoc._id}`} className="details-links">
               {softAssoc.name}
             </Link></p>
           {daysBetweenDates(licenseItem.expiryDate) > 0 ?
