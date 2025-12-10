@@ -10,7 +10,7 @@ import './StylesRicardo.css'
 function HomeProjPage() {
 
 
- 
+
 
   const currPath = useLocation() // Se obtiene la ruta actual
   function getSection(path) { // Determinar qué contenido se debe mostrar según la ruta
@@ -29,8 +29,16 @@ function HomeProjPage() {
   return (
     <>
       <CompactMainMenu></CompactMainMenu>
-      <h1 className="general-title">{sectionData.title}</h1>
-      <h3 className="general-subtitle">{sectionData.subtext}</h3>
+      <div className="spacing-top">
+        <div className="general-header">
+          <h1 className="general-title">{sectionData.title}</h1>
+          <h3 className="general-subtitle">{sectionData.subtext}</h3>
+
+        </div>
+
+
+
+      </div>
       <nav className="general-submenu">
       </nav>
 

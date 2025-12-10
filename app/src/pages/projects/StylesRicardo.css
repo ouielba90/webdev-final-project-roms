@@ -193,6 +193,35 @@ body{
     margin-bottom: 10px;
 }
 
+/*estilos para el header de proyectos*/
+.spacing-top{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-image: url("../../../public/img_header/blue_circuit_3.jpg");
+    background-size: cover;
+}
+.general-header{
+    padding-left: 80px;
+    padding-right: 80px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(241, 241, 241);
+    padding-bottom: 75px;
+     clip-path: polygon(
+    10% 0%,  /* arriba izquierda */
+    100% 0%, /* arriba derecha */
+    90% 100%,/* abajo derecha */
+    0% 100%  /* abajo izquierda */
+  );
+}
+.general-submenu{
+    margin-top: 0px;
+}
+/*-----------------------------------------*/
 
 /*diferentes colores para los estados del proyecto*/
 .status-green {
