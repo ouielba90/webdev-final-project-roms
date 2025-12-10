@@ -28,9 +28,10 @@ function AddLicense({ softList, handleSubmit, selectedSoft, setSelectedSoft, set
         <div className="addsoft-row">
           <div className="addsoft-group">
             <label htmlFor="software">Software</label>
-            <select id="software" name="software" value={selectedSoft}
+            <select id="software" name="software"
               onChange={e =>
                 setSelectedSoft(Array.from(e.target.selectedOptions, o => o.value))}>
+              <option key="1234" value="">Selecciona software</option>
               {softList.map((software, i) => {
                 return (
                   <option key={i} value={software.name}>{software.name}</option>

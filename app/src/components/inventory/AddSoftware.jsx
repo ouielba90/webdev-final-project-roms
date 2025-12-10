@@ -5,7 +5,9 @@ function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHa
   const [form, setForm] = useState({
     name: "",
     version: "",
-    description: ""
+    description: "",
+    category: "",
+    status: ""
   });
 
   const { errors, canSubmit } = useSoftwareValidation(form);

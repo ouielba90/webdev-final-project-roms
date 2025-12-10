@@ -11,15 +11,18 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
   const [storage, setStorage] = useState(toBeEdited.specs.storage)
   const [os, setOs] = useState(toBeEdited.os)
   const [lastMaintenance, setLastMaintenance] = useState(toBeEdited.lastMaintenance.split("T")[0])
-
   function handleSelectedSoftware(e) {
     const selected = Array.from(e.target.selectedOptions, option => option.value);
     setSelectedSoft(selected)
   }
-
   useEffect(() => {
-    setSelectedSoft(toBeEdited.installedSoftware)
-  }, [toBeEdited, setSelectedSoft])
+    if (!toBeEdited) return;
+    const names = toBeEdited.installedSoftware
+      .map(id => softList.find(s => s.id === id)?.name)
+      .filter(Boolean);
+
+    setSelectedSoft(names);
+  }, [toBeEdited?._id]);
 
   const [form, setForm] = useState({
     model: toBeEdited.model,
@@ -36,7 +39,6 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
   }, [model, purchaseDate, lastMaintenance, os, cpu, ram, storage]);
 
   const { errors, canSubmit } = useHardwareValidation(form);
-
   return (
     <form onSubmit={handleSubmitEdit} className="addsoft-form">
       <h2 className="addsoft-title">Editar Hardware</h2>
@@ -44,7 +46,7 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
       <div className="addsoft-row">
         <div className="addsoft-group">
           <label htmlFor="id">ID</label>
-          <input type="text" id="id" name="id" value={toBeEdited.id} disabled />
+          <input type="text" id="id" name="id" value={toBeEdited._id} disabled />
         </div>
       </div>
       <div className="addsoft-row">

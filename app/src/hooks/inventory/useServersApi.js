@@ -12,8 +12,19 @@ function useServersApi() {
       })
       .catch((error) => console.log(`Error while fetching the data: ${error}`));
   }
+  async function updateServer(id, updateData) {
+    return fetch(`${apiUrl}/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updateData),
+    })
+      .then((response) => response.json())
+      .catch((error) => {
+        console.error("Error updating server post:", error);
+      });
+  }
 
-  return { getServers };
+  return { getServers, updateServer };
 }
 
 export default useServersApi;

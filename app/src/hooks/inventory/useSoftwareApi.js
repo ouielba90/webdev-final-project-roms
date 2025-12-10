@@ -13,7 +13,39 @@ function useSoftwareApi() {
     });
   }
 
-  return { getSoftware };
+  async function createSoftware(postData) {
+    return fetch(apiUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(postData),
+    })
+      .then((response) => response.json())
+      .catch((error) => {
+        console.error("Error creating software post:", error);
+      });
+  }
+  async function updateSoftware(id, updateData) {
+    return fetch(`${apiUrl}/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updateData),
+    })
+      .then((response) => response.json())
+      .catch((error) => {
+        console.error("Error updating software post:", error);
+      });
+  }
+  async function deleteSoftware(id) {
+    return fetch(`${apiUrl}/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .catch((error) => {
+        console.error("Error deleting software post:", error);
+      });
+  }
+
+  return { getSoftware, createSoftware, updateSoftware, deleteSoftware };
 }
 
 export default useSoftwareApi;

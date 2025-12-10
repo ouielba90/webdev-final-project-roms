@@ -33,8 +33,8 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit, setEditFormOpen }
         <h2 className="addsoft-title">Edit License</h2>
         <div className="addsoft-row">
           <div className="addsoft-group">
-            <label htmlFor="id">ID</label>
-            <input type="text" id="id" name="id" value={toBeEdited.id} disabled />
+            <label htmlFor="_id">ID</label>
+            <input type="text" id="_id" name="_id" value={toBeEdited._id} disabled />
           </div>
         </div>
         <div className="addsoft-row">

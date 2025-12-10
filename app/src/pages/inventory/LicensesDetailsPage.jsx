@@ -17,7 +17,7 @@ function LicensesDetailsPage() {
       <div className="details-main">
         <div>
 
-          <h2>ID de licencia: {softAssoc._id.slice(-5)}</h2>
+          <h2>ID de licencia: {licenseItem._id.slice(-5)}</h2>
           <p><strong>Asociada a: </strong>
             <Link to={`/inventory/software/${softAssoc._id}`} className="details-links">
               {softAssoc.name}

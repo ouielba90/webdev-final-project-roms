@@ -6,9 +6,11 @@ import EditLicense from "../../components/inventory/EditLicense";
 import Modal from "../../components/inventory/Modal.jsx"
 import { isoToeuDate, daysBetweenDates } from "./../../utils/inventory/date.js";
 import useFiltersSearch from "../../hooks/inventory/useFiltersSearch.js";
+import useLicensesActions from "../../hooks/inventory/useLicensesActions.js"
 
 function LicensesInvPage() {
-  let { licenses, setLicenses, software } = useContext(DataContext)
+  let { licenses, setLicenses, licensesApi, software } = useContext(DataContext)
+  const { syncCreationWithSoftware, syncEditWithSoftware, syncRemoveWithSoftware } = useLicensesActions();
 
   useEffect(() => {
     setLicenses((prev) =>
@@ -32,53 +34,78 @@ function LicensesInvPage() {
     setCurrEditId(id)
   }
 
-  function handleRemove(id) {
-    setLicenses(prev => prev.filter(el => el.id !== id))
-  }
-
   const [addFormOpen, setAddFormOpen] = useState(false)
   const [editFormOpen, setEditFormOpen] = useState(false)
   const [currEditId, setCurrEditId] = useState(0)
   const [selectedSoft, setSelectedSoft] = useState("");
-  const softList = software.filter(s => s.licenseId === null)
-    .map(s => ({ id: s._id, name: s.name }));
+  const [softList, setSoftList] = useState(
+    software.filter(s => s.licenseId === null)
+      .map(s => ({ _id: s._id, name: s.name })));
 
-  function handleSubmit(e) {
+  console.log("softList, out", softList)
+  async function handleSubmit(e) {
     e.preventDefault()
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
     const newItem = {
-      id: licenses.length ? licenses.at(-1).id + 1 : 2001,
-      softwareId: software.find(s => s.name === data.software).id,
+      softwareId: software.find(s => s.name === data.software)._id,
       seats: data.seats,
-      purchaseDate: isoToeuDate(data.purchaseDate),
-      expiryDate: isoToeuDate(data.expiryDate),
-      licenceKey: data.licenseKey,
+      purchaseDate: data.purchaseDate,
+      expiryDate: data.expiryDate,
+      licenseKey: data.licenseKey,
       vendor: data.vendor,
       cost: data.cost,
     };
+    const created = await licensesApi.createLicense(newItem);
+    if (!created) return;
+    const normalized = { ...created, id: created._id || created.id }
 
-    setLicenses(prev => [...prev, newItem]);
+    setSoftList(prev => prev.filter((s) => s.name !== data.software))
+    setLicenses(prev => [...prev, normalized]);
+
+    await syncCreationWithSoftware(created._id, created.softwareId);
     e.target.reset()
     setAddFormOpen(false)
   }
-  function handleSubmitEdit(e) {
+  async function handleSubmitEdit(e) {
     e.preventDefault()
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
+    console.log("dataaa", data)
+    const updatedItem = {
+      _id: currEditId,
+      softwareId: software.find(s => s.name === data.softwareId)._id,
+      seats: data.seats,
+      purchaseDate: data.purchaseDate,
+      expiryDate: data.expiryDate,
+      licenseKey: data.licenseKey,
+      vendor: data.vendor,
+      cost: data.cost,
+      //softwareName: data.softwareId
+    }
+    const updated = await licensesApi.updateLicense(currEditId, updatedItem)
+    if (!updated) return;
+    const normalized = {
+      ...updated,
+      status: daysBetweenDates(data.expiryDate) > 0 ? "activa" : "expirada",
+    };
+    console.log("updated and normalized", updated, normalized)
     setLicenses(prev =>
       prev.map(item =>
-        item.id === Number(data.id) ? {
-          ...item,
-          softwareId: software.find(s => s.name === data.softwareId).id,
-          seats: data.seats,
-          purchaseDate: data.purchaseDate,
-          expiryDate: data.expiryDate,
-          licenseKey: data.licenseKey,
-          vendor: data.vendor,
-          cost: data.cost,
-        } : item));
+        item._id === currEditId ? { ...item, ...normalized } : item
+        // This is important because status and softwareName do not exist in the database
+        // In Software and Hardware we don't need this
+      ))
+    const prevItem = licenses.find(item => item._id === currEditId);
+    await syncEditWithSoftware(currEditId, prevItem, updatedItem);
     setEditFormOpen(false)
+  }
+
+  async function handleRemove(id) {
+    const deleted = await licensesApi.deleteLicense(id);
+    if (!deleted) return;
+    setLicenses(prev => prev.filter(el => el._id !== id))
+    await syncRemoveWithSoftware(id);
   }
 
   return (

@@ -12,8 +12,39 @@ function useHardwareApi() {
       })
       .catch((error) => console.log(`Error while fetching the data: ${error}`));
   }
+  async function createHardware(postData) {
+    return fetch(apiUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(postData),
+    })
+      .then((response) => response.json())
+      .catch((error) => {
+        console.error("Error creating hardware post:", error);
+      });
+  }
+  async function updateHardware(id, updateData) {
+    return fetch(`${apiUrl}/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updateData),
+    })
+      .then((response) => response.json())
+      .catch((error) => {
+        console.error("Error updating hardware post:", error);
+      });
+  }
+  async function deleteHardware(id) {
+    return fetch(`${apiUrl}/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .catch((error) => {
+        console.error("Error deleting hardware post:", error);
+      });
+  }
 
-  return { getHardware };
+  return { getHardware, createHardware, updateHardware, deleteHardware };
 }
 
 export default useHardwareApi;
