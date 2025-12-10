@@ -1,9 +1,10 @@
+// Funcion para la ventana modal de eliminar proyecto
 function ProjectDelete({ project, onCancel, onConfirm }) {
-
+    // evento para cancelar la eliminacion
     function handleCancel() {
         onCancel?.()
     }
-
+    // evento para cerrar la ventana modal al hacer click fuera de ella
     function handleOverlay(event){
         if (event.target === event.curretntTarget) handleCancel()
     }

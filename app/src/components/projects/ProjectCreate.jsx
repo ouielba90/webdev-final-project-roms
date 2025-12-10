@@ -2,26 +2,27 @@ import { useState } from "react"
 
 const emptyForm = Object.freeze({ name: '', client: '', description: '' })
 
-
+// Funcion para el modal de crear proyecto
 export default function ProjectCreate({ onClose, onSumit }) {
     const [values, setValues] = useState(emptyForm)
 
+    // Funcion para actualizar los campos del formulario
     function updatefield(field) {
         return function (event) {
             const value = event.target.value;
             setValues((prev) => ({ ...prev, [field]: value }))
         }
     }
-
+    // Funcion para resetear el formulario
     function resetForm() {
         setValues(emptyForm)
     }
-
+    // Funcion para cerrar el modal
     function closeModal() {
         onClose?.()
         resetForm()
     }
-
+    // Funcion para manejar el submit del formulario
     function handleSubmit(event) {
         event.preventDefault();
         console.log(values);

@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+// Funcion para obtener los valores iniciales del proyecto
 function getInitialValues(project) {
     if (!project) return { name: "", client: "", status: "", description: "", tasks: [] }
     return {
@@ -11,17 +12,20 @@ function getInitialValues(project) {
     }
 }
 
+// Funcion para el modal de editar proyecto
 function ProjectItem({ project, onClose, onSubmit }) {
     const [values, setValues] = useState(getInitialValues(project));
     const [newTask, setNewTask] = useState("");
 
     if (!project) return null;
-
+    
+    // evento para cancelar la edicion
     function handleCancel() {
         setValues(getInitialValues(project));
         onClose?.();
     }
 
+    // evento para enviar el formulario
     function handelSubmit(e) {
         e.preventDefault()
         const trimmed = {
@@ -36,6 +40,7 @@ function ProjectItem({ project, onClose, onSubmit }) {
 
     }
 
+    // funcion para agregar una nueva tarea
     function addTask() {
         const t = newTask.trim();
         if (!t) return;
