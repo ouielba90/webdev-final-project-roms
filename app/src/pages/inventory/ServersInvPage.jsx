@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { DataContext } from "../../context/inventory/DataContext";
 import ServerCard from "../../components/inventory/ServerCard";
-import useFiltersSearch from "../../hooks/inventory/useFiltersSearch";
+import useFiltersSearch from "../../logic/inventory/useFiltersSearch";
 
 function ServersInvPage() {
   const { servers, software } = useContext(DataContext)

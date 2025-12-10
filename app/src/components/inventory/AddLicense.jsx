@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useLicensesValidation from "../../hooks/inventory/useLicensesValidation.js"
+import useLicensesValidation from "../../logic/inventory/useLicensesValidation.js"
 
 function AddLicense({ softList, handleSubmit, selectedSoft, setSelectedSoft, setAddFormOpen }) {
   const [form, setForm] = useState({

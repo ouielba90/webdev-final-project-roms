@@ -5,8 +5,8 @@ import AddSoftware from "../../components/inventory/AddSoftware";
 import EditSoftware from "../../components/inventory/EditSoftware.jsx"
 import Modal from "../../components/inventory/Modal.jsx"
 import { Outlet } from "react-router-dom";
-import useFiltersSearch from "../../hooks/inventory/useFiltersSearch.js";
-import useSoftwareActions from "../../hooks/inventory/useSoftwareActions.js";
+import useFiltersSearch from "../../logic/inventory/useFiltersSearch.js";
+import useSoftwareActions from "../../logic/inventory/useSoftwareActions.js";
 
 function SoftwareInvPage() {
   const { software, setSoftware, softwareApi, hardware, servers } = useContext(DataContext);

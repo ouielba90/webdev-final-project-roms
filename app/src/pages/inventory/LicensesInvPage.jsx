@@ -5,8 +5,8 @@ import AddLicense from "../../components/inventory/AddLicense";
 import EditLicense from "../../components/inventory/EditLicense";
 import Modal from "../../components/inventory/Modal.jsx"
 import { isoToeuDate, daysBetweenDates } from "./../../utils/inventory/date.js";
-import useFiltersSearch from "../../hooks/inventory/useFiltersSearch.js";
-import useLicensesActions from "../../hooks/inventory/useLicensesActions.js"
+import useFiltersSearch from "../../logic/inventory/useFiltersSearch.js";
+import useLicensesActions from "../../logic/inventory/useLicensesActions.js"
 
 function LicensesInvPage() {
   let { licenses, setLicenses, licensesApi, software } = useContext(DataContext)

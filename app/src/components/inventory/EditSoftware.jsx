@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useSoftwareValidation from "../../hooks/inventory/useSoftwareValidation";
+import useSoftwareValidation from "../../logic/inventory/useSoftwareValidation";
 
 function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmitEdit, selectedHard, setSelectedHard, selectedServ, setSelectedServ, setEditFormOpen }) {
   const [name, setName] = useState(toBeEdited.name)

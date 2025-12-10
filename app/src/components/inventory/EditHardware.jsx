@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import useHardwareValidation from "../../hooks/inventory/useHardwareValidation";
+import useHardwareValidation from "../../logic/inventory/useHardwareValidation";
 
 function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, setSelectedSoft, setEditFormOpen }) {
   const [type, setType] = useState(toBeEdited.type)

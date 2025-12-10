@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import useHardwareValidation from "../../hooks/inventory/useLicensesValidation"
+import useHardwareValidation from "../../logic/inventory/useLicensesValidation"
 
 function EditLicense({ toBeEdited, softList, handleSubmitEdit, setEditFormOpen }) {
 

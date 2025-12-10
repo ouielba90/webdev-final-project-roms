@@ -4,8 +4,8 @@ import HardwareCard from "../../components/inventory/HardwareCard";
 import AddHardware from "../../components/inventory/AddHardware";
 import EditHardware from "../../components/inventory/EditHardware";
 import Modal from "../../components/inventory/Modal.jsx"
-import useFiltersSearch from "../../hooks/inventory/useFiltersSearch.js";
-import useHardwareActions from "../../hooks/inventory/useHardwareActions.js";
+import useFiltersSearch from "../../logic/inventory/useFiltersSearch.js";
+import useHardwareActions from "../../logic/inventory/useHardwareActions.js";
 
 function HardwareInvPage() {
   const { hardware, setHardware, hardwareApi, software } = useContext(DataContext)

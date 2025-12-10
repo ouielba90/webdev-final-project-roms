@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useHardwareValidation from "../../hooks/inventory/useHardwareValidation";
+import useHardwareValidation from "../../logic/inventory/useHardwareValidation";
 
 function AddHardware({ softList, handleSubmit, selectedSoft, setSelectedSoft, setAddFormOpen }) {
   const [form, setForm] = useState({
