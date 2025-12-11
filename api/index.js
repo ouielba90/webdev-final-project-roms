@@ -7,8 +7,11 @@ import hardwareRoutes from "./src/routes/inventory.hardware.routes.js"
 import licensesRoutes from "./src/routes/inventory.licenses.routes.js"
 import serversRoutes from "./src/routes/inventory.servers.routes.js"
 import users from './data/users.data.js';
-import projects from "./data/projects.data.js";
-import projectsUsers from "./data/projectsUsers.data.js";
+// Importacion de los projectos en la data de api
+//import projects from "./data/projects.data.js";
+//import projectsUsers from "./data/projectsUsers.data.js";
+//-----------------------------------------------
+import projectRoutes from "./src/routes/projects.project.routes.js"
 import notifications from "./data/notifications.data.js";
 import messages from "./data/messages.data.js"
 import chatMessages from "./data/chatMessages.data.js";
@@ -52,15 +55,19 @@ api.use("/ouissam/servers", serversRoutes);
 /***************************************/
 
 /* API RICARDO */
-api.get("/projects", (req, res) => {
+/*api.get("/projects", (req, res) => {
   console.log("Extrayendo los datos de proyectos");
   res.json(projects);
-});
+});*/
+api.use("/projects", projectRoutes);
+
 
 api.get("/projectsUsers", (req, res) => {
   console.log("Extrayendo los datos de usuarios asignados a proyectos");
   res.json(projectsUsers);
 });
+
+
 
 /*API Santos*/
 api.get("/notifications", (req, res) => {
