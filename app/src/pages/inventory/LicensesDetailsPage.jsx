@@ -10,8 +10,8 @@ function LicensesDetailsPage() {
   const licenseItem = licenses.find(l => l._id === id);
   if (!licenseItem) return <p>Licencia no encontrada.</p>;
 
-  const softAssoc = software.find(s => s._id === licenseItem.softwareId)
-
+  const softAssoc = licenseItem.softwareId
+  console.log(softAssoc)
   return (
     <>
       <div className="details-main">

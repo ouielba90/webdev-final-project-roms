@@ -13,8 +13,9 @@ function SoftwareDetailsPage() {
   const hardwareMap = Object.fromEntries(hardware.map(h => [h._id, h]));
   const serverMap = Object.fromEntries(servers.map(s => [s._id, s]));
 
-  const hardAssocList = softwareItem.installedOnHardware.map(id => hardwareMap[id]).filter(Boolean);
-  const serversAssocList = softwareItem.serverId.map(id => serverMap[id]).filter(Boolean);
+  const hardAssocList = softwareItem.installedOnHardware
+  const serversAssocList = softwareItem.serverId
+  console.log(hardAssocList, serversAssocList)
 
   return (
     <>
@@ -40,7 +41,7 @@ function SoftwareDetailsPage() {
             </div>
             <div>
               <p><strong>Licencia</strong></p>
-              <p>{softwareItem.licenseId || "Ninguna"}</p>
+              <p>{softwareItem.licenseId?._id.slice(-5) || "Ninguna"}</p>
             </div>
           </div>
         </div>
@@ -73,13 +74,15 @@ function SoftwareDetailsPage() {
           <div className="details-quick-stats">
             {serversAssocList.length ? (
               serversAssocList.map((s, i) => (
-                <div key={i} className="assoc-card">
-                  <p className="assoc-name">{s.name}</p>
-                  <p className="assoc-type">{s.location}</p>
-                  <p className={`assoc-status ${s.status.replace(" ", "-").toLowerCase()}`}>
-                    {s.status}
-                  </p>
-                </div>
+                <Link key={i} to={`/inventory/servers/${s._id}`} className="details-links">
+                  <div key={i} className="assoc-card">
+                    <p className="assoc-name">{s.name}</p>
+                    <p className="assoc-type">{s.location}</p>
+                    <p className={`assoc-status ${s.status.replace(" ", "-").toLowerCase()}`}>
+                      {s.status}
+                    </p>
+                  </div>
+                </Link>
               ))
             ) : (
               <p>Ninguno</p>

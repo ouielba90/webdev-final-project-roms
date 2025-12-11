@@ -38,7 +38,6 @@ function HardwareInvPage() {
     if (!created) return;
     const normalized = { ...created, id: created._id || created.id }
     setHardware(prev => [...prev, normalized]);
-    //console.log("a few things", created._id, selectedSoft)
     await syncCreationWithSoftware(created._id, created.installedSoftware);
     e.target.reset()
     setSelectedSoft([]);
@@ -47,7 +46,6 @@ function HardwareInvPage() {
 
   function handleEdit(id) {
     setEditFormOpen(true)
-    //console.log("id", id)
     setCurrEditId(id)
   }
 

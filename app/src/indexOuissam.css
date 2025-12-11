@@ -17,6 +17,7 @@
   letter-spacing: -1px;
   background: linear-gradient(180deg, #111 0%, #555 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -682,7 +683,8 @@
   font-weight: 500;
   border: none;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
+  transform: translateY(0);
   font-family: "Inter", "Segoe UI", Roboto, sans-serif;
 }
 
@@ -758,14 +760,12 @@
   border-radius: 16px;
   padding: 18px 22px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  transition:
-    box-shadow 0.2s,
-    border-color 0.2s;
+  transition: all 0.3s ease;
 }
 
 .software-card:hover {
   border-color: #cbd5e1;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.40);
 }
 
 .software-card-first-section {
@@ -838,10 +838,14 @@
   background: #2563eb;
   text-decoration: none;
   font-weight: unset;
+  transform: translateY(0);
+  transition: all 0.3s ease;
+  display: inline-block;
 }
 
 .software-card-details-btn .details-btn-link:hover {
-  background: #1d4ed8;
+  background: #0535ba;
+  transform: translateY(-5%);
 }
 
 .software-card-edit-btn button {
@@ -850,6 +854,7 @@
 
 .software-card-edit-btn button:hover {
   background: #d97706;
+  transform: translateY(-5%);
 }
 
 .software-card-delete-btn button {
@@ -858,6 +863,7 @@
 
 .software-card-delete-btn button:hover {
   background: #b91c1c;
+  transform: translateY(-5%);
 }
 
 /* No usadas en los JSX que enviaste, pero necesarias para otros componentes */
@@ -1534,9 +1540,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition:
-    transform 0.12s ease,
-    box-shadow 0.12s ease;
+  transition: all 0.3s ease;
 }
 
 .node-card::before {

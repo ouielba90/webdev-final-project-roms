@@ -7,19 +7,19 @@ const softwareSchema = new mongoose.Schema({
     status: { type: String, required: true },
     licenseId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "licensesPost",
+        ref: "LicensesPost",
         default: null
     },
     installedOnHardware: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "hardwarePost"
+            ref: "HardwarePost"
         }
     ],
     serverId: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "serversPost"
+            ref: "ServersPost"
         }
     ],
     description: { type: String, required: true }

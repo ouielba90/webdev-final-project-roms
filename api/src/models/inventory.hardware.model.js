@@ -18,4 +18,4 @@ const hardwareSchema = new mongoose.Schema({
     lastMaintenance: { type: Date, required: true },
 });
 
-export default mongoose.model("hardwarePost", hardwareSchema, "hardware");
+export default mongoose.model("HardwarePost", hardwareSchema, "hardware");

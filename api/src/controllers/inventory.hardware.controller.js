@@ -2,7 +2,7 @@ import HardwarePost from "./../models/inventory.hardware.model.js"
 
 const getHardware = async (req, res) => {
     try {
-        const posts = await HardwarePost.find().lean();
+        const posts = await HardwarePost.find().populate("installedSoftware").lean();
         res.json(posts);
     } catch (err) {
         console.error("[ERROR] GET /ouissam/hardware:", err);
@@ -13,7 +13,7 @@ const getHardware = async (req, res) => {
 const getAHardware = async (req, res) => {
     try {
         const id = req.params.id
-        const posts = await HardwarePost.findById(id).lean();
+        const posts = await HardwarePost.findById(id).populate("installedSoftware").lean();
         res.json(posts);
     } catch (err) {
         console.error(`[ERROR] GET /ouissam/hardware/${id}`, err);

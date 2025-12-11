@@ -162,7 +162,7 @@ function LicensesInvPage() {
               <LicenseCard
                 key={el._id}
                 id={el._id}
-                softwareName={software.find((s) => el.softwareId === s._id)?.name}
+                softwareName={el.softwareId.name}
                 seats={el.seats}
                 purchaseDate={isoToeuDate(el.purchaseDate)}
                 expiryDate={isoToeuDate(el.expiryDate)}

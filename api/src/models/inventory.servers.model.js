@@ -25,4 +25,4 @@ const serversSchema = new mongoose.Schema({
     connectedUsers: { type: Number, required: true }
 });
 
-export default mongoose.model("serversPost", serversSchema, "servers");
+export default mongoose.model("ServersPost", serversSchema, "servers");

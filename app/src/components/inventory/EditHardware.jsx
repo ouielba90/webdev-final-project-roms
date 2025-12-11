@@ -39,6 +39,7 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
   }, [model, purchaseDate, lastMaintenance, os, cpu, ram, storage]);
 
   const { errors, canSubmit } = useHardwareValidation(form);
+
   return (
     <form onSubmit={handleSubmitEdit} className="addsoft-form">
       <h2 className="addsoft-title">Editar Hardware</h2>

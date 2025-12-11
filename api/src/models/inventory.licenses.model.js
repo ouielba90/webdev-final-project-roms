@@ -19,4 +19,4 @@ const licensesSchema = new mongoose.Schema({
     cost: { type: Number, required: true }
 });
 
-export default mongoose.model("licensesPost", licensesSchema, "licenses");
+export default mongoose.model("LicensesPost", licensesSchema, "licenses");

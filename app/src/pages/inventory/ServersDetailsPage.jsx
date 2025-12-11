@@ -12,7 +12,7 @@ function ServersDetailsPage() {
 
   const softwareMap = Object.fromEntries(software.map(s => [s._id, s]));
 
-  const softAssocList = serverItem.hostedSoftware.map(id => softwareMap[id]).filter(Boolean);
+  const softAssocList = serverItem.hostedSoftware
 
   const servAvgPropNodes = getNodeAverages(serverItem.nodeSpecs)
 
