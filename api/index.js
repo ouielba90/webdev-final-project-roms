@@ -8,10 +8,11 @@ import licensesRoutes from "./src/routes/inventory.licenses.routes.js"
 import serversRoutes from "./src/routes/inventory.servers.routes.js"
 import users from './data/users.data.js';
 // Importacion de los projectos en la data de api
-//import projects from "./data/projects.data.js";
-//import projectsUsers from "./data/projectsUsers.data.js";
+import projects from "./data/projects.data.js";
+import projectsUsers from "./data/projectsUsers.data.js";
 //-----------------------------------------------
 import projectRoutes from "./src/routes/projects.project.routes.js"
+import projectUserRoutes from "./src/routes/projects.projectUser.routes.js"
 import notifications from "./data/notifications.data.js";
 import messages from "./data/messages.data.js"
 import chatMessages from "./data/chatMessages.data.js";
@@ -61,12 +62,13 @@ api.use("/ouissam/servers", serversRoutes);
 });*/
 api.use("/projects", projectRoutes);
 
-
 api.get("/projectsUsers", (req, res) => {
   console.log("Extrayendo los datos de usuarios asignados a proyectos");
   res.json(projectsUsers);
 });
+//api.use("/projectsUsers", projectUserRoutes);
 
+/***************************************/
 
 
 /*API Santos*/
