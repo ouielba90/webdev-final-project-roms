@@ -35,9 +35,6 @@ function HomeProjPage() {
           <h3 className="general-subtitle">{sectionData.subtext}</h3>
 
         </div>
-
-
-
       </div>
       <nav className="general-submenu">
       </nav>
