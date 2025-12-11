@@ -11,7 +11,7 @@ function AddLicense({ softList, handleSubmit, selectedSoft, setSelectedSoft, set
     compareDates: "",
     cost: ""
   });
-
+  console.log(softList)
   const { errors, canSubmit } = useLicensesValidation(form);
 
   function handleChange(e) {
@@ -30,11 +30,12 @@ function AddLicense({ softList, handleSubmit, selectedSoft, setSelectedSoft, set
             <label htmlFor="software">Software</label>
             <select id="software" name="software"
               onChange={e =>
-                setSelectedSoft(Array.from(e.target.selectedOptions, o => o.value))}>
+                setSelectedSoft(Array.from(e.target.selectedOptions, o => o.value))}
+            >
               <option key="1234" value="">Selecciona software</option>
               {softList.map((software, i) => {
                 return (
-                  <option key={i} value={software.name}>{software.name}</option>
+                  <option key={i} value={software._id}>{software.name}</option>
                 )
               })}
             </select>

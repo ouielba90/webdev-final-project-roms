@@ -7,7 +7,7 @@ function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmi
   const [category, setCategory] = useState(toBeEdited.category)
   const [status, setStatus] = useState(toBeEdited.status)
   const [description, setDescription] = useState(toBeEdited.description)
-
+  console.log(selectedHard)
   function handleSelectedHardware(e) {
     const selected = Array.from(e.target.selectedOptions, option => option.value);
     setSelectedHard(selected);
@@ -86,7 +86,7 @@ function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmi
             multiple
             id="installedOnHardware"
             name="installedOnHardware"
-            value={selectedHard}
+            value={selectedHard.map(h => h._id)}
             onChange={handleSelectedHardware}
           >
             {hardList.map((h, i) => (
@@ -97,7 +97,7 @@ function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmi
         </div>
         <div className="addsoft-group">
           <label htmlFor="serverId">Servidor</label>
-          <select multiple id="serverId" name="serverId" value={selectedServ} onChange={handleSelectedServers}>
+          <select multiple id="serverId" name="serverId" value={selectedServ.map(s => s._id)} onChange={handleSelectedServers}>
             {serverList.map((srv, i) => (
               <option key={i} value={srv.id}>{srv.name}</option>
             ))}

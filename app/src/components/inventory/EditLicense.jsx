@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import useHardwareValidation from "../../logic/inventory/useLicensesValidation"
 
-function EditLicense({ toBeEdited, softList, handleSubmitEdit, setEditFormOpen }) {
+function EditLicense({ toBeEdited, softList, setSoftList, handleSubmitEdit, setEditFormOpen }) {
 
   const [vendor, setVendor] = useState(toBeEdited.vendor)
   const [seats, setSeats] = useState(toBeEdited.seats)
@@ -9,8 +9,9 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit, setEditFormOpen }
   const [purchaseDate, setPurchaseDate] = useState(toBeEdited.purchaseDate.split("T")[0])
   const [expiryDate, setExpiryDate] = useState(toBeEdited.expiryDate.split("T")[0])
   const [cost, setCost] = useState(toBeEdited.cost)
-  const [softwareId, setSoftwareId] = useState(toBeEdited.softwareId)
-
+  const [softwareId, setSoftwareId] = useState(toBeEdited.softwareId._id)
+  console.log("nnn", softwareId)
+  console.log("ooo", softList)
   const [form, setForm] = useState({
     vendor: toBeEdited.vendor,
     seats: toBeEdited.seats,
@@ -44,7 +45,7 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit, setEditFormOpen }
               onChange={(e) => setSoftwareId(e.target.value)}>
               {softList.map((software, i) => {
                 return (
-                  <option key={i} value={software.name}>{software.name}</option>
+                  <option key={i} value={software._id}>{software.name}</option>
                 )
               })}
             </select>

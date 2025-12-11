@@ -24,19 +24,20 @@ function HardwareInvPage() {
     e.preventDefault()
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
+    console.log("seeee", selectedSoft)
     const newItem = {
       type: data.type,
       model: data.model,
       status: data.status,
       purchaseDate: data.purchaseDate,
       specs: { cpu: data.cpu, ram: data.ram, storage: data.storage },
-      installedSoftware: selectedSoft.map(soft_name => software.find(s => s.name === soft_name)._id),
+      installedSoftware: selectedSoft,
       os: data.os,
       lastMaintenance: data.lastMaintenance
     };
     const created = await hardwareApi.createHardware(newItem);
     if (!created) return;
-    const normalized = { ...created, id: created._id || created.id }
+    const normalized = { ...created, id: created._id }
     setHardware(prev => [...prev, normalized]);
     await syncCreationWithSoftware(created._id, created.installedSoftware);
     e.target.reset()
@@ -60,7 +61,7 @@ function HardwareInvPage() {
       status: data.status,
       purchaseDate: data.purchaseDate,
       specs: { cpu: data.cpu, ram: data.ram, storage: data.storage },
-      installedSoftware: selectedSoft.map(soft_name => software.find(s => s.name === soft_name)._id),
+      installedSoftware: selectedSoft,
       os: data.os,
       lastMaintenance: data.lastMaintenance
     }
@@ -77,11 +78,14 @@ function HardwareInvPage() {
   }
 
   async function handleRemove(id) {
-    const deleted = await hardwareApi.deleteHardware(id);
-    if (!deleted) return;
-    setHardware(prev => prev.filter(el => el._id !== id))
+    const userConfirmation = confirm(`¿Seguro que quieres proceder a eliminar el hardware cuya id es ${id}?`);
+    if (userConfirmation) {
+      const deleted = await hardwareApi.deleteHardware(id);
+      if (!deleted) return;
+      setHardware(prev => prev.filter(el => el._id !== id))
 
-    await syncRemoveWithSoftware(id);
+      await syncRemoveWithSoftware(id);
+    }
   }
 
   return (

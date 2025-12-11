@@ -10,7 +10,9 @@ function LicensesDetailsPage() {
   const licenseItem = licenses.find(l => l._id === id);
   if (!licenseItem) return <p>Licencia no encontrada.</p>;
 
-  const softAssoc = licenseItem.softwareId
+  const softwareMap = Object.fromEntries(software.map(s => [s._id, s]));
+
+  const softAssoc = licenseItem.softwareId.map(id => softwareMap[id]).filter(Boolean)
   console.log(softAssoc)
   return (
     <>

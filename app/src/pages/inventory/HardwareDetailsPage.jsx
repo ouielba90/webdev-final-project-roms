@@ -7,11 +7,12 @@ import { isoToeuDate } from "./../../utils/inventory/date.js";
 function HardwareDetailsPage() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { hardware } = useContext(DataContext)
-  const hardwareItem = hardware.find(s => s._id === id);
+  const { hardware, software } = useContext(DataContext)
+  const hardwareItem = hardware.find(h => h._id === id);
   if (!hardwareItem) return <p>Hardware no encontrado.</p>;
 
-  const softAssocList = hardwareItem.installedSoftware
+  const softwareMap = Object.fromEntries(software.map(s => [s._id, s]));
+  const softAssocList = hardwareItem.installedSoftware.map(soft_id => softwareMap[soft_id]).filter(Boolean)
 
   return (
     <>

@@ -11,13 +11,17 @@ function AddHardware({ softList, handleSubmit, selectedSoft, setSelectedSoft, se
     ram: "",
     storage: ""
   });
+  console.log(selectedSoft, "selectedSoft")
 
   const { errors, canSubmit } = useHardwareValidation(form);
 
   const handleChange = (e) => {
-    const { id, value } = e.target;
-    setForm(prev => ({ ...prev, [id]: value }));
+    setForm(prev => ({
+      ...prev,
+      [e.target.id]: e.target.value
+    }));
   };
+
   return (
     <form onSubmit={handleSubmit} className="addsoft-form">
       <h2 className="addsoft-title">Añadir Hardware</h2>
@@ -98,9 +102,15 @@ function AddHardware({ softList, handleSubmit, selectedSoft, setSelectedSoft, se
       </div>
       <div className="addsoft-group">
         <label htmlFor="installedSoftware">Software instalado</label>
-        <select multiple id="installedSoftware" name="installedSoftware" value={selectedSoft} onChange={e => setSelectedSoft(Array.from(e.target.selectedOptions, o => o.value))}>
+        <select
+          multiple
+          id="installedSoftware"
+          name="installedSoftware"
+          value={selectedSoft}
+          onChange={e => setSelectedSoft(Array.from(e.target.selectedOptions, o => o.value))}
+        >
           {softList.map((s, i) => (
-            <option key={i} value={s.name}>{s.name}</option>
+            <option key={i} value={s.id}>{s.name}</option>
           ))}
         </select>
         <small className="hint">Mantén pulsado CTRL para seleccionar varios</small>

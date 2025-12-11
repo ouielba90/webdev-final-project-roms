@@ -10,11 +10,15 @@ function SoftwareDetailsPage() {
   const softwareItem = software.find(s => s._id === id);
   if (!softwareItem) return <p>Software no encontrado.</p>;
 
+  // Creamos mapas rápidos de hardware y servidores por su _id para acceso eficiente
   const hardwareMap = Object.fromEntries(hardware.map(h => [h._id, h]));
   const serverMap = Object.fromEntries(servers.map(s => [s._id, s]));
 
-  const hardAssocList = softwareItem.installedOnHardware
-  const serversAssocList = softwareItem.serverId
+  // Convertimos los IDs asociados del software en objetos completos, eliminando undefined
+  // Facilita renderizar detalles completos del hardware y servidores, sino después de crear el producto e ir a detalles
+  // no se pueden mostrar.
+  const hardAssocList = softwareItem.installedOnHardware.map(id => hardwareMap[id]).filter(Boolean);
+  const serversAssocList = softwareItem.serverId.map(id => serverMap[id]).filter(Boolean);
   console.log(hardAssocList, serversAssocList)
 
   return (

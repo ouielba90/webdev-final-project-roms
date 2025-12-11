@@ -31,6 +31,7 @@ function SoftwareInvPage() {
     e.preventDefault()
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
+    console.log("seee", selectedServ)
     const newItem = {
       name: data.name,
       version: data.version,
@@ -43,7 +44,8 @@ function SoftwareInvPage() {
     };
     const created = await softwareApi.createSoftware(newItem);
     if (!created) return;
-    const normalized = { ...created, id: created._id || created.id };
+    const normalized = { ...created, id: created._id };
+
     setSoftware(prev => [...prev, normalized]);
 
     await syncCreationWithHardwareAndServers(created._id, selectedHard, selectedServ);
@@ -88,11 +90,14 @@ function SoftwareInvPage() {
   }
 
   async function handleRemove(id) {
-    const deleted = await softwareApi.deleteSoftware(id);
-    if (!deleted) return;
-    setSoftware(prev => prev.filter(el => el._id !== id))
+    const userConfirmation = confirm(`¿Seguro que quieres proceder a eliminar el software cuya id es ${id}?`);
+    if (userConfirmation) {
+      const deleted = await softwareApi.deleteSoftware(id);
+      if (!deleted) return;
+      setSoftware(prev => prev.filter(el => el._id !== id))
 
-    await syncRemoveWithHardwareAndServers(id);
+      await syncRemoveWithHardwareAndServers(id);
+    }
   }
 
   return (
