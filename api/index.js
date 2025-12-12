@@ -62,11 +62,11 @@ api.use("/ouissam/servers", serversRoutes);
 });*/
 api.use("/projects", projectRoutes);
 
-api.get("/projectsUsers", (req, res) => {
+/*api.get("/projectsUsers", (req, res) => {
   console.log("Extrayendo los datos de usuarios asignados a proyectos");
   res.json(projectsUsers);
-});
-//api.use("/projectsUsers", projectUserRoutes);
+});*/
+api.use("/projectsUsers", projectUserRoutes);
 
 /***************************************/
 
