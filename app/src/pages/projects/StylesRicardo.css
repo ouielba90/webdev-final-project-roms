@@ -211,6 +211,7 @@ body{
     flex-direction: column;
     background-color: rgb(241, 241, 241);
     padding-bottom: 75px;
+    padding-top: 45px;
      clip-path: polygon(
     10% 0%,  /* arriba izquierda */
     100% 0%, /* arriba derecha */

@@ -1,8 +1,9 @@
+import { motion, AnimatePresence } from "framer-motion";
 
 // funcion para renderizar cada item de proyecto
-function ProjectItem({ project, projectUsers, activeId, setActiveId, onEdit, onDelete}) {
+function ProjectItem({ project, projectUsers, activeId, setActiveId, onEdit, onDelete }) {
 
-    const {id, name, client, status, description, tasks} = project
+    const { id, name, client, status, description, tasks } = project
 
     // Renderiza las tareas asociadas al proyecto
     const taskItems = [];
@@ -24,21 +25,21 @@ function ProjectItem({ project, projectUsers, activeId, setActiveId, onEdit, onD
 
     // cambia el class name del componente que imprime el estatus del proyecto
     const getStatusClass = (status) => {
-    switch (status.toLowerCase()) {
-        case "completo":
-        case "completado":
-        case "finalizado":
-            return "status-green";
-        case "en progreso":
-        case "progreso":
-            return "status-yellow";
-        case "atrasado":
-        case "pendiente":
-            return "status-red";
-        default:
-            return "status-gray";
-    }
-};
+        switch (status.toLowerCase()) {
+            case "completo":
+            case "completado":
+            case "finalizado":
+                return "status-green";
+            case "en progreso":
+            case "progreso":
+                return "status-yellow";
+            case "atrasado":
+            case "pendiente":
+                return "status-red";
+            default:
+                return "status-gray";
+        }
+    };
     // evento para abrir o cerrar el proyecto
     const isOpen = activeId === id;
     const toggleOpen = () => {
@@ -52,28 +53,52 @@ function ProjectItem({ project, projectUsers, activeId, setActiveId, onEdit, onD
                     <h3 className="name-project">{name}</h3>
                     <p className="client-project">{client}</p>
                     <p className="description-project">{description}</p>
-                    {isOpen && (
-                        <ul className="box-list-tasks">
-                            {taskItems}
-                        </ul>
-                    )}
+                    <AnimatePresence>
+                        {isOpen && (
+                            <motion.ul
+                                className="box-list-tasks"
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                {taskItems}
+                            </motion.ul>
+                        )}
+                    </AnimatePresence>
                 </div>
                 <div>
                     <p className={`status-project ${getStatusClass(status)}`}>{status}</p>
-                    {isOpen && (
-                        <div className="box-users-project">
-                            <h4>Usuarios</h4>
-                            <ul>
-                                {usersItems}
-                            </ul>
-                        </div>
-                    )}
-                    {isOpen && (
-                        <div className="box-buttons-project">
-                            <button className="btn-card-project" onClick={() => onEdit?.(project)}>Editar</button>
-                            <button className="btn-card-project" onClick={() => onDelete?.(project)}>Eliminar</button>
-                        </div>
-                    )}
+                    <AnimatePresence>
+                        {isOpen && (
+                            <motion.div
+                                className="box-users-project"
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: "auto" }}
+                                exit={{ opacity: 0, height: 0 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <h4>Usuarios</h4>
+                                <ul>
+                                    {usersItems}
+                                </ul>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                    <AnimatePresence>
+                        {isOpen && (
+                            <motion.div
+                                className="box-buttons-project"
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: "auto" }}
+                                exit={{ opacity: 0, height: 0 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <button className="btn-card-project" onClick={() => onEdit?.(project)}>Editar</button>
+                                <button className="btn-card-project" onClick={() => onDelete?.(project)}>Eliminar</button>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
             </div>
         </>
