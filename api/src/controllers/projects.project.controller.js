@@ -61,6 +61,7 @@ const updateProject = async (req, res) => {
 const deleteProject = async (req, res) => {
     try {
         const postId = req.params.id
+        console.log("Intentando eliminar el proyecto con ID:", postId);
         const deletedPost = await ProjectsPost.findByIdAndDelete(postId);
         if (!deletedPost) {
             return res.status(404).json({ error: "POST_NOT_FOUND" });
