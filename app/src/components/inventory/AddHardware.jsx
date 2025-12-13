@@ -34,7 +34,7 @@ function AddHardware({ softList, handleSubmit, selectedSoft, setSelectedSoft, se
         </div>
         <div className="addsoft-group">
           <label htmlFor="model">Modelo</label>
-          <input type="text" id="model" name="model" onChange={handleChange} />
+          <input type="text" id="model" name="model" onChange={handleChange} placeholder="Ej: Dell XPS 15" />
           {errors.model && <small className="error-msg">{errors.model}</small>}
         </div>
       </div>
@@ -62,12 +62,12 @@ function AddHardware({ softList, handleSubmit, selectedSoft, setSelectedSoft, se
       <div className="addsoft-row">
         <div className="addsoft-group">
           <label htmlFor="os">Sistema operativo</label>
-          <input type="text" id="os" name="os" onChange={handleChange} />
+          <input type="text" id="os" name="os" onChange={handleChange} placeholder="Ej: Windows 11, Ubuntu 22.04" />
           {errors.os && <small className="error-msg">{errors.os}</small>}
         </div>
         <div className="addsoft-group">
           <label htmlFor="cpu">CPU</label>
-          <input type="text" id="cpu" name="cpu" onChange={handleChange} />
+          <input type="text" id="cpu" name="cpu" onChange={handleChange} placeholder="Ej: Intel i7-12700K" />
           {errors.cpu && <small className="error-msg">{errors.cpu}</small>}
         </div>
       </div>
@@ -75,12 +75,12 @@ function AddHardware({ softList, handleSubmit, selectedSoft, setSelectedSoft, se
       <div className="addsoft-row">
         <div className="addsoft-group">
           <label htmlFor="ram">RAM</label>
-          <input type="text" id="ram" name="ram" onChange={handleChange} />
+          <input type="text" id="ram" name="ram" onChange={handleChange} placeholder="Ej: 16GB" />
           {errors.ram && <small className="error-msg">{errors.ram}</small>}
         </div>
         <div className="addsoft-group">
           <label htmlFor="storage">Disco</label>
-          <input type="text" id="storage" name="storage" onChange={handleChange} />
+          <input type="text" id="storage" name="storage" onChange={handleChange} placeholder="Ej: 512GB SSD" />
           {errors.storage && <small className="error-msg">{errors.storage}</small>}
         </div>
       </div>

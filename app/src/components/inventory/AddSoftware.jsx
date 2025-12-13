@@ -28,12 +28,12 @@ function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHa
       <div className="addsoft-row">
         <div className="addsoft-group">
           <label htmlFor="name">Nombre</label>
-          <input type="text" id="name" name="name" onChange={handleChange} />
+          <input type="text" id="name" name="name" onChange={handleChange} placeholder="Ej: MobaXterm" />
           {errors.name && <small className="error-msg">{errors.name}</small>}
         </div>
         <div className="addsoft-group">
           <label htmlFor="version">Versión</label>
-          <input type="text" id="version" name="version" onChange={handleChange} />
+          <input type="text" id="version" name="version" onChange={handleChange} placeholder="Ej: 2024.1" />
           {errors.version && <small className="error-msg">{errors.version}</small>}
         </div>
       </div>
@@ -87,7 +87,7 @@ function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHa
 
       <div className="addsoft-group">
         <label htmlFor="description">Descripción</label>
-        <textarea id="description" name="description" rows="2" onChange={handleChange}></textarea>
+        <textarea id="description" name="description" rows="2" onChange={handleChange} placeholder="Breve descripción del software..."></textarea>
         {errors.description && <small className="error-msg">{errors.description}</small>}
       </div>
 

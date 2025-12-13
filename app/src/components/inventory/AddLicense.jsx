@@ -40,19 +40,19 @@ function AddLicense({ softList, handleSubmit, setAddFormOpen }) {
           </div>
           <div className="addsoft-group">
             <label htmlFor="vendor">Proveedor</label>
-            <input type="text" id="vendor" name="vendor" onChange={handleChange} />
+            <input type="text" id="vendor" name="vendor" onChange={handleChange} placeholder="Ej: Microsoft" />
             {errors.vendor && <small className="error-msg">{errors.vendor}</small>}
           </div>
         </div>
         <div className="addsoft-row">
           <div className="addsoft-group">
             <label htmlFor="seats">Asignaciones</label>
-            <input type="number" id="seats" name="seats" onChange={handleChange} />
+            <input type="number" id="seats" name="seats" onChange={handleChange} placeholder="Ej: 10" />
             {errors.seats && <small className="error-msg">{errors.seats}</small>}
           </div>
           <div className="addsoft-group">
             <label htmlFor="licenseKey">Clave de licencia</label>
-            <input type="text" id="licenseKey" name="licenseKey" onChange={handleChange} />
+            <input type="text" id="licenseKey" name="licenseKey" onChange={handleChange} placeholder="Ej: ABCD-1234-EFGH-5678" />
             {errors.licenseKey && <small className="error-msg">{errors.licenseKey}</small>}
           </div>
         </div>
@@ -73,7 +73,7 @@ function AddLicense({ softList, handleSubmit, setAddFormOpen }) {
         <div className="addsoft-row">
           <div className="addsoft-group">
             <label htmlFor="cost">Precio (€)</label>
-            <input type="number" id="cost" name="cost" onChange={handleChange} />
+            <input type="number" id="cost" name="cost" onChange={handleChange} placeholder="Ej: 299.99" />
             {errors.cost && <small className="error-msg">{errors.cost}</small>}
           </div>
         </div>
