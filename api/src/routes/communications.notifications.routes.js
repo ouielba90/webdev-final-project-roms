@@ -1,5 +1,5 @@
 import express from 'express';
-import notificationsController from '../../controllers/notification.controller.js';
+import notificationsController from '../controllers/communications.notifications.controller.js';
 
 const router = express.Router();
 
@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', notificationsController.getAllNotifications);
 
 // Ruta para obtener una notificación por ID    
-router.get('/:id', notificationsController.getNotificationById);
+router.get('/:id', notificationsController.getNotifications);
 
 // Ruta para crear una nueva notificación
 router.post('/', notificationsController.createNotification);

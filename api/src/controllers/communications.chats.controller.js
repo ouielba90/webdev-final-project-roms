@@ -1,4 +1,4 @@
-import ChatPost from '../models/communications.chats.model.js';
+import ChatPost from './../models/communications.chats.model.js';
 
 const getAllChats = async (req, res) => {
     try {
@@ -63,4 +63,4 @@ const deleteChat = async (req, res) => {
     }
 };
 
-export { getAllChats, getChatById, createChat, updateChat, deleteChat };
+export default{ getAllChats, getChatById, createChat, updateChat, deleteChat };
