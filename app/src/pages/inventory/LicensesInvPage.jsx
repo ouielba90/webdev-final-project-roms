@@ -55,8 +55,9 @@ function LicensesInvPage() {
     e.preventDefault()
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
+    console.log(data.softwareId)
     const newItem = {
-      softwareId: software.find(s => s.name === data.software)._id,
+      softwareId: data.softwareId,
       seats: data.seats,
       purchaseDate: data.purchaseDate,
       expiryDate: data.expiryDate,

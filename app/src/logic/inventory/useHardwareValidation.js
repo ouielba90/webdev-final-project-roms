@@ -1,68 +1,99 @@
 import { useState, useEffect } from "react";
 
-export default function useHardwareValidation(form) {
+function useHardwareValidation(form) {
   const [errors, setErrors] = useState({});
   const [canSubmit, setCanSubmit] = useState(false);
 
   useEffect(() => {
-    const textRegex = /^[A-Za-z0-9]+(?: [A-Za-z0-9]+)*$/; // letras, números, espacios intermedios
-    const specialRegex = /^[A-Za-z0-9-]+(?: [A-Za-z0-9-]+)*$/;
+    const textRegex = /^[\p{L}0-9]+(?: [\p{L}0-9]+)*$/u;
+    const specialRegex = /^[\p{L}0-9-]+(?: [\p{L}0-9-]+)*$/u;
 
     const newErrors = {};
     const today = new Date().toISOString().split("T")[0];
 
-    if (form.model !== "" && !specialRegex.test(form.model)) {
+    if (!form.model) {
+      newErrors.model = "El modelo es obligatorio.";
+    } else if (form.model.length < 2) {
+      newErrors.model = "El modelo debe tener al menos 2 caracteres.";
+    } else if (form.model.length > 100) {
+      newErrors.model = "El modelo no puede superar los 100 caracteres.";
+    } else if (!specialRegex.test(form.model)) {
       newErrors.model =
         "Modelo inválido: solo letras, números, espacios intermedios y guiones.";
     }
 
-    if (form.os !== "" && !textRegex.test(form.os)) {
+    if (!form.os) {
+      newErrors.os = "El sistema operativo es obligatorio.";
+    } else if (form.os.length < 2) {
+      newErrors.os = "El sistema operativo debe tener al menos 2 caracteres.";
+    } else if (form.os.length > 50) {
+      newErrors.os = "El sistema operativo no puede superar los 50 caracteres.";
+    } else if (!textRegex.test(form.os)) {
       newErrors.os =
         "Sistema operativo inválido: solo letras, números y espacios intermedios.";
     }
 
-    if (form.cpu !== "" && !specialRegex.test(form.cpu)) {
+    if (!form.cpu) {
+      newErrors.cpu = "El CPU es obligatorio.";
+    } else if (form.cpu.length < 2) {
+      newErrors.cpu = "El CPU debe tener al menos 2 caracteres.";
+    } else if (form.cpu.length > 50) {
+      newErrors.cpu = "El CPU no puede superar los 50 caracteres.";
+    } else if (!specialRegex.test(form.cpu)) {
       newErrors.cpu =
         "CPU inválido: solo letras, números, espacios intermedios y guiones.";
     }
 
-    if (form.ram !== "" && !textRegex.test(form.ram)) {
+    if (!form.ram) {
+      newErrors.ram = "La RAM es obligatoria.";
+    } else if (form.ram.length < 1) {
+      newErrors.ram = "La RAM debe tener al menos 1 carácter.";
+    } else if (form.ram.length > 20) {
+      newErrors.ram = "La RAM no puede superar los 20 caracteres.";
+    } else if (!textRegex.test(form.ram)) {
       newErrors.ram =
-        "RAM inválido: solo letras, números y espacios intermedios.";
+        "RAM inválida: solo letras, números y espacios intermedios.";
     }
 
-    if (form.storage !== "" && !textRegex.test(form.storage)) {
+    if (!form.storage) {
+      newErrors.storage = "El disco es obligatorio.";
+    } else if (form.storage.length < 1) {
+      newErrors.storage = "El disco debe tener al menos 1 carácter.";
+    } else if (form.storage.length > 50) {
+      newErrors.storage = "El disco no puede superar los 50 caracteres.";
+    } else if (!textRegex.test(form.storage)) {
       newErrors.storage =
         "Disco inválido: solo letras, números y espacios intermedios.";
     }
 
-    if (form.purchaseDate && form.purchaseDate >= today) {
+    if (!form.purchaseDate) {
+      newErrors.purchaseDate = "La fecha de compra es obligatoria.";
+    } else if (form.purchaseDate >= today) {
       newErrors.purchaseDate = "La fecha de compra no puede ser futura.";
     }
 
-    if (form.lastMaintenance && form.lastMaintenance >= today) {
-      newErrors.lastMaintenance =
-        "El último mantenimiento no puede ser futuro.";
+    if (form.lastMaintenance) {
+      if (form.lastMaintenance >= today) {
+        newErrors.lastMaintenance = "El último mantenimiento no puede ser futuro.";
+      }
+      if (form.purchaseDate && form.lastMaintenance < form.purchaseDate) {
+        newErrors.compareDates =
+          "La fecha del último mantenimiento no puede ser anterior a la fecha de compra.";
+      }
     }
-
-    if (form.lastMaintenance < form.purchaseDate) {
-      newErrors.compareDates =
-        "La fecha del último mantenimiento no puede ser más antigua que la fecha de compra futuro.";
+    else {
+      newErrors.lastMaintenance = "La fecha de mantenimiento es obligatoria.";
     }
 
     setErrors(newErrors);
 
     const isValid =
-      Object.keys(newErrors).length === 0 &&
-      form.model !== "" &&
-      form.purchaseDate !== "" &&
-      form.os !== "" &&
-      form.cpu !== "" &&
-      form.ram !== "" &&
-      form.storage !== "";
+      Object.keys(newErrors).length === 0
 
     setCanSubmit(isValid);
   }, [form]);
 
   return { errors, canSubmit };
 }
+
+export default useHardwareValidation

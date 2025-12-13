@@ -67,6 +67,7 @@ function AddLicense({ softList, handleSubmit, setAddFormOpen }) {
             <label htmlFor="expiryDate">Fecha de expiración</label>
             <input type="date" id="expiryDate" name="expiryDate" onChange={handleChange} />
             {errors.compareDates && <small className="error-msg">{errors.compareDates}</small>}
+            {errors.expiryDate && <small className="error-msg">{errors.expiryDate}</small>}
           </div>
         </div>
         <div className="addsoft-row">
