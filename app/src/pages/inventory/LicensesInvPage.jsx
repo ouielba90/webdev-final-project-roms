@@ -55,7 +55,6 @@ function LicensesInvPage() {
     e.preventDefault()
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    console.log(data.softwareId)
     const newItem = {
       softwareId: data.softwareId,
       seats: data.seats,
@@ -79,7 +78,6 @@ function LicensesInvPage() {
     e.preventDefault()
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    console.log("dataaa", data)
     const updatedItem = {
       _id: currEditId,
       softwareId: data.softwareId,
@@ -89,7 +87,6 @@ function LicensesInvPage() {
       licenseKey: data.licenseKey,
       vendor: data.vendor,
       cost: data.cost,
-      //softwareName: data.softwareId
     }
     const updated = await licensesApi.updateLicense(currEditId, updatedItem)
     if (!updated) return;
@@ -97,7 +94,6 @@ function LicensesInvPage() {
       ...updated,
       status: daysBetweenDates(data.expiryDate) > 0 ? "activa" : "expirada",
     };
-    console.log("updated and normalized", updated, normalized)
     setLicenses(prev =>
       prev.map(item =>
         item._id === currEditId ? { ...item, ...normalized } : item
@@ -110,10 +106,13 @@ function LicensesInvPage() {
   }
 
   async function handleRemove(id) {
-    const deleted = await licensesApi.deleteLicense(id);
-    if (!deleted) return;
-    setLicenses(prev => prev.filter(el => el._id !== id))
-    await syncRemoveWithSoftware(id);
+    const userConfirmation = confirm(`¿Seguro que quieres proceder a eliminar la licencia cuya id es ${id}?`);
+    if (userConfirmation) {
+      const deleted = await licensesApi.deleteLicense(id);
+      if (!deleted) return;
+      setLicenses(prev => prev.filter(el => el._id !== id))
+      await syncRemoveWithSoftware(id);
+    }
   }
 
   return (

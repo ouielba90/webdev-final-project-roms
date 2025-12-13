@@ -59,7 +59,7 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
         </div>
         <div className="addsoft-group">
           <label htmlFor="model">Modelo</label>
-          <input type="text" id="model" name="model" value={model} onChange={(e) => setModel(e.target.value)} required />
+          <input type="text" id="model" name="model" value={model} onChange={(e) => setModel(e.target.value)} />
           {errors.model && <small className="error-msg">{errors.model}</small>}
         </div>
       </div>

@@ -28,12 +28,12 @@ function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHa
       <div className="addsoft-row">
         <div className="addsoft-group">
           <label htmlFor="name">Nombre</label>
-          <input type="text" id="name" name="name" onChange={handleChange} required />
+          <input type="text" id="name" name="name" onChange={handleChange} />
           {errors.name && <small className="error-msg">{errors.name}</small>}
         </div>
         <div className="addsoft-group">
           <label htmlFor="version">Versión</label>
-          <input type="text" id="version" name="version" onChange={handleChange} required />
+          <input type="text" id="version" name="version" onChange={handleChange} />
           {errors.version && <small className="error-msg">{errors.version}</small>}
         </div>
       </div>

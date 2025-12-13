@@ -38,7 +38,6 @@ function HomeInvPage() {
       }
       if (section === "licenses") {
         const sw = software.find(s => s.licenseId === parts[2]);
-        console.log("swwww", sw, software, parts[2])
         inventorySections[parts] = {
           title: `Licencia: ${sw?.name || "cargando información..."}`,
           subtext: "Información detallada de esta licencia"

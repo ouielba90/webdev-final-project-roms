@@ -79,11 +79,14 @@ function HardwareInvPage() {
   }
 
   async function handleRemove(id) {
-    const deleted = await hardwareApi.deleteHardware(id);
-    if (!deleted) return;
-    setHardware(prev => prev.filter(el => el._id !== id))
+    const userConfirmation = confirm(`¿Seguro que quieres proceder a eliminar el hardware cuya id es ${id}?`);
+    if (userConfirmation) {
+      const deleted = await hardwareApi.deleteHardware(id);
+      if (!deleted) return;
+      setHardware(prev => prev.filter(el => el._id !== id))
 
-    await syncRemoveWithSoftware(id);
+      await syncRemoveWithSoftware(id);
+    }
   }
 
   return (

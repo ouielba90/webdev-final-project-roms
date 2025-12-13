@@ -49,13 +49,13 @@ function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmi
       </div>
       <div className="addsoft-row">
         <div className="addsoft-group">
-          <label htmlFor="name">Nombre*</label>
-          <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} required />
+          <label htmlFor="name">Nombre</label>
+          <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} />
           {errors.name && <small className="error-msg">{errors.name}</small>}
         </div>
         <div className="addsoft-group">
-          <label htmlFor="version">Versión*</label>
-          <input type="text" id="version" name="version" value={version} onChange={(e) => setVersion(e.target.value)} required />
+          <label htmlFor="version">Versión</label>
+          <input type="text" id="version" name="version" value={version} onChange={(e) => setVersion(e.target.value)} />
           {errors.version && <small className="error-msg">{errors.version}</small>}
         </div>
       </div>

@@ -34,7 +34,7 @@ function AddHardware({ softList, handleSubmit, selectedSoft, setSelectedSoft, se
         </div>
         <div className="addsoft-group">
           <label htmlFor="model">Modelo</label>
-          <input type="text" id="model" name="model" onChange={handleChange} required />
+          <input type="text" id="model" name="model" onChange={handleChange} />
           {errors.model && <small className="error-msg">{errors.model}</small>}
         </div>
       </div>

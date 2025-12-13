@@ -40,7 +40,6 @@ function ServersInvPage() {
         </div>
         <div className="software-cards">
           {filtered.map((el) => {
-            console.log(el.hostedSoftware)
             return (
               <ServerCard
                 key={el._id}
