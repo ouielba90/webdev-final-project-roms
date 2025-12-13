@@ -1,19 +1,19 @@
 function OSImage({ osName }) {
-  const osIcons = [
-    "centos",
-    "ubuntu",
-    "kali",
-    "debian",
-    "macos",
-    "rocky",
-    "windows10",
-    "windows11"
-  ];
-  const iconToUse = osIcons.find(icon => osName.replace(/\s+/g, '').toLowerCase().includes(icon))
+  let icon;
+
+  const name = osName?.toLowerCase() || "";
+
+  if (name.includes("windows")) {
+    icon = "windows";
+  } else if (name.includes("mac") || name.includes("osx") || name.includes("macos")) {
+    icon = "mac";
+  } else {
+    icon = "linux";
+  }
 
   return (
     <>
-      <img src={`/public/icons/${iconToUse}.png`} alt={`${iconToUse}`} className="header-os-img" />
+      <img src={`/public/icons/${icon}.png`} alt={`${icon}`} className="header-os-img" />
     </>
   )
 }

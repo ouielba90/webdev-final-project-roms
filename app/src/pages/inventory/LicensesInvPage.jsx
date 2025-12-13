@@ -37,22 +37,16 @@ function LicensesInvPage() {
   const [addFormOpen, setAddFormOpen] = useState(false)
   const [editFormOpen, setEditFormOpen] = useState(false)
   const [currEditId, setCurrEditId] = useState(0)
-  const [selectedSoft, setSelectedSoft] = useState("");
   const licenseToEdit = licenses.find(s => s._id === currEditId);
 
-  /// const [softList, setSoftList] = useState(
-  //   software.filter(s => s.licenseId === null)
-  //     .map(s => ({ _id: s._id, name: s.name })));
   const getSoftListForEdit = (license) => {
     if (!license) return [];
 
     return software
-      .filter(
-        s =>
-          s.licenseId === null || s._id === license.softwareId
-      )
+      .filter(s => s.licenseId === null || s._id === license.softwareId)
       .map(s => ({ _id: s._id, name: s.name }));
   };
+
   const softListForAdd = software
     .filter(s => s.licenseId === null)
     .map(s => ({ _id: s._id, name: s.name }));

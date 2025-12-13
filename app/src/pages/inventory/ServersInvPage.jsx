@@ -8,6 +8,7 @@ function ServersInvPage() {
 
   const { filtered, az, za, setAZ, setZA, handleSearch, handleStatus, handleOs } =
     useFiltersSearch(servers, "servers");
+  const osList = [...new Set(servers.map(item => item.os.replace(/[0-9.]+/g, "").trim()))]
 
   return (
     <>
@@ -18,11 +19,7 @@ function ServersInvPage() {
             <div className="filter-field">
               <p>S.O.</p>
               <select onClick={handleOs}>
-                <option>Todos</option>
-                <option>CentOS</option>
-                <option>Debian</option>
-                <option>Rocky Linux</option>
-                <option>Ubuntu</option>
+                {osList.map((os, i) => <option key={i}>{os}</option>)}
               </select>
             </div>
             <div className="filter-field">

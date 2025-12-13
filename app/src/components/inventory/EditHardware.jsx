@@ -136,7 +136,10 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
       </div>
 
       <div className="addsoft-row">
-        <button className="addsoft-cancel" type="button" onClick={() => setEditFormOpen(false)}>Cancel</button>
+        <button className="addsoft-cancel" type="button" onClick={() => {
+          setSelectedSoft([])
+          setEditFormOpen(false)
+        }}>Cancel</button>
         <button type="submit" className="addsoft-submit" disabled={!canSubmit}>Aplicar cambios</button>
       </div>
     </form>
