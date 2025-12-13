@@ -32,7 +32,7 @@ function ProjectList() {
     data.getProjects(apiProjectsLocalData)
       .then((projectsData) => setUseProjects(projectsData))
       .catch((error) => console.log("Error al cargar los datos de proyectos:", error));
-    
+
     //funcion para conectar con la base de datos y extraer la informacion de los projectos
     /*async function loadProjects() {
       const data = await fetchData(apiProjectsLocalData);
@@ -108,7 +108,10 @@ function ProjectList() {
 
   return (
     <>
-      <button className="btn-new-project" onClick={() => setCreateOpen(true)}>Crear projecto</button>
+      <div className="div-buttons-list-projects">
+        <button className="btn-new-project" onClick={() => setCreateOpen(true)}>Crear projecto</button>
+      </div>
+
       {createOpen && (
         <ProjectCreate
           onClose={() => setCreateOpen(false)}

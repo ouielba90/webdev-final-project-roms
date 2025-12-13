@@ -9,6 +9,12 @@ body {
     align-items: center;
 }
 
+.div-buttons-list-projects {
+    display: flex;
+    position: sticky;
+    top: 80px;
+}
+
 /*Estilos para el componente project*/
 .box-project {
     /*border: 2px, solid, rgb(196, 183, 255);*/
@@ -88,8 +94,9 @@ body {
 }
 
 .btn-new-project {
-    background-color: #4CAF50;;
+    background-color: #4CAF50;
     color: white;
+
 }
 
 .btn-edit-project {
@@ -105,9 +112,9 @@ button {
     padding: 15px 16px;
 }
 
-/*Estilos para los botones que no pertenezcan a las 
-acciones de nuevo, añadir y cancelar de los componentes principales*/
-.button-task-list{
+/*Estilos para los botones que necesiten ser modificiados personalmente por
+que estan en un entorno mas exigente*/
+.button-task-list {
     background-color: #dc2626;
     color: white;
     margin: 0px;
@@ -119,10 +126,12 @@ acciones de nuevo, añadir y cancelar de los componentes principales*/
     border-radius: 10px;
 
 }
-.task-edit-button-add button{
+
+.task-edit-button-add button {
     padding-bottom: 5px;
     padding-top: 5px;
 }
+
 /*----------------------------------------------------*/
 
 /*Estilos para el componente create project*/
