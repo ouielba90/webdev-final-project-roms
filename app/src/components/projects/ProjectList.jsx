@@ -45,7 +45,7 @@ function ProjectList() {
       } else {
         // Manejo de caso inesperado
         console.log("Formato inesperado:", dataUsers);
-      }  
+      }
     }
     loadProjectsUsers()
   }, [])

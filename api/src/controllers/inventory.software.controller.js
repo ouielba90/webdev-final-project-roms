@@ -2,7 +2,7 @@ import SoftwarePost from "./../models/inventory.software.model.js"
 
 const getSoftware = async (req, res) => {
     try {
-        const posts = await SoftwarePost.find().populate(["licenseId", "installedOnHardware", "serverId"]).lean();
+        const posts = await SoftwarePost.find().lean();
         res.json(posts);
     } catch (err) {
         console.error("[ERROR] GET /ouissam/software:", err);
@@ -13,7 +13,7 @@ const getSoftware = async (req, res) => {
 const getASoftware = async (req, res) => {
     try {
         const id = req.params.id
-        const posts = await SoftwarePost.findById(id).populate(["licenseId", "installedOnHardware", "serverId"]).lean();
+        const posts = await SoftwarePost.findById(id).lean();
         res.json(posts);
     } catch (err) {
         console.error(`[ERROR] GET /ouissam/software/${id}`, err);

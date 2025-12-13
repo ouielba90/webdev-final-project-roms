@@ -1,6 +1,5 @@
 import StatusAnimation from "./StatusAnimation.jsx"
 function DashboardInsightsI({ riskLicenses, lastMaintHard, software }) {
-  console.log("risk", riskLicenses)
   return (
     <>
 
@@ -24,8 +23,8 @@ function DashboardInsightsI({ riskLicenses, lastMaintHard, software }) {
                   <StatusAnimation color={"orange"} />
                   : undefined
               return (
-                <tr key={item.softwareId._id}>
-                  <td>{item.softwareId.name}</td>
+                <tr key={item.softwareId}>
+                  <td>{software.filter(s => s._id === item.softwareId).map(s => s.name)}</td>
                   <td className="issues">{color}</td>
                 </tr>
               );

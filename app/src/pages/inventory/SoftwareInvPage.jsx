@@ -14,8 +14,8 @@ function SoftwareInvPage() {
 
   const { filtered, az, za, setAZ, setZA, handleSearch, handleStatus } = useFiltersSearch(software, "software");
 
-  //const hardwareById = Object.fromEntries(hardware.map(h => [h._id, h]));
-  //const serversById = Object.fromEntries(servers.map(s => [s._id, s]));
+  const hardwareById = Object.fromEntries(hardware.map(h => [h._id, h]));
+  const serversById = Object.fromEntries(servers.map(s => [s._id, s]));
 
   // Forms
   const [addFormOpen, setAddFormOpen] = useState(false)
@@ -31,7 +31,6 @@ function SoftwareInvPage() {
     e.preventDefault()
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    console.log("seee", selectedServ)
     const newItem = {
       name: data.name,
       version: data.version,
@@ -44,8 +43,7 @@ function SoftwareInvPage() {
     };
     const created = await softwareApi.createSoftware(newItem);
     if (!created) return;
-    const normalized = { ...created, id: created._id };
-
+    const normalized = { ...created, id: created._id || created.id };
     setSoftware(prev => [...prev, normalized]);
 
     await syncCreationWithHardwareAndServers(created._id, selectedHard, selectedServ);
@@ -90,14 +88,11 @@ function SoftwareInvPage() {
   }
 
   async function handleRemove(id) {
-    const userConfirmation = confirm(`¿Seguro que quieres proceder a eliminar el software cuya id es ${id}?`);
-    if (userConfirmation) {
-      const deleted = await softwareApi.deleteSoftware(id);
-      if (!deleted) return;
-      setSoftware(prev => prev.filter(el => el._id !== id))
+    const deleted = await softwareApi.deleteSoftware(id);
+    if (!deleted) return;
+    setSoftware(prev => prev.filter(el => el._id !== id))
 
-      await syncRemoveWithHardwareAndServers(id);
-    }
+    await syncRemoveWithHardwareAndServers(id);
   }
 
   return (
@@ -162,7 +157,11 @@ function SoftwareInvPage() {
                 name={el.name}
                 version={el.version}
                 category={el.category}
+                description={el.description}
                 status={el.status}
+                licenseId={el.licenseId}
+                installedOnHardware={el.installedOnHardware.map(hid => hardwareById[hid]?.model).filter(Boolean)}
+                serverId={el.serverId.map(sid => serversById[sid]?.name).filter(Boolean)}
                 handleRemove={handleRemove}
                 handleEdit={handleEdit}
               />

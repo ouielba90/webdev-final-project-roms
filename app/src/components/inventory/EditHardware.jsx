@@ -11,14 +11,18 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
   const [storage, setStorage] = useState(toBeEdited.specs.storage)
   const [os, setOs] = useState(toBeEdited.os)
   const [lastMaintenance, setLastMaintenance] = useState(toBeEdited.lastMaintenance.split("T")[0])
-  console.log("pffff", selectedSoft)
   function handleSelectedSoftware(e) {
     const selected = Array.from(e.target.selectedOptions, option => option.value);
     setSelectedSoft(selected)
   }
   useEffect(() => {
-    setSelectedSoft(toBeEdited.installedSoftware);
-  }, [toBeEdited, setSelectedSoft]);
+    if (!toBeEdited) return;
+    const names = toBeEdited.installedSoftware
+      .map(id => softList.find(s => s.id === id)?.name)
+      .filter(Boolean);
+
+    setSelectedSoft(names);
+  }, [toBeEdited?._id]);
 
   const [form, setForm] = useState({
     model: toBeEdited.model,
@@ -35,7 +39,6 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
   }, [model, purchaseDate, lastMaintenance, os, cpu, ram, storage]);
 
   const { errors, canSubmit } = useHardwareValidation(form);
-
   return (
     <form onSubmit={handleSubmitEdit} className="addsoft-form">
       <h2 className="addsoft-title">Editar Hardware</h2>
@@ -123,9 +126,9 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
       </div>
       <div className="addsoft-group">
         <label htmlFor="installedSoftware">Software instalado</label>
-        <select multiple id="installedSoftware" name="installedSoftware" value={selectedSoft.map(h => h._id)} onChange={handleSelectedSoftware}>
+        <select multiple id="installedSoftware" name="installedSoftware" value={selectedSoft} onChange={handleSelectedSoftware}>
           {softList.map((s, i) => (
-            <option key={i} value={s.id}>{s.name}</option>
+            <option key={i} value={s.name}>{s.name}</option>
           ))}
         </select>
         <small className="hint">Mantén pulsado CTRL para seleccionar varios</small>

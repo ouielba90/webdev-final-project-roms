@@ -2,7 +2,7 @@ import LicensesPost from "./../models/inventory.licenses.model.js"
 
 const getLicenses = async (req, res) => {
     try {
-        const posts = await LicensesPost.find().populate("softwareId").lean();
+        const posts = await LicensesPost.find().lean();
         res.json(posts);
     } catch (err) {
         console.error("[ERROR] GET /ouissam/licenses:", err);
@@ -13,7 +13,7 @@ const getLicenses = async (req, res) => {
 const getALicense = async (req, res) => {
     try {
         const id = req.params.id
-        const posts = await LicensesPost.findById(id).populate("softwareId").lean();
+        const posts = await LicensesPost.findById(id).lean();
         res.json(posts);
     } catch (err) {
         console.error(`[ERROR] GET /ouissam/licenses/${id}`, err);

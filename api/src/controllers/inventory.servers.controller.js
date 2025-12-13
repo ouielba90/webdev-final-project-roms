@@ -2,7 +2,7 @@ import ServersPost from "./../models/inventory.servers.model.js"
 
 const getServers = async (req, res) => {
     try {
-        const posts = await ServersPost.find().populate("hostedSoftware").lean();
+        const posts = await ServersPost.find().lean();
         res.json(posts);
     } catch (err) {
         console.error("[ERROR] GET /ouissam/servers:", err);
@@ -13,7 +13,7 @@ const getServers = async (req, res) => {
 const getAServer = async (req, res) => {
     try {
         const id = req.params.id
-        const posts = await ServersPost.findById(id).populate("hostedSoftware").lean();
+        const posts = await ServersPost.findById(id).lean();
         res.json(posts);
     } catch (err) {
         console.error(`[ERROR] GET /ouissam/servers/${id}`, err);
