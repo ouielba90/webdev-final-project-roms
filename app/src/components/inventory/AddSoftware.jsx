@@ -2,14 +2,15 @@ import { useState } from "react";
 import useSoftwareValidation from "../../logic/inventory/useSoftwareValidation";
 
 function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHard, setSelectedHard, selectedServ, setSelectedServ, setAddFormOpen }) {
-  const [form, setForm] = useState({
+  const initialForm = {
     name: "",
     version: "",
     description: "",
     category: "",
     status: ""
-  });
+  };
 
+  const [form, setForm] = useState(initialForm)
   const { errors, canSubmit } = useSoftwareValidation(form);
 
   function handleChange(e) {
@@ -88,11 +89,15 @@ function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHa
         <label htmlFor="description">Descripción</label>
         <textarea id="description" name="description" rows="2" onChange={handleChange}></textarea>
         {errors.description && <small className="error-msg">{errors.description}</small>}
-
       </div>
 
       <div className="addsoft-row">
-        <button className="addsoft-cancel" type="button" onClick={() => setAddFormOpen(false)}>Cancel</button>
+        <button className="addsoft-cancel" type="button" onClick={() => {
+          setForm(initialForm);
+          setSelectedHard([]);
+          setSelectedServ([]);
+          setAddFormOpen(false)
+        }}>Cancel</button>
         <button type="submit" className="addsoft-submit" disabled={!canSubmit}>Añadir</button>
       </div>
     </form>

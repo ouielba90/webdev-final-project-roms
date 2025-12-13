@@ -2,7 +2,8 @@ import { useState } from "react";
 import useLicensesValidation from "../../logic/inventory/useLicensesValidation.js"
 
 function AddLicense({ softList, handleSubmit, setAddFormOpen }) {
-  const [form, setForm] = useState({
+  const initialForm = {
+    softwareId: "",
     vendor: "",
     seats: "",
     licenseKey: "",
@@ -10,8 +11,8 @@ function AddLicense({ softList, handleSubmit, setAddFormOpen }) {
     expiryDate: "",
     compareDates: "",
     cost: ""
-  });
-
+  };
+  const [form, setForm] = useState(initialForm);
   const { errors, canSubmit } = useLicensesValidation(form);
 
   function handleChange(e) {
@@ -30,7 +31,6 @@ function AddLicense({ softList, handleSubmit, setAddFormOpen }) {
             <label htmlFor="softwareId">Software</label>
             <select id="softwareId" name="softwareId"
               onChange={handleChange}>
-              <option key="1234" value="">Selecciona software</option>
               {softList.map((software) => {
                 return (
                   <option key={software._id} value={software._id}>{software.name}</option>
@@ -67,6 +67,7 @@ function AddLicense({ softList, handleSubmit, setAddFormOpen }) {
             <label htmlFor="expiryDate">Fecha de expiración</label>
             <input type="date" id="expiryDate" name="expiryDate" onChange={handleChange} />
             {errors.compareDates && <small className="error-msg">{errors.compareDates}</small>}
+            {errors.expiryDate && <small className="error-msg">{errors.expiryDate}</small>}
           </div>
         </div>
         <div className="addsoft-row">
@@ -78,7 +79,10 @@ function AddLicense({ softList, handleSubmit, setAddFormOpen }) {
         </div>
 
         <div className="addsoft-row">
-          <button className="addsoft-cancel" type="button" onClick={() => setAddFormOpen(false)}>Cancel</button>
+          <button className="addsoft-cancel" type="button" onClick={() => {
+            setAddFormOpen(false)
+            setForm(initialForm)
+          }}>Cancel</button>
           <button type="submit" className="addsoft-submit" disabled={!canSubmit}>Añadir</button>
         </div>
       </form>

@@ -2,22 +2,24 @@ import { useState } from "react";
 import useHardwareValidation from "../../logic/inventory/useHardwareValidation";
 
 function AddHardware({ softList, handleSubmit, selectedSoft, setSelectedSoft, setAddFormOpen }) {
-  const [form, setForm] = useState({
+  const initialForm = {
     model: "",
     purchaseDate: "",
-    lastMaintenance: new Date().toISOString().split("T")[0],
+    lastMaintenance: "",
     os: "",
     cpu: "",
     ram: "",
     storage: ""
-  });
+  };
 
+  const [form, setForm] = useState(initialForm)
   const { errors, canSubmit } = useHardwareValidation(form);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
     setForm(prev => ({ ...prev, [id]: value }));
   };
+
   return (
     <form onSubmit={handleSubmit} className="addsoft-form">
       <h2 className="addsoft-title">Añadir Hardware</h2>
@@ -90,7 +92,6 @@ function AddHardware({ softList, handleSubmit, selectedSoft, setSelectedSoft, se
             type="date"
             id="lastMaintenance"
             name="lastMaintenance"
-            defaultValue={new Date().toISOString().split("T")[0]}
             onChange={handleChange}
           />
           {errors.lastMaintenance && <small className="error-msg">{errors.lastMaintenance}</small>}
@@ -108,7 +109,11 @@ function AddHardware({ softList, handleSubmit, selectedSoft, setSelectedSoft, se
       </div>
 
       <div className="addsoft-row">
-        <button className="addsoft-cancel" type="button" onClick={() => setAddFormOpen(false)}>Cancel</button>
+        <button className="addsoft-cancel" type="button" onClick={() => {
+          setForm(initialForm)
+          setAddFormOpen(false)
+          setSelectedSoft([])
+        }}>Cancel</button>
         <button type="submit" className="addsoft-submit" disabled={!canSubmit}>Añadir</button>
       </div>
     </form>

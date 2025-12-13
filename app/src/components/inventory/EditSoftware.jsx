@@ -113,7 +113,11 @@ function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmi
       </div>
 
       <div className="addsoft-row">
-        <button className="addsoft-cancel" type="button" onClick={() => setEditFormOpen(false)}>Cancel</button>
+        <button className="addsoft-cancel" type="button" onClick={() => {
+          setEditFormOpen(false)
+          setSelectedHard([])
+          setSelectedServ([])
+        }}>Cancel</button>
         <button type="submit" className="addsoft-submit" disabled={!canSubmit}>Aplicar cambios</button>
       </div>
     </form>
