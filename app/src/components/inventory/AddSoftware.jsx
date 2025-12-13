@@ -1,11 +1,13 @@
 import { useState } from "react";
-import useSoftwareValidation from "../../hooks/inventory/useSoftwareValidation";
+import useSoftwareValidation from "../../logic/inventory/useSoftwareValidation";
 
 function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHard, setSelectedHard, selectedServ, setSelectedServ, setAddFormOpen }) {
   const [form, setForm] = useState({
     name: "",
     version: "",
-    description: ""
+    description: "",
+    category: "",
+    status: ""
   });
 
   const { errors, canSubmit } = useSoftwareValidation(form);

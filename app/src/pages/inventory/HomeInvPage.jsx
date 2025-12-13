@@ -21,32 +21,37 @@ function HomeInvPage() {
     if (parts.length === 3) {
       const section = parts[1];
       if (section === "software") {
+        const sw = software.find(s => s._id === parts[2]);
         inventorySections[parts] = {
-          title: `Software: ${software.find(s => s.id === Number(parts[2])).name}`,
+          title: `Software: ${sw?.name || "cargando información"}`,
           subtext: "Información detallada de este software"
         }
-        return parts
+        return parts;
       }
       if (section === "hardware") {
+        const hw = hardware.find(h => h._id === parts[2]);
         inventorySections[parts] = {
-          title: `Hardware: ${hardware.find(s => s.id === Number(parts[2])).model}`,
+          title: `Hardware: ${hw?.model || "cargando información..."}`,
           subtext: "Información detallada de este hardware"
         }
-        return parts
+        return parts;
       }
       if (section === "licenses") {
+        const sw = software.find(s => s.licenseId === parts[2]);
+        console.log("swwww", sw, software, parts[2])
         inventorySections[parts] = {
-          title: `Licencia: ${parts[2]}`,
+          title: `Licencia: ${sw?.name || "cargando información..."}`,
           subtext: "Información detallada de esta licencia"
         }
         return parts
       }
       if (section === "servers") {
+        const serv = servers.find(s => s._id === parts[2]);
         inventorySections[parts] = {
-          title: `Servidor: ${servers.find(s => s.id === Number(parts[2])).name}`,
+          title: `Servidor: ${serv?.name || "cargando información..."}`,
           subtext: "Información detallada de este servidor"
         }
-        return parts
+        return parts;
       }
       return inventorySections[section] ? section : "dashboard";
     }
@@ -58,8 +63,12 @@ function HomeInvPage() {
   return (
     <>
       <CompactMainMenu></CompactMainMenu>
-      <h1 className="general-title">{sectionData.title}</h1>
-      <h3 className="general-subtitle">{sectionData.subtext}</h3>
+      <div className="spacing-top">
+        <div className="general-header">
+          <h1 className="general-title">{sectionData.title}</h1>
+          <h3 className="general-subtitle">{sectionData.subtext}</h3>
+        </div>
+      </div>
       <nav className="general-submenu">
         <Link to="/inventory">Centro de inventario</Link>
         <Link to="/inventory/software">Software</Link>

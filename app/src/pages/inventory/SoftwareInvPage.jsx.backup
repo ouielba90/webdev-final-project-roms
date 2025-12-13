@@ -1,0 +1,294 @@
+import { useContext, useState } from "react";
+import { DataContext } from "../../context/inventory/DataContext";
+import SoftwareCard from "../../components/inventory/SoftwareCard";
+import AddSoftware from "../../components/inventory/AddSoftware";
+import EditSoftware from "../../components/inventory/EditSoftware.jsx"
+import Modal from "../../components/inventory/Modal.jsx"
+import { Outlet } from "react-router-dom";
+import useFiltersSearch from "../../logic/inventory/useFiltersSearch.js";
+
+function SoftwareInvPage() {
+  const { software, setSoftware, softwareApi, setHardware, hardware, hardwareApi, servers, setServers, serversApi } = useContext(DataContext);
+
+  const { filtered, az, za, setAZ, setZA, handleSearch, handleStatus } =
+    useFiltersSearch(software, "software");
+
+  const hardwareById = Object.fromEntries(hardware.map(h => [h._id, h]));
+  const serversById = Object.fromEntries(servers.map(s => [s._id, s]));
+
+  async function handleRemove(id) {
+    const deleted = await softwareApi.deleteSoftware(id);
+    if (!deleted) return;
+    setSoftware(prev => prev.filter(el => el._id !== id))
+
+    const toBeUpdatedHard = hardware.filter(h => h.installedSoftware.includes(id))
+    const updatedHard = toBeUpdatedHard.map(item => ({ ...item, installedSoftware: item.installedSoftware.filter(is => is !== id) }))
+    updatedHard.map(async (uH) => await hardwareApi.updateHardware(uH._id, uH))
+    setHardware(prev =>
+      prev.map(h => {
+        const updated = updatedHard.find(uH => uH._id === h._id);
+        return updated ? updated : h;
+      })
+    );
+    const toBeUpdatedServ = servers.filter(s => s.hostedSoftware.includes(id))
+    const updatedServ = toBeUpdatedServ.map(item => ({ ...item, hostedSoftware: item.hostedSoftware.filter(hs => hs !== id) }))
+    updatedServ.map(async (uS) => await serversApi.updateServer(uS._id, uS))
+    setServers(prev =>
+      prev.map(s => {
+        const updated = updatedServ.find(uS => uS._id === s._id);
+        return updated ? updated : s;
+      })
+    );
+  }
+
+  // Forms
+  const [addFormOpen, setAddFormOpen] = useState(false)
+  const [editFormOpen, setEditFormOpen] = useState(false)
+  const [currEditId, setCurrEditId] = useState(null)
+  const [selectedHard, setSelectedHard] = useState([]);
+  const [selectedServ, setSelectedServ] = useState([]);
+  const categList = Array.from(new Set(software.map(el => el.category)))
+  const hardList = hardware.map(el => { return { id: el._id, model: el.model } })
+  const serverList = servers.map(el => { return { id: el._id, name: el.name } })
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+    const newItem = {
+      //id: software.length ? software.at(-1).id + 1 : 1001,
+      name: data.name,
+      version: data.version,
+      category: data.category,
+      status: data.status,
+      licenseId: null,
+      installedOnHardware: selectedHard,
+      serverId: selectedServ, //Evita que se rompa si lo que devuelve data.serverId
+      description: data.description,
+    };
+    const created = await softwareApi.createSoftware(newItem);
+    if (!created) return;
+    const normalized = { ...created, id: created._id || created.id };
+    setSoftware(prev => [...prev, normalized]);
+
+    newItem.installedOnHardware.map(async (hid) => {
+      const hardItemToUpdate = hardware.find(h => hid === h._id)
+      await hardwareApi.updateHardware(hid, {
+        installedSoftware: [...hardItemToUpdate.installedSoftware, created._id]
+      })
+      setHardware(prev =>
+        prev.map(item =>
+          hid === item._id ?
+            { ...item, installedSoftware: [...item.installedSoftware, created._id] }
+            : item
+        )
+      )
+    })
+
+    newItem.serverId.map(async (sid) => {
+      const servItemToUpdate = servers.find(s => sid === s._id)
+      await serversApi.updateServer(sid, {
+        hostedSoftware: [...servItemToUpdate.hostedSoftware, created._id]
+      })
+      setServers(prev =>
+        prev.map(item =>
+          sid === item._id ?
+            { ...item, hostedSoftware: [...item.hostedSoftware, created._id] }
+            : item
+        )
+      )
+    })
+    e.target.reset()
+    setSelectedHard([])
+    setSelectedServ([])
+    setAddFormOpen(false)
+  }
+
+  function handleEdit(id) {
+    setEditFormOpen(true)
+    setCurrEditId(id)
+  }
+
+  async function handleSubmitEdit(e) {
+    e.preventDefault()
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+
+    console.log("data modified", data)
+    const updatedItem = {
+      name: data.name,
+      version: data.version,
+      category: data.category,
+      status: data.status,
+      installedOnHardware: selectedHard,
+      serverId: selectedServ, //Evita que se rompa si lo que devuelve data.serverId
+      description: data.description,
+    }
+
+    const updated = await softwareApi.updateSoftware(currEditId, updatedItem)
+    if (!updated) return;
+    const normalized = { ...updated, id: updated._id || updated.id };
+    setSoftware(prev =>
+      prev.map(item =>
+        item._id === currEditId ? normalized : item
+      ))
+
+    const compareInstalledOnHardware = diffLists(software.find(item => item._id == currEditId).installedOnHardware, updatedItem.installedOnHardware)
+    if (compareInstalledOnHardware.added) {
+      compareInstalledOnHardware.added.map(async (hid) => {
+        const hardItemToUpdate = hardware.find(h => hid === h._id)
+        await hardwareApi.updateHardware(hid, {
+          installedSoftware: [...hardItemToUpdate.installedSoftware, updated._id]
+        })
+        setHardware(prev =>
+          prev.map(item =>
+            hid === item._id ?
+              { ...item, installedSoftware: [...item.installedSoftware, updated._id] }
+              : item
+          )
+        )
+      })
+    }
+
+    if (compareInstalledOnHardware.removed) {
+      compareInstalledOnHardware.removed.map(async (hid) => {
+        const hardItemToUpdate = hardware.find(h => hid === h._id)
+        const updatedInstalledSoftware = hardItemToUpdate.installedSoftware.filter(sid => sid !== updated._id);
+        await hardwareApi.updateHardware(hid, {
+          installedSoftware: updatedInstalledSoftware
+        })
+        setHardware(prev =>
+          prev.map(item =>
+            hid === item._id ?
+              { ...item, installedSoftware: updatedInstalledSoftware }
+              : item
+          )
+        )
+      })
+    }
+    const compareServerId = diffLists(software.find(item => item._id == currEditId).serverId, updatedItem.serverId)
+    if (compareServerId.added) {
+      compareServerId.added.map(async (sid) => {
+        const servItemToUpdate = servers.find(s => sid === s._id)
+        await serversApi.updateServer(sid, {
+          hostedSoftware: [...servItemToUpdate.hostedSoftware, updated._id]
+        })
+        setServers(prev =>
+          prev.map(item =>
+            sid === item._id ?
+              { ...item, hostedSoftware: [...item.hostedSoftware, updated._id] }
+              : item
+          )
+        )
+      })
+    }
+    if (compareServerId.removed) {
+      compareServerId.removed.map(async (sid) => {
+        const servItemToUpdate = servers.find(s => sid === s._id)
+        const updatedHostedSoftware = [...servItemToUpdate.hostedSoftware, updated._id];
+
+        await serversApi.updateServer(sid, {
+          hostedSoftware: updatedHostedSoftware
+        })
+        setServers(prev =>
+          prev.map(item =>
+            sid === item._id ?
+              { ...item, hostedSoftware: updatedHostedSoftware }
+              : item
+          )
+        )
+      })
+    }
+    setEditFormOpen(false)
+  }
+
+  return (
+    <>
+      <Modal open={editFormOpen} onClose={() => setEditFormOpen(false)}>
+        <EditSoftware
+          toBeEdited={software.find(s => s._id === currEditId)}
+          categList={categList}
+          serverList={serverList}
+          hardList={hardList}
+          handleSubmitEdit={handleSubmitEdit}
+          selectedHard={selectedHard}
+          setSelectedHard={setSelectedHard}
+          selectedServ={selectedServ}
+          setSelectedServ={setSelectedServ}
+          setEditFormOpen={setEditFormOpen}
+        />
+      </Modal>
+      <Modal open={addFormOpen} onClose={() => setAddFormOpen(false)}>
+        <AddSoftware
+          software={software}
+          categList={categList}
+          serverList={serverList}
+          hardList={hardList}
+          handleSubmit={handleSubmit}
+          selectedHard={selectedHard}
+          setSelectedHard={setSelectedHard}
+          selectedServ={selectedServ}
+          setSelectedServ={setSelectedServ}
+          setAddFormOpen={setAddFormOpen}
+        />
+      </Modal>
+      <div className="software-main-container">
+        <div className="filters-container">
+          <div className="filters-row-main">
+            <input type="text" id="searchForm" onChange={handleSearch} placeholder="Buscar software..." />
+            <div className="filter-field">
+              <p>Estado</p>
+              <select onChange={handleStatus}>
+                <option>Todos</option>
+                <option>disponible</option>
+                <option>en-uso</option>
+              </select>
+            </div>
+          </div>
+          <div className="filters-btn-combined">
+            <div className="filters-row-sort">
+              <button className={az ? "filter-activation" : ""} onClick={() => { setAZ(!az); setZA(false); }}>A-Z</button>
+              <button className={za ? "filter-activation" : ""} onClick={() => { setZA(!za); setAZ(false); }}>Z-A</button>
+            </div>
+            <div className="filters-row-sort">
+              <button onClick={() => setAddFormOpen(!addFormOpen)}>Añadir software</button>
+            </div>
+          </div>
+        </div>
+        <div className="software-cards">
+          {filtered.map((el) => {
+            return (
+              <SoftwareCard
+                key={el._id}
+                id={el._id}
+                name={el.name}
+                version={el.version}
+                category={el.category}
+                description={el.description}
+                status={el.status}
+                licenseId={el.licenseId}
+                installedOnHardware={el.installedOnHardware.map(hid => hardwareById[hid]?.model).filter(Boolean)}
+                serverId={el.serverId.map(sid => serversById[sid]?.name).filter(Boolean)}
+                handleRemove={handleRemove}
+                handleEdit={handleEdit}
+              />
+            )
+          })}
+          <Outlet></Outlet>
+        </div>
+      </div>
+    </>
+  )
+}
+
+export default SoftwareInvPage
+
+function diffLists(oldList, newList) {
+  const oldSet = new Set(oldList);
+  const newSet = new Set(newList);
+
+  const added = newList.filter(item => !oldSet.has(item));
+  const removed = oldList.filter(item => !newSet.has(item));
+
+  return { added, removed };
+}

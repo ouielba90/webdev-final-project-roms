@@ -1,0 +1,243 @@
+import cors from 'cors';
+import express from 'express';
+import dotenv from "dotenv"
+import connectDB from "./src/config/db.js"
+import SoftwarePost from "./src/models/inventory.software.model.js"
+import HardwarePost from "./src/models/inventory.hardware.model.js"
+import LicensesPost from "./src/models/inventory.licenses.model.js"
+import ServersPost from "./src/models/inventory.servers.model.js"
+import users from './data/users.data.js';
+import projects from "./data/projects.data.js";
+import projectsUsers from "./data/projectsUsers.data.js";
+import software from "./data/inventory/software.js";
+import hardware from "./data/inventory/hardware.js";
+import licenses from "./data/inventory/licenses.js";
+import servers from "./data/inventory/servers.js";
+import notifications from "./data/notifications.data.js";
+import messages from "./data/messages.data.js"
+import chatMessages from "./data/chatMessages.data.js";
+import posts from "./data/post.data.js";
+
+dotenv.config();
+const PORT = process.env.PORT || 3000;
+
+await connectDB();
+const api = express();
+
+api.use(cors());
+
+api.use(express.json());
+
+
+/* API MARC */
+api.get("/", (req, res) => {
+  res.send("Hello, World!");
+});
+
+api.get("/marc", (req, res) => {
+  res.send("Esta es la API de Marc, los datos se encuentran en /users.");
+});
+
+api.get("/marc/users", (req, res) => {
+  res.json(users)
+})
+
+/* API OUISSAM */
+api.get("/ouissam", (req, res) => {
+  res.send(
+    "Esta es la API de Ouissam, los datos se encuentran en /hardware, /software, /licenses o /servers.",
+  );
+});
+
+const softwareRoutes = require('./src/routes/inventory.software.routes.js')
+api.use('/ouissam/software', softwareRoutes)
+
+
+api.route("/ouissam/hardware")
+  .get(async (req, res) => {
+    try {
+      const posts = await HardwarePost.find().lean();
+      res.json(posts);
+    } catch (err) {
+      console.error("[ERROR] GET /ouissam/hardware:", err);
+      res.json({ error: "DB_ERROR (hardware)" });
+    }
+  })
+  .post(async (req, res) => {
+    try {
+      const postData = req.body;
+      const newPost = new HardwarePost(postData);
+      const savedPost = await newPost.save();
+      res.status(201).json(savedPost);
+    } catch (err) {
+      console.error("[ERROR] POST /ouissam/hardware:", err);
+      res.status(500).json({ error: "DB_ERROR (hardware)" });
+    }
+  })
+
+api.route("/ouissam/hardware/:id")
+  .delete(async (req, res) => {
+    try {
+      const postId = req.params.id
+      const deletedPost = await HardwarePost.findByIdAndDelete(postId);
+      if (!deletedPost) {
+        return res.status(404).json({ error: "POST_NOT_FOUND" });
+      }
+      return res.json(deletedPost);
+    } catch (err) {
+      console.error("[ERROR] DELETE /ouissam/hardware/:id:", err);
+      return res.status(500).json({ error: "DB_ERROR" });
+    }
+  })
+  .put(async (req, res) => {
+    try {
+      const postId = req.params.id
+      const updateData = req.body;
+      const post = await HardwarePost.findById(postId);
+      if (!post) {
+        return res.status(404).json({ error: "POST_NOT_FOUND" });
+      }
+      post.set(updateData);
+      const updatedPost = await post.save();
+      return res.json(updatedPost);
+    } catch (err) {
+      console.error("[ERROR] PUT /ouissam/licenses/:id:", err);
+      return res.status(500).json({ error: "DB_ERROR" });
+    }
+  });
+
+api.route("/ouissam/licenses")
+  .get(async (req, res) => {
+    try {
+      const posts = await LicensesPost.find().lean();
+      res.json(posts);
+    } catch (err) {
+      console.error("[ERROR] GET /ouissam/licenses:", err);
+      res.json({ error: "DB_ERROR (licenses)" });
+    }
+  })
+  .post(async (req, res) => {
+    try {
+      const postData = req.body;
+      const newPost = new LicensesPost(postData);
+      const savedPost = await newPost.save();
+      res.status(201).json(savedPost);
+    } catch (err) {
+      console.error("[ERROR] POST /ouissam/licenses:", err);
+      res.status(500).json({ error: "DB_ERROR (licenses)" });
+    }
+  })
+
+api.route("/ouissam/licenses/:id")
+  .delete(async (req, res) => {
+    try {
+      const postId = req.params.id
+      const deletedPost = await LicensesPost.findByIdAndDelete(postId);
+      if (!deletedPost) {
+        return res.status(404).json({ error: "POST_NOT_FOUND" });
+      }
+      return res.json(deletedPost);
+    } catch (err) {
+      console.error("[ERROR] DELETE /ouissam/licenses/:id:", err);
+      return res.status(500).json({ error: "DB_ERROR" });
+    }
+  })
+  .put(async (req, res) => {
+    try {
+      const postId = req.params.id
+      const updateData = req.body;
+      const post = await LicensesPost.findById(postId);
+      if (!post) {
+        return res.status(404).json({ error: "POST_NOT_FOUND" });
+      }
+      post.set(updateData);
+      const updatedPost = await post.save();
+      return res.json(updatedPost);
+    } catch (err) {
+      console.error("[ERROR] PUT /ouissam/licenses/:id:", err);
+      return res.status(500).json({ error: "DB_ERROR" });
+    }
+  });
+
+api.route("/ouissam/servers")
+  .get(async (req, res) => {
+    try {
+      const posts = await ServersPost.find().lean();
+      res.json(posts);
+    } catch (err) {
+      console.error("[ERROR] GET /ouissam/servers:", err);
+      res.json({ error: "DB_ERROR (servers)" });
+    }
+  })
+  .post(async (req, res) => {
+    try {
+      const postData = req.body;
+      const newPost = new ServersPost(postData);
+      const savedPost = await newPost.save();
+      res.status(201).json(savedPost);
+    } catch (err) {
+      console.error("[ERROR] POST /ouissam/servers:", err);
+      res.status(500).json({ error: "DB_ERROR (servers)" });
+    }
+  })
+api.route("/ouissam/servers/:id")
+  .delete(async (req, res) => {
+    try {
+      const postId = req.params.id
+      const deletedPost = await ServersPost.findByIdAndDelete(postId);
+      if (!deletedPost) {
+        return res.status(404).json({ error: "POST_NOT_FOUND" });
+      }
+      return res.json(deletedPost);
+    } catch (err) {
+      console.error("[ERROR] DELETE /ouissam/servers/:id:", err);
+      return res.status(500).json({ error: "DB_ERROR" });
+    }
+  })
+  .put(async (req, res) => {
+    try {
+      const postId = req.params.id
+      const updateData = req.body;
+      const post = await ServersPost.findById(postId);
+      if (!post) {
+        return res.status(404).json({ error: "POST_NOT_FOUND" });
+      }
+      post.set(updateData);
+      const updatedPost = await post.save();
+      return res.json(updatedPost);
+    } catch (err) {
+      console.error("[ERROR] PUT /ouissam/servers/:id:", err);
+      return res.status(500).json({ error: "DB_ERROR" });
+    }
+  });
+/***************************************/
+
+/* API RICARDO */
+api.get("/projects", (req, res) => {
+  console.log("Extrayendo los datos de proyectos");
+  res.json(projects);
+});
+
+api.get("/projectsUsers", (req, res) => {
+  console.log("Extrayendo los datos de usuarios asignados a proyectos");
+  res.json(projectsUsers);
+});
+
+/*API Santos*/
+api.get("/notifications", (req, res) => {
+  res.json(notifications);
+})
+api.get("/messages", (req, res) => {
+  res.json(messages);
+})
+api.get("/chat-messages", (req, res) => {
+  res.json(chatMessages);
+})
+api.get("/posts", (req, res) => {
+  res.json(chatMessages);
+})
+/**************/
+
+api.listen(PORT, () => {
+  console.log(`API is running at http://localhost:${PORT}`);
+});

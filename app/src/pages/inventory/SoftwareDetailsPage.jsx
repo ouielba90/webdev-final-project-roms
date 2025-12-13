@@ -6,14 +6,20 @@ function SoftwareDetailsPage() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { software, hardware, servers } = useContext(DataContext)
-  const softwareItem = software.find(s => s.id === Number(id));
+
+  const softwareItem = software.find(s => s._id === id);
   if (!softwareItem) return <p>Software no encontrado.</p>;
 
-  const hardwareMap = Object.fromEntries(hardware.map(h => [h.id, h]));
-  const serverMap = Object.fromEntries(servers.map(s => [s.id, s]));
+  // Creamos mapas rápidos de hardware y servidores por su _id para acceso eficiente
+  const hardwareMap = Object.fromEntries(hardware.map(h => [h._id, h]));
+  const serverMap = Object.fromEntries(servers.map(s => [s._id, s]));
 
-  const hardAssocList = softwareItem.installedOnHardware.map(id => hardwareMap[id]);
-  const serversAssocList = softwareItem.serverId.map(id => serverMap[id]);
+  // Convertimos los IDs asociados del software en objetos completos, eliminando undefined
+  // Facilita renderizar detalles completos del hardware y servidores, sino después de crear el producto e ir a detalles
+  // no se pueden mostrar.
+  const hardAssocList = softwareItem.installedOnHardware.map(id => hardwareMap[id]).filter(Boolean);
+  const serversAssocList = softwareItem.serverId.map(id => serverMap[id]).filter(Boolean);
+  console.log(hardAssocList, serversAssocList)
 
   return (
     <>
@@ -39,7 +45,7 @@ function SoftwareDetailsPage() {
             </div>
             <div>
               <p><strong>Licencia</strong></p>
-              <p>{softwareItem.licenseId || "Ninguna"}</p>
+              <p>{softwareItem.licenseId?._id.slice(-5) || "Ninguna"}</p>
             </div>
           </div>
         </div>
@@ -49,7 +55,7 @@ function SoftwareDetailsPage() {
           <div className="details-quick-stats-ii">
             {hardAssocList.length ? (
               hardAssocList.map((h, i) => (
-                <Link key={i} to={`/inventory/hardware/${h.id}`} className="details-links">
+                <Link key={i} to={`/inventory/hardware/${h._id}`} className="details-links">
                   <div className="assoc-card">
                     <p className="assoc-name">{h.model}</p>
                     <p className="assoc-type">{h.type}</p>
@@ -72,13 +78,15 @@ function SoftwareDetailsPage() {
           <div className="details-quick-stats">
             {serversAssocList.length ? (
               serversAssocList.map((s, i) => (
-                <div key={i} className="assoc-card">
-                  <p className="assoc-name">{s.name}</p>
-                  <p className="assoc-type">{s.location}</p>
-                  <p className={`assoc-status ${s.status.replace(" ", "-").toLowerCase()}`}>
-                    {s.status}
-                  </p>
-                </div>
+                <Link key={i} to={`/inventory/servers/${s._id}`} className="details-links">
+                  <div key={i} className="assoc-card">
+                    <p className="assoc-name">{s.name}</p>
+                    <p className="assoc-type">{s.location}</p>
+                    <p className={`assoc-status ${s.status.replace(" ", "-").toLowerCase()}`}>
+                      {s.status}
+                    </p>
+                  </div>
+                </Link>
               ))
             ) : (
               <p>Ninguno</p>

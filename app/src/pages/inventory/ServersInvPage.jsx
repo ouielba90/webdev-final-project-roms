@@ -1,13 +1,15 @@
 import { useContext } from "react";
 import { DataContext } from "../../context/inventory/DataContext";
 import ServerCard from "../../components/inventory/ServerCard";
-import useFiltersSearch from "../../hooks/inventory/useFiltersSearch";
+import useFiltersSearch from "../../logic/inventory/useFiltersSearch";
 
 function ServersInvPage() {
-  const { servers, software } = useContext(DataContext)
+  const { servers } = useContext(DataContext)
 
   const { filtered, az, za, setAZ, setZA, handleSearch, handleStatus, handleOs } =
     useFiltersSearch(servers, "servers");
+
+  const osList = [...new Set(servers.map(item => item.os.replace(/[0-9.]+/g, "").trim()))]
 
   return (
     <>
@@ -19,10 +21,7 @@ function ServersInvPage() {
               <p>S.O.</p>
               <select onClick={handleOs}>
                 <option>Todos</option>
-                <option>CentOS</option>
-                <option>Debian</option>
-                <option>Rocky Linux</option>
-                <option>Ubuntu</option>
+                {osList.map((os, i) => <option key={i}>{os}</option>)}
               </select>
             </div>
             <div className="filter-field">
@@ -45,16 +44,15 @@ function ServersInvPage() {
           {filtered.map((el) => {
             return (
               <ServerCard
-                key={el.id}
-                id={el.id}
+                key={el._id}
+                id={el._id}
                 name={el.name}
                 ip={el.ip}
                 location={el.location}
                 os={el.os}
                 status={el.status}
                 numberOfNodes={el.numberOfNodes}
-                hostedSoftware={el.hostedSoftware.map((hS) =>
-                  software.find((s) => hS === s.id).name)}
+                hostedSoftware={el.hostedSoftware.map((hS) => hS.name)}
                 connectedUsers={el.connectedUsers}
               />
             )

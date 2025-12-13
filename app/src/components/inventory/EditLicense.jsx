@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import useHardwareValidation from "../../hooks/inventory/useLicensesValidation"
+import useHardwareValidation from "../../logic/inventory/useLicensesValidation"
 
-function EditLicense({ toBeEdited, softList, handleSubmitEdit, setEditFormOpen }) {
+function EditLicense({ toBeEdited, softList, setSoftList, handleSubmitEdit, setEditFormOpen }) {
 
   const [vendor, setVendor] = useState(toBeEdited.vendor)
   const [seats, setSeats] = useState(toBeEdited.seats)
@@ -9,8 +9,9 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit, setEditFormOpen }
   const [purchaseDate, setPurchaseDate] = useState(toBeEdited.purchaseDate.split("T")[0])
   const [expiryDate, setExpiryDate] = useState(toBeEdited.expiryDate.split("T")[0])
   const [cost, setCost] = useState(toBeEdited.cost)
-  const [softwareId, setSoftwareId] = useState(toBeEdited.softwareId)
-
+  const [softwareId, setSoftwareId] = useState(toBeEdited.softwareId._id)
+  console.log("nnn", softwareId)
+  console.log("ooo", softList)
   const [form, setForm] = useState({
     vendor: toBeEdited.vendor,
     seats: toBeEdited.seats,
@@ -33,8 +34,8 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit, setEditFormOpen }
         <h2 className="addsoft-title">Edit License</h2>
         <div className="addsoft-row">
           <div className="addsoft-group">
-            <label htmlFor="id">ID</label>
-            <input type="text" id="id" name="id" value={toBeEdited.id} readOnly />
+            <label htmlFor="_id">ID</label>
+            <input type="text" id="_id" name="_id" value={toBeEdited._id} disabled />
           </div>
         </div>
         <div className="addsoft-row">
@@ -44,7 +45,7 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit, setEditFormOpen }
               onChange={(e) => setSoftwareId(e.target.value)}>
               {softList.map((software, i) => {
                 return (
-                  <option key={i} value={software.name}>{software.name}</option>
+                  <option key={i} value={software._id}>{software.name}</option>
                 )
               })}
             </select>

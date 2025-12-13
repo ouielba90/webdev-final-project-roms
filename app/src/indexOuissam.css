@@ -17,6 +17,7 @@
   letter-spacing: -1px;
   background: linear-gradient(180deg, #111 0%, #555 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -93,7 +94,8 @@
   height: 150px;
   transform: translate(-50%, -50%);
   z-index: 10;
-  opacity: 0.15; /* efecto visual suave */
+  opacity: 0.15;
+  /* efecto visual suave */
 }
 
 .background-side-animation {
@@ -108,14 +110,19 @@
   display: flex;
   justify-content: center;
 }
+
 .card-inner-link {
-  display: contents; /* allows the link to fill the card */
-  text-decoration: none; /* remove underline */
-  color: inherit; /* keep original text color */
+  display: contents;
+  /* allows the link to fill the card */
+  text-decoration: none;
+  /* remove underline */
+  color: inherit;
+  /* keep original text color */
 }
 
 .card-inner-link .card-inner {
-  cursor: pointer; /* makes the whole card clickable */
+  cursor: pointer;
+  /* makes the whole card clickable */
 }
 
 .card-inner {
@@ -163,7 +170,8 @@
   color: #555;
   opacity: 0;
   transform: translateY(0px);
-  pointer-events: none; /* evita que interfiera */
+  pointer-events: none;
+  /* evita que interfiera */
   transition:
     opacity 0.5s ease,
     transform 0.5s ease;
@@ -186,20 +194,24 @@
   margin-top: 0;
   transform: translateY(20px);
 }
+
 .card-menu:nth-child(1) .card-inner {
   border-color: #4285f4;
 }
+
 .card-menu:nth-child(2) .card-inner {
   border-color: #ea4335;
 }
+
 .card-menu:nth-child(3) .card-inner {
   border-color: #fbbc05;
 }
+
 .card-menu:nth-child(4) .card-inner {
   border-color: #34a853;
 }
 
-.card-menu > .tune-unlocker {
+.card-menu>.tune-unlocker {
   width: 100px;
   margin: -100px 0 0 -50px;
 }
@@ -209,12 +221,15 @@
 .card-menu:nth-child(1) {
   transform: rotate(-45deg) translate(200px) rotate(45deg);
 }
+
 .card-menu:nth-child(2) {
   transform: rotate(45deg) translate(200px) rotate(-45deg);
 }
+
 .card-menu:nth-child(3) {
   transform: rotate(135deg) translate(200px) rotate(-135deg);
 }
+
 .card-menu:nth-child(4) {
   transform: rotate(-135deg) translate(200px) rotate(135deg);
 }
@@ -230,6 +245,7 @@
   filter: opacity(0.15);
   z-index: -1;
 }
+
 /*****************************************************/
 /* --------------- END MAIN MENU -------------------- */
 /*****************************************************/
@@ -315,6 +331,7 @@
   box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
   transform: translateY(-2px);
 }
+
 /*****************************************************/
 /* ------------------- DASHBOARD ------------------- */
 /*****************************************************/
@@ -326,6 +343,7 @@
   letter-spacing: -1px;
   margin-top: 60px;
 }
+
 .general-subtitle {
   text-align: center;
   font-size: 18px;
@@ -334,6 +352,7 @@
   letter-spacing: 0.4px;
   font-weight: 400;
 }
+
 /* ------------------- STATUS GRID ------------------- */
 
 .status-grid {
@@ -383,6 +402,7 @@
 .status-block p {
   margin: 5px;
 }
+
 .total-num-res {
   font-size: 50px;
   font-weight: bold;
@@ -404,12 +424,15 @@
 .software {
   grid-area: software;
 }
+
 .hardware {
   grid-area: hardware;
 }
+
 .servers {
   grid-area: servers;
 }
+
 .licenses {
   grid-area: licenses;
 }
@@ -432,15 +455,19 @@
 .bar-active {
   background: #10b981;
 }
+
 .bar-inactive {
   background: #6b7280;
 }
+
 .bar-inuse {
   background: #3b82f6;
 }
+
 .bar-maintenance {
   background: #f59e0b;
 }
+
 .bar-expired {
   background: #ef4444;
 }
@@ -613,7 +640,7 @@
   padding: 25px 0;
 }
 
-.loading-animation > p {
+.loading-animation>p {
   margin: 0;
   font-size: 12px;
   text-align: center;
@@ -656,7 +683,8 @@
   font-weight: 500;
   border: none;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
+  transform: translateY(0);
   font-family: "Inter", "Segoe UI", Roboto, sans-serif;
 }
 
@@ -715,6 +743,7 @@
   border: 1px solid black;
   margin: -1px;
 }
+
 /* --------------------------------------------- */
 /* TARJETAS */
 /* --------------------------------------------- */
@@ -731,14 +760,12 @@
   border-radius: 16px;
   padding: 18px 22px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  transition:
-    box-shadow 0.2s,
-    border-color 0.2s;
+  transition: all 0.3s ease;
 }
 
 .software-card:hover {
   border-color: #cbd5e1;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.40);
 }
 
 .software-card-first-section {
@@ -769,6 +796,7 @@
   background: #dcfce7;
   color: #166534;
 }
+
 .status-en-uso {
   background: #dbeafe;
   color: #1e40af;
@@ -784,7 +812,7 @@
   color: #b91c1c;
 }
 
-.software-card > div:nth-child(2) {
+.software-card>div:nth-child(2) {
   margin: 6px 0 14px 0;
   font-size: 14px;
   color: #475569;
@@ -810,10 +838,14 @@
   background: #2563eb;
   text-decoration: none;
   font-weight: unset;
+  transform: translateY(0);
+  transition: all 0.3s ease;
+  display: inline-block;
 }
 
 .software-card-details-btn .details-btn-link:hover {
-  background: #1d4ed8;
+  background: #0535ba;
+  transform: translateY(-5%);
 }
 
 .software-card-edit-btn button {
@@ -822,6 +854,7 @@
 
 .software-card-edit-btn button:hover {
   background: #d97706;
+  transform: translateY(-5%);
 }
 
 .software-card-delete-btn button {
@@ -830,6 +863,7 @@
 
 .software-card-delete-btn button:hover {
   background: #b91c1c;
+  transform: translateY(-5%);
 }
 
 /* No usadas en los JSX que enviaste, pero necesarias para otros componentes */
@@ -1004,9 +1038,11 @@
 .addsoft-cancel {
   background: #d93b3b;
 }
+
 .addsoft-submit:hover {
   background: #111827;
 }
+
 .addsoft-submit:disabled {
   opacity: 0.5;
   cursor: not-allowed;
@@ -1091,12 +1127,17 @@
 }
 
 .details-main h2 {
-  font-size: 24px; /* más grande que los demás h3 */
-  font-weight: 800; /* más contundente */
-  color: #0f172a; /* color primario oscuro */
-  margin: 0 0 6px 0; /* menos espacio inferior */
+  font-size: 24px;
+  /* más grande que los demás h3 */
+  font-weight: 800;
+  /* más contundente */
+  color: #0f172a;
+  /* color primario oscuro */
+  margin: 0 0 6px 0;
+  /* menos espacio inferior */
   letter-spacing: -0.5px;
-  display: inline-block; /* permite la línea decorativa exacta */
+  display: inline-block;
+  /* permite la línea decorativa exacta */
   padding-bottom: 6px;
   border-bottom: 3px solid rgb(32 148 233);
   line-height: 1.05;
@@ -1184,10 +1225,12 @@
   color: #1e293b;
   margin-bottom: 3px;
 }
+
 .details-links {
   text-decoration: none;
   color: #475569;
 }
+
 /* ---------- Asociación de elementos ---------- */
 .assoc-card {
   background: #ffffff;
@@ -1272,8 +1315,8 @@
 }
 
 .header-os-img {
-  width: 60px;
-  height: 60px;
+  width: 12px;
+  height: 12px;
 }
 
 /* ===================================================
@@ -1328,7 +1371,7 @@
   box-shadow: 0 4px 12px rgba(16, 24, 40, 0.04);
 }
 
-.server-hero > div:first-child {
+.server-hero>div:first-child {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 6px;
@@ -1339,15 +1382,25 @@
   margin: 0;
   width: fit-content;
 }
+
 .server-hero .ip {
   color: #475569;
   font-size: 14px;
   margin: 0;
 }
+
 .server-hero .small {
   color: #6b7280;
   font-size: 13px;
   margin: 0;
+  align-items: center;
+  ;
+}
+
+.info-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .server-header-container {
@@ -1429,7 +1482,7 @@
   gap: 16px;
 }
 
-.server-summary > div {
+.server-summary>div {
   background: #fbfdff;
   border: 1px solid #eef6fb;
   border-radius: 12px;
@@ -1446,6 +1499,7 @@
   color: #334155;
   margin: 0;
 }
+
 .server-summary .big {
   font-size: 24px;
   font-weight: 800;
@@ -1461,7 +1515,8 @@
   overflow: hidden;
   border: 1px solid rgba(14, 165, 233, 0.04);
 }
-.bar-specs > div {
+
+.bar-specs>div {
   height: 100%;
   background: linear-gradient(90deg, #60a5fa 0%, #2563eb 100%);
   border-radius: 10px;
@@ -1485,9 +1540,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition:
-    transform 0.12s ease,
-    box-shadow 0.12s ease;
+  transition: all 0.3s ease;
 }
 
 .node-card::before {
@@ -1505,13 +1558,16 @@
 .node-card.operativo::before {
   background: linear-gradient(180deg, #10b981, #34d399);
 }
+
 .node-card.en-uso::before,
 .node-card.in-use::before {
   background: linear-gradient(180deg, #3b82f6, #60a5fa);
 }
+
 .node-card.mantenimiento::before {
   background: linear-gradient(180deg, #f59e0b, #fbbf24);
 }
+
 .node-card.down::before,
 .node-card.expirada::before {
   background: linear-gradient(180deg, #ef4444, #fca5a5);
@@ -1537,12 +1593,14 @@
   margin-top: 8px;
   font-weight: 600;
 }
+
 .node-usage .bar-specs {
   height: 8px;
   border-radius: 8px;
   background: #f1f5f9;
 }
-.node-usage .bar-specs > div {
+
+.node-usage .bar-specs>div {
   height: 100%;
   background: linear-gradient(90deg, #60a5fa, #2563eb);
 }

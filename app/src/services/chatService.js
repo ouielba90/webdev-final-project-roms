@@ -1,6 +1,6 @@
 // Servicio para manejar las peticiones de chat con fetch usando .then() y .catch()
 
-const API_URL = 'http://localhost:3000';
+const API_URL = 'http://localhost:3000/santos';
 
 /**
  * Obtiene todos los mensajes de chat desde la API
@@ -33,7 +33,7 @@ export function fetchChatMessages() {
  * @returns {Promise} Promesa que resuelve con los mensajes de la conversación
  */
 export function fetchChatMessagesByConversation(chatId) {
-    return fetch(`${API_URL}/chat-messages?chatId=${chatId}`)
+    return fetch(`${API_URL}/chat-messages/${chatId}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);
@@ -101,24 +101,3 @@ export function deleteChatMessage(id) {
         });
 }
 
-/**
- * Obtiene posts desde la API
- * @returns {Promise} Promesa que resuelve con los datos de posts
- */
-export function fetchPosts() {
-    return fetch(`${API_URL}/posts`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('✅ Posts obtenidos exitosamente:', data);
-            return data;
-        })
-        .catch(error => {
-            console.error('❌ Error al obtener posts:', error);
-            throw error;
-        });
-}

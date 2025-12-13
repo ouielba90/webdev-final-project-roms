@@ -99,7 +99,19 @@ Funcionalidad:
   * Listado de software y usuarios con acceso
 
 ---
+# 📜 Lista de proyectos
 
+Subpágina para mostrar y gestionar los diferentes proyectos que gestiona la empresa y a los empleados que estan trabajando en los diferentes proyectos.
+
+Cada proyecto tendra:
+
+  * Un titulo
+  * El nombre del cliente
+  * Las tareas que hay que realizar
+  * La lista de trabajadores asignados
+  * Y el estado del proyecto
+
+---
 
 3. Usuarios y clientes (UserPage)
 - Lista de usuarios y clientes

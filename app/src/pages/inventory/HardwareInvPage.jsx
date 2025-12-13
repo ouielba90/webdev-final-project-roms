@@ -4,42 +4,42 @@ import HardwareCard from "../../components/inventory/HardwareCard";
 import AddHardware from "../../components/inventory/AddHardware";
 import EditHardware from "../../components/inventory/EditHardware";
 import Modal from "../../components/inventory/Modal.jsx"
-import useFiltersSearch from "../../hooks/inventory/useFiltersSearch.js";
+import useFiltersSearch from "../../logic/inventory/useFiltersSearch.js";
+import useHardwareActions from "../../logic/inventory/useHardwareActions.js";
 
 function HardwareInvPage() {
-  const { hardware, setHardware, software } = useContext(DataContext)
+  const { hardware, setHardware, hardwareApi, software } = useContext(DataContext)
+  const { syncCreationWithSoftware, syncEditWithSoftware, syncRemoveWithSoftware } = useHardwareActions();
 
   const { filtered, az, za, setAZ, setZA, handleSearch, handleStatus, handleType } =
     useFiltersSearch(hardware, "hardware");
-
-  function handleRemove(id) {
-    //console.log(id)
-    setHardware(prev => prev.filter(el => el.id !== id))
-  }
 
   const [addFormOpen, setAddFormOpen] = useState(false)
   const [editFormOpen, setEditFormOpen] = useState(false)
   const [currEditId, setCurrEditId] = useState(0)
   const [selectedSoft, setSelectedSoft] = useState([]);
-  const softList = software.map(el => { return { id: el.id, name: el.name } })
+  const softList = software.map(el => { return { id: el._id, name: el.name } })
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
+    console.log("seeee", selectedSoft)
     const newItem = {
-      id: hardware.length ? hardware.at(-1).id + 1 : 2001,
       type: data.type,
       model: data.model,
       status: data.status,
       purchaseDate: data.purchaseDate,
       specs: { cpu: data.cpu, ram: data.ram, storage: data.storage },
-      installedSoftware: selectedSoft.map(soft_name => software.find(s => s.name === soft_name).id),
+      installedSoftware: selectedSoft,
       os: data.os,
       lastMaintenance: data.lastMaintenance
     };
-
-    setHardware(prev => [...prev, newItem]);
+    const created = await hardwareApi.createHardware(newItem);
+    if (!created) return;
+    const normalized = { ...created, id: created._id }
+    setHardware(prev => [...prev, normalized]);
+    await syncCreationWithSoftware(created._id, created.installedSoftware);
     e.target.reset()
     setSelectedSoft([]);
     setAddFormOpen(false)
@@ -47,36 +47,53 @@ function HardwareInvPage() {
 
   function handleEdit(id) {
     setEditFormOpen(true)
-    //console.log("id", id)
     setCurrEditId(id)
   }
 
-  function handleSubmitEdit(e) {
+  async function handleSubmitEdit(e) {
     e.preventDefault()
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    //console.log('data from edit', data)
+    const updatedItem = {
+      id: currEditId,
+      type: data.type,
+      model: data.model,
+      status: data.status,
+      purchaseDate: data.purchaseDate,
+      specs: { cpu: data.cpu, ram: data.ram, storage: data.storage },
+      installedSoftware: selectedSoft,
+      os: data.os,
+      lastMaintenance: data.lastMaintenance
+    }
+    const updated = await hardwareApi.updateHardware(currEditId, updatedItem)
+    if (!updated) return;
     setHardware(prev =>
       prev.map(item =>
-        item.id === Number(data.id) ? {
-          ...item,
-          type: data.type,
-          model: data.model,
-          status: data.status,
-          purchaseDate: data.purchaseDate,
-          specs: { cpu: data.cpu, ram: data.ram, storage: data.storage },
-          installedSoftware: selectedSoft,
-          os: data.os,
-          lastMaintenance: data.lastMaintenance
-        } : item));
+        item._id === currEditId ? updated : item
+      ));
+    const prevItem = hardware.find(item => item._id === currEditId);
+    await syncEditWithSoftware(currEditId, prevItem, updatedItem);
+
     setEditFormOpen(false)
   }
+
+  async function handleRemove(id) {
+    const userConfirmation = confirm(`¿Seguro que quieres proceder a eliminar el hardware cuya id es ${id}?`);
+    if (userConfirmation) {
+      const deleted = await hardwareApi.deleteHardware(id);
+      if (!deleted) return;
+      setHardware(prev => prev.filter(el => el._id !== id))
+
+      await syncRemoveWithSoftware(id);
+    }
+  }
+
   return (
     <>
       <Modal open={editFormOpen} onClose={() => setEditFormOpen(false)}>
         {editFormOpen && (
           <EditHardware
-            toBeEdited={hardware.find(s => s.id === currEditId)}
+            toBeEdited={hardware.find(s => s._id === currEditId)}
             hardware={hardware}
             softList={softList}
             handleSubmitEdit={handleSubmitEdit}
@@ -133,8 +150,8 @@ function HardwareInvPage() {
           {filtered.map((el) => {
             return (
               <HardwareCard
-                key={el.id}
-                id={el.id}
+                key={el._id}
+                id={el._id}
                 type={el.type}
                 model={el.model}
                 os={el.os}

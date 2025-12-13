@@ -11,6 +11,7 @@ api/node_modules
 api/package-lock.json
 api/package.json
 api/node_modules
+api/.env
 api/node_modules/package.json
 api/node_modules/package-lock.json
 app/node_modules

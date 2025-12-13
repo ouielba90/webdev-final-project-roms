@@ -5,38 +5,34 @@ import AddSoftware from "../../components/inventory/AddSoftware";
 import EditSoftware from "../../components/inventory/EditSoftware.jsx"
 import Modal from "../../components/inventory/Modal.jsx"
 import { Outlet } from "react-router-dom";
-import useFiltersSearch from "../../hooks/inventory/useFiltersSearch.js";
+import useFiltersSearch from "../../logic/inventory/useFiltersSearch.js";
+import useSoftwareActions from "../../logic/inventory/useSoftwareActions.js";
 
 function SoftwareInvPage() {
-  const { software, setSoftware, hardware, servers } = useContext(DataContext);
+  const { software, setSoftware, softwareApi, hardware, servers } = useContext(DataContext);
+  const { syncCreationWithHardwareAndServers, syncEditWithHardwareAndServers, syncRemoveWithHardwareAndServers } = useSoftwareActions();
 
-  const { filtered, az, za, setAZ, setZA, handleSearch, handleStatus } =
-    useFiltersSearch(software, "software");
+  const { filtered, az, za, setAZ, setZA, handleSearch, handleStatus } = useFiltersSearch(software, "software");
 
-  const hardwareById = Object.fromEntries(hardware.map(h => [h.id, h]));
-  const serversById = Object.fromEntries(servers.map(s => [s.id, s]));
-
-  function handleRemove(id) {
-    setSoftware(prev => prev.filter(el => el.id !== id))
-  }
+  //const hardwareById = Object.fromEntries(hardware.map(h => [h._id, h]));
+  //const serversById = Object.fromEntries(servers.map(s => [s._id, s]));
 
   // Forms
   const [addFormOpen, setAddFormOpen] = useState(false)
   const [editFormOpen, setEditFormOpen] = useState(false)
-  const [currEditId, setCurrEditId] = useState(0)
+  const [currEditId, setCurrEditId] = useState(null)
   const [selectedHard, setSelectedHard] = useState([]);
   const [selectedServ, setSelectedServ] = useState([]);
   const categList = Array.from(new Set(software.map(el => el.category)))
-  const hardList = hardware.map(el => { return { id: el.id, model: el.model } })
-  const serverList = servers.map(el => { return { id: el.id, name: el.name } })
+  const hardList = hardware.map(el => { return { id: el._id, model: el.model } })
+  const serverList = servers.map(el => { return { id: el._id, name: el.name } })
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    //console.log(data.status)
+    console.log("seee", selectedServ)
     const newItem = {
-      id: software.length ? software.at(-1).id + 1 : 1001,
       name: data.name,
       version: data.version,
       category: data.category,
@@ -46,8 +42,14 @@ function SoftwareInvPage() {
       serverId: selectedServ, //Evita que se rompa si lo que devuelve data.serverId
       description: data.description,
     };
+    const created = await softwareApi.createSoftware(newItem);
+    if (!created) return;
+    const normalized = { ...created, id: created._id };
 
-    setSoftware(prev => [...prev, newItem]);
+    setSoftware(prev => [...prev, normalized]);
+
+    await syncCreationWithHardwareAndServers(created._id, selectedHard, selectedServ);
+
     e.target.reset()
     setSelectedHard([])
     setSelectedServ([])
@@ -59,31 +61,50 @@ function SoftwareInvPage() {
     setCurrEditId(id)
   }
 
-  function handleSubmitEdit(e) {
-    //console.log("handleeeeeeeeee")
+  async function handleSubmitEdit(e) {
     e.preventDefault()
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
+
+    console.log("data modified", data)
+    const updatedItem = {
+      name: data.name,
+      version: data.version,
+      category: data.category,
+      status: data.status,
+      installedOnHardware: selectedHard,
+      serverId: selectedServ, //Evita que se rompa si lo que devuelve data.serverId
+      description: data.description,
+    }
+
+    const updated = await softwareApi.updateSoftware(currEditId, updatedItem)
+    if (!updated) return;
+    const normalized = { ...updated, id: updated._id || updated.id };
     setSoftware(prev =>
       prev.map(item =>
-        item.id === Number(data.id) ? {
-          ...item,
-          name: data.name,
-          version: data.version,
-          category: data.category,
-          status: data.status,
-          installedOnHardware: selectedHard,
-          serverId: selectedServ, //Evita que se rompa si lo que devuelve data.serverId
-          description: data.description,
-        } : item));
+        item._id === currEditId ? normalized : item
+      ))
+    const prevItem = software.find(item => item._id === currEditId);
+    await syncEditWithHardwareAndServers(currEditId, prevItem, updatedItem);
     setEditFormOpen(false)
+  }
+
+  async function handleRemove(id) {
+    const userConfirmation = confirm(`¿Seguro que quieres proceder a eliminar el software cuya id es ${id}?`);
+    if (userConfirmation) {
+      const deleted = await softwareApi.deleteSoftware(id);
+      if (!deleted) return;
+      setSoftware(prev => prev.filter(el => el._id !== id))
+
+      await syncRemoveWithHardwareAndServers(id);
+    }
   }
 
   return (
     <>
       <Modal open={editFormOpen} onClose={() => setEditFormOpen(false)}>
         <EditSoftware
-          toBeEdited={software.find(s => s.id === currEditId)}
+          toBeEdited={software.find(s => s._id === currEditId)}
           categList={categList}
           serverList={serverList}
           hardList={hardList}
@@ -136,16 +157,12 @@ function SoftwareInvPage() {
           {filtered.map((el) => {
             return (
               <SoftwareCard
-                key={el.id}
-                id={el.id}
+                key={el._id}
+                id={el._id}
                 name={el.name}
                 version={el.version}
                 category={el.category}
-                description={el.description}
                 status={el.status}
-                licenseId={el.licenseId}
-                installedOnHardware={el.installedOnHardware.map(hid => hardwareById[Number(hid)]?.model).filter(Boolean)}
-                serverId={el.serverId.map(sid => serversById[Number(sid)]?.name).filter(Boolean)}
                 handleRemove={handleRemove}
                 handleEdit={handleEdit}
               />

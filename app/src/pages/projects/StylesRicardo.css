@@ -116,16 +116,6 @@ body{
     align-items: center;
 }
 
-.box-create-project {
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-    border: 1px, solid, black;
-    padding: 20px;
-    margin-bottom: 30px;
-}
-
 .div-create {
     display: flex;
     flex-direction: column;
@@ -170,6 +160,7 @@ body{
     color: #3b82f6;
 }
 .content-modal label{
+    font-weight: bold;
     color: #3b82f6;
 }
 .content-modal input {
@@ -196,7 +187,42 @@ body{
 .modal-title {
     color: #3b82f6;
 }
+.task-edit-button-add{
+    display: flex; 
+    gap: 8px;
+    margin-bottom: 10px;
+}
 
+/*estilos para el header de proyectos*/
+.spacing-top{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-image: url("../../../public/img_header/blue_circuit_3.jpg");
+    background-size: cover;
+}
+.general-header{
+    padding-left: 80px;
+    padding-right: 80px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(241, 241, 241);
+    padding-bottom: 75px;
+    padding-top: 45px;
+     clip-path: polygon(
+    10% 0%,  /* arriba izquierda */
+    100% 0%, /* arriba derecha */
+    90% 100%,/* abajo derecha */
+    0% 100%  /* abajo izquierda */
+  );
+}
+.general-submenu{
+    margin-top: 0px;
+}
+/*-----------------------------------------*/
 
 /*diferentes colores para los estados del proyecto*/
 .status-green {

@@ -7,12 +7,12 @@ function ServersDetailsPage() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { software, servers } = useContext(DataContext)
-  const serverItem = servers.find(serv => serv.id === Number(id));
+  const serverItem = servers.find(serv => serv._id === id);
   if (!serverItem) return <p>Servidor no encontrado.</p>;
 
-  const softwareMap = Object.fromEntries(software.map(s => [s.id, s]));
+  const softwareMap = Object.fromEntries(software.map(s => [s._id, s]));
 
-  const softAssocList = serverItem.hostedSoftware.map(id => softwareMap[id]);
+  const softAssocList = serverItem.hostedSoftware
 
   const servAvgPropNodes = getNodeAverages(serverItem.nodeSpecs)
 
@@ -24,16 +24,13 @@ function ServersDetailsPage() {
             <div className="server-header-container">
               <h2>{serverItem.name}</h2>
               <p className="ip">{serverItem.ip}</p>
-              <p className="small">{serverItem.location} · {serverItem.os}</p>
+              <p className="small info-line">{serverItem.location} · <OSImage osName={serverItem.os} /> {serverItem.os}</p>
               <div className="connected-users">
                 👥 {serverItem.connectedUsers} usuarios conectados
               </div>
             </div>
-            <div className="subheader-status-os">
-              <div className={`status-badge ${serverItem.status}`}>
-                {serverItem.status}
-              </div>
-              <OSImage osName={serverItem.os} />
+            <div className={`status-badge ${serverItem.status}`}>
+              {serverItem.status}
             </div>
           </div>
         </div>
@@ -90,8 +87,8 @@ function ServersDetailsPage() {
         <h3>Software instalado</h3>
         <div className="small-card-list">
           {softAssocList.map((soft, i) => (
-            <Link to={`/inventory/software/${soft.id}`} className="details-links">
-              <div key={i} className="mini-card">{soft.name}</div>
+            <Link key={i} to={`/inventory/software/${soft._id}`} className="details-links">
+              <div className="mini-card">{soft.name}</div>
             </Link>
           ))}
         </div>
