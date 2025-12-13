@@ -91,26 +91,41 @@ body {
 .btn-cancel {
     background: #dc2626;
     color: white;
-}
-
-.btn-new-project {
-    background-color: #4CAF50;
-    color: white;
-
-}
-
-.btn-edit-project {
-    background-color: #f59e0b;
-    color: white;
-}
-
-button {
     cursor: pointer;
     border: none;
     margin: 10px;
     border-radius: 10px;
     padding: 15px 16px;
 }
+
+.btn-new-project {
+    background-color: #4CAF50;
+    color: white;
+     cursor: pointer;
+    border: none;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 15px 16px;
+
+}
+
+.btn-edit-project {
+    background-color: #f59e0b;
+    color: white;
+     cursor: pointer;
+    border: none;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 15px 16px;
+}
+
+/*button {
+    cursor: pointer;
+    border: none;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 15px 16px;
+}*/
 
 /*Estilos para los botones que necesiten ser modificiados personalmente por
 que estan en un entorno mas exigente*/
@@ -124,6 +139,8 @@ que estan en un entorno mas exigente*/
     padding-top: 0px;
     padding-bottom: 0px;
     border-radius: 10px;
+    cursor: pointer;
+    border: none;
 
 }
 
