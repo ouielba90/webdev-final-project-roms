@@ -82,24 +82,25 @@ function ProjectList() {
   //funcion para eliminar el proyecto
   async function handleDelete(projectId) {
     const data = fetchData()
-    setUseProjects((prev) => prev.filter((project) => project.id !== projectId))
+    setUseProjects((prev) => prev.filter((project) => project._id !== projectId))
     setDeleteProject(null)
-    console.log("Eliminando proyecto con id:", projectId); 
     await data.deleteProject(projectId, apiProjectsLocalData);
   }
 
   //funcion para actualizar el proyecto editado
-  function handleUpdate(data) {
+  async function handleUpdate(data) {
+    const dataFetchData = fetchData()
     if (!projectEdit) return
 
     setUseProjects((prev) =>
       prev.map((project) =>
-        project.id === projectEdit.id
+        project._id === projectEdit._id
           ? { ...project, ...data }
           : project
       )
     )
     setProjectEdit(null)
+    await dataFetchData.updateProject(apiProjectsLocalData, projectEdit._id, data);
   }
 
   return (

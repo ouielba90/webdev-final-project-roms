@@ -18,7 +18,7 @@ function ProjectDelete({ project, onCancel, onConfirm }) {
                     </header>
                     <p>¿Estás seguro de que deseas eliminar el proyecto <strong className="modal-title"> {project.name} </strong>?</p>
                     <div className="div-button-form">
-                        <button onClick={() => onConfirm?.(project.id)}>Eliminar</button>
+                        <button onClick={() => onConfirm?.(project._id)}>Eliminar</button>
                         <button onClick={handleCancel}>Cancelar</button>
                     </div>
                 </div>
