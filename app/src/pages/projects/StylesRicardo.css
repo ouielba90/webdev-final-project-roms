@@ -1,4 +1,4 @@
-body{
+body {
     background-color: rgb(241, 241, 241);
 }
 
@@ -82,32 +82,48 @@ body{
     margin-top: 40px;
 }
 
-.btn-standard {
-    border: solid;
-    background-color: lightblue;
-    padding: 10px;
-    margin: 10px;
-}
-
 .btn-cancel {
-    border: solid;
-    background-color: lightcoral;
-    padding: 10px;
-    margin: 10px;
+    background: #dc2626;
+    color: white;
 }
 
 .btn-new-project {
-    border: solid;
-    background-color: lightblue;
-    margin-bottom: 20px;
-    padding: 10px;
+    background-color: #4CAF50;;
+    color: white;
 }
 
-.btn-card-project {
-    border: solid;
-    background-color: lightblue;
-    padding: 10px;
+.btn-edit-project {
+    background-color: #f59e0b;
+    color: white;
 }
+
+button {
+    cursor: pointer;
+    border: none;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 15px 16px;
+}
+
+/*Estilos para los botones que no pertenezcan a las 
+acciones de nuevo, añadir y cancelar de los componentes principales*/
+.button-task-list{
+    background-color: #dc2626;
+    color: white;
+    margin: 0px;
+    border-radius: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    border-radius: 10px;
+
+}
+.task-edit-button-add button{
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+/*----------------------------------------------------*/
 
 /*Estilos para el componente create project*/
 .create-project-container {
@@ -140,29 +156,35 @@ body{
     box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
     border: 1px solid #d9e2ec;
 }
+
 /*Estilos para los elementos de la ventana Editar proyecto*/
-.content-modal form{
+.content-modal form {
     display: flex;
     flex-direction: column;
 }
-.div-button-form{
+
+.div-button-form {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 100px;
 }
-.ul-task-project-edit li{
+
+.ul-task-project-edit li {
     display: flex;
     justify-content: space-between;
     margin-bottom: 5px;
 }
-.content-modal header{
+
+.content-modal header {
     color: #3b82f6;
 }
-.content-modal label{
+
+.content-modal label {
     font-weight: bold;
     color: #3b82f6;
 }
+
 .content-modal input {
     border: none;
     box-shadow: 0 0 5px rgba(0, 0, 0, 2);
@@ -170,6 +192,7 @@ body{
     margin: 5px;
     border-radius: 10px;
 }
+
 .content-modal select {
     border: none;
     box-shadow: 0 0 5px rgba(0, 0, 0, 2);
@@ -177,6 +200,7 @@ body{
     margin: 5px;
     border-radius: 10px;
 }
+
 .content-modal textarea {
     border: none;
     box-shadow: 0 0 5px rgba(0, 0, 0, 2);
@@ -184,17 +208,19 @@ body{
     margin: 5px;
     border-radius: 10px;
 }
+
 .modal-title {
     color: #3b82f6;
 }
-.task-edit-button-add{
-    display: flex; 
+
+.task-edit-button-add {
+    display: flex;
     gap: 8px;
     margin-bottom: 10px;
 }
 
 /*estilos para el header de proyectos*/
-.spacing-top{
+.spacing-top {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -203,7 +229,8 @@ body{
     background-image: url("../../../public/img_header/blue_circuit_3.jpg");
     background-size: cover;
 }
-.general-header{
+
+.general-header {
     padding-left: 80px;
     padding-right: 80px;
     height: 100%;
@@ -212,35 +239,44 @@ body{
     background-color: rgb(241, 241, 241);
     padding-bottom: 75px;
     padding-top: 45px;
-     clip-path: polygon(
-    10% 0%,  /* arriba izquierda */
-    100% 0%, /* arriba derecha */
-    90% 100%,/* abajo derecha */
-    0% 100%  /* abajo izquierda */
-  );
+    clip-path: polygon(10% 0%,
+            /* arriba izquierda */
+            100% 0%,
+            /* arriba derecha */
+            90% 100%,
+            /* abajo derecha */
+            0% 100%
+            /* abajo izquierda */
+        );
 }
-.general-submenu{
+
+.general-submenu {
     margin-top: 0px;
 }
+
 /*-----------------------------------------*/
 
 /*diferentes colores para los estados del proyecto*/
 .status-green {
-    background-color: #4CAF50; /* Verde */
+    background-color: #4CAF50;
+    /* Verde */
     color: white;
 }
 
 .status-yellow {
-    background-color: #FFC107; /* Amarillo/Naranja */
+    background-color: #FFC107;
+    /* Amarillo/Naranja */
     color: black;
 }
 
 .status-red {
-    background-color: #F44336; /* Rojo */
+    background-color: #F44336;
+    /* Rojo */
     color: white;
 }
 
 .status-gray {
-    background-color: #BDBDBD; /* Gris por defecto */
+    background-color: #BDBDBD;
+    /* Gris por defecto */
     color: white;
 }
