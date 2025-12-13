@@ -1,8 +1,12 @@
 // Marc, modifica si lo crees necesario
 export const userSections = {
-  dashboard: {
-    title: "Gestión de Usuarios",
-    subtext: "Administración de usuarios, roles y permisos",
+  homeUser: {
+    title: "Centro de Usuarios",
+    subtext: "Acceso centralizado a los usuarios y clientes",
+  },
+  clientList: {
+    title: "Lista de Clientes",
+    subtext: "Consulta y gestión de clientes",
   },
   usersList: {
     title: "Lista de Usuarios",
