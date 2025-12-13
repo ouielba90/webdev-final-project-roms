@@ -13,9 +13,9 @@ import projectsUsers from "./data/projectsUsers.data.js";
 //-----------------------------------------------
 import projectRoutes from "./src/routes/projects.project.routes.js"
 import projectUserRoutes from "./src/routes/projects.projectUser.routes.js"
-import notifications from "./data/notifications.data.js";
-import messages from "./data/messages.data.js"
-import chatMessages from "./data/chatMessages.data.js";
+import notificationsRoutes from "./src/routes/communications.notifications.routes.js";
+import messagesRoutes from "./src/routes/communications.messages.routes.js";
+import chatMessagesRoutes from "./src/routes/comunications.chats.routes.js";
 
 dotenv.config();
 const PORT = process.env.PORT || 3000;
@@ -72,18 +72,11 @@ api.use("/projectsUsers", projectUserRoutes);
 
 
 /*API Santos*/
-api.get("/notifications", (req, res) => {
-  res.json(notifications);
-})
-api.get("/messages", (req, res) => {
-  res.json(messages);
-})
-api.get("/chat-messages", (req, res) => {
-  res.json(chatMessages);
-})
-api.get("/posts", (req, res) => {
-  res.json(chatMessages);
-})
+api.use("/santos/notifications", notificationsRoutes);
+api.use("/santos/messages", messagesRoutes);
+api.use("/santos/chat-messages", chatMessagesRoutes);
+
+
 /**************/
 
 api.listen(PORT, () => {

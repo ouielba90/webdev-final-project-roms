@@ -14,6 +14,7 @@ const getProjects = async (req, res) => {
 
 const getAProjects = async (req, res) => {
     try {
+        console.log("ID del proyecto solicitado:", req.params.id);
         const id = req.params.id
         const post = await ProjectsPost.findById(id).lean();
         
@@ -27,6 +28,7 @@ const getAProjects = async (req, res) => {
 
 const createProject = async (req, res) => {
     try {
+        console.log("Cuerpo de la solicitud de creación:", req.body);
         const postData = req.body;
         const newPost = new ProjectsPost(postData);
         const savedPost = await newPost.save();
@@ -41,6 +43,7 @@ const createProject = async (req, res) => {
 
 const updateProject = async (req, res) => {
     try {
+        console.log("Cuerpo de la solicitud de actualización:", req.body);
         const postId = req.params.id
         const updateData = req.body;
         const post = await ProjectsPost.findById(postId);
@@ -61,6 +64,7 @@ const updateProject = async (req, res) => {
 const deleteProject = async (req, res) => {
     try {
         const postId = req.params.id
+        console.log("Intentando eliminar el proyecto con ID:", postId);
         const deletedPost = await ProjectsPost.findByIdAndDelete(postId);
         if (!deletedPost) {
             return res.status(404).json({ error: "POST_NOT_FOUND" });

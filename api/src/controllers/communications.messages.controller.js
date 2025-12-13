@@ -32,7 +32,7 @@ const createMessage = async (req, res) => {
 const updateMessage = async (req, res) => {
     try {
         const { id } = req.params;
-        const updatedMessage = await communicationsMessagesPost.findById(AndUpdate(id, req.body, { new: true });
+        const updatedMessage = await communicationsMessagesPost.findById(AndUpdate(id, req.body, { new: true }));
         if (!updatedMessage) {
             return res.status(404).json({ message: "Message not found" });
         }
@@ -54,7 +54,7 @@ const deleteMessage = async (req, res) => {
     }
 }
 
-export {
+export default{
     getAllMessages,
     getIdMessage,
     createMessage,

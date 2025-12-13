@@ -107,7 +107,7 @@ function ProjectItem({ project, onClose, onSubmit }) {
                                     onChange={(e) => setNewTask(e.target.value)}
                                     placeholder="Escribe una tarea..."
                                 />
-                                <button type="button" onClick={addTask}>
+                                <button className="btn-new-project" type="button" onClick={addTask}>
                                     Añadir
                                 </button>
                             </div>
@@ -117,7 +117,7 @@ function ProjectItem({ project, onClose, onSubmit }) {
                                 {values.tasks.map((task, index) => (
                                     <li key={index}>
                                         {task}
-                                        <button
+                                        <button className="button-task-list"
                                             type="button"
                                             onClick={() =>
                                                 setValues({
@@ -132,8 +132,8 @@ function ProjectItem({ project, onClose, onSubmit }) {
                                 ))}
                             </ul>
                             <div className="div-button-form">
-                                <button type="submit">Guardar</button>
-                                <button type="button" onClick={handleCancel}>Cancelar</button>
+                                <button className="btn-new-project" type="submit">Guardar</button>
+                                <button className="btn-cancel" type="button" onClick={handleCancel}>Cancelar</button>
                             </div>
                         </form>
                     </div>

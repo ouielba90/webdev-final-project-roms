@@ -1,4 +1,4 @@
-// Santos, modifica esto si lo crees necesario
+
 export const communicationSections = {
   homeComm: {
     title: "Centro de Comunicaciones",
