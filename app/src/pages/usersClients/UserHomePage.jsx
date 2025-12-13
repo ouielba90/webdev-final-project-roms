@@ -9,14 +9,14 @@ function UsersHomePage() {
   const location = useLocation()
 
   const currPath = useLocation() // Se obtiene la ruta actual
-  
+
   function getSection(path) { // Determinar qué contenido se debe mostrar según la ruta
     const parts = path.split("/").filter(Boolean); // Divide la ruta por / y filter(Boolean) elimina cadenas vacías en el caso de tener slashes sueltos
-    
+
     if (parts.length === 1) return "homeUser"; // Si solo hay un segmento en la ruta, se considera la sección principal (homeComm)
     if (parts.length === 2) { // Si hay dos segmentos toma el segundo como clave de sección, si existe en communicationSections, lo devuelve. Si no, devuelve "dashboard" (manejo de errores)
       const section = parts[1];
-      
+
       return userSections[section] ? section : "homeUser";
     }
 
@@ -29,8 +29,12 @@ function UsersHomePage() {
   return (
     <>
       <CompactMainMenu></CompactMainMenu>
-      <h1 className="general-title">{sectionData.title}</h1>
-      <h3 className="general-subtitle">{sectionData.subtext}</h3>
+      <div className="spacing-top">
+        <div className="general-header">
+          <h1 className="general-title">{sectionData.title}</h1>
+          <h3 className="general-subtitle">{sectionData.subtext}</h3>
+        </div>
+      </div>
       <nav className="general-submenu">
         <Link to='/users/clientsList'>Clientes</Link>
         <Link to='/users/usersList'>Lista de Usuarios</Link>
