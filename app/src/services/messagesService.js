@@ -1,6 +1,6 @@
 // Servicio para manejar las peticiones de mensajes con fetch usando .then() y .catch()
 
-const API_URL = 'http://localhost:3000';
+const API_URL = 'http://localhost:3000/santos';
 
 /**
  * Obtiene todos los mensajes desde la API
