@@ -6,7 +6,7 @@ function MessageCard({ id, from, to, text, date, isAlert, edited, editedAt, onDe
     const fechaFormateada = new Date(date).toLocaleString('es-ES');
     console.log('hora', date);
 
-    //Operador ternario
+    //Operador ternario Evalúa una expresión booleana y devuelve un valor si es verdadera y otro si es falsa, todo en una sola línea.
     const mensajeTernario = isAlert ? `⚠️ ${text}` : text
 
     //Funcion obtiene el objeto del  mensaje para pasar a onStartEdit
@@ -58,7 +58,7 @@ function MessageCard({ id, from, to, text, date, isAlert, edited, editedAt, onDe
                 🕒 {fechaFormateada}
                 {edited && <span className="edited-indicator"> (Editado {editedAt})</span>}
 
-                {/*renderizacion condicional - mostrar botones de fuardar/cancelar*/}
+                {/*renderizacion condicional - mostrar botones de guardar/cancelar*/}
                 <div className="messasge-actions">
                     {isEditing ? (
                         <>
