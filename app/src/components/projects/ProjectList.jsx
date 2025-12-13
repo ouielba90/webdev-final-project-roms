@@ -45,6 +45,7 @@ function ProjectList() {
     }
     loadProjects()*/
 
+    //funcion para conectar con la API y extraer la informacion de usuarios asignados a proyectos
     data.getProjects(apiProjectsUsersLocalData)
       .then((projectsUsersData) => setProjectsUsers(projectsUsersData))
       .catch((error) => console.log("Error al cargar los datos de usuarios de proyectos:", error));
@@ -64,6 +65,7 @@ function ProjectList() {
 
   //funcion para crear un nuevo proyecto
   function handleCreate(data) {
+    const dataFetchData = fetchData()
     const newProject = {
       id: globalThis.crypto?.randomUUID?.() || `p_${Date.now().toString(36)}`,
       //valores del formulario
@@ -77,6 +79,7 @@ function ProjectList() {
     }
     setUseProjects((prev) => [...prev, newProject])
     setCreateOpen(false)
+    dataFetchData.createProject(apiProjectsLocalData, newProject);
   }
 
   //funcion para eliminar el proyecto
