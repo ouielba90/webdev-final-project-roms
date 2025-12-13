@@ -1,10 +1,10 @@
 import { Link, Outlet } from "react-router-dom"
-import { users } from "./../../data/users.js"
-import UserCard from "./users/UserCard.jsx"
+import { users } from "./../../../../data/users.js"
+import UserCard from "./UserCard.jsx"
 import { useState, useEffect } from "react"
-import RegistroForm from "./users/formulario.jsx"
-import EditUserModal from "./users/EditUserModal.jsx"
-import getUsers from "../logic/getUsers.js"
+import RegistroForm from "./formulario.jsx"
+import EditUserModal from "./EditUserModal.jsx"
+import getUsers from "../../../logic/getUsers.js"
 
 function UserPage() {
   const [usersState, setUsersState] = useState(users)
@@ -55,7 +55,7 @@ function UserPage() {
 
   return (
     <>
-      <div className="users-div">
+      <div className="users-clients-div">
         <RegistroForm handleSubmit={handleSubmit} />
         <h2 className="subtitle">Lista de usuarios</h2>
         <div className="usersContainer">

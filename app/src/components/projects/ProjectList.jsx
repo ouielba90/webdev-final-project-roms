@@ -6,7 +6,9 @@ import ProjectItem from "./ProjectItem"
 import ProjectCreate from "./ProjectCreate"
 import ProjectDelete from "./ProjectDelete"
 import ProjectEdit from "./ProjectEdit"
-import FetchData from "./FetchData"
+//import FetchData from "./FetchDataOld"
+import fetchData from "./fetchData.js"
+
 
 // funcion para renderizar la lista de proyectos
 function ProjectList() {
@@ -25,9 +27,15 @@ function ProjectList() {
   const [projectsUsers, setProjectsUsers] = useState([])
 
   useEffect(() => {
+    //funcion para conectar con la API y extraer la informacion de los projectos
+    const data = fetchData()
+    data.getProjects(apiProjectsLocalData)
+      .then((projectsData) => setUseProjects(projectsData))
+      .catch((error) => console.log("Error al cargar los datos de proyectos:", error));
+
     //funcion para conectar con la base de datos y extraer la informacion de los projectos
-    async function loadProjects() {
-      const data = await FetchData(apiProjectsLocalData);
+    /*async function loadProjects() {
+      const data = await fetchData(apiProjectsLocalData);
       if (Array.isArray(data)) {
         setUseProjects(data);
       } else {
@@ -35,10 +43,15 @@ function ProjectList() {
         console.log("Formato inesperado:", data);
       }
     }
-    loadProjects()
+    loadProjects()*/
+
+    //funcion para conectar con la API y extraer la informacion de usuarios asignados a proyectos
+    data.getProjects(apiProjectsUsersLocalData)
+      .then((projectsUsersData) => setProjectsUsers(projectsUsersData))
+      .catch((error) => console.log("Error al cargar los datos de usuarios de proyectos:", error));
 
     //funcion para conectar con la base de datos y extraer la informacion de usuarios asignados a proyectos
-    async function loadProjectsUsers() {
+    /*async function loadProjectsUsers() {
       const dataUsers = await FetchData(apiProjectsUsersLocalData);
       if (Array.isArray(dataUsers)) {
         setProjectsUsers(dataUsers);
@@ -47,11 +60,12 @@ function ProjectList() {
         console.log("Formato inesperado:", dataUsers);
       }  
     }
-    loadProjectsUsers()
+    loadProjectsUsers()*/
   }, [])
 
   //funcion para crear un nuevo proyecto
   function handleCreate(data) {
+    const dataFetchData = fetchData()
     const newProject = {
       id: globalThis.crypto?.randomUUID?.() || `p_${Date.now().toString(36)}`,
       //valores del formulario
@@ -65,31 +79,39 @@ function ProjectList() {
     }
     setUseProjects((prev) => [...prev, newProject])
     setCreateOpen(false)
+    dataFetchData.createProject(apiProjectsLocalData, newProject);
   }
 
   //funcion para eliminar el proyecto
-  function handleDelete(projectId) {
-    setUseProjects((prev) => prev.filter((project) => project.id !== projectId))
+  async function handleDelete(projectId) {
+    const data = fetchData()
+    setUseProjects((prev) => prev.filter((project) => project._id !== projectId))
     setDeleteProject(null)
+    await data.deleteProject(projectId, apiProjectsLocalData);
   }
 
   //funcion para actualizar el proyecto editado
-  function handleUpdate(data) {
+  async function handleUpdate(data) {
+    const dataFetchData = fetchData()
     if (!projectEdit) return
 
     setUseProjects((prev) =>
       prev.map((project) =>
-        project.id === projectEdit.id
+        project._id === projectEdit._id
           ? { ...project, ...data }
           : project
       )
     )
     setProjectEdit(null)
+    await dataFetchData.updateProject(apiProjectsLocalData, projectEdit._id, data);
   }
 
   return (
     <>
-      <button className="btn-new-project" onClick={() => setCreateOpen(true)}>Crear projecto</button>
+      <div className="div-buttons-list-projects">
+        <button className="btn-new-project" onClick={() => setCreateOpen(true)}>Crear projecto</button>
+      </div>
+
       {createOpen && (
         <ProjectCreate
           onClose={() => setCreateOpen(false)}

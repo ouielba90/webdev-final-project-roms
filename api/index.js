@@ -56,11 +56,11 @@ api.use("/ouissam/servers", serversRoutes);
 /***************************************/
 
 /* API RICARDO */
-/*api.get("/projects", (req, res) => {
+api.get("/ricardo", (req, res) => {
   console.log("Extrayendo los datos de proyectos");
-  res.json(projects);
-});*/
-api.use("/projects", projectRoutes);
+  //res.json(projects);
+});
+api.use("/ricardo/projects", projectRoutes);
 
 /*api.get("/projectsUsers", (req, res) => {
   console.log("Extrayendo los datos de usuarios asignados a proyectos");

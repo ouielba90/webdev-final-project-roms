@@ -78,7 +78,7 @@ export default function ProjectCreate({ onClose, onSumit }) {
                                 required
                             />
                             <div className="div-button-form">
-                                <button className="btn-standard" type="submit">Crear Proyecto</button>
+                                <button className="btn-new-project" type="submit">Crear Proyecto</button>
                                 <button className="btn-cancel" onClick={closeModal} type="button">Cancelar</button>
                             </div>
 

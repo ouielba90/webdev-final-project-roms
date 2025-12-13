@@ -94,8 +94,8 @@ function ProjectItem({ project, projectUsers, activeId, setActiveId, onEdit, onD
                                 exit={{ opacity: 0, height: 0 }}
                                 transition={{ duration: 0.3 }}
                             >
-                                <button className="btn-card-project" onClick={() => onEdit?.(project)}>Editar</button>
-                                <button className="btn-card-project" onClick={() => onDelete?.(project)}>Eliminar</button>
+                                <button className="btn-edit-project " onClick={() => onEdit?.(project)}>Editar</button>
+                                <button className="btn-cancel" onClick={() => onDelete?.(project)}>Eliminar</button>
                             </motion.div>
                         )}
                     </AnimatePresence>
