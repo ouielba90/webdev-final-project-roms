@@ -36,10 +36,11 @@ function HardwareInvPage() {
     };
     const created = await hardwareApi.createData(newItem);
     if (!created) return;
-    const normalized = { ...created, id: created._id || created.id }
+    const normalized = { ...created, id: created._id }
     setHardware(prev => [...prev, normalized]);
-    //console.log("a few things", created._id, selectedSoft)
+
     await syncCreationWithSoftware(created._id, created.installedSoftware);
+
     e.target.reset()
     setSelectedSoft([]);
     setAddFormOpen(false)
@@ -47,35 +48,58 @@ function HardwareInvPage() {
 
   function handleEdit(id) {
     setEditFormOpen(true)
-    //console.log("id", id)
     setCurrEditId(id)
   }
 
   async function handleSubmitEdit(e) {
-    e.preventDefault()
+    e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    const updatedItem = {
-      id: currEditId,
-      type: data.type,
-      model: data.model,
-      status: data.status,
-      purchaseDate: data.purchaseDate,
-      specs: { cpu: data.cpu, ram: data.ram, storage: data.storage },
-      installedSoftware: selectedSoft.map(soft_name => software.find(s => s.name === soft_name)._id),
-      os: data.os,
-      lastMaintenance: data.lastMaintenance
-    }
-    const updated = await hardwareApi.updateData(currEditId, updatedItem)
-    if (!updated) return;
-    setHardware(prev =>
-      prev.map(item =>
-        item._id === currEditId ? updated : item
-      ));
-    const prevItem = hardware.find(item => item._id === currEditId);
-    await syncEditWithSoftware(currEditId, prevItem, updatedItem);
 
-    setEditFormOpen(false)
+    const prevItem = hardware.find(item => item._id === currEditId);
+
+    const updatedItem = {};
+
+    ["type", "model", "status", "purchaseDate", "os", "lastMaintenance"].forEach(key => {
+      if (data[key] !== prevItem[key]) {
+        updatedItem[key] = data[key];
+      }
+    });
+
+    const prevSpecs = prevItem.specs || {};
+    const newSpecs = {};
+    ["cpu", "ram", "storage"].forEach(key => {
+      if (data[key] !== prevSpecs[key]) {
+        newSpecs[key] = data[key];
+      }
+    });
+    if (Object.keys(newSpecs).length > 0) {
+      updatedItem.specs = { ...prevSpecs, ...newSpecs };
+    }
+
+    const prevSoftIds = prevItem.installedSoftware || [];
+    const newSoftIds = selectedSoft.map(soft_name => software.find(s => s.name === soft_name)?._id).filter(Boolean);
+    if (JSON.stringify(prevSoftIds) !== JSON.stringify(newSoftIds)) {
+      updatedItem.installedSoftware = newSoftIds;
+    }
+
+    if (Object.keys(updatedItem).length === 0) {
+      setEditFormOpen(false);
+      return;
+    }
+
+    const updated = await hardwareApi.updateData(currEditId, updatedItem);
+    if (!updated) return;
+
+    setHardware(prev =>
+      prev.map(item => item._id === currEditId ? { ...item, ...updatedItem } : item)
+    );
+
+    if (updatedItem.installedSoftware) {
+      await syncEditWithSoftware(currEditId, prevItem, updatedItem);
+    }
+
+    setEditFormOpen(false);
   }
 
   async function handleRemove(id) {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function useSoftwareValidation(form) {
+function useSoftwareValidation(name, version, description) {
   const [errors, setErrors] = useState({});
   const [canSubmit, setCanSubmit] = useState(false);
 
@@ -11,39 +11,37 @@ function useSoftwareValidation(form) {
 
     const newErrors = {};
 
-    if (!form.name) {
+    if (!name) {
       newErrors.name = "El nombre es obligatorio.";
-    } else if (form.name.length < 2) {
+    } else if (name.length < 2) {
       newErrors.name = "El nombre debe tener al menos 2 caracteres.";
-    } else if (form.name.length > 100) {
+    } else if (name.length > 100) {
       newErrors.name = "El nombre no puede superar los 100 caracteres.";
-    } else if (!nameRegex.test(form.name)) {
+    } else if (!nameRegex.test(name)) {
       newErrors.name = "El nombre contiene caracteres no permitidos.";
     }
 
-    if (!form.version) {
+    if (!version) {
       newErrors.version = "La versión es obligatoria.";
-    } else if (form.version.length > 50) {
+    } else if (version.length > 50) {
       newErrors.version = "La versión no puede superar los 50 caracteres.";
-    } else if (!versionRegex.test(form.version)) {
+    } else if (!versionRegex.test(version)) {
       newErrors.version = "La versión contiene caracteres no permitidos.";
     }
 
-    if (!form.description) {
+    if (!description) {
       newErrors.description = "La descripción es obligatoria.";
-    } else if (form.description.length < 10) {
+    } else if (description.length < 10) {
       newErrors.description = "La descripción debe tener al menos 10 caracteres.";
-    } else if (form.description.length > 500) {
+    } else if (description.length > 500) {
       newErrors.description = "La descripción no puede superar los 500 caracteres.";
-    } else if (!descriptionRegex.test(form.description)) {
+    } else if (!descriptionRegex.test(description)) {
       newErrors.description = "La descripción contiene caracteres no permitidos.";
     }
 
     setErrors(newErrors);
-
     setCanSubmit(Object.keys(newErrors).length === 0);
-
-  }, [form]);
+  }, [name, version, description]);
 
   return { errors, canSubmit };
 }

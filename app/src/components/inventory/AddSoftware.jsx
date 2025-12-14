@@ -11,7 +11,11 @@ function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHa
   };
 
   const [form, setForm] = useState(initialForm)
-  const { errors, canSubmit } = useSoftwareValidation(form);
+  const { errors, canSubmit } = useSoftwareValidation(
+    form.name,
+    form.version,
+    form.description
+  );
 
   function handleChange(e) {
     setForm(prev => ({
@@ -22,9 +26,7 @@ function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHa
 
   return (
     <form id="softwareForm" onSubmit={handleSubmit} className="addsoft-form">
-
       <h2 className="addsoft-title">Añadir Software</h2>
-
       <div className="addsoft-row">
         <div className="addsoft-group">
           <label htmlFor="name">Nombre</label>
@@ -101,9 +103,7 @@ function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHa
         <button type="submit" className="addsoft-submit" disabled={!canSubmit}>Añadir</button>
       </div>
     </form>
-
   );
 }
 
 export default AddSoftware;
-

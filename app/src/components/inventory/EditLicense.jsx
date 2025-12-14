@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import useHardwareValidation from "../../logic/inventory/useLicensesValidation"
 
 function EditLicense({ toBeEdited, softList, handleSubmitEdit, setEditFormOpen }) {
@@ -11,21 +11,14 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit, setEditFormOpen }
   const [cost, setCost] = useState(toBeEdited.cost)
   const [softwareId, setSoftwareId] = useState(toBeEdited.softwareId)
 
-  const [form, setForm] = useState({
-    vendor: toBeEdited.vendor,
-    seats: toBeEdited.seats,
-    licenseKey: toBeEdited.licenseKey,
-    purchaseDate: toBeEdited.purchaseDate,
-    expiryDate: toBeEdited.expiryDate,
-    cost: toBeEdited.cost,
-  });
-
-  useEffect(() => {
-    setForm({ vendor, seats, licenseKey, purchaseDate, expiryDate, cost });
-  }, [vendor, seats, licenseKey, purchaseDate, expiryDate, cost]);
-
-
-  const { errors, canSubmit } = useHardwareValidation(form);
+  const { errors, canSubmit } = useHardwareValidation(
+    vendor,
+    seats,
+    licenseKey,
+    purchaseDate,
+    expiryDate,
+    cost
+  );
 
   return (
     <>

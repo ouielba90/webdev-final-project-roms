@@ -26,7 +26,7 @@ export default function useLicensesActions() {
     async function syncEditWithSoftware(currentId, prevItem, updatedItem) {
         const prevSoft = prevItem.softwareId;
         const newSoft = updatedItem.softwareId;
-
+        console.log(prevSoft, newSoft)
         // SOFTWARE ADDED
         await softwareApi.updateData(newSoft, { licenseId: currentId });
         setSoftware(prev =>

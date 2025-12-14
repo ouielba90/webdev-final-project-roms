@@ -2,11 +2,17 @@ import { useEffect, useState } from "react";
 import useSoftwareValidation from "../../logic/inventory/useSoftwareValidation";
 
 function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmitEdit, selectedHard, setSelectedHard, selectedServ, setSelectedServ, setEditFormOpen }) {
-  const [name, setName] = useState(toBeEdited.name)
-  const [version, setVersion] = useState(toBeEdited.version)
-  const [category, setCategory] = useState(toBeEdited.category)
-  const [status, setStatus] = useState(toBeEdited.status)
-  const [description, setDescription] = useState(toBeEdited.description)
+  const [name, setName] = useState(toBeEdited?.name || "");
+  const [version, setVersion] = useState(toBeEdited?.version || "");
+  const [category, setCategory] = useState(toBeEdited?.category || "");
+  const [status, setStatus] = useState(toBeEdited?.status || "");
+  const [description, setDescription] = useState(toBeEdited?.description || "");
+
+  useEffect(() => {
+    if (!toBeEdited) return;
+    setSelectedHard(toBeEdited.installedOnHardware || []);
+    setSelectedServ(toBeEdited.serverId || []);
+  }, [toBeEdited]);
 
   function handleSelectedHardware(e) {
     const selected = Array.from(e.target.selectedOptions, option => option.value);
@@ -18,23 +24,11 @@ function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmi
     setSelectedServ(selected)
   }
 
-  useEffect(() => {
-    setSelectedHard(toBeEdited.installedOnHardware)
-    setSelectedServ(toBeEdited.serverId)
-  }, [toBeEdited, setSelectedHard, setSelectedServ])
-
-  const [form, setForm] = useState({
-    name: toBeEdited.name,
-    version: toBeEdited.version,
-    description: toBeEdited.description
-  });
-
-  useEffect(() => {
-    setForm({ name, version, description });
-  }, [name, version, description]);
-
-
-  const { errors, canSubmit } = useSoftwareValidation(form);
+  const { errors, canSubmit } = useSoftwareValidation(
+    name,
+    version,
+    description
+  );
 
   return (
     <form id="softwareForm" onSubmit={handleSubmitEdit} className="addsoft-form">
@@ -44,7 +38,7 @@ function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmi
       <div className="addsoft-row">
         <div className="addsoft-group">
           <label htmlFor="id">ID</label>
-          <input type="text" id="id" name="id" value={toBeEdited._id} disabled />
+          <input type="text" value={toBeEdited._id} disabled />
         </div>
       </div>
       <div className="addsoft-row">

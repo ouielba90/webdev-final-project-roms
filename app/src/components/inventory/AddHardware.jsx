@@ -13,12 +13,22 @@ function AddHardware({ softList, handleSubmit, selectedSoft, setSelectedSoft, se
   };
 
   const [form, setForm] = useState(initialForm)
-  const { errors, canSubmit } = useHardwareValidation(form);
+  const { errors, canSubmit } = useHardwareValidation(
+    form.model,
+    form.os,
+    form.cpu,
+    form.ram,
+    form.storage,
+    form.purchaseDate,
+    form.lastMaintenance
+  );
 
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-    setForm(prev => ({ ...prev, [id]: value }));
-  };
+  function handleChange(e) {
+    setForm(prev => ({
+      ...prev,
+      [e.target.id]: e.target.value
+    }));
+  }
 
   return (
     <form onSubmit={handleSubmit} className="addsoft-form">

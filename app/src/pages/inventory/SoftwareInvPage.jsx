@@ -17,7 +17,6 @@ function SoftwareInvPage() {
   const hardwareById = Object.fromEntries(hardware.map(h => [h._id, h]));
   const serversById = Object.fromEntries(servers.map(s => [s._id, s]));
 
-  // Forms
   const [addFormOpen, setAddFormOpen] = useState(false)
   const [editFormOpen, setEditFormOpen] = useState(false)
   const [currEditId, setCurrEditId] = useState(null)
@@ -43,7 +42,7 @@ function SoftwareInvPage() {
     };
     const created = await softwareApi.createData(newItem);
     if (!created) return;
-    const normalized = { ...created, id: created._id || created.id };
+    const normalized = { ...created, id: created._id };
     setSoftware(prev => [...prev, normalized]);
 
     await syncCreationWithHardwareAndServers(created._id, selectedHard, selectedServ);
@@ -64,25 +63,41 @@ function SoftwareInvPage() {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
 
-    const updatedItem = {
-      name: data.name,
-      version: data.version,
-      category: data.category,
-      status: data.status,
-      installedOnHardware: selectedHard,
-      serverId: selectedServ,
-      description: data.description,
+    const prevItem = software.find(item => item._id === currEditId);
+
+    const updatedItem = {};
+
+    ["name", "version", "category", "status", "description"].forEach(key => {
+      if (data[key] !== prevItem[key]) {
+        updatedItem[key] = data[key];
+      }
+    });
+
+    if (JSON.stringify(selectedHard) !== JSON.stringify(prevItem.installedOnHardware)) {
+      updatedItem.installedOnHardware = selectedHard;
+    }
+
+    if (JSON.stringify(selectedServ) !== JSON.stringify(prevItem.serverId)) {
+      updatedItem.serverId = selectedServ;
+    }
+
+    if (Object.keys(updatedItem).length === 0) {
+      setEditFormOpen(false);
+      return;
     }
 
     const updated = await softwareApi.updateData(currEditId, updatedItem)
     if (!updated) return;
-    const normalized = { ...updated, id: updated._id || updated.id };
+
     setSoftware(prev =>
-      prev.map(item =>
-        item._id === currEditId ? normalized : item
-      ))
-    const prevItem = software.find(item => item._id === currEditId);
-    await syncEditWithHardwareAndServers(currEditId, prevItem, updatedItem);
+      prev.map(item => item._id === currEditId ? { ...item, ...updatedItem } : item
+      )
+    );
+
+    if (updatedItem.installedOnHardware || updatedItem.serverId) {
+      await syncEditWithHardwareAndServers(currEditId, prevItem, updatedItem);
+    }
+
     setEditFormOpen(false)
   }
 

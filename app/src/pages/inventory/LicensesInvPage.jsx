@@ -29,11 +29,6 @@ function LicensesInvPage() {
   const { filtered, az, za, setAZ, setZA, handleSearch, handleStatus } =
     useFiltersSearch(licenses, "licenses");
 
-  function handleEdit(id) {
-    setEditFormOpen(true)
-    setCurrEditId(id)
-  }
-
   const [addFormOpen, setAddFormOpen] = useState(false)
   const [editFormOpen, setEditFormOpen] = useState(false)
   const [currEditId, setCurrEditId] = useState(0)
@@ -66,7 +61,7 @@ function LicensesInvPage() {
     };
     const created = await licensesApi.createData(newItem);
     if (!created) return;
-    const normalized = { ...created, id: created._id || created.id }
+    const normalized = { ...created, id: created._id }
 
     setLicenses(prev => [...prev, normalized]);
 
@@ -74,35 +69,50 @@ function LicensesInvPage() {
     e.target.reset()
     setAddFormOpen(false)
   }
+
+  function handleEdit(id) {
+    setEditFormOpen(true)
+    setCurrEditId(id)
+  }
+
   async function handleSubmitEdit(e) {
-    e.preventDefault()
+    e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    const updatedItem = {
-      _id: currEditId,
-      softwareId: data.softwareId,
-      seats: data.seats,
-      purchaseDate: data.purchaseDate,
-      expiryDate: data.expiryDate,
-      licenseKey: data.licenseKey,
-      vendor: data.vendor,
-      cost: data.cost,
+
+    const prevItem = licenses.find(item => item._id === currEditId);
+    const updatedItem = {};
+
+    // En este caso es necesario que softwareId esté presente en el item actualizado
+    // para que se hagan las respectivas comparaciones durante la sincronización
+    ["softwareId", "seats", "purchaseDate", "expiryDate", "licenseKey", "vendor", "cost"].forEach(key => {
+      if (data[key] !== prevItem[key] || key === "softwareId") {
+        updatedItem[key] = data[key];
+      }
+    });
+
+    if (Object.keys(updatedItem).length === 0) {
+      setEditFormOpen(false);
+      return;
     }
-    const updated = await licensesApi.updateData(currEditId, updatedItem)
+
+    const updated = await licensesApi.updateData(currEditId, updatedItem);
     if (!updated) return;
+
     const normalized = {
-      ...updated,
+      ...updatedItem,
       status: daysBetweenDates(data.expiryDate) > 0 ? "activa" : "expirada",
     };
+
     setLicenses(prev =>
       prev.map(item =>
         item._id === currEditId ? { ...item, ...normalized } : item
-        // This is important because status and softwareName do not exist in the database
-        // In Software and Hardware we don't need this
-      ))
-    const prevItem = licenses.find(item => item._id === currEditId);
+      )
+    );
+    console.log(currEditId, prevItem, updatedItem)
     await syncEditWithSoftware(currEditId, prevItem, updatedItem);
-    setEditFormOpen(false)
+
+    setEditFormOpen(false);
   }
 
   async function handleRemove(id) {

@@ -11,10 +11,7 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
   const [storage, setStorage] = useState(toBeEdited.specs.storage)
   const [os, setOs] = useState(toBeEdited.os)
   const [lastMaintenance, setLastMaintenance] = useState(toBeEdited.lastMaintenance.split("T")[0])
-  function handleSelectedSoftware(e) {
-    const selected = Array.from(e.target.selectedOptions, option => option.value);
-    setSelectedSoft(selected)
-  }
+
   useEffect(() => {
     if (!toBeEdited) return;
     const names = toBeEdited.installedSoftware
@@ -24,21 +21,21 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
     setSelectedSoft(names);
   }, [toBeEdited?._id]);
 
-  const [form, setForm] = useState({
-    model: toBeEdited.model,
-    purchaseDate: toBeEdited.purchaseDate,
-    lastMaintenance: toBeEdited.lastMaintenance,
-    os: toBeEdited.os,
-    cpu: toBeEdited.cpu,
-    ram: toBeEdited.ram,
-    storage: toBeEdited.storage
-  });
+  function handleSelectedSoftware(e) {
+    const selected = Array.from(e.target.selectedOptions, option => option.value);
+    setSelectedSoft(selected)
+  }
 
-  useEffect(() => {
-    setForm({ model, purchaseDate, lastMaintenance, os, cpu, ram, storage });
-  }, [model, purchaseDate, lastMaintenance, os, cpu, ram, storage]);
+  const { errors, canSubmit } = useHardwareValidation(
+    model,
+    os,
+    cpu,
+    ram,
+    storage,
+    purchaseDate,
+    lastMaintenance
+  );
 
-  const { errors, canSubmit } = useHardwareValidation(form);
   return (
     <form onSubmit={handleSubmitEdit} className="addsoft-form">
       <h2 className="addsoft-title">Editar Hardware</h2>
@@ -46,7 +43,7 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
       <div className="addsoft-row">
         <div className="addsoft-group">
           <label htmlFor="id">ID</label>
-          <input type="text" id="id" name="id" value={toBeEdited._id} disabled />
+          <input type="text" value={toBeEdited._id} disabled />
         </div>
       </div>
       <div className="addsoft-row">

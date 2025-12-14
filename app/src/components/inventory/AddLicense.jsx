@@ -13,7 +13,14 @@ function AddLicense({ softList, handleSubmit, setAddFormOpen }) {
     cost: ""
   };
   const [form, setForm] = useState(initialForm);
-  const { errors, canSubmit } = useLicensesValidation(form);
+  const { errors, canSubmit } = useLicensesValidation(
+    form.vendor,
+    form.seats,
+    form.licenseKey,
+    form.purchaseDate,
+    form.expiryDate,
+    form.cost
+  );
 
   function handleChange(e) {
     setForm(prev => ({
