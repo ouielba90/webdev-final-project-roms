@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation } from 'react-router-dom'
-import { DataContext } from "../../context/inventory/DataContext";
+import { ApiDataContext } from "../../context/ApiDataContext";
 import { inventorySections } from "../../sections/inventorySections.js";
 import "./../../indexOuissam.css"
 import CompactMainMenu from '../../components/homepage/CompactMainMenu'
@@ -8,7 +8,7 @@ import LoadingAnimation from '../../components/inventory/LoadingAnimation.jsx';
 import ErrorAnimation from '../../components/inventory/ErrorAnimation.jsx';
 
 function HomeInvPage() {
-  const { software, hardware, licenses, servers, error } = useContext(DataContext);
+  const { software, hardware, licenses, servers, error } = useContext(ApiDataContext);
   const currPath = useLocation()
 
   function getSection(path) {

@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { DataContext } from "../../context/inventory/DataContext";
+import { ApiDataContext } from "../../context/ApiDataContext";
 import SoftwareCard from "../../components/inventory/SoftwareCard";
 import AddSoftware from "../../components/inventory/AddSoftware";
 import EditSoftware from "../../components/inventory/EditSoftware.jsx"
@@ -9,7 +9,7 @@ import useFiltersSearch from "../../logic/inventory/useFiltersSearch.js";
 import useSoftwareActions from "../../logic/inventory/useSoftwareActions.js";
 
 function SoftwareInvPage() {
-  const { software, setSoftware, softwareApi, hardware, servers } = useContext(DataContext);
+  const { software, setSoftware, softwareApi, hardware, servers } = useContext(ApiDataContext);
   const { syncCreationWithHardwareAndServers, syncEditWithHardwareAndServers, syncRemoveWithHardwareAndServers } = useSoftwareActions();
 
   const { filtered, az, za, setAZ, setZA, handleSearch, handleStatus } = useFiltersSearch(software, "software");
@@ -41,7 +41,7 @@ function SoftwareInvPage() {
       serverId: selectedServ, //Evita que se rompa si lo que devuelve data.serverId
       description: data.description,
     };
-    const created = await softwareApi.createSoftware(newItem);
+    const created = await softwareApi.createData(newItem);
     if (!created) return;
     const normalized = { ...created, id: created._id || created.id };
     setSoftware(prev => [...prev, normalized]);
@@ -74,7 +74,7 @@ function SoftwareInvPage() {
       description: data.description,
     }
 
-    const updated = await softwareApi.updateSoftware(currEditId, updatedItem)
+    const updated = await softwareApi.updateData(currEditId, updatedItem)
     if (!updated) return;
     const normalized = { ...updated, id: updated._id || updated.id };
     setSoftware(prev =>
@@ -89,7 +89,7 @@ function SoftwareInvPage() {
   async function handleRemove(id) {
     const userConfirmation = confirm(`¿Seguro que quieres proceder a eliminar el software cuya id es ${id}?`);
     if (userConfirmation) {
-      const deleted = await softwareApi.deleteSoftware(id);
+      const deleted = await softwareApi.deleteData(id);
       if (!deleted) return;
       setSoftware(prev => prev.filter(el => el._id !== id))
 

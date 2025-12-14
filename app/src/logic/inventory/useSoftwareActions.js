@@ -1,5 +1,5 @@
-import { useContext, useState } from "react";
-import { DataContext } from "../../context/inventory/DataContext";
+import { useContext } from "react";
+import { ApiDataContext } from "../../context/ApiDataContext";
 
 export default function useSoftwareActions() {
     const {
@@ -9,7 +9,7 @@ export default function useSoftwareActions() {
         servers,
         setServers,
         serversApi
-    } = useContext(DataContext);
+    } = useContext(ApiDataContext);
 
     function diffLists(oldList, newList) {
         const oldSet = new Set(oldList);
@@ -26,7 +26,7 @@ export default function useSoftwareActions() {
             const hardItem = hardware.find(h => h._id === hid);
             const updatedList = [...hardItem.installedSoftware, createdId];
 
-            await hardwareApi.updateHardware(hid, { installedSoftware: updatedList });
+            await hardwareApi.updateData(hid, { installedSoftware: updatedList });
 
             setHardware(prev =>
                 prev.map(item =>
@@ -40,7 +40,7 @@ export default function useSoftwareActions() {
             const servItem = servers.find(s => s._id === sid);
             const updatedList = [...servItem.hostedSoftware, createdId];
 
-            await serversApi.updateServer(sid, { hostedSoftware: updatedList });
+            await serversApi.updateData(sid, { hostedSoftware: updatedList });
 
             setServers(prev =>
                 prev.map(item =>
@@ -65,7 +65,7 @@ export default function useSoftwareActions() {
             const hardItem = hardware.find(h => h._id === hid);
             const updatedList = [...hardItem.installedSoftware, currentId];
 
-            await hardwareApi.updateHardware(hid, { installedSoftware: updatedList });
+            await hardwareApi.updateData(hid, { installedSoftware: updatedList });
 
             setHardware(prev =>
                 prev.map(item =>
@@ -79,7 +79,7 @@ export default function useSoftwareActions() {
             const hardItem = hardware.find(h => h._id === hid);
             const updatedList = hardItem.installedSoftware.filter(sw => sw !== currentId);
 
-            await hardwareApi.updateHardware(hid, { installedSoftware: updatedList });
+            await hardwareApi.updateData(hid, { installedSoftware: updatedList });
 
             setHardware(prev =>
                 prev.map(item =>
@@ -93,7 +93,7 @@ export default function useSoftwareActions() {
             const servItem = servers.find(s => s._id === sid);
             const updatedList = [...servItem.hostedSoftware, currentId];
 
-            await serversApi.updateServer(sid, { hostedSoftware: updatedList });
+            await serversApi.updateData(sid, { hostedSoftware: updatedList });
 
             setServers(prev =>
                 prev.map(item =>
@@ -107,7 +107,7 @@ export default function useSoftwareActions() {
             const servItem = servers.find(s => s._id === sid);
             const updatedList = servItem.hostedSoftware.filter(sw => sw !== currentId);
 
-            await serversApi.updateServer(sid, { hostedSoftware: updatedList });
+            await serversApi.updateData(sid, { hostedSoftware: updatedList });
 
             setServers(prev =>
                 prev.map(item =>
@@ -121,7 +121,7 @@ export default function useSoftwareActions() {
         for (const h of hardware) {
             if (h.installedSoftware.includes(removedId)) {
                 const updatedList = h.installedSoftware.filter(sw => sw !== removedId);
-                await hardwareApi.updateHardware(h._id, { installedSoftware: updatedList });
+                await hardwareApi.updateData(h._id, { installedSoftware: updatedList });
                 setHardware(prev => prev.map(item => item._id === h._id ? { ...item, installedSoftware: updatedList } : item));
             }
         }
@@ -130,7 +130,7 @@ export default function useSoftwareActions() {
         for (const s of servers) {
             if (s.hostedSoftware.includes(removedId)) {
                 const updatedList = s.hostedSoftware.filter(sw => sw !== removedId);
-                await serversApi.updateServer(s._id, { hostedSoftware: updatedList });
+                await serversApi.updateData(s._id, { hostedSoftware: updatedList });
                 setServers(prev => prev.map(item => item._id === s._id ? { ...item, hostedSoftware: updatedList } : item));
             }
         }

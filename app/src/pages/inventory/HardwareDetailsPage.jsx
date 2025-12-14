@@ -1,13 +1,13 @@
 import { useContext } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { DataContext } from "./../../context/inventory/DataContext"
+import { ApiDataContext } from "./../../context/ApiDataContext"
 import OSImage from "../../components/inventory/OSImage"
 import { isoToeuDate } from "./../../utils/inventory/date.js";
 
 function HardwareDetailsPage() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { software, hardware } = useContext(DataContext)
+  const { software, hardware } = useContext(ApiDataContext)
   const hardwareItem = hardware.find(s => s._id === id);
   if (!hardwareItem) return <p>Hardware no encontrado.</p>;
 

@@ -1,12 +1,12 @@
 import { useContext } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { DataContext } from "./../../context/inventory/DataContext"
+import { ApiDataContext } from "./../../context/ApiDataContext"
 import { isoToeuDate, daysBetweenDates } from "./../../utils/inventory/date.js";
 
 function LicensesDetailsPage() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { software, licenses } = useContext(DataContext)
+  const { software, licenses } = useContext(ApiDataContext)
   const licenseItem = licenses.find(l => l._id === id);
   if (!licenseItem) return <p>Licencia no encontrada.</p>;
 

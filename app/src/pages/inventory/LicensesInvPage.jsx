@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { DataContext } from "../../context/inventory/DataContext";
+import { ApiDataContext } from "../../context/ApiDataContext";
 import LicenseCard from "../../components/inventory/LicenseCard";
 import AddLicense from "../../components/inventory/AddLicense";
 import EditLicense from "../../components/inventory/EditLicense";
@@ -9,7 +9,7 @@ import useFiltersSearch from "../../logic/inventory/useFiltersSearch.js";
 import useLicensesActions from "../../logic/inventory/useLicensesActions.js"
 
 function LicensesInvPage() {
-  let { licenses, setLicenses, licensesApi, software } = useContext(DataContext)
+  let { licenses, setLicenses, licensesApi, software } = useContext(ApiDataContext)
   const { syncCreationWithSoftware, syncEditWithSoftware, syncRemoveWithSoftware } = useLicensesActions();
 
   useEffect(() => {
@@ -64,7 +64,7 @@ function LicensesInvPage() {
       vendor: data.vendor,
       cost: data.cost,
     };
-    const created = await licensesApi.createLicense(newItem);
+    const created = await licensesApi.createData(newItem);
     if (!created) return;
     const normalized = { ...created, id: created._id || created.id }
 
@@ -88,7 +88,7 @@ function LicensesInvPage() {
       vendor: data.vendor,
       cost: data.cost,
     }
-    const updated = await licensesApi.updateLicense(currEditId, updatedItem)
+    const updated = await licensesApi.updateData(currEditId, updatedItem)
     if (!updated) return;
     const normalized = {
       ...updated,
@@ -108,7 +108,7 @@ function LicensesInvPage() {
   async function handleRemove(id) {
     const userConfirmation = confirm(`¿Seguro que quieres proceder a eliminar la licencia cuya id es ${id}?`);
     if (userConfirmation) {
-      const deleted = await licensesApi.deleteLicense(id);
+      const deleted = await licensesApi.deleteData(id);
       if (!deleted) return;
       setLicenses(prev => prev.filter(el => el._id !== id))
       await syncRemoveWithSoftware(id);

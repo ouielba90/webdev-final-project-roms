@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { DataContext } from "../../context/inventory/DataContext";
+import { ApiDataContext } from "../../context/ApiDataContext";
 import HardwareCard from "../../components/inventory/HardwareCard";
 import AddHardware from "../../components/inventory/AddHardware";
 import EditHardware from "../../components/inventory/EditHardware";
@@ -8,7 +8,7 @@ import useFiltersSearch from "../../logic/inventory/useFiltersSearch.js";
 import useHardwareActions from "../../logic/inventory/useHardwareActions.js";
 
 function HardwareInvPage() {
-  const { hardware, setHardware, hardwareApi, software } = useContext(DataContext)
+  const { hardware, setHardware, hardwareApi, software } = useContext(ApiDataContext)
   const { syncCreationWithSoftware, syncEditWithSoftware, syncRemoveWithSoftware } = useHardwareActions();
 
   const { filtered, az, za, setAZ, setZA, handleSearch, handleStatus, handleType } =
@@ -34,7 +34,7 @@ function HardwareInvPage() {
       os: data.os,
       lastMaintenance: data.lastMaintenance
     };
-    const created = await hardwareApi.createHardware(newItem);
+    const created = await hardwareApi.createData(newItem);
     if (!created) return;
     const normalized = { ...created, id: created._id || created.id }
     setHardware(prev => [...prev, normalized]);
@@ -66,7 +66,7 @@ function HardwareInvPage() {
       os: data.os,
       lastMaintenance: data.lastMaintenance
     }
-    const updated = await hardwareApi.updateHardware(currEditId, updatedItem)
+    const updated = await hardwareApi.updateData(currEditId, updatedItem)
     if (!updated) return;
     setHardware(prev =>
       prev.map(item =>
@@ -81,7 +81,7 @@ function HardwareInvPage() {
   async function handleRemove(id) {
     const userConfirmation = confirm(`¿Seguro que quieres proceder a eliminar el hardware cuya id es ${id}?`);
     if (userConfirmation) {
-      const deleted = await hardwareApi.deleteHardware(id);
+      const deleted = await hardwareApi.deleteData(id);
       if (!deleted) return;
       setHardware(prev => prev.filter(el => el._id !== id))
 

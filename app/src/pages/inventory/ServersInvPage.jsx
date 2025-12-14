@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import { DataContext } from "../../context/inventory/DataContext";
+import { ApiDataContext } from "../../context/ApiDataContext";
 import ServerCard from "../../components/inventory/ServerCard";
 import useFiltersSearch from "../../logic/inventory/useFiltersSearch";
 
 function ServersInvPage() {
-  const { servers, software } = useContext(DataContext)
+  const { servers, software } = useContext(ApiDataContext)
 
   const { filtered, az, za, setAZ, setZA, handleSearch, handleStatus, handleOs } =
     useFiltersSearch(servers, "servers");

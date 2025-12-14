@@ -1,12 +1,12 @@
 import { useContext, useState } from "react";
-import { DataContext } from "../../context/inventory/DataContext";
+import { ApiDataContext } from "../../context/ApiDataContext";
 
 export default function useHardwareActions() {
     const {
         software,
         setSoftware,
         softwareApi,
-    } = useContext(DataContext);
+    } = useContext(ApiDataContext);
 
     function diffLists(oldList, newList) {
         const oldSet = new Set(oldList);
@@ -23,7 +23,7 @@ export default function useHardwareActions() {
             const softItem = software.find(h => h._id === sid);
             const updatedList = [...softItem.installedOnHardware, createdId];
 
-            await softwareApi.updateSoftware(sid, { installedOnHardware: updatedList });
+            await softwareApi.updateData(sid, { installedOnHardware: updatedList });
 
             setSoftware(prev =>
                 prev.map(item =>
@@ -44,7 +44,7 @@ export default function useHardwareActions() {
             const softItem = software.find(s => s._id === sid);
             const updatedList = [...softItem.installedOnHardware, currentId];
 
-            await softwareApi.updateSoftware(sid, { installedOnHardware: updatedList });
+            await softwareApi.updateData(sid, { installedOnHardware: updatedList });
 
             setSoftware(prev =>
                 prev.map(item =>
@@ -58,7 +58,7 @@ export default function useHardwareActions() {
             const softItem = software.find(s => s._id === sid);
             const updatedList = softItem.installedOnHardware.filter(sw => sw !== currentId);
 
-            await softwareApi.updateSoftware(sid, { installedOnHardware: updatedList });
+            await softwareApi.updateData(sid, { installedOnHardware: updatedList });
 
             setSoftware(prev =>
                 prev.map(item =>
@@ -72,7 +72,7 @@ export default function useHardwareActions() {
         for (const s of software) {
             if (s.installedOnHardware.includes(removedId)) {
                 const updatedList = s.installedOnHardware.filter(sw => sw !== removedId);
-                await softwareApi.updateSoftware(s._id, { installedOnHardware: updatedList });
+                await softwareApi.updateData(s._id, { installedOnHardware: updatedList });
                 setSoftware(prev => prev.map(item => item._id === s._id ? { ...item, installedOnHardware: updatedList } : item));
             }
         }

@@ -1,16 +1,16 @@
 import { useContext, useState } from "react";
-import { DataContext } from "../../context/inventory/DataContext";
+import { ApiDataContext } from "../../context/ApiDataContext";
 
 export default function useLicensesActions() {
     const {
         software,
         setSoftware,
         softwareApi,
-    } = useContext(DataContext);
+    } = useContext(ApiDataContext);
 
     async function syncCreationWithSoftware(createdId, softwareId) {
         // Software
-        await softwareApi.updateSoftware(softwareId, { licenseId: createdId });
+        await softwareApi.updateData(softwareId, { licenseId: createdId });
 
         setSoftware(prev =>
             prev.map(item =>
@@ -24,7 +24,7 @@ export default function useLicensesActions() {
         const newSoft = updatedItem.softwareId;
 
         // SOFTWARE ADDED
-        await softwareApi.updateSoftware(newSoft, { licenseId: currentId });
+        await softwareApi.updateData(newSoft, { licenseId: currentId });
         setSoftware(prev =>
             prev.map(item =>
                 item._id === newSoft ? { ...item, licenseId: currentId } : item
@@ -32,7 +32,7 @@ export default function useLicensesActions() {
         );
 
         // SOFTWARE REMOVED
-        await softwareApi.updateSoftware(prevSoft, { licenseId: null });
+        await softwareApi.updateData(prevSoft, { licenseId: null });
         setSoftware(prev =>
             prev.map(item =>
                 item._id === prevSoft ? { ...item, licenseId: null } : item
@@ -43,7 +43,7 @@ export default function useLicensesActions() {
     async function syncRemoveWithSoftware(removedId) {
         for (const s of software) {
             if (s.licenseId === removedId) {
-                await softwareApi.updateSoftware(s._id, { licenseId: null });
+                await softwareApi.updateData(s._id, { licenseId: null });
                 setSoftware(prev => prev.map(item => item._id === s._id ? { ...item, licenseId: null } : item));
             }
         }

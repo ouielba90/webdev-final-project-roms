@@ -1,12 +1,12 @@
 import { useContext } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { DataContext } from "./../../context/inventory/DataContext"
+import { ApiDataContext } from "./../../context/ApiDataContext"
 import OSImage from "../../components/inventory/OSImage"
 
 function ServersDetailsPage() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { software, servers } = useContext(DataContext)
+  const { software, servers } = useContext(ApiDataContext)
   const serverItem = servers.find(serv => serv._id === id);
   if (!serverItem) return <p>Servidor no encontrado.</p>;
 

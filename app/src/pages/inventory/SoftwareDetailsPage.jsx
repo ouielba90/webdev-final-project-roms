@@ -1,11 +1,11 @@
 import { useContext } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { DataContext } from "./../../context/inventory/DataContext"
+import { ApiDataContext } from "./../../context/ApiDataContext"
 
 function SoftwareDetailsPage() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { software, hardware, servers } = useContext(DataContext)
+  const { software, hardware, servers } = useContext(ApiDataContext)
 
   const softwareItem = software.find(s => s._id === id);
   if (!softwareItem) return <p>Software no encontrado.</p>;

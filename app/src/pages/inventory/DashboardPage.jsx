@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { DataContext } from "../../context/inventory/DataContext";
+import { ApiDataContext } from "../../context/ApiDataContext";
 import LoadingAnimation from "../../components/inventory/LoadingAnimation.jsx"
 import DashboardGeneralStatus from "../../components/inventory/DashboardGeneralStatus.jsx"
 import DashboardInsightsI from "../../components/inventory/DashboardInsightsI";
@@ -7,7 +7,7 @@ import DashboardInsightsII from "../../components/inventory/DashboardInsightsII.
 import { daysBetweenDates } from "./../../utils/inventory/date.js";
 
 function DashboardPage() {
-  const { software, hardware, licenses, servers } = useContext(DataContext);
+  const { software, hardware, licenses, servers } = useContext(ApiDataContext);
   const totalNumRes = software.length + hardware.length + servers.length + licenses.length;
   let subTotalRes = {
     software: software.length,

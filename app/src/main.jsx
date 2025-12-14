@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import ProviderInventory from './context/inventory/ProviderInventory'
+import ProviderDataApi from "./context/ProviderDataApi"
 import App from './App.jsx'
 
 import HomeInvPage from './pages/inventory/HomeInvPage.jsx'
@@ -28,6 +28,7 @@ import ClientPage from './pages/usersClients/clients/ClientPage.jsx'
 import ClientChatsPage from './pages/communications/ClientChatsPage.jsx'
 import ChatViewPage from './pages/communications/ChatViewPage.jsx'
 import InternalChatsPage from './pages/communications/InternalChatsPage.jsx'
+
 const router = createBrowserRouter(
   [
     {
@@ -132,8 +133,8 @@ const router = createBrowserRouter(
 )
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ProviderInventory>
+    <ProviderDataApi>
       <RouterProvider router={router} />
-    </ProviderInventory>
+    </ProviderDataApi>
   </StrictMode>,
 )
