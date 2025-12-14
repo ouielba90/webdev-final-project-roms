@@ -8,6 +8,8 @@ export default function useLicensesActions() {
         softwareApi,
     } = useContext(ApiDataContext);
 
+    // Sincronización bidireccional al editar una licencia:
+    // 1. Añade la ID de esta licencia al software seleccionado.
     async function syncCreationWithSoftware(createdId, softwareId) {
         // Software
         await softwareApi.updateData(softwareId, { licenseId: createdId });
@@ -19,6 +21,8 @@ export default function useLicensesActions() {
         );
     }
 
+    // 2. Elimina la ID de esta licencia del software que fué deseleccionado.
+    // y lo añade en el otro.
     async function syncEditWithSoftware(currentId, prevItem, updatedItem) {
         const prevSoft = prevItem.softwareId;
         const newSoft = updatedItem.softwareId;
@@ -40,6 +44,7 @@ export default function useLicensesActions() {
         );
     }
 
+    // 2. Elimina la ID de esta licencia en el software seleccionado anteriormente.
     async function syncRemoveWithSoftware(removedId) {
         for (const s of software) {
             if (s.licenseId === removedId) {

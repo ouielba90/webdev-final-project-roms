@@ -29,6 +29,8 @@ import ClientChatsPage from './pages/communications/ClientChatsPage.jsx'
 import ChatViewPage from './pages/communications/ChatViewPage.jsx'
 import InternalChatsPage from './pages/communications/InternalChatsPage.jsx'
 
+// Definición de rutas anidadas:
+// el menú superior mientras cambia el contenido en <Outlet />.
 const router = createBrowserRouter(
   [
     {
@@ -133,7 +135,9 @@ const router = createBrowserRouter(
 )
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    {/*Carga los datos de la API y crea el estado global.*/}
     <ProviderDataApi>
+      {/*Muestra la interfaz de usuario correcta según la URL, usando los datos del Provider.*/}
       <RouterProvider router={router} />
     </ProviderDataApi>
   </StrictMode>,

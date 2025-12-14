@@ -11,6 +11,9 @@ export default function useSoftwareActions() {
         serversApi
     } = useContext(ApiDataContext);
 
+    // Calcula la diferencia entre la lista antigua y la nueva para identificar
+    // exactamente qué referencias se han añadido y cuáles se han eliminado,
+    // minimizando las llamadas a la API
     function diffLists(oldList, newList) {
         const oldSet = new Set(oldList);
         const newSet = new Set(newList);
@@ -20,6 +23,8 @@ export default function useSoftwareActions() {
         };
     }
 
+    // Sincronización bidireccional al editar un hardware:
+    // 1. Añade la ID de este software a los nuevos hardware seleccionados.
     async function syncCreationWithHardwareAndServers(createdId, hardwareIds, serverIds) {
         // Hardware
         for (const hid of hardwareIds) {
@@ -50,6 +55,8 @@ export default function useSoftwareActions() {
         }
     }
 
+    // 2. Elimina la ID de este software de los hardware y servers que fueron deseleccionados
+    // y los añade en los otros.
     async function syncEditWithHardwareAndServers(currentId, prevItem, updatedItem) {
         const prevHard = prevItem.installedOnHardware;
         const newHard = updatedItem.installedOnHardware;
@@ -116,6 +123,8 @@ export default function useSoftwareActions() {
             );
         }
     }
+
+    // 2. Elimina la ID de este software en el hardware y software seleccionados anteriormente.
     async function syncRemoveWithHardwareAndServers(removedId) {
         // Update hardware
         for (const h of hardware) {

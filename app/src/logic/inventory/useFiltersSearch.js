@@ -13,6 +13,9 @@ function useFiltersSearch(data, currFilter) {
   const handleType = (e) => setType(e.target.value);
   const handleOs = (e) => setOs(e.target.value);
 
+  // Configuración dinámica: mapea el tipo de recurso (software, hardware, etc.) 
+  // a sus campos específicos en la base de datos para permitir una búsqueda genérica
+
   const filterConfig = {
     software: { searchFields: ["name", "description"], statusField: "status" },
     hardware: {
@@ -30,6 +33,8 @@ function useFiltersSearch(data, currFilter) {
 
   const config = filterConfig[currFilter];
 
+  // Lógica de filtrado combinada: aplica simultáneamente búsqueda por texto (en múltiples campos),
+  // estado, tipo y sistema operativo. Si un filtro está vacío, se ignora.
   const filtered = data
     .filter((item) => {
       const matchesSearch = config.searchFields.some(

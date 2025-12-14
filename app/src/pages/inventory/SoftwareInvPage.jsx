@@ -38,7 +38,7 @@ function SoftwareInvPage() {
       status: data.status,
       licenseId: null,
       installedOnHardware: selectedHard,
-      serverId: selectedServ, //Evita que se rompa si lo que devuelve data.serverId
+      serverId: selectedServ,
       description: data.description,
     };
     const created = await softwareApi.createData(newItem);
@@ -70,7 +70,7 @@ function SoftwareInvPage() {
       category: data.category,
       status: data.status,
       installedOnHardware: selectedHard,
-      serverId: selectedServ, //Evita que se rompa si lo que devuelve data.serverId
+      serverId: selectedServ,
       description: data.description,
     }
 

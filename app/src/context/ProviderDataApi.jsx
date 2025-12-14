@@ -15,6 +15,9 @@ function ProviderDataApi({ children }) {
     const [servers, setServers] = useState([]);
     const [error, setError] = useState([])
 
+    // Carga inicial de datos (Fetching):
+    // Se ejecutan todas las peticiones en paralelo al montar la aplicación
+    // Los errores se acumulan en un array para mostrar feedback global si falla alguna API
     useEffect(() => {
         softwareApi.getData().then(setSoftware).catch(e => setError(p => [...p, e]));
         hardwareApi.getData().then(setHardware).catch(e => setError(p => [...p, e]));

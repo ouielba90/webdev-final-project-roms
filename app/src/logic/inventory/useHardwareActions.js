@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { ApiDataContext } from "../../context/ApiDataContext";
 
 export default function useHardwareActions() {
@@ -8,6 +8,9 @@ export default function useHardwareActions() {
         softwareApi,
     } = useContext(ApiDataContext);
 
+    // Calcula la diferencia entre la lista antigua y la nueva para identificar
+    // exactamente qué referencias se han añadido y cuáles se han eliminado,
+    // minimizando las llamadas a la API
     function diffLists(oldList, newList) {
         const oldSet = new Set(oldList);
         const newSet = new Set(newList);
@@ -17,6 +20,8 @@ export default function useHardwareActions() {
         };
     }
 
+    // Sincronización bidireccional al editar un hardware:
+    // 1. Añade la ID de este hardware a los nuevos software seleccionados.
     async function syncCreationWithSoftware(createdId, softwareIds) {
         // Software
         for (const sid of softwareIds) {
@@ -33,6 +38,8 @@ export default function useHardwareActions() {
         }
     }
 
+    // 2. Elimina la ID de este hardware de los software que fueron deseleccionados
+    // y lo añade en el otro.
     async function syncEditWithSoftware(currentId, prevItem, updatedItem) {
         const prevSoft = prevItem.installedSoftware;
         const newSoft = updatedItem.installedSoftware;
@@ -68,6 +75,7 @@ export default function useHardwareActions() {
         }
     }
 
+    // 2. Elimina la ID de este hardware en el software seleccionado anteriormente.
     async function syncRemoveWithSoftware(removedId) {
         for (const s of software) {
             if (s.installedOnHardware.includes(removedId)) {
