@@ -1,24 +1,16 @@
 import { useEffect, useState } from "react"
 import ProjectItem from "./ProjectItem"
-// las dos siguientes lineas son para usar datos locales
-/*import listProjects from "./../../../data/projects"*/
-/*import projectsUsers from "./../../../data/projectsUsers"*/
 import ProjectCreate from "./ProjectCreate"
 import ProjectDelete from "./ProjectDelete"
 import ProjectEdit from "./ProjectEdit"
-//import FetchData from "./FetchDataOld"
 import fetchData from "./fetchData.js"
 
 
 // funcion para renderizar la lista de proyectos
 function ProjectList() {
   //URLs de las APIs
-  const apiProjects = import.meta.env.VITE_API_URL_PROJECTS
-  const apiProjectsUsers = import.meta.env.VITE_API_URL_PROJECTS_USERS
   const apiProjectsLocalData = import.meta.env.VITE_API_URL_PROJECTS_LOCAL_DATA
   const apiProjectsUsersLocalData = import.meta.env.VITE_API_URL_PROJECTSUSERS_LOCAL_DATA
-  //la siguiente linea es para usar datos locales
-  /*const [useprojects, setUseProjects] = useState(listProjects)*/
   const [useprojects, setUseProjects] = useState([])
   const [activeId, setActiveId] = useState(null)
   const [createOpen, setCreateOpen] = useState(false)
@@ -33,34 +25,10 @@ function ProjectList() {
       .then((projectsData) => setUseProjects(projectsData))
       .catch((error) => console.log("Error al cargar los datos de proyectos:", error));
 
-    //funcion para conectar con la base de datos y extraer la informacion de los projectos
-    /*async function loadProjects() {
-      const data = await fetchData(apiProjectsLocalData);
-      if (Array.isArray(data)) {
-        setUseProjects(data);
-      } else {
-        // Manejo de caso inesperado
-        console.log("Formato inesperado:", data);
-      }
-    }
-    loadProjects()*/
-
     //funcion para conectar con la API y extraer la informacion de usuarios asignados a proyectos
     data.getProjects(apiProjectsUsersLocalData)
       .then((projectsUsersData) => setProjectsUsers(projectsUsersData))
       .catch((error) => console.log("Error al cargar los datos de usuarios de proyectos:", error));
-
-    //funcion para conectar con la base de datos y extraer la informacion de usuarios asignados a proyectos
-    /*async function loadProjectsUsers() {
-      const dataUsers = await FetchData(apiProjectsUsersLocalData);
-      if (Array.isArray(dataUsers)) {
-        setProjectsUsers(dataUsers);
-      } else {
-        // Manejo de caso inesperado
-        console.log("Formato inesperado:", dataUsers);
-      }
-    }
-    loadProjectsUsers()*/
   }, [])
 
   //funcion para crear un nuevo proyecto
