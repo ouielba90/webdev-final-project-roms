@@ -15,8 +15,6 @@ Ejemplos
 Propiedades
 id, name, client, status, description, tasks, collabs
 
----
-
 # 📦 Inventario
 
 Este subpágina implementa la gestión completa de activos tecnológicos del sistema: **hardware, software, licencias y servidores**, utilizando React, Context API y un conjunto de componentes modulares.
@@ -32,70 +30,83 @@ Este subpágina implementa la gestión completa de activos tecnológicos del sis
 
 * **Estructura modular** en `/components/inventory` y `/pages/inventory`.
   Cada tipo de recurso tiene:
-
   * Página de listado
   * Página de detalles
   * Formularios de alta y edición
   * Tarjetas reutilizables
   * Modales para CRUD
 
----
 
-## 📊 Dashboard 
+## ✅ Validaciones  FrontEnd y Lógica de Negocio
 
-Incluye:
+El sistema desacopla la lógica de validación de la interfaz de usuario mediante **Custom Hooks** ubicados en `/logic/inventory`. Esto garantiza la integridad de los datos antes de enviarlos a la API.
+
+* **Hooks Implementados:** `useSoftwareValidation`, `useHardwareValidation` y `useLicensesValidation`.
+* **Funcionamiento:**
+  * Validación reactiva en tiempo real mediante `useEffect` que habilita/deshabilita el botón de envío (`canSubmit`).
+  * Gestión de errores granulares devueltos en un objeto `errors` para feedback visual.
+* **Reglas aplicadas:**
+  * **Consistencia de Fechas:** Se impide ingresar fechas de compra futuras y se valida que las fechas de mantenimiento o expiración sean posteriores a la compra.
+  * **Formatos Estrictos (Regex):** Control de caracteres permitidos para versiones de software, modelos de hardware y claves de licencia.
+  * **Límites Lógicos:** Validación de longitudes mínimas/máximas (ej. descripciones entre 10-500 caracteres) y valores numéricos positivos (costes, asignaciones).
+
+
+## 📊 Dashboard
+
+Funcionalidades:
 
 * Conteo total de recursos y estado global.
 * Métricas por categoría (software/hardware/licencias/servidores).
 * Detección automática de:
-
   * licencias próximas a expirar
   * servidores con mayor carga de usuarios
   * alertas por uso de CPU/RAM/Disco
 * Uso de animaciones Lottie para estados.
 
----
 
 ## 💿 Software
+Funcionalidades:
 
 * Alta, edición y eliminación con validaciones básicas.
 * Asignación a hardware y servidores.
 * Filtros por categoría/estado y búsqueda por nombre.
 * Vista detallada con relaciones y metadatos.
 
----
+
 
 ## 🖥️ Hardware
 
-Funcionalidad:
+Funcionalidades:
 
 * CRUD completo (add/edit/delete) con formularios estructurados.
 * Filtrado por tipo/estado, búsqueda por modelo y ordenación A–Z/Z–A.
 * Asociación de software mediante `select` múltiple.
 * Vista detallada con specs, fecha de compra y software instalado.
 
----
+
 
 ## 🔑 Licencias
+Funcionalidades:
 
 * Relación automática con el software asociado.
 * Cálculo de estado (activa/expirada) en función de la fecha.
 * CRUD con campos técnicos: vendor, licenseKey, seats, fechas, coste.
 * Filtros + búsqueda por software.
 
----
+
 
 ## 🖧 Servidores
 
+Funcionalidades:
 * Card con estado, ubicación, OS, usuarios y software alojado.
 * Vista detallada con:
-
   * Cálculo de promedios por CPU/RAM/Disco
   * Grid de nodos individuales
   * Listado de software y usuarios con acceso
 
-
 ---
+---
+
 # 📜 Lista de proyectos
 
 Subpágina para mostrar y gestionar los diferentes proyectos que gestiona la empresa y a los empleados que estan trabajando en los diferentes proyectos.
