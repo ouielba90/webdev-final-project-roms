@@ -58,14 +58,9 @@ api.use("/ouissam/servers", serversRoutes);
 /* API RICARDO */
 api.get("/ricardo", (req, res) => {
   console.log("Extrayendo los datos de proyectos");
-  //res.json(projects);
 });
 api.use("/ricardo/projects", projectRoutes);
 
-/*api.get("/projectsUsers", (req, res) => {
-  console.log("Extrayendo los datos de usuarios asignados a proyectos");
-  res.json(projectsUsers);
-});*/
 api.use("/projectsUsers", projectUserRoutes);
 
 /***************************************/
