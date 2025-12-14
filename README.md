@@ -16,7 +16,7 @@ Propiedades
 id, name, client, status, description, tasks, collabs
 
 
-# 📦 Inventario 
+# 📦 Inventario (@ouielba90) 
 
 Esta sección implementa la **gestión integral de activos tecnológicos** de la plataforma de consultoría de ciberseguridad. El módulo cubre **hardware, software, licencias y servidores**, proporcionando trazabilidad completa, relaciones entre entidades y validación de reglas de negocio críticas.
 
