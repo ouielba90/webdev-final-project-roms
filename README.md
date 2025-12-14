@@ -15,93 +15,169 @@ Ejemplos
 Propiedades
 id, name, client, status, description, tasks, collabs
 
-# 📦 Inventario
 
-Este subpágina implementa la gestión completa de activos tecnológicos del sistema: **hardware, software, licencias y servidores**, utilizando React, Context API y un conjunto de componentes modulares.
+# 📦 Inventario 
+
+Esta sección implementa la **gestión integral de activos tecnológicos** de la plataforma de consultoría de ciberseguridad. El módulo cubre **hardware, software, licencias y servidores**, proporcionando trazabilidad completa, relaciones entre entidades y validación de reglas de negocio críticas.
+
+La implementación está realizada con **React**, **Context API** y una arquitectura modular orientada a escalabilidad y mantenimiento.
 
 ---
-## 🧱 Arquitectura
 
-* **Contexto global** (`ProviderInventory.jsx` + `DataContext.js`):
-  Centraliza software, hardware, licencias y servidores, exponiendo los datos a todas las páginas del inventario.
+## 🧱 Arquitectura y Diseño
 
-* **APIs dedicadas** (`useHardwareApi`, `useSoftwareApi`, `useLicensesApi`, `useServersApi`):
-  Hooks personalizados que encapsulan las llamadas a las distintas rutas del backend mediante `fetch()`.
+### Contexto Global de Inventario
 
-* **Estructura modular** en `/components/inventory` y `/pages/inventory`.
-  Cada tipo de recurso tiene:
-  * Página de listado
-  * Página de detalles
-  * Formularios de alta y edición
-  * Tarjetas reutilizables
-  * Modales para CRUD
+**`ProviderInventory.jsx` + `DataContext.js`**
 
+Se utiliza un **contexto global centralizado** para gestionar el estado compartido de:
 
-## ✅ Validaciones  FrontEnd y Lógica de Negocio
+* Hardware
+* Software
+* Licencias
+* Servidores
 
-El sistema desacopla la lógica de validación de la interfaz de usuario mediante **Custom Hooks** ubicados en `/logic/inventory`. Esto garantiza la integridad de los datos antes de enviarlos a la API.
+Este enfoque evita el *prop drilling*, lo que garantiza consistencia entre vistas y permite que cualquier componente del inventario acceda o actualice los datos de forma controlada.
 
-* **Hooks Implementados:** `useSoftwareValidation`, `useHardwareValidation` y `useLicensesValidation`.
-* **Funcionamiento:**
-  * Validación reactiva en tiempo real mediante `useEffect` que habilita/deshabilita el botón de envío (`canSubmit`).
-  * Gestión de errores granulares devueltos en un objeto `errors` para feedback visual.
-* **Reglas aplicadas:**
-  * **Consistencia de Fechas:** Se impide ingresar fechas de compra futuras y se valida que las fechas de mantenimiento o expiración sean posteriores a la compra.
-  * **Formatos Estrictos (Regex):** Control de caracteres permitidos para versiones de software, modelos de hardware y claves de licencia.
-  * **Límites Lógicos:** Validación de longitudes mínimas/máximas (ej. descripciones entre 10-500 caracteres) y valores numéricos positivos (costes, asignaciones).
+---
 
+### Hook de Acceso a la API
 
-## 📊 Dashboard
+**`useApi`**
 
-Funcionalidades:
+Cada tipo de recurso dispone de un **hook dedicado** que encapsula:
 
-* Conteo total de recursos y estado global.
-* Métricas por categoría (software/hardware/licencias/servidores).
+* Llamadas HTTP (`fetch`)
+* Normalización de datos
+* Operaciones CRUD
+
+Esto desacopla completamente la lógica de red de los componentes de presentación y facilita futuras migraciones o cambios de backend.
+
+---
+
+### Estructura Modular
+
+Ubicación:
+`/components/inventory`
+`/pages/inventory`
+
+Cada dominio (hardware, software, licencias, servidores) sigue una **estructura homogénea**, compuesta por:
+
+* Página de listado
+* Página de detalle
+* Formularios de alta y edición
+* Tarjetas reutilizables
+* Modales de confirmación para operaciones CRUD
+
+Esta consistencia mejora la legibilidad del repositorio y reduce la curva de aprendizaje para nuevos desarrolladores.
+
+---
+
+## ✅ Validación Frontend y Lógica de Negocio
+
+La validación está **desacoplada de la UI** mediante **Custom Hooks** ubicados en `/logic/inventory`, garantizando la integridad de los datos antes de cualquier interacción con la API.
+
+### Hooks Implementados
+
+* `useSoftwareValidation`
+* `useHardwareValidation`
+* `useLicensesValidation`
+
+### Características Clave
+
+* **Validación reactiva en tiempo real** mediante `useEffect`
+* Control del estado de envío mediante `canSubmit`
+* Gestión de errores granular mediante un objeto `errors` para feedback visual inmediato
+
+### Reglas de Negocio Aplicadas
+
+* **Consistencia temporal**
+
+  * No se permiten fechas de compra futuras
+  * Las fechas de mantenimiento o expiración deben ser posteriores a la compra
+* **Validación de formato (Regex)**
+
+  * Modelos de hardware
+  * Versiones de software
+  * Claves de licencia
+* **Restricciones lógicas**
+
+  * Longitudes mínimas y máximas
+  * Valores numéricos positivos (costes, asignaciones, recursos)
+
+---
+
+## 📊 Dashboard de Inventario
+
+El Dashboard actúa como un **centro de control operativo**, ofreciendo información crítica de un solo vistazo:
+
+* Conteo global de activos
+* Métricas por categoría
 * Detección automática de:
-  * licencias próximas a expirar
-  * servidores con mayor carga de usuarios
-  * alertas por uso de CPU/RAM/Disco
-* Uso de animaciones Lottie para estados.
 
+  * Licencias próximas a expirar
+  * Servidores con alta carga de usuarios
+  * Alertas por uso de CPU, RAM y disco
+* Uso de **animaciones Lottie** para estados y feedback visual
 
-## 💿 Software
-Funcionalidades:
+Este enfoque permite una gestión **proactiva**, alineada con un entorno de consultoría IT/ciberseguridad.
 
-* Alta, edición y eliminación con validaciones básicas.
-* Asignación a hardware y servidores.
-* Filtros por categoría/estado y búsqueda por nombre.
-* Vista detallada con relaciones y metadatos.
+---
 
-
-
-## 🖥️ Hardware
+## 💿 Gestión de Software
 
 Funcionalidades:
 
-* CRUD completo (add/edit/delete) con formularios estructurados.
-* Filtrado por tipo/estado, búsqueda por modelo y ordenación A–Z/Z–A.
-* Asociación de software mediante `select` múltiple.
-* Vista detallada con specs, fecha de compra y software instalado.
+* CRUD completo con validaciones
+* Asociación bidireccional con hardware y servidores
+* Filtros por categoría y estado
+* Búsqueda por nombre
+* Vista de detalle con relaciones y metadatos
 
+---
 
-
-## 🔑 Licencias
-Funcionalidades:
-
-* Relación automática con el software asociado.
-* Cálculo de estado (activa/expirada) en función de la fecha.
-* CRUD con campos técnicos: vendor, licenseKey, seats, fechas, coste.
-* Filtros + búsqueda por software.
-
-
-
-## 🖧 Servidores
+## 🖥️ Gestión de Hardware
 
 Funcionalidades:
-* Card con estado, ubicación, OS, usuarios y software alojado.
-* Vista detallada con:
-  * Cálculo de promedios por CPU/RAM/Disco
-  * Grid de nodos individuales
+
+* CRUD completo con formularios estructurados
+* Filtros por tipo y estado
+* Búsqueda por modelo y ordenación A–Z / Z–A
+* Asociación múltiple de software
+* Vista de detalle con:
+
+  * Especificaciones técnicas
+  * Fechas relevantes
+  * Software instalado
+
+---
+
+## 🔑 Gestión de Licencias
+
+Funcionalidades:
+
+* Asociación automática con software
+* Cálculo dinámico de estado (activa / expirada)
+* CRUD completo con campos técnicos:
+
+  * Proveedor
+  * Clave de licencia
+  * Asignaciones
+  * Fechas
+  * Coste
+* Filtros y búsqueda por software
+
+---
+
+## 🖧 Gestión de Servidores
+
+Funcionalidades:
+
+* Tarjetas resumen con estado, ubicación, SO y usuarios
+* Vista de detalle avanzada con:
+
+  * Cálculo de promedios de CPU, RAM y disco
+  * Visualización de nodos individuales
   * Listado de software y usuarios con acceso
 
 ---
