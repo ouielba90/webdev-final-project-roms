@@ -15,9 +15,6 @@ Ejemplos
 Propiedades
 id, name, client, status, description, tasks, collabs
 
-
-Aquí tienes una **versión más corta, más técnica y centrada únicamente en el inventario**:
-
 ---
 
 # 📦 Inventario
@@ -25,7 +22,6 @@ Aquí tienes una **versión más corta, más técnica y centrada únicamente en 
 Este subpágina implementa la gestión completa de activos tecnológicos del sistema: **hardware, software, licencias y servidores**, utilizando React, Context API y un conjunto de componentes modulares.
 
 ---
-
 ## 🧱 Arquitectura
 
 * **Contexto global** (`ProviderInventory.jsx` + `DataContext.js`):
@@ -97,6 +93,7 @@ Funcionalidad:
   * Cálculo de promedios por CPU/RAM/Disco
   * Grid de nodos individuales
   * Listado de software y usuarios con acceso
+
 
 ---
 # 📜 Lista de proyectos
