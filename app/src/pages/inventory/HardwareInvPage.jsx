@@ -20,6 +20,8 @@ function HardwareInvPage() {
   const [selectedSoft, setSelectedSoft] = useState([]);
   const softList = software.map(el => { return { id: el._id, name: el.name } })
 
+  console.log(hardware)
+
   async function handleSubmit(e) {
     e.preventDefault()
     const formData = new FormData(e.target);
@@ -36,8 +38,8 @@ function HardwareInvPage() {
     };
     const created = await hardwareApi.createData(newItem);
     if (!created) return;
-    const normalized = { ...created, id: created._id }
-    setHardware(prev => [...prev, normalized]);
+
+    setHardware(prev => [...prev, created]);
 
     await syncCreationWithSoftware(created._id, created.installedSoftware);
 
@@ -131,7 +133,6 @@ function HardwareInvPage() {
       <Modal open={addFormOpen} onClose={() => setAddFormOpen(false)}>
         {addFormOpen && (
           <AddHardware
-            hardware={hardware}
             softList={softList}
             handleSubmit={handleSubmit}
             selectedSoft={selectedSoft}

@@ -42,8 +42,8 @@ function SoftwareInvPage() {
     };
     const created = await softwareApi.createData(newItem);
     if (!created) return;
-    const normalized = { ...created, id: created._id };
-    setSoftware(prev => [...prev, normalized]);
+
+    setSoftware(prev => [...prev, created]);
 
     await syncCreationWithHardwareAndServers(created._id, selectedHard, selectedServ);
 
@@ -131,7 +131,6 @@ function SoftwareInvPage() {
       </Modal>
       <Modal open={addFormOpen} onClose={() => setAddFormOpen(false)}>
         <AddSoftware
-          software={software}
           categList={categList}
           serverList={serverList}
           hardList={hardList}

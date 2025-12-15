@@ -61,9 +61,8 @@ function LicensesInvPage() {
     };
     const created = await licensesApi.createData(newItem);
     if (!created) return;
-    const normalized = { ...created, id: created._id }
 
-    setLicenses(prev => [...prev, normalized]);
+    setLicenses(prev => [...prev, created]);
 
     await syncCreationWithSoftware(created._id, created.softwareId);
     e.target.reset()
@@ -141,7 +140,6 @@ function LicensesInvPage() {
       <Modal open={addFormOpen} onClose={() => setAddFormOpen(false)}>
         {addFormOpen && (
           <AddLicense
-            licenses={licenses}
             softList={softListForAdd}
             handleSubmit={handleSubmit}
             setAddFormOpen={setAddFormOpen}
