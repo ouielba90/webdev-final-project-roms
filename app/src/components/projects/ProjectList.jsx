@@ -1,38 +1,41 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import ProjectItem from "./ProjectItem"
 import ProjectCreate from "./ProjectCreate"
 import ProjectDelete from "./ProjectDelete"
 import ProjectEdit from "./ProjectEdit"
 import fetchData from "./fetchData.js"
-
+import { ApiDataContext } from "../../context/ApiDataContext";
 
 // funcion para renderizar la lista de proyectos
 function ProjectList() {
   //URLs de las APIs
   const apiProjectsLocalData = import.meta.env.VITE_API_URL_PROJECTS_LOCAL_DATA
   const apiProjectsUsersLocalData = import.meta.env.VITE_API_URL_PROJECTSUSERS_LOCAL_DATA
-  const [useprojects, setUseProjects] = useState([])
+  //  const [useprojects, setUseProjects] = useState([])
   const [activeId, setActiveId] = useState(null)
   const [createOpen, setCreateOpen] = useState(false)
   const [deleteProject, setDeleteProject] = useState(null)
   const [projectEdit, setProjectEdit] = useState(null)
-  const [projectsUsers, setProjectsUsers] = useState([])
+  //  const [projectsUsers, setProjectsUsers] = useState([])
 
-  useEffect(() => {
-    //funcion para conectar con la API y extraer la informacion de los projectos
-    const data = fetchData()
-    data.getProjects(apiProjectsLocalData)
-      .then((projectsData) => setUseProjects(projectsData))
-      .catch((error) => console.log("Error al cargar los datos de proyectos:", error));
+  const { useprojects, setUseProjects, useProjectsApi, projectsUsers, setProjectsUsers, userProjectsUsersApi
+  } = useContext(ApiDataContext)
 
-    //funcion para conectar con la API y extraer la informacion de usuarios asignados a proyectos
-    data.getProjects(apiProjectsUsersLocalData)
-      .then((projectsUsersData) => setProjectsUsers(projectsUsersData))
-      .catch((error) => console.log("Error al cargar los datos de usuarios de proyectos:", error));
-  }, [])
+  // useEffect(() => {
+  //   //funcion para conectar con la API y extraer la informacion de los projectos
+  //   const data = fetchData()
+  //   data.getProjects(apiProjectsLocalData)
+  //     .then((projectsData) => setUseProjects(projectsData))
+  //     .catch((error) => console.log("Error al cargar los datos de proyectos:", error));
+
+  //   //funcion para conectar con la API y extraer la informacion de usuarios asignados a proyectos
+  //   data.getProjects(apiProjectsUsersLocalData)
+  //     .then((projectsUsersData) => setProjectsUsers(projectsUsersData))
+  //     .catch((error) => console.log("Error al cargar los datos de usuarios de proyectos:", error));
+  // }, [])
 
   //funcion para crear un nuevo proyecto
-  function handleCreate(data) {
+  async function handleCreate(data) {
     const dataFetchData = fetchData()
     const newProject = {
       id: globalThis.crypto?.randomUUID?.() || `p_${Date.now().toString(36)}`,
@@ -47,7 +50,8 @@ function ProjectList() {
     }
     setUseProjects((prev) => [...prev, newProject])
     setCreateOpen(false)
-    dataFetchData.createProject(apiProjectsLocalData, newProject);
+    await useProjectsApi.createData(newProject)
+    //dataFetchData.createProject(apiProjectsLocalData, newProject);
   }
 
   //funcion para eliminar el proyecto
