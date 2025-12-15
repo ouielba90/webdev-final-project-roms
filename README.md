@@ -212,3 +212,461 @@ id, name, role, email, type (usuarios/clientes)
 Propiedades
 id, from, to (multiples o a un grupo en concreto), text, date, (attachments)
 
+
+<!-- Comunicaciones por Santos --> 
+
+# 📱 Sistema de Comunicaciones
+
+## 📋 Tabla de Contenidos
+
+- [Descripción](#descripción)
+- [Tecnologías](#tecnologías)
+- [Características](#características)
+- [Estructura del Proyecto](#estructura-del-proyecto)
+- [Instalación](#instalación)
+- [Configuración](#configuración)
+- [Uso](#uso)
+- [API Endpoints](#api-endpoints)
+- [Frontend](#frontend)
+- [Contribuidores](#contribuidores)
+
+---
+
+## 🎯 Descripción
+
+Sistema completo de gestión empresarial desarrollado como proyecto final de bootcamp de desarrollo web full-stack. 
+La Funcionalidad que trabajo yo es la de comunicaciones
+---
+
+## 🛠️ Tecnologías
+
+### Backend
+- **Node.js** - Entorno de ejecución
+- **Express.js** - Framework web
+- **MongoDB** - Base de datos NoSQL
+- **Mongoose** - ODM para MongoDB
+- **CORS** - Manejo de peticiones entre dominios
+- **dotenv** - Variables de entorno
+
+### Frontend
+- **React** - Librería de UI
+- **JavaScript (ES6+)** - Lenguaje de programación
+- **HTML5 & CSS3** - Estructura y estilos
+
+### Herramientas de Desarrollo
+- **Postman** - Testing de API
+- **Git** - Control de versiones
+- **npm** - Gestor de paquetes
+
+---
+
+## ✨ Características
+
+### 💬 Módulo de Comunicaciones (Santos)
+- ✅ Mensajes directos entre usuarios
+- ✅ Sistema de notificaciones
+- ✅ Chat con historial de conversaciones
+- ✅ Marcado de mensajes como leídos
+- ✅ Edición de mensajes
+
+---
+
+## 📁 Estructura del Proyecto
+
+```
+proyecto/
+│
+├── backend/
+│   ├── src/
+│   │   ├── config/
+│   │   │   └── db.js                              # Conexión MongoDB
+│   │   │
+│   │   ├── models/
+│   │   │   ├── communications.messages.model.js
+│   │   │   ├── communications.notifications.model.js
+│   │   │   ├── communications.chats.model.js
+│   │   │  
+│   │   │
+│   │   ├── controllers/
+│   │   │   ├── communications.messages.controller.js
+│   │   │   ├── communications.notifications.controller.js
+│   │   │   ├── communications.chats.controller.js
+│   │   │  
+│   │   │
+│   │   └── routes/
+│   │       ├── communications.messages.routes.js
+│   │       ├── communications.notifications.routes.js
+│   │       ├── comunications.chats.routes.js
+│   │      
+│   │
+│   ├── data/
+│   │   ├── ChatMessages.data.js
+│   │   ├── messages.data.js
+│   │   └── notifications.data.js
+│   │
+│   ├── .env
+│   ├── index.js
+│   └── package.json
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── App.jsx
+│   │
+│   └── package.json
+│
+└── README.md
+```
+
+---
+
+## 🚀 Instalación
+
+### Prerrequisitos
+
+- Node.js (v14 o superior)
+- MongoDB (local o MongoDB Atlas)
+- npm o yarn
+- Git
+
+### Pasos de Instalación
+
+#### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/tu-usuario/tu-proyecto.git
+cd tu-proyecto
+```
+
+#### 2. Instalar dependencias del Backend
+
+```bash
+cd backend
+npm install
+```
+
+**Dependencias principales:**
+```json
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^8.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3"
+  }
+}
+```
+
+#### 3. Instalar dependencias del Frontend
+
+```bash
+cd ../frontend
+npm install
+```
+
+**Dependencias principales:**
+```json
+{
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
+```
+
+---
+
+## ⚙️ Configuración
+
+### Backend
+
+#### 1. Crear archivo `.env` en la carpeta backend
+
+```env
+# Puerto del servidor
+PORT=3000
+
+# MongoDB local
+MONGODB_URI=mongodb://localhost:27017/gestion_empresarial
+
+# O MongoDB Atlas
+# MONGODB_URI=mongodb+srv://usuario:password@cluster.mongodb.net/gestion_empresarial
+
+# Entorno
+NODE_ENV=development
+```
+
+#### 2. Configurar MongoDB
+
+**Opción A: MongoDB Local**
+```bash
+# Iniciar MongoDB
+mongod
+```
+
+**Opción B: MongoDB Atlas**
+1. Crear cuenta en [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+2. Crear un cluster
+3. Obtener connection string
+4. Añadir IP a whitelist
+5. Copiar URI a `.env`
+
+#### 3. Estructura de la Base de Datos
+
+**Colecciones creadas automáticamente:**
+- `messages` - Mensajes directos
+- `notifications` - Notificaciones del sistema
+- `chat-messages` - Mensajes de chat
+
+---
+
+## 🎮 Uso
+
+### Iniciar el Backend
+
+```bash
+cd backend
+npm start
+```
+
+El servidor iniciará en `http://localhost:3000`
+
+**Salida esperada:**
+```
+API is running at http://localhost:3000
+MongoDB conectado correctamente
+```
+
+### Iniciar el Frontend
+
+```bash
+cd frontend
+npm run dev
+```
+
+El frontend iniciará en `http://localhost:5173` (Vite) o `http://localhost:3000` (Create React App)
+
+### Verificar Instalación
+
+**Prueba rápida con curl:**
+```bash
+curl http://localhost:3000/
+# Respuesta: "Hello, World!"
+```
+
+---
+
+## 📡 API Endpoints
+
+### Base URL
+```
+http://localhost:3000
+```
+
+---
+
+### 💬 Módulo de Comunicaciones
+
+#### Mensajes Directos
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| GET | `/santos/messages` | Obtener todos los mensajes |
+| GET | `/santos/messages/:id` | Obtener mensaje por ID |
+| POST | `/santos/messages` | Crear nuevo mensaje |
+| PUT | `/santos/messages/:id` | Actualizar mensaje |
+| DELETE | `/santos/messages/:id` | Eliminar mensaje |
+
+**Ejemplo: Crear mensaje**
+```bash
+POST http://localhost:3000/santos/messages
+Content-Type: application/json
+
+{
+  "from": "alice@example.com",
+  "to": "bob@example.com",
+  "text": "¿Nos vemos mañana?",
+  "date": "2024-12-13T15:00:00Z"
+}
+```
+
+**Respuesta:**
+```json
+{
+  "_id": "657abc123...",
+  "from": "alice@example.com",
+  "to": "bob@example.com",
+  "text": "¿Nos vemos mañana?",
+  "date": "2024-12-13T15:00:00.000Z",
+  "edited": false,
+  "editedAt": null
+}
+```
+
+#### Notificaciones
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| GET | `/santos/notifications` | Obtener todas las notificaciones |
+| GET | `/santos/notifications/:userId` | Obtener notificaciones de usuario |
+| POST | `/santos/notifications` | Crear notificación |
+| PUT | `/santos/notifications/:id` | Actualizar notificación |
+| DELETE | `/santos/notifications/:id` | Eliminar notificación |
+
+**Ejemplo: Crear notificación**
+```bash
+POST http://localhost:3000/santos/notifications
+Content-Type: application/json
+
+{
+  "from": "system",
+  "to": "alice@example.com",
+  "text": "Tienes un nuevo mensaje",
+  "date": "2024-12-13T15:00:00Z",
+  "isAlert": false
+}
+```
+
+#### Chat Messages
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| GET | `/santos/chat-messages` | Obtener todos los mensajes de chat |
+| GET | `/santos/chat-messages/:id` | Obtener mensaje por ID personalizado |
+| POST | `/santos/chat-messages` | Crear mensaje de chat |
+| PUT | `/santos/chat-messages/:id` | Actualizar mensaje (ej: marcar como leído) |
+| DELETE | `/santos/chat-messages/:id` | Eliminar mensaje |
+
+**Ejemplo: Crear mensaje de chat**
+```bash
+POST http://localhost:3000/santos/chat-messages
+Content-Type: application/json
+
+{
+  "id": 1,
+  "from": "alice@example.com",
+  "to": "bob@example.com",
+  "text": "Hola Bob!",
+  "chatId": 100
+}
+```
+
+**Ejemplo: Marcar como leído**
+```bash
+PUT http://localhost:3000/santos/chat-messages/1
+Content-Type: application/json
+
+{
+  "read": true
+}
+```
+
+---
+
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| GET | `/ouissam/servers` | Obtener todos los servidores |
+| GET | `/ouissam/servers/:id` | Obtener servidor por ID |
+| POST | `/ouissam/servers` | Crear servidor |
+| PUT | `/ouissam/servers/:id` | Actualizar servidor |
+| DELETE | `/ouissam/servers/:id` | Eliminar servidor |
+
+---
+
+## 💻 Frontend
+
+### Estructura de Componentes
+
+```
+src/
+├── components/
+│   ├── Messages/
+│   │   ├── MessageList.jsx
+│   │   ├── MessageItem.jsx
+│   │   └── MessageForm.jsx
+│   │
+│   ├── Notifications/
+│   │   ├── NotificationList.jsx
+│   │   └── NotificationItem.jsx
+│   │
+│   └── Chat/
+│       ├── ChatWindow.jsx
+│       ├── ChatMessage.jsx
+│       └── ChatInput.jsx
+│
+├── pages/
+│   ├── Home.jsx
+│   ├── Messages.jsx
+│   ├── Notifications.jsx
+│   └── Chat.jsx
+│
+├── services/
+│   ├── api.js
+│   ├── messagesService.js
+│   ├── notificationsService.js
+│   └── chatService.js
+│
+├── App.jsx
+└── main.jsx
+```
+---
+
+## 🧪 Testing con Postman
+
+### Colección de Postman
+
+---
+
+## 📝 Scripts Disponibles
+
+### Backend
+
+```json
+{
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "jest"
+  }
+}
+```
+
+### Frontend
+
+```json
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint src"
+  }
+}
+```
+---
+
+## 📄 Licencia
+
+Este proyecto es parte de un bootcamp de desarrollo web y está bajo licencia MIT.
+
+---
+
+## 🙏 Agradecimientos
+
+- A nuestros instructores del bootcamp
+
+---
+
+## 📚 Recursos Adicionales
+
+### Documentación Oficial
+- [Node.js](https://nodejs.org/docs/)
+- [Express.js](https://expressjs.com/)
+- [MongoDB](https://docs.mongodb.com/)
+- [Mongoose](https://mongoosejs.com/docs/)
+- [React](https://react.dev/)
+
+

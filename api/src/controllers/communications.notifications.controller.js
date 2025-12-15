@@ -12,7 +12,7 @@ const getAllNotifications = async (req, res) => {
 const getNotifications = async (req, res) => {
     const { userId } = req.params;
     try {
-        const notifications = await NotificationsPost.find({ userId });
+        const notifications = await NotificationsPost.find({to: userId });
         res.status(200).json(notifications);
     } catch (error) {
         res.status(500).json({ message: 'Error retrieving notifications for user', error });
