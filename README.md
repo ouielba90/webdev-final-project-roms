@@ -26,6 +26,97 @@ La implementación está realizada con **React**, **Context API** y una arquitec
 
 ## 🧱 Arquitectura y Diseño
 
+### Estructura del Proyecto
+```
+├── api
+│    ├── index.js
+│    └── src
+│        ├── config
+│        │    └── db.js
+│        ├── controllers
+│        │    ├── inventory.hardware.controller.js
+│        │    ├── inventory.licenses.controller.js
+│        │    ├── inventory.servers.controller.js
+│        │    ├── inventory.software.controller.js
+│        ├── models
+│        │    ├── inventory.hardware.model.js
+│        │    ├── inventory.licenses.model.js
+│        │    ├── inventory.servers.model.js
+│        │    ├── inventory.software.model.js
+│        └── routes
+│            ├── inventory.hardware.routes.js
+│            ├── inventory.licenses.routes.js
+│            ├── inventory.servers.routes.js
+│            ├── inventory.software.routes.js
+├── app
+│    ├── src
+│    │    ├── App.jsx
+│    │    ├── components
+│    │    │    ├── inventory
+│    │    │    │    ├── AddHardware.jsx
+│    │    │    │    ├── AddLicense.jsx
+│    │    │    │    ├── AddSoftware.jsx
+│    │    │    │    ├── animations
+│    │    │    │    │    ├── green_dot.json
+│    │    │    │    │    ├── Hourglass.json
+│    │    │    │    │    ├── MaterialWaveLoading.json
+│    │    │    │    │    ├── orange_dot.json
+│    │    │    │    │    ├── red_dot.json
+│    │    │    │    │    ├── server-error.json
+│    │    │    │    │    └── TrailLoading.json
+│    │    │    │    ├── DashboardGeneralStatus.jsx
+│    │    │    │    ├── DashboardInsightsII.jsx
+│    │    │    │    ├── DashboardInsightsI.jsx
+│    │    │    │    ├── EditHardware.jsx
+│    │    │    │    ├── EditLicense.jsx
+│    │    │    │    ├── EditSoftware.jsx
+│    │    │    │    ├── ErrorAnimation.jsx
+│    │    │    │    ├── GeneralStatus.jsx
+│    │    │    │    ├── HardwareCard.jsx
+│    │    │    │    ├── LicenseCard.jsx
+│    │    │    │    ├── LoadingAnimation.jsx
+│    │    │    │    ├── Modal.jsx
+│    │    │    │    ├── OSImage.jsx
+│    │    │    │    ├── ServerCard.jsx
+│    │    │    │    ├── SoftwareCard.jsx
+│    │    │    │    └── StatusAnimation.jsx
+│    │    ├── context
+│    │    │    ├── ApiDataContext.js
+│    │    │    └── ProviderDataApi.jsx
+│    │    ├── logic
+│    │    │    ├── inventory
+│    │    │    │    ├── useFiltersSearch.js
+│    │    │    │    ├── useHardwareActions.js
+│    │    │    │    ├── useHardwareValidation.js
+│    │    │    │    ├── useLicensesActions.js
+│    │    │    │    ├── useLicensesValidation.js
+│    │    │    │    ├── useSoftwareActions.js
+│    │    │    │    └── useSoftwareValidation.js
+│    │    │    └── useApi.js
+│    │    ├── main.jsx
+│    │    ├── pages
+│    │    │    ├── inventory
+│    │    │    │    ├── DashboardPage.jsx
+│    │    │    │    ├── HardwareDetailsPage.jsx
+│    │    │    │    ├── HardwareInvPage.jsx
+│    │    │    │    ├── HomeInvPage.jsx
+│    │    │    │    ├── LicensesDetailsPage.jsx
+│    │    │    │    ├── LicensesInvPage.jsx
+│    │    │    │    ├── ServersDetailsPage.jsx
+│    │    │    │    ├── ServersInvPage.jsx
+│    │    │    │    ├── SoftwareDetailsPage.jsx
+│    │    │    │    └── SoftwareInvPage.jsx
+│    │    │    ├── projects
+│    │    │    │    ├── HomeProjPage.jsx
+│    │    │    │    └── StylesRicardo.css
+│    │    ├── sections
+│    │    │    ├── inventorySections.js
+│    │    └── utils
+│    │        └── inventory
+│    │            └── date.js
+```
+---
+
 ### Contexto Global de Inventario
 
 **`ProviderInventory.jsx` + `DataContext.js`**
