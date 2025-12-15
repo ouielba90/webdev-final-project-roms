@@ -56,10 +56,11 @@ function ProjectList() {
 
   //funcion para eliminar el proyecto
   async function handleDelete(projectId) {
-    const data = fetchData()
+    const dataFetchData = fetchData()
     setUseProjects((prev) => prev.filter((project) => project._id !== projectId))
     setDeleteProject(null)
-    await data.deleteProject(projectId, apiProjectsLocalData);
+    await useProjectsApi.deleteData(projectId)
+    //await dataFetchData.deleteProject(projectId, apiProjectsLocalData);
   }
 
   //funcion para actualizar el proyecto editado
@@ -75,7 +76,8 @@ function ProjectList() {
       )
     )
     setProjectEdit(null)
-    await dataFetchData.updateProject(apiProjectsLocalData, projectEdit._id, data);
+    await useProjectsApi.updateData(projectEdit._id, data)
+    //await dataFetchData.updateProject(apiProjectsLocalData, projectEdit._id, data);
   }
 
   return (
