@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom";
 
-function SoftwareCard({ id, name, version, category, status, handleRemove, handleEdit }) {
+function SoftwareCard({ id, name, version, category, status, handleRemove, handleEdit, idDeleting }) {
+  const ongoingDeletion = idDeleting !== null;
+
+  const removeLabel = idDeleting === null
+    ? "Eliminar"
+    : idDeleting === id
+      ? "Eliminando..."
+      : "Eliminar";
+
   return (
     <>
       <div className="software-card">
@@ -19,7 +27,7 @@ function SoftwareCard({ id, name, version, category, status, handleRemove, handl
             <button onClick={() => handleEdit(id)}>Modificar</button>
           </div>
           <div className="software-card-delete-btn">
-            <button onClick={() => handleRemove(id)}>Eliminar</button>
+            <button onClick={() => handleRemove(id)} disabled={ongoingDeletion}>{removeLabel}</button>
           </div>
         </div>
       </div>

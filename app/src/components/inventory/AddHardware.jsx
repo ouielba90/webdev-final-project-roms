@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useHardwareValidation from "../../logic/inventory/useHardwareValidation";
 
 function AddHardware({ softList, handleSubmit, selectedSoft, setSelectedSoft, setAddFormOpen }) {
@@ -11,6 +11,8 @@ function AddHardware({ softList, handleSubmit, selectedSoft, setSelectedSoft, se
     ram: "",
     storage: ""
   };
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [form, setForm] = useState(initialForm)
   const { errors, canSubmit } = useHardwareValidation(
@@ -30,8 +32,15 @@ function AddHardware({ softList, handleSubmit, selectedSoft, setSelectedSoft, se
     }));
   }
 
+  async function onSubmit(e) {
+    setIsSubmitting(true);
+    await handleSubmit(e);
+  }
+
+  useEffect(() => setIsSubmitting(false), []);
+
   return (
-    <form onSubmit={handleSubmit} className="addsoft-form">
+    <form onSubmit={onSubmit} className="addsoft-form">
       <h2 className="addsoft-title">Añadir Hardware</h2>
 
       <div className="addsoft-row">
@@ -123,8 +132,14 @@ function AddHardware({ softList, handleSubmit, selectedSoft, setSelectedSoft, se
           setForm(initialForm)
           setAddFormOpen(false)
           setSelectedSoft([])
-        }}>Cancel</button>
-        <button type="submit" className="addsoft-submit" disabled={!canSubmit}>Añadir</button>
+        }} disabled={isSubmitting}>Cancel</button>
+        <button
+          type="submit"
+          className="addsoft-submit"
+          disabled={!canSubmit || isSubmitting}
+        >
+          {isSubmitting ? "Creando..." : "Añadir"}
+        </button>
       </div>
     </form>
   )

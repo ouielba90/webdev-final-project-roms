@@ -114,7 +114,11 @@ function LicensesInvPage() {
     setEditFormOpen(false);
   }
 
+  // Estado para rastrear qué elemento se está eliminando
+  const [idDeleting, setIdDeleting] = useState(null);
+
   async function handleRemove(id) {
+    setIdDeleting(id);
     const userConfirmation = confirm(`¿Seguro que quieres proceder a eliminar la licencia cuya id es ${id}?`);
     if (userConfirmation) {
       const deleted = await licensesApi.deleteData(id);
@@ -122,6 +126,7 @@ function LicensesInvPage() {
       setLicenses(prev => prev.filter(el => el._id !== id))
       await syncRemoveWithSoftware(id);
     }
+    setIdDeleting(null);
   }
 
   return (
@@ -183,6 +188,7 @@ function LicensesInvPage() {
                 vendor={el.vendor}
                 handleRemove={handleRemove}
                 handleEdit={handleEdit}
+                idDeleting={idDeleting}
               />
             )
           })}

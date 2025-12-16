@@ -104,7 +104,11 @@ function HardwareInvPage() {
     setEditFormOpen(false);
   }
 
+  // Estado para rastrear qué elemento se está eliminando
+  const [idDeleting, setIdDeleting] = useState(null);
+
   async function handleRemove(id) {
+    setIdDeleting(id);
     const userConfirmation = confirm(`¿Seguro que quieres proceder a eliminar el hardware cuya id es ${id}?`);
     if (userConfirmation) {
       const deleted = await hardwareApi.deleteData(id);
@@ -113,6 +117,7 @@ function HardwareInvPage() {
 
       await syncRemoveWithSoftware(id);
     }
+    setIdDeleting(null);
   }
 
   return (
@@ -185,6 +190,7 @@ function HardwareInvPage() {
                 specs={el.specs}
                 handleRemove={handleRemove}
                 handleEdit={handleEdit}
+                idDeleting={idDeleting}
               />
             )
           })}
