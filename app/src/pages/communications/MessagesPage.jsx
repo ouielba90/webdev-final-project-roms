@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";  //hook para manejar estados
-import { messages as messagesData } from "../../../data/communications/messages"; //datos externos -  array datos sistema
+//import { messages } from "../../../data/communications/messages"; //datos externos -  array datos sistema
 import MessageCard from "../../components/communications/MessageCard"
 
 //funcion principal
@@ -8,7 +8,7 @@ import MessageCard from "../../components/communications/MessageCard"
 function MessagesPages() {
   const [messages, setMessages] = useState(() => {
     const savedMessages = localStorage.getItem('messages');
-    return savedMessages ? JSON.parse(savedMessages) : messagesData;
+    return JSON.parse(savedMessages)
   });
   const [editingId, setEditingId] = useState(null);
   const [editText, setEditText] = useState('');
