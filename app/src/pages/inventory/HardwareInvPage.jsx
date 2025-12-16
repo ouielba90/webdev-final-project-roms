@@ -20,8 +20,6 @@ function HardwareInvPage() {
   const [selectedSoft, setSelectedSoft] = useState([]);
   const softList = software.map(el => { return { id: el._id, name: el.name } })
 
-  console.log(hardware)
-
   async function handleSubmit(e) {
     e.preventDefault()
     const formData = new FormData(e.target);

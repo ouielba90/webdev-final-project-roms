@@ -108,7 +108,6 @@ function LicensesInvPage() {
         item._id === currEditId ? { ...item, ...normalized } : item
       )
     );
-    console.log(currEditId, prevItem, updatedItem)
     await syncEditWithSoftware(currEditId, prevItem, updatedItem);
 
     setEditFormOpen(false);
