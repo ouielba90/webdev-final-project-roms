@@ -1,4 +1,4 @@
-function ClientCard({ client, onDeleteClient, onEditClient }) {
+function ClientCard({ client, onDeleteClient}) {
 	function clientStatus(estado) {
 		if (estado === 'activo') {
 			return ({
@@ -34,12 +34,9 @@ function ClientCard({ client, onDeleteClient, onEditClient }) {
 				</p>
 			</div>
 
-			<div>
+			<div className="client-actions">
 				<div className="estado" style={clientStatus(client.status)}></div>
-				<h1 className="estado-txt">{client.status}</h1>
-			</div>
 
-			<div className="btn-box">
 				<button
 					onClick={onDeleteClient}
 					className="client-btn">Eliminar

@@ -4,7 +4,7 @@ export const userSections = {
     title: "Centro de Usuarios",
     subtext: "Acceso centralizado a los usuarios y clientes",
   },
-  clientList: {
+  clientsList: {
     title: "Lista de Clientes",
     subtext: "Consulta y gestión de clientes",
   },

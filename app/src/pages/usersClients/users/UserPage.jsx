@@ -10,7 +10,7 @@ function UserPage() {
   const [usersState, setUsersState] = useState(users)
   const [editingUser, setEditingUser] = useState(null)
 
-  const [user, setUsers] = useState([])
+  const [users, setUsers] = useState([])
 
   function handleSubmit(e) {
     e.preventDefault()
