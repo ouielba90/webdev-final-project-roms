@@ -3,7 +3,7 @@
 //Este es el endpoint /santos/notifications, que devuelve las notificaciones de la API de Santos
 //Este es el endpoint /santos/chat-messages, que devuelve los mensajes de chat de la API de Santos
 
-// Componente de ejemplo que muestra cómo usar los servicios con fetch .then() y .catch()
+// Componente uso de  los servicios con fetch .then() y .catch()
 import { useState, useEffect } from 'react';
 import { fetchMessages } from '../../services/messagesService';
 import { fetchNotifications } from '../../services/notificationsService';
