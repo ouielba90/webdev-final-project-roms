@@ -7,6 +7,7 @@ function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmi
   const [category, setCategory] = useState(toBeEdited?.category || "");
   const [status, setStatus] = useState(toBeEdited?.status || "");
   const [description, setDescription] = useState(toBeEdited?.description || "");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (!toBeEdited) return;
@@ -30,8 +31,15 @@ function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmi
     description
   );
 
+  async function onSubmit(e) {
+    setIsSubmitting(true);
+    await handleSubmitEdit(e);
+  }
+
+  useEffect(() => setIsSubmitting(false), []);
+
   return (
-    <form id="softwareForm" onSubmit={handleSubmitEdit} className="addsoft-form">
+    <form id="softwareForm" onSubmit={onSubmit} className="addsoft-form">
 
       <h2 className="addsoft-title">Editar Software</h2>
 
@@ -111,8 +119,14 @@ function EditSoftware({ toBeEdited, categList, serverList, hardList, handleSubmi
           setEditFormOpen(false)
           setSelectedHard([])
           setSelectedServ([])
-        }}>Cancel</button>
-        <button type="submit" className="addsoft-submit" disabled={!canSubmit}>Aplicar cambios</button>
+        }} disabled={isSubmitting}>Cancel</button>
+        <button
+          type="submit"
+          className="addsoft-submit"
+          disabled={!canSubmit || isSubmitting}
+        >
+          {isSubmitting ? "Editando..." : "Aplicar cambios"}
+        </button>
       </div>
     </form>
 

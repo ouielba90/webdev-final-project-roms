@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react"
+import { useEffect, useState, useContext, use } from "react"
 import ProjectItem from "./ProjectItem"
 import ProjectCreate from "./ProjectCreate"
 import ProjectDelete from "./ProjectDelete"
@@ -21,8 +21,11 @@ function ProjectList() {
   const { useprojects, setUseProjects, useProjectsApi, projectsUsers, setProjectsUsers, userProjectsUsersApi
   } = useContext(ApiDataContext)
 
-  // useEffect(() => {
-  //   //funcion para conectar con la API y extraer la informacion de los projectos
+  useEffect(() => {
+    useProjectsApi.getData().then(setUseProjects).catch(e => setError(p => [...p, e.message]));
+    userProjectsUsersApi.getData().then(setProjectsUsers).catch(e => setError(p => [...p, e.message]));
+
+    //funcion para conectar con la API y extraer la informacion de los projectos
   //   const data = fetchData()
   //   data.getProjects(apiProjectsLocalData)
   //     .then((projectsData) => setUseProjects(projectsData))
@@ -32,53 +35,53 @@ function ProjectList() {
   //   data.getProjects(apiProjectsUsersLocalData)
   //     .then((projectsUsersData) => setProjectsUsers(projectsUsersData))
   //     .catch((error) => console.log("Error al cargar los datos de usuarios de proyectos:", error));
-  // }, [])
+   }, [])
 
   //funcion para crear un nuevo proyecto
   async function handleCreate(data) {
-    const dataFetchData = fetchData()
-    const newProject = {
-      id: globalThis.crypto?.randomUUID?.() || `p_${Date.now().toString(36)}`,
-      //valores del formulario
-      name: data.name,
-      client: data.client,
-      description: data.description,
-      //valores por defecto
-      status: data.status || "Pendiente",
-      task: data.task || [],
-      users: data.users || [],
+      const dataFetchData = fetchData()
+      const newProject = {
+        id: globalThis.crypto?.randomUUID?.() || `p_${Date.now().toString(36)}`,
+        //valores del formulario
+        name: data.name,
+        client: data.client,
+        description: data.description,
+        //valores por defecto
+        status: data.status || "Pendiente",
+        task: data.task || [],
+        users: data.users || [],
+      }
+      setUseProjects((prev) => [...prev, newProject])
+      setCreateOpen(false)
+      await useProjectsApi.createData(newProject)
+      //dataFetchData.createProject(apiProjectsLocalData, newProject);
     }
-    setUseProjects((prev) => [...prev, newProject])
-    setCreateOpen(false)
-    await useProjectsApi.createData(newProject)
-    //dataFetchData.createProject(apiProjectsLocalData, newProject);
-  }
 
   //funcion para eliminar el proyecto
   async function handleDelete(projectId) {
-    const dataFetchData = fetchData()
-    setUseProjects((prev) => prev.filter((project) => project._id !== projectId))
-    setDeleteProject(null)
-    await useProjectsApi.deleteData(projectId)
-    //await dataFetchData.deleteProject(projectId, apiProjectsLocalData);
-  }
+      const dataFetchData = fetchData()
+      setUseProjects((prev) => prev.filter((project) => project._id !== projectId))
+      setDeleteProject(null)
+      await useProjectsApi.deleteData(projectId)
+      //await dataFetchData.deleteProject(projectId, apiProjectsLocalData);
+    }
 
   //funcion para actualizar el proyecto editado
   async function handleUpdate(data) {
-    const dataFetchData = fetchData()
-    if (!projectEdit) return
+      const dataFetchData = fetchData()
+      if (!projectEdit) return
 
-    setUseProjects((prev) =>
-      prev.map((project) =>
-        project._id === projectEdit._id
-          ? { ...project, ...data }
-          : project
+      setUseProjects((prev) =>
+        prev.map((project) =>
+          project._id === projectEdit._id
+            ? { ...project, ...data }
+            : project
+        )
       )
-    )
-    setProjectEdit(null)
-    await useProjectsApi.updateData(projectEdit._id, data)
-    //await dataFetchData.updateProject(apiProjectsLocalData, projectEdit._id, data);
-  }
+      setProjectEdit(null)
+      await useProjectsApi.updateData(projectEdit._id, data)
+      //await dataFetchData.updateProject(apiProjectsLocalData, projectEdit._id, data);
+    }
 
   return (
     <>

@@ -11,6 +11,7 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
   const [storage, setStorage] = useState(toBeEdited.specs.storage)
   const [os, setOs] = useState(toBeEdited.os)
   const [lastMaintenance, setLastMaintenance] = useState(toBeEdited.lastMaintenance.split("T")[0])
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (!toBeEdited) return;
@@ -36,8 +37,15 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
     lastMaintenance
   );
 
+  async function onSubmit(e) {
+    setIsSubmitting(true);
+    await handleSubmitEdit(e);
+  }
+
+  useEffect(() => setIsSubmitting(false), []);
+
   return (
-    <form onSubmit={handleSubmitEdit} className="addsoft-form">
+    <form onSubmit={onSubmit} className="addsoft-form">
       <h2 className="addsoft-title">Editar Hardware</h2>
 
       <div className="addsoft-row">
@@ -136,8 +144,14 @@ function EditHardware({ toBeEdited, softList, handleSubmitEdit, selectedSoft, se
         <button className="addsoft-cancel" type="button" onClick={() => {
           setSelectedSoft([])
           setEditFormOpen(false)
-        }}>Cancel</button>
-        <button type="submit" className="addsoft-submit" disabled={!canSubmit}>Aplicar cambios</button>
+        }} disabled={isSubmitting}>Cancel</button>
+        <button
+          type="submit"
+          className="addsoft-submit"
+          disabled={!canSubmit || isSubmitting}
+        >
+          {isSubmitting ? "Editando..." : "Aplicar cambios"}
+        </button>
       </div>
     </form>
   )

@@ -41,8 +41,8 @@ export default function useHardwareActions() {
     // 2. Elimina la ID de este hardware de los software que fueron deseleccionados
     // y lo añade en el otro.
     async function syncEditWithSoftware(currentId, prevItem, updatedItem) {
-        const prevSoft = prevItem.installedSoftware;
-        const newSoft = updatedItem.installedSoftware;
+        const prevSoft = prevItem.installedSoftware || [];
+        const newSoft = updatedItem.installedSoftware || prevItem.installedSoftware || [];
 
         const softDiff = diffLists(prevSoft, newSoft);
 

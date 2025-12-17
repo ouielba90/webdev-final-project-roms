@@ -73,13 +73,15 @@ function SoftwareDetailsPage() {
           <div className="details-quick-stats">
             {serversAssocList.length ? (
               serversAssocList.map((s, i) => (
-                <div key={i} className="assoc-card">
-                  <p className="assoc-name">{s.name}</p>
-                  <p className="assoc-type">{s.location}</p>
-                  <p className={`assoc-status ${s.status.replace(" ", "-").toLowerCase()}`}>
-                    {s.status}
-                  </p>
-                </div>
+                <Link key={i} to={`/inventory/servers/${s._id}`} className="details-links">
+                  <div key={i} className="assoc-card">
+                    <p className="assoc-name">{s.name}</p>
+                    <p className="assoc-type">{s.location}</p>
+                    <p className={`assoc-status ${s.status.replace(" ", "-").toLowerCase()}`}>
+                      {s.status}
+                    </p>
+                  </div>
+                </Link>
               ))
             ) : (
               <p>Ninguno</p>

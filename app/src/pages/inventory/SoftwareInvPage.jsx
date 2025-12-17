@@ -41,7 +41,10 @@ function SoftwareInvPage() {
       description: data.description,
     };
     const created = await softwareApi.createData(newItem);
-    if (!created) return;
+    if (created?.error) {
+      alert(`Error al crear software: ${created.error}`);
+      return;
+    }
 
     setSoftware(prev => [...prev, created]);
 
@@ -87,7 +90,10 @@ function SoftwareInvPage() {
     }
 
     const updated = await softwareApi.updateData(currEditId, updatedItem)
-    if (!updated) return;
+    if (updated?.error) {
+      alert(`Error al actualizar software: ${updated.error}`);
+      return;
+    }
 
     setSoftware(prev =>
       prev.map(item => item._id === currEditId ? { ...item, ...updatedItem } : item
@@ -101,16 +107,24 @@ function SoftwareInvPage() {
     setEditFormOpen(false)
   }
 
+  // Estado para rastrear qué elemento se está eliminando
+  const [idDeleting, setIdDeleting] = useState(null);
+
   async function handleRemove(id) {
+    setIdDeleting(id);
     const userConfirmation = confirm(`¿Seguro que quieres proceder a eliminar el software cuya id es ${id}?`);
     if (userConfirmation) {
       const deleted = await softwareApi.deleteData(id);
-      if (!deleted) return;
+      if (deleted?.error) {
+        alert(`Error al eliminar software: ${deleted.error}`);
+        setIdDeleting(null);
+        return;
+      }
       setSoftware(prev => prev.filter(el => el._id !== id))
 
       await syncRemoveWithHardwareAndServers(id);
     }
-
+    setIdDeleting(null)
   }
 
   return (
@@ -181,6 +195,7 @@ function SoftwareInvPage() {
                 serverId={el.serverId.map(sid => serversById[sid]?.name).filter(Boolean)}
                 handleRemove={handleRemove}
                 handleEdit={handleEdit}
+                idDeleting={idDeleting}
               />
             )
           })}

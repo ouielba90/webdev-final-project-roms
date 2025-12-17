@@ -1,39 +1,13 @@
-// Servicio para manejar las peticiones de chat con fetch usando .then() y .catch()
+// Servicio para manejar las peticiones de chat con MongoDB
 
-const API_URL = 'http://localhost:3000/santos';
-
-/**
- * Obtiene todos los mensajes de chat desde la API
- * @returns {Promise} Promesa que resuelve con los datos de mensajes de chat
- */
-export function fetchChatMessages() {
-    return fetch(`${API_URL}/chat-messages`)
-        .then(response => {
-            // Verificar si la respuesta es exitosa
-            if (!response.ok) {
-                throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);
-            }
-            // Convertir la respuesta a JSON
-            return response.json();
-        })
-        .then(data => {
-            console.log('✅ Mensajes de chat obtenidos exitosamente:', data);
-            return data;
-        })
-        .catch(error => {
-            console.error('❌ Error al obtener mensajes de chat:', error);
-            // Lanzar el error para que pueda ser manejado por el componente
-            throw error;
-        });
-}
+const API_URL = 'http://localhost:3000/santos/chats';
 
 /**
- * Obtiene mensajes de chat de una conversación específica
- * @param {number} chatId - ID de la conversación
- * @returns {Promise} Promesa que resuelve con los mensajes de la conversación
+ * Obtiene todos los chats desde la API
+ * @returns {Promise} Promesa que resuelve con los datos de chats
  */
-export function fetchChatMessagesByConversation(chatId) {
-    return fetch(`${API_URL}/chat-messages/${chatId}`)
+export function fetchAllChats() {
+    return fetch(API_URL)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);
@@ -41,22 +15,98 @@ export function fetchChatMessagesByConversation(chatId) {
             return response.json();
         })
         .then(data => {
-            console.log(`✅ Mensajes de chat ${chatId} obtenidos exitosamente:`, data);
+            console.log('✅ Chats obtenidos exitosamente:', data);
             return data;
         })
         .catch(error => {
-            console.error(`❌ Error al obtener mensajes de chat ${chatId}:`, error);
+            console.error('❌ Error al obtener chats:', error);
             throw error;
         });
 }
 
 /**
- * Envía un nuevo mensaje de chat
- * @param {Object} messageData - Datos del mensaje a enviar
- * @returns {Promise} Promesa que resuelve con el mensaje enviado
+ * Obtiene chats por tipo (internal o client)
+ * @param {string} type - Tipo de chat ('internal' o 'client')
+ * @returns {Promise} Promesa que resuelve con los chats del tipo especificado
  */
-export function sendChatMessage(messageData) {
-    return fetch(`${API_URL}/chat-messages`, {
+export function fetchChatsByType(type) {
+    return fetch(`${API_URL}/type/${type}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(`✅ Chats de tipo ${type} obtenidos exitosamente:`, data);
+            return data;
+        })
+        .catch(error => {
+            console.error(`❌ Error al obtener chats de tipo ${type}:`, error);
+            throw error;
+        });
+}
+
+/**
+ * Obtiene un chat específico por chatId
+ * @param {number} chatId - ID del chat
+ * @returns {Promise} Promesa que resuelve con el chat específico
+ */
+export function fetchChatById(chatId) {
+    return fetch(`${API_URL}/${chatId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(`✅ Chat ${chatId} obtenido exitosamente:`, data);
+            return data;
+        })
+        .catch(error => {
+            console.error(`❌ Error al obtener chat ${chatId}:`, error);
+            throw error;
+        });
+}
+
+/**
+ * Crea un nuevo chat
+ * @param {Object} chatData - Datos del chat a crear
+ * @returns {Promise} Promesa que resuelve con el chat creado
+ */
+export function createChat(chatData) {
+    return fetch(API_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(chatData)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('✅ Chat creado exitosamente:', data);
+            return data;
+        })
+        .catch(error => {
+            console.error('❌ Error al crear chat:', error);
+            throw error;
+        });
+}
+
+/**
+ * Añade un mensaje a un chat existente
+ * @param {number} chatId - ID del chat
+ * @param {Object} messageData - Datos del mensaje (from, text)
+ * @returns {Promise} Promesa que resuelve con el chat actualizado
+ */
+export function addMessageToChat(chatId, messageData) {
+    return fetch(`${API_URL}/${chatId}/messages`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -70,34 +120,93 @@ export function sendChatMessage(messageData) {
             return response.json();
         })
         .then(data => {
-            console.log('✅ Mensaje de chat enviado exitosamente:', data);
+            console.log('✅ Mensaje añadido exitosamente:', data);
             return data;
         })
         .catch(error => {
-            console.error('❌ Error al enviar mensaje de chat:', error);
+            console.error('❌ Error al añadir mensaje:', error);
             throw error;
         });
 }
 
 /**
- * Elimina un mensaje de chat
- * @param {number} id - ID del mensaje a eliminar
+ * Edita un mensaje específico dentro de un chat
+ * @param {number} chatId - ID del chat
+ * @param {number} messageId - ID del mensaje
+ * @param {string} newText - Nuevo texto del mensaje
+ * @returns {Promise} Promesa que resuelve con el chat actualizado
+ */
+export function editMessageInChat(chatId, messageId, newText) {
+    return fetch(`${API_URL}/${chatId}/messages/${messageId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text: newText })
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('✅ Mensaje editado exitosamente:', data);
+            return data;
+        })
+        .catch(error => {
+            console.error('❌ Error al editar mensaje:', error);
+            throw error;
+        });
+}
+
+/**
+ * Elimina un mensaje específico de un chat
+ * @param {number} chatId - ID del chat
+ * @param {number} messageId - ID del mensaje a eliminar
  * @returns {Promise} Promesa que resuelve cuando el mensaje es eliminado
  */
-export function deleteChatMessage(id) {
-    return fetch(`${API_URL}/chat-messages/${id}`, {
+export function deleteMessageFromChat(chatId, messageId) {
+    return fetch(`${API_URL}/${chatId}/messages/${messageId}`, {
         method: 'DELETE'
     })
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);
             }
-            console.log('✅ Mensaje de chat eliminado exitosamente');
-            return { success: true, id };
+            return response.json();
+        })
+        .then(data => {
+            console.log('✅ Mensaje eliminado exitosamente');
+            return data;
         })
         .catch(error => {
-            console.error('❌ Error al eliminar mensaje de chat:', error);
+            console.error('❌ Error al eliminar mensaje:', error);
             throw error;
         });
 }
 
+/**
+ * Elimina un chat completo
+ * @param {number} chatId - ID del chat a eliminar
+ * @returns {Promise} Promesa que resuelve cuando el chat es eliminado
+ */
+export function deleteChat(chatId) {
+    return fetch(`${API_URL}/${chatId}`, {
+        method: 'DELETE'
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('✅ Chat eliminado exitosamente');
+            return data;
+        })
+        .catch(error => {
+            console.error('❌ Error al eliminar chat:', error);
+            throw error;
+        });
+}

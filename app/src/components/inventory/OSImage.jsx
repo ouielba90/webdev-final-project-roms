@@ -13,7 +13,7 @@ function OSImage({ osName }) {
 
   return (
     <>
-      <img src={`/public/icons/${icon}.png`} alt={`${icon}`} className="header-os-img" />
+      <img src={`/icons/${icon}.png`} alt={`${icon}`} className="header-os-img" />
     </>
   )
 }

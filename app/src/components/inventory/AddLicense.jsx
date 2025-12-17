@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useLicensesValidation from "../../logic/inventory/useLicensesValidation.js"
 
 function AddLicense({ softList, handleSubmit, setAddFormOpen }) {
@@ -13,6 +13,7 @@ function AddLicense({ softList, handleSubmit, setAddFormOpen }) {
     cost: ""
   };
   const [form, setForm] = useState(initialForm);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { errors, canSubmit } = useLicensesValidation(
     form.vendor,
     form.seats,
@@ -29,9 +30,16 @@ function AddLicense({ softList, handleSubmit, setAddFormOpen }) {
     }));
   }
 
+  async function onSubmit(e) {
+    setIsSubmitting(true);
+    await handleSubmit(e);
+  }
+
+  useEffect(() => setIsSubmitting(false), []);
+
   return (
     <>
-      <form className="addsoft-form" onSubmit={handleSubmit}>
+      <form className="addsoft-form" onSubmit={onSubmit}>
         <h2 className="addsoft-title">Añadir Licencia</h2>
         <div className="addsoft-row">
           <div className="addsoft-group">
@@ -89,8 +97,14 @@ function AddLicense({ softList, handleSubmit, setAddFormOpen }) {
           <button className="addsoft-cancel" type="button" onClick={() => {
             setAddFormOpen(false)
             setForm(initialForm)
-          }}>Cancel</button>
-          <button type="submit" className="addsoft-submit" disabled={!canSubmit}>Añadir</button>
+          }} disabled={isSubmitting}>Cancel</button>
+          <button
+            type="submit"
+            className="addsoft-submit"
+            disabled={!canSubmit || isSubmitting}
+          >
+            {isSubmitting ? "Creando..." : "Añadir"}
+          </button>
         </div>
       </form>
     </>
