@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ProviderDataApi from "./context/ProviderDataApi"
 import App from './App.jsx'
-
 import HomeInvPage from './pages/inventory/HomeInvPage.jsx'
 import DashboardPage from './pages/inventory/DashboardPage.jsx'
 import SoftwareInvPage from './pages/inventory/SoftwareInvPage.jsx'
@@ -14,20 +13,17 @@ import SoftwareDetailsPage from './pages/inventory/SoftwareDetailsPage.jsx'
 import HardwareDetailsPage from './pages/inventory/HardwareDetailsPage.jsx'
 import LicensesDetailsPage from './pages/inventory/LicensesDetailsPage.jsx'
 import ServersDetailsPage from './pages/inventory/ServersDetailsPage.jsx'
-import './indexOuissam.css'
-
 import HomeProjPage from './pages/projects/HomeProjPage.jsx'
 import HomeCommPage from './pages/communications/HomeCommPage.jsx'
 import MessagesPage from './pages/communications/MessagesPage.jsx'
 import NotificationsPage from './pages/communications/NotificationsPage.jsx'
-
 import UserHomePage from './pages/usersClients/UserHomePage.jsx'
 import UserPage from './pages/usersClients/users/UserPage.jsx'
 import ClientPage from './pages/usersClients/clients/ClientPage.jsx'
-
 import ClientChatsPage from './pages/communications/ClientChatsPage.jsx'
 import ChatViewPage from './pages/communications/ChatViewPage.jsx'
 import InternalChatsPage from './pages/communications/InternalChatsPage.jsx'
+import './indexOuissam.css'
 
 // Definición de rutas anidadas:
 // el menú superior mientras cambia el contenido en <Outlet />.

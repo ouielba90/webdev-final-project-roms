@@ -6,10 +6,6 @@ import softwareRoutes from "./src/routes/inventory.software.routes.js"
 import hardwareRoutes from "./src/routes/inventory.hardware.routes.js"
 import licensesRoutes from "./src/routes/inventory.licenses.routes.js"
 import serversRoutes from "./src/routes/inventory.servers.routes.js"
-// Importacion de los projectos en la data de api
-import projects from "./data/projects.data.js";
-import projectsUsers from "./data/projectsUsers.data.js";
-//-----------------------------------------------
 import projectRoutes from "./src/routes/projects.project.routes.js"
 import projectUserRoutes from "./src/routes/projects.projectUser.routes.js"
 import notificationsRoutes from "./src/routes/communications.notifications.routes.js";
@@ -28,16 +24,14 @@ api.use(cors());
 
 api.use(express.json());
 
-
-/* API MARC */
 api.get("/", (req, res) => {
   res.send("Hello, World!");
 });
 
+/* API MARC */
 api.get("/marc", (req, res) => {
   res.send("Esta es la API de Marc, los datos se encuentran en /users.");
 });
-
 api.use("/marc/users", usersRoutes);
 
 /* API OUISSAM */
@@ -46,7 +40,6 @@ api.get("/ouissam", (req, res) => {
     "Esta es la API de Ouissam, los datos se encuentran en /hardware, /software, /licenses o /servers.",
   );
 });
-
 api.use("/ouissam/software", softwareRoutes);
 api.use("/ouissam/hardware", hardwareRoutes);
 api.use("/ouissam/licenses", licensesRoutes);
@@ -64,12 +57,10 @@ api.use("/projectsUsers", projectUserRoutes);
 
 /***************************************/
 
-
 /*API Santos*/
 api.use("/santos/notifications", notificationsRoutes);
 api.use("/santos/messages", messagesRoutes);
 api.use("/santos/chats", chatMessagesRoutes);
-
 
 /**************/
 
