@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 
-const chatSchema = new mongoose.Schema({
+const { Schema } = mongoose;
+
+const messageSchema = new Schema({
     id: { type: Number, required: true, unique: true },
     from: { type: String, required: true },
     to: { type: String, required: true },
@@ -8,8 +10,34 @@ const chatSchema = new mongoose.Schema({
     date: { type: Date, default: Date.now },
     read: { type: Boolean, default: false },
     chatId: { type: Number, required: true },
-    
-}
-);
-const Chat = mongoose.model('ChatPost', chatSchema, 'chat-messages');
+});
+// Esquema principal del chat
+const ChatSchema = new Schema({
+    chatId: { 
+        type: Number, 
+        required: true, 
+        unique: true 
+    },
+    type: { 
+        type: String, 
+        required: true,
+        enum: ['internal', 'client'], // Solo puede ser 'internal' o 'client'
+    },
+    participants: [{ 
+        type: String, 
+        required: true 
+    }],
+    messages: [messageSchema], // Array de mensajes
+    unreadCount: { 
+        type: Number, 
+        default: 0 
+    },
+    lastMessageDate: { 
+        type: Date, 
+        default: Date.now 
+    }
+}, { timestamps: true }); //añade createdAt y updatedAt automáticamente
+
+const Chat = mongoose.model('Chat', ChatSchema, 'chats');
+
 export default Chat;

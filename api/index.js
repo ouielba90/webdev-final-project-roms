@@ -69,7 +69,7 @@ api.use("/projectsUsers", projectUserRoutes);
 /*API Santos*/
 api.use("/santos/notifications", notificationsRoutes);
 api.use("/santos/messages", messagesRoutes);
-api.use("/santos/chat-messages", chatMessagesRoutes);
+api.use("/santos/chats", chatMessagesRoutes);
 
 
 /**************/

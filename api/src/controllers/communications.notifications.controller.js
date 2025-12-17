@@ -1,65 +1,89 @@
-import NotificationsPost from "./../models/communications.notifications.model.js";
+import CommunicationsNotifications from "./../models/communications.notifications.model.js";
 
+//obtner todas las notificaciones
 const getAllNotifications = async (req, res) => {
     try {
-        const notifications = await NotificationsPost.find();
+        const notifications = await CommunicationsNotifications.find();
         res.status(200).json(notifications);
     } catch (error) {
-        res.status(500).json({ message: 'Error retrieving notifications', error });
+        res.status(500).json({
+             message: 'Error retrieving notifications', 
+             error: error.message });
     }
 };
 
-const getNotifications = async (req, res) => {
-    const { userId } = req.params;
+//obtener notificaciones por usuario ID
+const getIdNotifications = async (req, res) => {
     try {
-        const notifications = await NotificationsPost.find({to: userId });
-        res.status(200).json(notifications);
+    const { Id } = req.params;
+    const notification = await CommunicationsNotifications.findById(id);
+    
+        if (!notification) {
+            return res.status(404).json({ message: 'Notification not found' });
+        }
+        res.status(200).json(notification);
     } catch (error) {
-        res.status(500).json({ message: 'Error retrieving notifications for user', error });
+        res.status(500).json({
+             message: 'Error retrieving notification for user',
+              error: error.message 
+            });
     }
 };
 
+//crear nueva notificación
 const createNotification = async (req, res) => {
-    const notificationData = req.body;
     try {
-        const newNotification = new NotificationsPost(notificationData);
-        await newNotification.save();
-        res.status(201).json(newNotification);
+        const newNotification = new CommunicationsNotifications(req.body);
+        const savedNotification = newNotification.save();
+        res.status(201).json(savedNotification);
     } catch (error) {
-        res.status(500).json({ message: 'Error creating notification', error });
+        res.status(500).json({ 
+            message: 'Error creating notification', 
+            error: error.message 
+        });
     }
 };
 
+//actualizar notificación por ID
 const updateNotification = async (req, res) => {
-    const { id } = req.params;
-    const updateData = req.body;
+    
     try {
-        const updatedNotification = await NotificationsPost.findByIdAndUpdate(id, updateData, { new: true });
-        if (!updatedNotification) {
+        const { id } = req.params;
+        const updatedNotification = await CommunicationsNotifications.findByIdAndUpdate(id, req.body, 
+            { new: true, runValidators: true });
+        
+            if (!updatedNotification) {
             return res.status(404).json({ message: 'Notification not found' });
         }
         res.status(200).json(updatedNotification);
     } catch (error) {
-        res.status(500).json({ message: 'Error updating notification', error });
+        res.status(500).json({ 
+            message: 'Error updating notification', 
+            error: error.message});
     }
 };
 
+//eliminar notificación por ID
 const deleteNotification = async (req, res) => {
-    const { id } = req.params;
-    try {
-        const deletedNotification = await NotificationsPost.findByIdAndDelete(id);
+    try {       
+        const { id } = req.params;
+        const deletedNotification = await CommunicationsNotifications.findByIdAndDelete(id);
+        
         if (!deletedNotification) {
             return res.status(404).json({ message: 'Notification not found' });
         }
-        res.status(200).json({ message: 'Notification deleted successfully' });
+        res.status(200).json({ message: 'Notification deleted successfully', 
+        id: id })
     } catch (error) {
-        res.status(500).json({ message: 'Error deleting notification', error });
+        res.status(500).json({ 
+            message: 'Error deleting notification', 
+            error: error.message});
     }
 }
 
 export default {
     getAllNotifications,
-    getNotifications,
+    getIdNotifications,
     createNotification,
     updateNotification,
     deleteNotification

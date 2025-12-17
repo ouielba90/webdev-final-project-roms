@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
-const NotificationSchema = new mongoose.Schema({
+const { Schema } = mongoose;
+const CommunicationsNotificationSchema = new Schema({
     from: { type: String, required: true },
     to: { type: String, required: true },
     text: { type: String, required: true },
@@ -10,6 +11,10 @@ const NotificationSchema = new mongoose.Schema({
     timestamps: true //mantiene la fecha de creación y actualización automáticamente
 });
 
-const Notification = mongoose.model('NotificationPost', NotificationSchema, 'notifications');
+const CommunicationsNotifications = mongoose.model(
+    'CommunicationsNotifications', 
+    CommunicationsNotificationSchema, 
+    'notifications'); //nombre de la colección en la base de datos mongodb
 
-export default Notification;
+
+export default CommunicationsNotifications;

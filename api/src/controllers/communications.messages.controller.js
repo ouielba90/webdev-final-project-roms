@@ -32,7 +32,7 @@ const createMessage = async (req, res) => {
 const updateMessage = async (req, res) => {
     try {
         const { id } = req.params;
-        const updatedMessage = await communicationsMessagesPost.findByIdAndUpdate(id, req.body, { new: true });
+        const updatedMessage = await communicationsMessagesPost.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
         if (!updatedMessage) {
             return res.status(404).json({ message: "Message not found" });
         }
@@ -62,4 +62,6 @@ export default{
     deleteMessage
 } 
 
+// runValidators asegura que se validen los datos
+        
 //const { id } = objeto.id = extraemos la propiedad id del objeto usuario y la guardas en una variable llamada id.
