@@ -28,8 +28,8 @@ function ProviderDataApi({ children }) {
         hardwareApi.getData().then(setHardware).catch(e => setError(p => [...p, e.message]));
         licensesApi.getData().then(setLicenses).catch(e => setError(p => [...p, e.message]));
         serversApi.getData().then(setServers).catch(e => setError(p => [...p, e.message]));
-        useProjectsApi.getData().then(setUseProjects).catch(e => setError(p => [...p, e.message]));
-        userProjectsUsersApi.getData().then(setProjectsUsers).catch(e => setError(p => [...p, e.message]));
+        /*useProjectsApi.getData().then(setUseProjects).catch(e => setError(p => [...p, e.message]));
+        userProjectsUsersApi.getData().then(setProjectsUsers).catch(e => setError(p => [...p, e.message]));*/
     }, []);
 
     return (
