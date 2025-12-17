@@ -24,10 +24,10 @@ router.put('/:id/messages/:messageId', chatsController.editMessageInChat);
 router.delete('/:id/messages/:messageId', chatsController.deleteMessageFromChat);
 
 // Ruta para obtener un chat por chatId
-router.get('/:chatId', chatsController.getChatById);
+router.get('/:id', chatsController.getChatById);
 
 // Ruta para actualizar un chat completo
-router.put('/:chatId', chatsController.updateChat);
+router.put('/:id', chatsController.updateChat);
 
 // Ruta para eliminar un chat completo
 router.delete('/:id', chatsController.deleteChat);
