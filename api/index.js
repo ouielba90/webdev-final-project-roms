@@ -6,7 +6,7 @@ import softwareRoutes from "./src/routes/inventory.software.routes.js"
 import hardwareRoutes from "./src/routes/inventory.hardware.routes.js"
 import licensesRoutes from "./src/routes/inventory.licenses.routes.js"
 import serversRoutes from "./src/routes/inventory.servers.routes.js"
-import users from './data/users.data.js';
+
 // Importacion de los projectos en la data de api
 import projects from "./data/projects.data.js";
 import projectsUsers from "./data/projectsUsers.data.js";
@@ -16,6 +16,8 @@ import projectUserRoutes from "./src/routes/projects.projectUser.routes.js"
 import notificationsRoutes from "./src/routes/communications.notifications.routes.js";
 import messagesRoutes from "./src/routes/communications.messages.routes.js";
 import chatMessagesRoutes from "./src/routes/comunications.chats.routes.js";
+import usersRoutes from "./src/routes/users.user.routes.js";
+//-----------------------------------------------
 
 dotenv.config();
 const PORT = process.env.PORT || 3000;
@@ -37,9 +39,7 @@ api.get("/marc", (req, res) => {
   res.send("Esta es la API de Marc, los datos se encuentran en /users.");
 });
 
-api.get("/marc/users", (req, res) => {
-  res.json(users)
-})
+api.use("/marc/users", usersRoutes);
 
 /* API OUISSAM */
 api.get("/ouissam", (req, res) => {

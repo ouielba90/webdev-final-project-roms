@@ -2,11 +2,12 @@ import { useState } from "react"
 
 function RegistroForm({handleSubmit}) {
     const [formData, setFormData] = useState({
-        nombre: "", email: "", role: "",
+        name: "", email: "", role: "",
     })
     
     function handleChange(event) {
         const { name, value } = event.target
+        console.log(name,value,event.target)
         setFormData({
             ...formData,
             [name]: value,

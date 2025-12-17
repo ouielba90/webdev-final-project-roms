@@ -1,18 +1,15 @@
 import { Link, Outlet } from "react-router-dom"
-import { users } from "./../../../../data/users.js"
+import { useState, useEffect, useContext } from "react"
 import UserCard from "./UserCard.jsx"
-import { useState, useEffect } from "react"
 import RegistroForm from "./formulario.jsx"
 import EditUserModal from "./EditUserModal.jsx"
-import getUsers from "../../../logic/getUsers.js"
+import { ApiDataContext } from "../../../context/ApiDataContext.js"
 
 function UserPage() {
-  const [usersState, setUsersState] = useState(users)
-  const [editingUser, setEditingUser] = useState(null)
+  const { users, setUsers, usersApi } = useContext(ApiDataContext)
+  const [editingUser, setEditingUser] = useState()
 
-  const [users, setUsers] = useState([])
-
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
     const datosFormulario = Object.fromEntries(new FormData(e.target).entries());
     console.log(datosFormulario)
@@ -24,34 +21,29 @@ function UserPage() {
       role: datosFormulario.role,
       status: "activo"
     };
-    setUsersState(prev => [...prev, newUser])
+    setUsers(prev => [...prev, newUser])
+    await usersApi.createData(newUser)
   }
 
-  function handleUpdate(e) {
+  async function handleUpdate(e) {
     e.preventDefault()
-    setUsersState(
-      usersState.map((user) =>
-        user.id === editingUser.id ? editingUser : user)
-    )
+    await usersApi.updateData(editingUser._id, editingUser)
+
+    setUsers(users.map((user) => user._id === editingUser._id ? editingUser : user))
     setEditingUser(null)
   }
 
-  function onDeleteUser(id) {
-    const copy = [...usersState]
-    setUsersState(copy.filter((user) => {
-      return user.id !== id
-    }))
+  async function onDeleteUser(_id) {
+    const copy = [...users]
+    setUsers(copy.filter((user) => {
+      return user._id !== _id
+    })) 
+    await usersApi.deleteData(_id)
   }
 
   function onEditUser(user) {
     setEditingUser({ ...user })
   }
-
-  useEffect(() => {
-    getUsers()
-      .then((data) => setUsers(data))
-      .catch((error) => console.error("Error fetching users: ", error));
-  }, []);
 
   return (
     <>
@@ -59,12 +51,12 @@ function UserPage() {
         <RegistroForm handleSubmit={handleSubmit} />
         <h2 className="subtitle">Lista de usuarios</h2>
         <div className="usersContainer">
-          {usersState.map(user => {
+          {users.map(user => {
             return(
             <UserCard
-              key={user.id}
+              key={user._id}
               user={user}
-              onDeleteUser={() => onDeleteUser(user.id)}
+              onDeleteUser={() => onDeleteUser(user._id)}
               onEditUser={() => onEditUser(user)}
             />
           )})}

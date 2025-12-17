@@ -1,14 +1,19 @@
 import './stylesMarc.css'
 import { Link, Outlet, useLocation } from 'react-router-dom'
+import { useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import CompactMainMenu from '../../components/homepage/CompactMainMenu'
 import { userSections } from '../../sections/userSections'
+import { ApiDataContext } from '../../context/ApiDataContext.js' 
 
 function UsersHomePage() {
   const navigate = useNavigate()
   const location = useLocation()
 
+  const { setUsers, usersApi, setError } = useContext(ApiDataContext)
   const currPath = useLocation() // Se obtiene la ruta actual
+
+  useEffect(() => { usersApi.getData().then(setUsers).catch(e => setError(p => [...p, e])); }, []);
 
   function getSection(path) { // Determinar qué contenido se debe mostrar según la ruta
     const parts = path.split("/").filter(Boolean); // Divide la ruta por / y filter(Boolean) elimina cadenas vacías en el caso de tener slashes sueltos
