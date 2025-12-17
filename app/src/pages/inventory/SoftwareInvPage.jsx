@@ -41,7 +41,10 @@ function SoftwareInvPage() {
       description: data.description,
     };
     const created = await softwareApi.createData(newItem);
-    if (!created) return;
+    if (created?.error) {
+      alert(`Error al crear software: ${created.error}`);
+      return;
+    }
 
     setSoftware(prev => [...prev, created]);
 
@@ -87,7 +90,10 @@ function SoftwareInvPage() {
     }
 
     const updated = await softwareApi.updateData(currEditId, updatedItem)
-    if (!updated) return;
+    if (updated?.error) {
+      alert(`Error al actualizar software: ${updated.error}`);
+      return;
+    }
 
     setSoftware(prev =>
       prev.map(item => item._id === currEditId ? { ...item, ...updatedItem } : item
@@ -109,7 +115,11 @@ function SoftwareInvPage() {
     const userConfirmation = confirm(`¿Seguro que quieres proceder a eliminar el software cuya id es ${id}?`);
     if (userConfirmation) {
       const deleted = await softwareApi.deleteData(id);
-      if (!deleted) return;
+      if (deleted?.error) {
+        alert(`Error al eliminar software: ${deleted.error}`);
+        setIdDeleting(null);
+        return;
+      }
       setSoftware(prev => prev.filter(el => el._id !== id))
 
       await syncRemoveWithHardwareAndServers(id);

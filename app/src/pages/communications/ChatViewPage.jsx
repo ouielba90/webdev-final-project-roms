@@ -27,6 +27,7 @@ function ChatViewPage() {
   const fetchChatData = async () => {
     try {
       setLoading(true);
+      console.log('Cargando chat con ID:', chatId);
       const response = await fetch(`${API_URL}/${chatId}`);
       
       if (!response.ok) {

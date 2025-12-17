@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import useHardwareValidation from "../../logic/inventory/useLicensesValidation"
 
 function EditLicense({ toBeEdited, softList, handleSubmitEdit, setEditFormOpen }) {
@@ -10,6 +10,7 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit, setEditFormOpen }
   const [expiryDate, setExpiryDate] = useState(toBeEdited.expiryDate.split("T")[0])
   const [cost, setCost] = useState(toBeEdited.cost)
   const [softwareId, setSoftwareId] = useState(toBeEdited.softwareId)
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { errors, canSubmit } = useHardwareValidation(
     vendor,
@@ -20,9 +21,16 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit, setEditFormOpen }
     cost
   );
 
+  async function onSubmit(e) {
+    setIsSubmitting(true);
+    await handleSubmitEdit(e);
+  }
+
+  useEffect(() => setIsSubmitting(false), []);
+
   return (
     <>
-      <form className="addsoft-form" onSubmit={handleSubmitEdit}>
+      <form className="addsoft-form" onSubmit={onSubmit}>
         <h2 className="addsoft-title">Edit License</h2>
         <div className="addsoft-row">
           <div className="addsoft-group">
@@ -94,8 +102,15 @@ function EditLicense({ toBeEdited, softList, handleSubmitEdit, setEditFormOpen }
         </div>
 
         <div className="addsoft-row">
-          <button className="addsoft-cancel" type="button" onClick={() => setEditFormOpen(false)}>Cancel</button>
-          <button type="submit" className="addsoft-submit" disabled={!canSubmit}>Aplicar cambios</button>
+          <button className="addsoft-cancel" type="button" onClick={() => setEditFormOpen(false)}
+            disabled={isSubmitting}>Cancel</button>
+          <button
+            type="submit"
+            className="addsoft-submit"
+            disabled={!canSubmit || isSubmitting}
+          >
+            {isSubmitting ? "Editando..." : "Aplicar cambios"}
+          </button>
         </div>
       </form>
     </>

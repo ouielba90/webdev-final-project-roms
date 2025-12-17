@@ -307,7 +307,7 @@ que estan en un entorno mas exigente*/
     align-items: center;
     padding-left: 20px;
     padding-right: 20px;
-    background-image: url("../../../public/img_header/blue_circuit_3.jpg");
+    background-image: url("/img_header/blue_circuit_3.jpg");
     background-size: cover;
 }
 

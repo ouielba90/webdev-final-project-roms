@@ -60,7 +60,10 @@ function LicensesInvPage() {
       cost: data.cost,
     };
     const created = await licensesApi.createData(newItem);
-    if (!created) return;
+    if (created?.error) {
+      alert(`Error al crear licencia: ${created.error}`);
+      return;
+    }
 
     setLicenses(prev => [...prev, created]);
 
@@ -96,7 +99,10 @@ function LicensesInvPage() {
     }
 
     const updated = await licensesApi.updateData(currEditId, updatedItem);
-    if (!updated) return;
+    if (updated?.error) {
+      alert(`Error al actualizar licencia: ${updated.error}`);
+      return;
+    }
 
     const normalized = {
       ...updatedItem,
@@ -121,7 +127,11 @@ function LicensesInvPage() {
     const userConfirmation = confirm(`¿Seguro que quieres proceder a eliminar la licencia cuya id es ${id}?`);
     if (userConfirmation) {
       const deleted = await licensesApi.deleteData(id);
-      if (!deleted) return;
+      if (deleted?.error) {
+        alert(`Error al eliminar licencia: ${deleted.error}`);
+        setIdDeleting(null);
+        return;
+      }
       setLicenses(prev => prev.filter(el => el._id !== id))
       await syncRemoveWithSoftware(id);
     }

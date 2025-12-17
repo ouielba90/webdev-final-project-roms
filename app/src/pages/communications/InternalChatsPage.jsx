@@ -142,7 +142,6 @@ function InternalChatPage() {
                     />
                 </form>
             </div>
-
             <div className="container-chats">
                 <div className="chat-list-grid">
                     {filterChats.length === 0 ? (
@@ -154,7 +153,7 @@ function InternalChatPage() {
                     ) : (
                         filterChats.map(chat => (
                             <ChatListItem
-                                key={chat.chatId}
+                                key={chat._id}
                                 chat={chat}
                                 editingMessageId={editingMessageId}
                                 editText={editText}
