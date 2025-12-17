@@ -31,7 +31,7 @@ const getChatsByType = async (req, res) => {
 const getChatById = async (req, res) => {
     try {
         const { chatId } = req.params;
-        const chat = await Chat.findOne({ chatId: parseInt(chatId) });
+        const chat = await Chat.findOne( chatId );
         
         if (!chat) {
             return res.status(404).json({ message: 'Chat not found' });

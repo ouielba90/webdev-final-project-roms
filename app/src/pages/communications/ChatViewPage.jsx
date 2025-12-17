@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import ChatMessage from "../../components/communications/ChatMessage";
 
 // URL de tu API backend
-const API_URL = 'http://localhost:3000/api/chats';
+const API_URL = 'http://localhost:3000/santos/chats';
 
 function ChatViewPage() {
   const { chatId } = useParams();
@@ -27,6 +27,7 @@ function ChatViewPage() {
   const fetchChatData = async () => {
     try {
       setLoading(true);
+      console.log('Cargando chat con ID:', chatId);
       const response = await fetch(`${API_URL}/${chatId}`);
       
       if (!response.ok) {

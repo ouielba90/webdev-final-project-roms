@@ -29,7 +29,7 @@ function ChatListItem({
         return (
             <div
                 className={`chat-list-item ${chat.unreadCount > 0 ? 'unread' : ''}`}
-                onClick={() => navigate(`/communications/chat/${chat.chatId}`)}
+                onClick={() => navigate(`/communications/chat/${chat._id}`)}
             >
                 <div className="chat-avatar">
                     {chat.type === 'internal' ? '👥' : '🏢'}
