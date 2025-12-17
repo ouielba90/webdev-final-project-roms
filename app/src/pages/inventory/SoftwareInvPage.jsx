@@ -40,20 +40,17 @@ function SoftwareInvPage() {
       serverId: selectedServ,
       description: data.description,
     };
-    const created = await softwareApi.createData(newItem);
-    if (created?.error) {
-      alert(`Error al crear software: ${created.error}`);
-      return;
+    try {
+      const created = await softwareApi.createData(newItem);
+      setSoftware(prev => [...prev, created]);
+      await syncCreationWithHardwareAndServers(created._id, selectedHard, selectedServ);
+      e.target.reset()
+      setSelectedHard([])
+      setSelectedServ([])
+      setAddFormOpen(false)
+    } catch (error) {
+      alert(`Error al crear software: ${error.message}`);
     }
-
-    setSoftware(prev => [...prev, created]);
-
-    await syncCreationWithHardwareAndServers(created._id, selectedHard, selectedServ);
-
-    e.target.reset()
-    setSelectedHard([])
-    setSelectedServ([])
-    setAddFormOpen(false)
   }
 
   function handleEdit(id) {
@@ -89,22 +86,19 @@ function SoftwareInvPage() {
       return;
     }
 
-    const updated = await softwareApi.updateData(currEditId, updatedItem)
-    if (updated?.error) {
-      alert(`Error al actualizar software: ${updated.error}`);
-      return;
+    try {
+      await softwareApi.updateData(currEditId, updatedItem)
+      setSoftware(prev =>
+        prev.map(item => item._id === currEditId ? { ...item, ...updatedItem } : item
+        )
+      );
+      if (updatedItem.installedOnHardware || updatedItem.serverId) {
+        await syncEditWithHardwareAndServers(currEditId, prevItem, updatedItem);
+      }
+      setEditFormOpen(false)
+    } catch (error) {
+      alert(`Error al actualizar software: ${error.message}`);
     }
-
-    setSoftware(prev =>
-      prev.map(item => item._id === currEditId ? { ...item, ...updatedItem } : item
-      )
-    );
-
-    if (updatedItem.installedOnHardware || updatedItem.serverId) {
-      await syncEditWithHardwareAndServers(currEditId, prevItem, updatedItem);
-    }
-
-    setEditFormOpen(false)
   }
 
   // Estado para rastrear qué elemento se está eliminando
@@ -114,15 +108,13 @@ function SoftwareInvPage() {
     setIdDeleting(id);
     const userConfirmation = confirm(`¿Seguro que quieres proceder a eliminar el software cuya id es ${id}?`);
     if (userConfirmation) {
-      const deleted = await softwareApi.deleteData(id);
-      if (deleted?.error) {
-        alert(`Error al eliminar software: ${deleted.error}`);
-        setIdDeleting(null);
-        return;
+      try {
+        await softwareApi.deleteData(id);
+        setSoftware(prev => prev.filter(el => el._id !== id))
+        await syncRemoveWithHardwareAndServers(id);
+      } catch (error) {
+        alert(`Error al eliminar software: ${error.message}`);
       }
-      setSoftware(prev => prev.filter(el => el._id !== id))
-
-      await syncRemoveWithHardwareAndServers(id);
     }
     setIdDeleting(null)
   }

@@ -34,19 +34,16 @@ function HardwareInvPage() {
       os: data.os,
       lastMaintenance: data.lastMaintenance
     };
-    const created = await hardwareApi.createData(newItem);
-    if (created?.error) {
-      alert(`Error al crear hardware: ${created.error}`);
-      return;
+    try {
+      const created = await hardwareApi.createData(newItem);
+      setHardware(prev => [...prev, created]);
+      await syncCreationWithSoftware(created._id, created.installedSoftware);
+      e.target.reset()
+      setSelectedSoft([]);
+      setAddFormOpen(false)
+    } catch (error) {
+      alert(`Error al crear hardware: ${error.message}`);
     }
-
-    setHardware(prev => [...prev, created]);
-
-    await syncCreationWithSoftware(created._id, created.installedSoftware);
-
-    e.target.reset()
-    setSelectedSoft([]);
-    setAddFormOpen(false)
   }
 
   function handleEdit(id) {
@@ -91,21 +88,18 @@ function HardwareInvPage() {
       return;
     }
 
-    const updated = await hardwareApi.updateData(currEditId, updatedItem);
-    if (updated?.error) {
-      alert(`Error al actualizar hardware: ${updated.error}`);
-      return;
+    try {
+      await hardwareApi.updateData(currEditId, updatedItem);
+      setHardware(prev =>
+        prev.map(item => item._id === currEditId ? { ...item, ...updatedItem } : item)
+      );
+      if (updatedItem.installedSoftware) {
+        await syncEditWithSoftware(currEditId, prevItem, updatedItem);
+      }
+      setEditFormOpen(false);
+    } catch (error) {
+      alert(`Error al actualizar hardware: ${error.message}`);
     }
-
-    setHardware(prev =>
-      prev.map(item => item._id === currEditId ? { ...item, ...updatedItem } : item)
-    );
-
-    if (updatedItem.installedSoftware) {
-      await syncEditWithSoftware(currEditId, prevItem, updatedItem);
-    }
-
-    setEditFormOpen(false);
   }
 
   // Estado para rastrear qué elemento se está eliminando
@@ -115,15 +109,14 @@ function HardwareInvPage() {
     setIdDeleting(id);
     const userConfirmation = confirm(`¿Seguro que quieres proceder a eliminar el hardware cuya id es ${id}?`);
     if (userConfirmation) {
-      const deleted = await hardwareApi.deleteData(id);
-      if (deleted?.error) {
-        alert(`Error al eliminar hardware: ${deleted.error}`);
+      try {
+        await hardwareApi.deleteData(id);
         setIdDeleting(null);
-        return;
+        setHardware(prev => prev.filter(el => el._id !== id))
+        await syncRemoveWithSoftware(id);
+      } catch (error) {
+        alert(`Error al eliminar hardware: ${error.message}`);
       }
-      setHardware(prev => prev.filter(el => el._id !== id))
-
-      await syncRemoveWithSoftware(id);
     }
     setIdDeleting(null);
   }

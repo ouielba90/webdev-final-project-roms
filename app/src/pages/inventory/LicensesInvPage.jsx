@@ -59,17 +59,16 @@ function LicensesInvPage() {
       vendor: data.vendor,
       cost: data.cost,
     };
-    const created = await licensesApi.createData(newItem);
-    if (created?.error) {
-      alert(`Error al crear licencia: ${created.error}`);
-      return;
+
+    try {
+      const created = await licensesApi.createData(newItem);
+      setLicenses(prev => [...prev, created]);
+      await syncCreationWithSoftware(created._id, created.softwareId);
+      e.target.reset()
+      setAddFormOpen(false)
+    } catch (error) {
+      alert(`Error al crear licencia: ${error.message}`);
     }
-
-    setLicenses(prev => [...prev, created]);
-
-    await syncCreationWithSoftware(created._id, created.softwareId);
-    e.target.reset()
-    setAddFormOpen(false)
   }
 
   function handleEdit(id) {
@@ -98,25 +97,22 @@ function LicensesInvPage() {
       return;
     }
 
-    const updated = await licensesApi.updateData(currEditId, updatedItem);
-    if (updated?.error) {
-      alert(`Error al actualizar licencia: ${updated.error}`);
-      return;
+    try {
+      await licensesApi.updateData(currEditId, updatedItem);
+      const normalized = {
+        ...updatedItem,
+        status: daysBetweenDates(data.expiryDate) > 0 ? "activa" : "expirada",
+      };
+      setLicenses(prev =>
+        prev.map(item =>
+          item._id === currEditId ? { ...item, ...normalized } : item
+        )
+      );
+      await syncEditWithSoftware(currEditId, prevItem, updatedItem);
+      setEditFormOpen(false);
+    } catch (error) {
+      alert(`Error al actualizar licencia: ${error.message}`);
     }
-
-    const normalized = {
-      ...updatedItem,
-      status: daysBetweenDates(data.expiryDate) > 0 ? "activa" : "expirada",
-    };
-
-    setLicenses(prev =>
-      prev.map(item =>
-        item._id === currEditId ? { ...item, ...normalized } : item
-      )
-    );
-    await syncEditWithSoftware(currEditId, prevItem, updatedItem);
-
-    setEditFormOpen(false);
   }
 
   // Estado para rastrear qué elemento se está eliminando
@@ -126,14 +122,13 @@ function LicensesInvPage() {
     setIdDeleting(id);
     const userConfirmation = confirm(`¿Seguro que quieres proceder a eliminar la licencia cuya id es ${id}?`);
     if (userConfirmation) {
-      const deleted = await licensesApi.deleteData(id);
-      if (deleted?.error) {
-        alert(`Error al eliminar licencia: ${deleted.error}`);
-        setIdDeleting(null);
-        return;
+      try {
+        await licensesApi.deleteData(id);
+        setLicenses(prev => prev.filter(el => el._id !== id))
+        await syncRemoveWithSoftware(id);
+      } catch (error) {
+        alert(`Error al eliminar licencia: ${error.message}`);
       }
-      setLicenses(prev => prev.filter(el => el._id !== id))
-      await syncRemoveWithSoftware(id);
     }
     setIdDeleting(null);
   }
