@@ -188,7 +188,7 @@ const deleteMessageFromChat = async (req, res) => {
 const deleteChat = async (req, res) => {
     try {
         const { chatId } = req.params;
-        const deletedChat = await Chat.findOneAndDelete({ chatId: parseInt(chatId) });
+        const deletedChat = await Chat.findOneAndDelete(chatId);
         
         if (!deletedChat) {
             return res.status(404).json({ message: 'Chat not found' });

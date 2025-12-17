@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import ChatMessage from "../../components/communications/ChatMessage";
 
 // URL de tu API backend
-const API_URL = 'http://localhost:3000/api/chats';
+const API_URL = 'http://localhost:3000/santos/chats';
 
 function ChatViewPage() {
   const { chatId } = useParams();
