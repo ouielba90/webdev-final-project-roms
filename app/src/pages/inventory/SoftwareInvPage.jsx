@@ -101,7 +101,11 @@ function SoftwareInvPage() {
     setEditFormOpen(false)
   }
 
+  // Estado para rastrear qué elemento se está eliminando
+  const [idDeleting, setIdDeleting] = useState(null);
+
   async function handleRemove(id) {
+    setIdDeleting(id);
     const userConfirmation = confirm(`¿Seguro que quieres proceder a eliminar el software cuya id es ${id}?`);
     if (userConfirmation) {
       const deleted = await softwareApi.deleteData(id);
@@ -110,7 +114,7 @@ function SoftwareInvPage() {
 
       await syncRemoveWithHardwareAndServers(id);
     }
-
+    setIdDeleting(null)
   }
 
   return (
@@ -181,6 +185,7 @@ function SoftwareInvPage() {
                 serverId={el.serverId.map(sid => serversById[sid]?.name).filter(Boolean)}
                 handleRemove={handleRemove}
                 handleEdit={handleEdit}
+                idDeleting={idDeleting}
               />
             )
           })}

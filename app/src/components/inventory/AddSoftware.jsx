@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useSoftwareValidation from "../../logic/inventory/useSoftwareValidation";
 
 function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHard, setSelectedHard, selectedServ, setSelectedServ, setAddFormOpen }) {
@@ -9,6 +9,8 @@ function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHa
     category: "",
     status: ""
   };
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [form, setForm] = useState(initialForm)
   const { errors, canSubmit } = useSoftwareValidation(
@@ -24,8 +26,15 @@ function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHa
     }));
   }
 
+  async function onSubmit(e) {
+    setIsSubmitting(true);
+    await handleSubmit(e);
+  }
+
+  useEffect(() => setIsSubmitting(false), []);
+
   return (
-    <form id="softwareForm" onSubmit={handleSubmit} className="addsoft-form">
+    <form id="softwareForm" onSubmit={onSubmit} className="addsoft-form">
       <h2 className="addsoft-title">Añadir Software</h2>
       <div className="addsoft-row">
         <div className="addsoft-group">
@@ -99,8 +108,14 @@ function AddSoftware({ categList, serverList, hardList, handleSubmit, selectedHa
           setSelectedHard([]);
           setSelectedServ([]);
           setAddFormOpen(false)
-        }}>Cancel</button>
-        <button type="submit" className="addsoft-submit" disabled={!canSubmit}>Añadir</button>
+        }} disabled={isSubmitting}>Cancel</button>
+        <button
+          type="submit"
+          className="addsoft-submit"
+          disabled={!canSubmit || isSubmitting}
+        >
+          {isSubmitting ? "Creando..." : "Añadir"}
+        </button>
       </div>
     </form>
   );

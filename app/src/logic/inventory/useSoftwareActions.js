@@ -58,11 +58,11 @@ export default function useSoftwareActions() {
     // 2. Elimina la ID de este software de los hardware y servers que fueron deseleccionados
     // y los añade en los otros.
     async function syncEditWithHardwareAndServers(currentId, prevItem, updatedItem) {
-        const prevHard = prevItem.installedOnHardware;
-        const newHard = updatedItem.installedOnHardware;
+        const prevHard = prevItem.installedOnHardware || [];
+        const newHard = updatedItem.installedOnHardware || prevItem.installedOnHardware || [];
 
-        const prevServ = prevItem.serverId;
-        const newServ = updatedItem.serverId;
+        const prevServ = prevItem.serverId || [];
+        const newServ = updatedItem.serverId || prevItem.serverId || [];
 
         const hardDiff = diffLists(prevHard, newHard);
         const servDiff = diffLists(prevServ, newServ);
