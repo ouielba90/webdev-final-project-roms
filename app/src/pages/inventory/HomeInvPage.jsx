@@ -3,12 +3,24 @@ import { ApiDataContext } from "../../context/ApiDataContext";
 import { inventorySections } from "../../sections/inventorySections.js";
 import "./../../indexOuissam.css"
 import CompactMainMenu from '../../components/homepage/CompactMainMenu'
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import LoadingAnimation from '../../components/inventory/LoadingAnimation.jsx';
 import ErrorAnimation from '../../components/inventory/ErrorAnimation.jsx';
 
 function HomeInvPage() {
-  const { software, hardware, licenses, servers, error } = useContext(ApiDataContext);
+  const { software, setSoftware, softwareApi,
+    hardware, setHardware, hardwareApi,
+    licenses, setLicenses, licensesApi,
+    servers, setServers, serversApi,
+    setError, error } = useContext(ApiDataContext);
+
+  useEffect(() => {
+    softwareApi.getData().then(setSoftware).catch(e => setError(p => [...p, e.message]));
+    hardwareApi.getData().then(setHardware).catch(e => setError(p => [...p, e.message]));
+    licensesApi.getData().then(setLicenses).catch(e => setError(p => [...p, e.message]));
+    serversApi.getData().then(setServers).catch(e => setError(p => [...p, e.message]));
+  }, []);
+
   const currPath = useLocation()
 
   function getSection(path) {
