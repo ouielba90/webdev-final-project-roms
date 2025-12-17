@@ -1,8 +1,9 @@
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { allChats } from '../../../data/communications/chats';
 import ChatMessage from "../../components/communications/ChatMessage";
-import getPosts from "../../logic/getPosts";
+
+// URL de tu API backend
+const API_URL = 'http://localhost:3000/api/chats';
 
 function ChatViewPage() {
   const { chatId } = useParams();
@@ -11,76 +12,154 @@ function ChatViewPage() {
   const [newMessageText, setNewMessageText] = useState('');
   const [editingMessageId, setEditingMessageId] = useState(null);
   const [editText, setEditText] = useState('');
-  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    getPosts()
-    .then(data => setPosts(data))
-    .catch(error => console.error("Error loading posts:", error));
-  }, []);
-  
   // Obtener el usuario actual desde el almacenamiento local
   const currentUser = localStorage.getItem('currentUser') || "Carlos";
 
-  // Cargar los mensajes del chat
+  // Cargar los mensajes del chat desde MongoDB
   useEffect(() => {
-    const chat = allChats.find(chat => chat.chatId == chatId) || [];
-    setParticipants(chat.participants);
-    setMessages(chat.messages);
+    fetchChatData();
   }, [chatId]);
 
-  // Función para enviar un nuevo mensaje
-  const handleSendMessage = () => {
-    if (newMessageText.trim() === '') return;
-
-    const user = participants.find(user => user !== messages[messages.length - 1].from);
-
-    const newMessage = {
-      id: messages.length + 1,
-      from: user,
-      text: newMessageText,
-      edited: false,
-      editedAt: null,
-    };
-
-    setMessages([...messages, newMessage]);
-    setNewMessageText('');
+  // Función para obtener los datos del chat
+  const fetchChatData = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${API_URL}/${chatId}`);
+      
+      if (!response.ok) {
+        throw new Error('Error al cargar el chat');
+      }
+      
+      const data = await response.json();
+      setParticipants(data.participants || []);
+      setMessages(data.messages || []);
+      setError(null);
+    } catch (err) {
+      setError(err.message);
+      console.error('Error:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // Nueva función para iniciar edición
+  // Función para enviar un nuevo mensaje
+  const handleSendMessage = async () => {
+    if (newMessageText.trim() === '') return;
+
+    try {
+      // Determinar quién envía el mensaje
+      const lastMessage = messages[messages.length - 1];
+      const sender = lastMessage 
+        ? participants.find(user => user !== lastMessage.from) || currentUser
+        : currentUser;
+
+      const response = await fetch(`${API_URL}/${chatId}/messages`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          from: sender,
+          text: newMessageText
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al enviar el mensaje');
+      }
+
+      const updatedChat = await response.json();
+      setMessages(updatedChat.messages);
+      setNewMessageText('');
+    } catch (err) {
+      console.error('Error al enviar mensaje:', err);
+      alert('No se pudo enviar el mensaje. Por favor, intenta de nuevo.');
+    }
+  };
+
+  // Función para iniciar edición
   const handleStartEdit = (messageId, messageText) => {
     setEditingMessageId(messageId);
     setEditText(messageText);
   };
 
-  // Nueva función para guardar edición
-  const handleSaveEdit = (messageId) => {
-    setMessages(prev => prev.map(msg =>
-      msg.id === messageId
-        ? {
-            ...msg,
-            text: editText,
-            edited: true,
-            editedAt: new Date().toLocaleString('es-ES')
-          }
-        : msg
-    ));
-    setEditingMessageId(null);
-    setEditText('');
+  // Función para guardar edición
+  const handleSaveEdit = async (messageId) => {
+    try {
+      const response = await fetch(`${API_URL}/${chatId}/messages/${messageId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text: editText }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al editar el mensaje');
+      }
+
+      const updatedChat = await response.json();
+      setMessages(updatedChat.messages);
+      setEditingMessageId(null);
+      setEditText('');
+    } catch (err) {
+      console.error('Error al guardar edición:', err);
+      alert('No se pudo guardar la edición. Por favor, intenta de nuevo.');
+    }
   };
 
-  // Nueva función para cancelar edición
+  // Función para cancelar edición
   const handleCancelEdit = () => {
     setEditingMessageId(null);
     setEditText('');
   };
 
-  // Nueva función para eliminar mensaje
-  const handleDeleteMessage = (messageId) => {
+  // Función para eliminar mensaje
+  const handleDeleteMessage = async (messageId) => {
     if (window.confirm('¿Estás seguro de que quieres eliminar este mensaje?')) {
-      setMessages(prev => prev.filter(msg => msg.id !== messageId));
+      try {
+        const response = await fetch(`${API_URL}/${chatId}/messages/${messageId}`, {
+          method: 'DELETE',
+        });
+
+        if (!response.ok) {
+          throw new Error('Error al eliminar el mensaje');
+        }
+
+        const result = await response.json();
+        setMessages(result.chat.messages);
+      } catch (err) {
+        console.error('Error al eliminar:', err);
+        alert('No se pudo eliminar el mensaje. Por favor, intenta de nuevo.');
+      }
     }
   };
+
+  // Renderizar estado de carga
+  if (loading) {
+    return (
+      <div className="chat-view-container">
+        <div className="chat-header-info">
+          <p>Cargando chat...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Renderizar estado de error
+  if (error) {
+    return (
+      <div className="chat-view-container">
+        <div className="chat-header-info">
+          <p className="error">Error: {error}</p>
+          <button onClick={fetchChatData}>Reintentar</button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="chat-view-container">
@@ -88,23 +167,28 @@ function ChatViewPage() {
       <div className="chat-header-info">
         <p>Conectado como: <strong>{currentUser}</strong></p>
       </div>
+
       {/* Área de mensajes */}
       <div className="chat-messages-area">
-        {messages.map((message) => (
-          <ChatMessage
-            key={message.id}
-            message={message}
-            currentUser={currentUser}
-            chatId={chatId}
-            editingMessageId={editingMessageId}
-            editText={editText}
-            onStartEdit={handleStartEdit}
-            onSaveEdit={handleSaveEdit}
-            onCancelEdit={handleCancelEdit}
-            onDeleteMessage={handleDeleteMessage}
-            onEditTextChange={(newText) => setEditText(newText)}
-          />
-        ))}
+        {messages.length === 0 ? (
+          <p>No hay mensajes en este chat</p>
+        ) : (
+          messages.map((message) => (
+            <ChatMessage
+              key={message.id}
+              message={message}
+              currentUser={currentUser}
+              chatId={chatId}
+              editingMessageId={editingMessageId}
+              editText={editText}
+              onStartEdit={handleStartEdit}
+              onSaveEdit={handleSaveEdit}
+              onCancelEdit={handleCancelEdit}
+              onDeleteMessage={handleDeleteMessage}
+              onEditTextChange={(newText) => setEditText(newText)}
+            />
+          ))
+        )}
       </div>
 
       {/* Input para escribir */}
@@ -113,6 +197,7 @@ function ChatViewPage() {
           type="text"
           value={newMessageText}
           onChange={(e) => setNewMessageText(e.target.value)}
+          onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
           placeholder="Escribe un mensaje..."
           className="chat-input"
         />
@@ -125,3 +210,14 @@ function ChatViewPage() {
 }
 
 export default ChatViewPage;
+
+
+{/*Backend creado/actualizado:
+communications.chats.model.js - Modelo con estructura completa (chat con array de mensajes)
+communications.chats.controller.js - Controlador con todas las operaciones CRUD + operaciones de mensajes
+communications.chats.routes.js - Rutas completas para chats y mensajes
+Frontend actualizado:
+InternalChatsPage.jsx - Conectado a MongoDB con filtros
+ClientChatsPage.jsx - Conectado a MongoDB con filtros
+ChatViewPage.jsx - Vista de chat individual con todas las operaciones
+chatService.js - Servicio actualizado para todas las operaciones*/}

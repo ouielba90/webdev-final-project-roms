@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', notificationsController.getAllNotifications);
 
 // Ruta para obtener una notificación por ID    
-router.get('/user/:userId', notificationsController.getNotifications);
+router.get('/:id', notificationsController.getIdNotifications);
 
 // Ruta para crear una nueva notificación
 router.post('/', notificationsController.createNotification);
