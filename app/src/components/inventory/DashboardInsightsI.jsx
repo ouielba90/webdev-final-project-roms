@@ -1,8 +1,8 @@
 import StatusAnimation from "./StatusAnimation.jsx"
 function DashboardInsightsI({ riskLicenses, lastMaintHard, software }) {
+  console.log(riskLicenses)
   return (
     <>
-
       <div className="insights-card insights-licenses">
         <h2 className="section-title">Licencias en riesgo</h2>
 
@@ -19,7 +19,7 @@ function DashboardInsightsI({ riskLicenses, lastMaintHard, software }) {
               const isAlert = item.daysLeft < 0;
               const color = isAlert ?
                 <StatusAnimation color={"red"} />
-                : item.daysLeft > 0 && item.daysLeft < 30 ?
+                : item.daysLeft >= 0 && item.daysLeft < 30 ?
                   <StatusAnimation color={"orange"} />
                   : undefined
               return (

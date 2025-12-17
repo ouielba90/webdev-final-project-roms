@@ -1,5 +1,5 @@
 import { ApiDataContext } from "./ApiDataContext.js";
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import useApi from "../logic/useApi.js";
 
 function ProviderDataApi({ children }) {
@@ -21,19 +21,6 @@ function ProviderDataApi({ children }) {
     const [projectsUsers, setProjectsUsers] = useState([])
 
     const [error, setError] = useState([])
-
-    // Carga inicial de datos (Fetching):
-    // Se ejecutan todas las peticiones en paralelo al montar la aplicación
-    // Los errores se acumulan en un array para mostrar feedback global si falla alguna API
-    useEffect(() => {
-        /*    softwareApi.getData().then(setSoftware).catch(e => setError(p => [...p, e]));
-            hardwareApi.getData().then(setHardware).catch(e => setError(p => [...p, e]));
-            licensesApi.getData().then(setLicenses).catch(e => setError(p => [...p, e]));
-            serversApi.getData().then(setServers).catch(e => setError(p => [...p, e]));
-            usersApi.getData().then(setUsers).catch(e => setError(p => [...p, e]));
-            useProjectsApi.getData().then(setUseProjects).catch(e => setError(p => [...p, e]));
-            userProjectsUsersApi.getData().then(setProjectsUsers).catch(e => setError(p => [...p, e])); */
-    }, []);
 
     return (
         <ApiDataContext.Provider
