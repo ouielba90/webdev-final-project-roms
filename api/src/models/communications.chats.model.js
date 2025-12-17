@@ -8,16 +8,12 @@ const messageSchema = new Schema({
     to: { type: String, required: true },
     text: { type: String, required: true },
     date: { type: Date, default: Date.now },
-    read: { type: Boolean, default: false },
-    chatId: { type: Number, required: true },
+    read: { type: Boolean, default: false }
+   
 });
 // Esquema principal del chat
 const ChatSchema = new Schema({
-    chatId: { 
-        type: Number, 
-        required: true, 
-        unique: true 
-    },
+    
     type: { 
         type: String, 
         required: true,

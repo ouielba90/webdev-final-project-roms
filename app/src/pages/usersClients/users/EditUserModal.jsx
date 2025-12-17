@@ -12,6 +12,7 @@ function EditUserModal({ editingUser, setEditingUser, handleUpdate }) {
               <label className="userEditFormLabels">Nombre y apellidos:</label>
               <input
                 type="text"
+                name="name"
                 value={editingUser.name ?? ""}
                 onChange={(e) =>
                   setEditingUser({ ...editingUser, name: e.target.value })
@@ -23,6 +24,7 @@ function EditUserModal({ editingUser, setEditingUser, handleUpdate }) {
               <label className="userEditFormLabels">Correo electrónico:</label>
               <input
                 type="email"
+                name="email"
                 value={editingUser.email ?? ""}
                 onChange={(e) =>
                   setEditingUser({ ...editingUser, email: e.target.value })
@@ -35,6 +37,7 @@ function EditUserModal({ editingUser, setEditingUser, handleUpdate }) {
             <div>
               <label className="userEditFormLabels">Rol:</label>
               <select className="edit-select-user"
+                name="role"
                 value={editingUser.role ?? ""}
                 onChange={(e) =>
                   setEditingUser({ ...editingUser, role: e.target.value })
@@ -50,6 +53,7 @@ function EditUserModal({ editingUser, setEditingUser, handleUpdate }) {
             <div>
               <label className="userEditFormLabels">Estado:</label>
               <select className="edit-select-user"
+                name="status"
                 value={editingUser.status ?? ""}
                 onChange={(e) =>
                   setEditingUser({ ...editingUser, status: e.target.value })

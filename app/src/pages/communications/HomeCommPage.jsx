@@ -48,6 +48,8 @@ function HomeCommPage() {
         <Link to='/communications/notifications'>Notificaciones</Link>
         <Link to='/communications/internal-chats'>Chats Internos</Link>
         <Link to='/communications/client-chats'>Chats con Clientes</Link>
+       
+
       </nav>
       <Outlet></Outlet>
     </>

@@ -22,14 +22,13 @@ function ChatListItem({
         minute: '2-digit'
     });
 
-    const otherParticipant = chat.participants.join(" y ");
-
     // Si no estamos en la vista de detalle del chat, solo mostrar el item de lista
+    const otherParticipant = chat.participants.join(" y ");
     if (!chat.isOpen) {
         return (
             <div
                 className={`chat-list-item ${chat.unreadCount > 0 ? 'unread' : ''}`}
-                onClick={() => navigate(`/communications/chat/${chat.chatId}`)}
+                onClick={() => navigate(`/communications/chat/${chat._id}`)}
             >
                 <div className="chat-avatar">
                     {chat.type === 'internal' ? '👥' : '🏢'}
@@ -65,6 +64,7 @@ function ChatListItem({
             </div>
 
             <div className="chat-messages-container">
+             
                 {chat.messages.map((message) => (
                     <ChatMessage
                         key={message.id}

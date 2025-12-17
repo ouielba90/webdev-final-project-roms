@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import ChatListItem from '../../components/communications/ChatListItem';
 
-// URL base de tu API backend
+// URL base de mi API backend
 const API_BASE_URL = 'http://localhost:3000/santos/chats';
 
 function InternalChatPage() {
@@ -27,9 +27,8 @@ function InternalChatPage() {
             }
 
             const data = await response.json();
-            const unreadChats = data.filter(chat => chat.unreadCount > 0);
-            setChats(unreadChats);
-            setFilterChats(unreadChats);
+            setChats(data);
+            setFilterChats(data);
             setError(null);
         } catch (err) {
             setError(err.message);
@@ -143,7 +142,6 @@ function InternalChatPage() {
                     />
                 </form>
             </div>
-
             <div className="container-chats">
                 <div className="chat-list-grid">
                     {filterChats.length === 0 ? (
@@ -155,7 +153,7 @@ function InternalChatPage() {
                     ) : (
                         filterChats.map(chat => (
                             <ChatListItem
-                                key={chat.chatId}
+                                key={chat._id}
                                 chat={chat}
                                 editingMessageId={editingMessageId}
                                 editText={editText}

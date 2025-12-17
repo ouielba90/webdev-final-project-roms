@@ -8,6 +8,7 @@ function ProviderDataApi({ children }) {
     const hardwareApi = useApi("ouissam/hardware");
     const licensesApi = useApi("ouissam/licenses");
     const serversApi = useApi("ouissam/servers");
+    const usersApi = useApi("marc/users")
     const useProjectsApi = useApi("ricardo/projects")
     const userProjectsUsersApi = useApi("projectsUsers")
 
@@ -15,6 +16,7 @@ function ProviderDataApi({ children }) {
     const [hardware, setHardware] = useState([]);
     const [licenses, setLicenses] = useState([]);
     const [servers, setServers] = useState([]);
+    const [users, setUsers] = useState([])
     const [useprojects, setUseProjects] = useState([])
     const [projectsUsers, setProjectsUsers] = useState([])
 
@@ -24,12 +26,13 @@ function ProviderDataApi({ children }) {
     // Se ejecutan todas las peticiones en paralelo al montar la aplicación
     // Los errores se acumulan en un array para mostrar feedback global si falla alguna API
     useEffect(() => {
-        //        softwareApi.getData().then(setSoftware).catch(e => setError(p => [...p, e.message]));
-        //        hardwareApi.getData().then(setHardware).catch(e => setError(p => [...p, e.message]));
-        //        licensesApi.getData().then(setLicenses).catch(e => setError(p => [...p, e.message]));
-        //        serversApi.getData().then(setServers).catch(e => setError(p => [...p, e.message]));
-        useProjectsApi.getData().then(setUseProjects).catch(e => setError(p => [...p, e.message]));
-        userProjectsUsersApi.getData().then(setProjectsUsers).catch(e => setError(p => [...p, e.message]));
+        /*    softwareApi.getData().then(setSoftware).catch(e => setError(p => [...p, e]));
+            hardwareApi.getData().then(setHardware).catch(e => setError(p => [...p, e]));
+            licensesApi.getData().then(setLicenses).catch(e => setError(p => [...p, e]));
+            serversApi.getData().then(setServers).catch(e => setError(p => [...p, e]));
+            usersApi.getData().then(setUsers).catch(e => setError(p => [...p, e]));
+            useProjectsApi.getData().then(setUseProjects).catch(e => setError(p => [...p, e]));
+            userProjectsUsersApi.getData().then(setProjectsUsers).catch(e => setError(p => [...p, e])); */
     }, []);
 
     return (
@@ -40,6 +43,7 @@ function ProviderDataApi({ children }) {
                 hardware, setHardware, hardwareApi,
                 licenses, setLicenses, licensesApi,
                 servers, setServers, serversApi,
+                users, setUsers, usersApi,
                 useprojects, setUseProjects, useProjectsApi,
                 projectsUsers, setProjectsUsers, userProjectsUsersApi
             }}
