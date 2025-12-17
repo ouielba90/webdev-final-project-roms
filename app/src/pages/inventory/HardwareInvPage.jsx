@@ -35,7 +35,10 @@ function HardwareInvPage() {
       lastMaintenance: data.lastMaintenance
     };
     const created = await hardwareApi.createData(newItem);
-    if (!created) return;
+    if (created?.error) {
+      alert(`Error al crear hardware: ${created.error}`);
+      return;
+    }
 
     setHardware(prev => [...prev, created]);
 
@@ -89,7 +92,10 @@ function HardwareInvPage() {
     }
 
     const updated = await hardwareApi.updateData(currEditId, updatedItem);
-    if (!updated) return;
+    if (updated?.error) {
+      alert(`Error al actualizar hardware: ${updated.error}`);
+      return;
+    }
 
     setHardware(prev =>
       prev.map(item => item._id === currEditId ? { ...item, ...updatedItem } : item)
@@ -110,7 +116,11 @@ function HardwareInvPage() {
     const userConfirmation = confirm(`¿Seguro que quieres proceder a eliminar el hardware cuya id es ${id}?`);
     if (userConfirmation) {
       const deleted = await hardwareApi.deleteData(id);
-      if (!deleted) return;
+      if (deleted?.error) {
+        alert(`Error al eliminar hardware: ${deleted.error}`);
+        setIdDeleting(null);
+        return;
+      }
       setHardware(prev => prev.filter(el => el._id !== id))
 
       await syncRemoveWithSoftware(id);

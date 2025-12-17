@@ -19,7 +19,7 @@ function MainHomeMenu() {
               <div className="card-inner">
                 <span>Inventario</span>
                 <p>Todo tu hardware, ordenado y seguro</p>
-                <img src="./../public/icons/inventory.png" alt="" />
+                <img src="/icons/inventory.png" alt="" />
               </div>
             </Link>
           </div>
@@ -28,7 +28,7 @@ function MainHomeMenu() {
               <div className="card-inner">
                 <span>Comunicaciones</span>
                 <p>Habla seguro, siempre y en cualquier lugar</p>
-                <img src="./../public/icons/communication.png" alt="" />
+                <img src="/icons/communication.png" alt="" />
               </div>
             </Link>
           </div>
@@ -37,7 +37,7 @@ function MainHomeMenu() {
               <div className="card-inner">
                 <span>Usuarios</span>
                 <p>Identidades siempre bajo control</p>
-                <img src="./../public/icons/users.png" alt="" />
+                <img src="/icons/users.png" alt="" />
               </div>
             </Link>
           </div>
@@ -46,7 +46,7 @@ function MainHomeMenu() {
               <div className="card-inner">
                 <span>Proyectos</span>
                 <p>Proyectos que avanzan sin riesgos</p>
-                <img src="./../public/icons/projects.png" alt="" />
+                <img src="/icons/projects.png" alt="" />
               </div>
             </Link>
           </div>

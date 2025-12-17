@@ -6,7 +6,7 @@ import softwareRoutes from "./src/routes/inventory.software.routes.js"
 import hardwareRoutes from "./src/routes/inventory.hardware.routes.js"
 import licensesRoutes from "./src/routes/inventory.licenses.routes.js"
 import serversRoutes from "./src/routes/inventory.servers.routes.js"
-import users from './data/users.data.js';
+//import users from './data/users.data.js';
 // Importacion de los projectos en la data de api
 import projects from "./data/projects.data.js";
 import projectsUsers from "./data/projectsUsers.data.js";

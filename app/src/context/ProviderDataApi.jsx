@@ -24,12 +24,12 @@ function ProviderDataApi({ children }) {
     // Se ejecutan todas las peticiones en paralelo al montar la aplicación
     // Los errores se acumulan en un array para mostrar feedback global si falla alguna API
     useEffect(() => {
-        softwareApi.getData().then(setSoftware).catch(e => setError(p => [...p, e]));
-        hardwareApi.getData().then(setHardware).catch(e => setError(p => [...p, e]));
-        licensesApi.getData().then(setLicenses).catch(e => setError(p => [...p, e]));
-        serversApi.getData().then(setServers).catch(e => setError(p => [...p, e]));
-        useProjectsApi.getData().then(setUseProjects).catch(e => setError(p => [...p, e]));
-        userProjectsUsersApi.getData().then(setProjectsUsers).catch(e => setError(p => [...p, e]));
+        softwareApi.getData().then(setSoftware).catch(e => setError(p => [...p, e.message]));
+        hardwareApi.getData().then(setHardware).catch(e => setError(p => [...p, e.message]));
+        licensesApi.getData().then(setLicenses).catch(e => setError(p => [...p, e.message]));
+        serversApi.getData().then(setServers).catch(e => setError(p => [...p, e.message]));
+        useProjectsApi.getData().then(setUseProjects).catch(e => setError(p => [...p, e.message]));
+        userProjectsUsersApi.getData().then(setProjectsUsers).catch(e => setError(p => [...p, e.message]));
     }, []);
 
     return (
