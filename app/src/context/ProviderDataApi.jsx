@@ -25,7 +25,7 @@ function ProviderDataApi({ children }) {
     return (
         <ApiDataContext.Provider
             value={{
-                error,
+                error, setError,
                 software, setSoftware, softwareApi,
                 hardware, setHardware, hardwareApi,
                 licenses, setLicenses, licensesApi,

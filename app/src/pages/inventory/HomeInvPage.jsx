@@ -14,11 +14,17 @@ function HomeInvPage() {
     servers, setServers, serversApi,
     setError, error } = useContext(ApiDataContext);
 
-  useEffect(() => {
+  const loadData = () => {
+    setError([]); // limpiar errores previos
+
     softwareApi.getData().then(setSoftware).catch(e => setError(p => [...p, e.message]));
     hardwareApi.getData().then(setHardware).catch(e => setError(p => [...p, e.message]));
     licensesApi.getData().then(setLicenses).catch(e => setError(p => [...p, e.message]));
     serversApi.getData().then(setServers).catch(e => setError(p => [...p, e.message]));
+  };
+
+  useEffect(() => {
+    loadData();
   }, []);
 
   const currPath = useLocation()
@@ -88,7 +94,7 @@ function HomeInvPage() {
         <Link to="/inventory/servers">Servidores</Link>
       </nav>
       {error.length > 0 ?
-        <ErrorAnimation />
+        <ErrorAnimation onRetry={loadData} />
         : [software, hardware, licenses, servers].some(arr => arr.length === 0) ?
           <LoadingAnimation />
           : <Outlet />
