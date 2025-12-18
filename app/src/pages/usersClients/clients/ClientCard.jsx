@@ -25,7 +25,7 @@ function ClientCard({ client, onDeleteClient}) {
 		}
 	}
 	return (
-		<div className="client-Div">
+		<div className="userClientDiv">
 			<div className="client-data">
 				<p>
 					{client.name} <br />

@@ -25,7 +25,7 @@ function UserCard({ user, onDeleteUser, onEditUser }) {
 		}
 	}
 	return (
-		<div className="userDiv">
+		<div className="userClientDiv">
 			<div className="user-data">
 				<p>
 					{user.name} <br />
@@ -36,7 +36,6 @@ function UserCard({ user, onDeleteUser, onEditUser }) {
 
 			<div>
 				<div className="estado" style={userStatus(user.status)}></div>
-				<h1 className="estado-txt">{user.status}</h1>
 			</div>
 
 			<div className="btn-box">
@@ -44,7 +43,6 @@ function UserCard({ user, onDeleteUser, onEditUser }) {
 					onClick={onDeleteUser}
 					className="user-btn">Eliminar
 				</button>
-
 				<button
 					onClick={onEditUser}
 					className="user-btn">
