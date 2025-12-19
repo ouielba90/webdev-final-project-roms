@@ -365,7 +365,7 @@ id, from, to (multiples o a un grupo en concreto), text, date, (attachments)
 
 <!-- Comunicaciones por Santos --> 
 
-# 📱 Sistema de Comunicaciones
+# 📱 Sistema de Comunicaciones Santos https://github.com/sanpro23
 
 ## 🛠️ Tecnologías
 
