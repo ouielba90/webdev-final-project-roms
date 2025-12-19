@@ -725,3 +725,309 @@ Este proyecto es parte de un bootcamp de desarrollo web y está bajo licencia MI
 - [React](https://react.dev/)
 
 ---
+
+
+
+# USUARIOS MARC
+
+# Módulo de Gestión de Usuarios y Clientes
+
+## 📋 Descripción General
+
+Este módulo permite gestionar usuarios y clientes dentro de la aplicación. Proporciona funcionalidades completas de CRUD (Crear, Leer, Actualizar, Eliminar) con una interfaz intuitiva para administrar diferentes roles y estados de usuarios.
+
+## 🏗️ Arquitectura del Módulo
+
+### Frontend (React)
+
+```
+src/
+├── pages/usersClients/
+│   ├── clients/
+│   │   ├── ClientCard.jsx
+│   │   └── ClientPage.jsx
+│   ├── users/
+│   │   ├── UserCard.jsx
+│   │   ├── UserPage.jsx
+│   │   ├── EditUserModal.jsx
+│   │   └── formulario.jsx
+│   └── UserHomePage.jsx
+├── logic/
+│   ├── getUsers.js
+│   └── getClients.js
+└── sections/
+    └── userSections.js
+```
+
+### Backend (Node.js + Express + MongoDB)
+
+```
+server/
+├── routes/
+│   └── users.user.routes.js
+├── controllers/
+│   └── users.user.controller.js
+└── models/
+    └── users.user.model.js
+```
+
+## 🎯 Características Principales
+
+### Gestión de Usuarios
+
+- ✅ Crear nuevos usuarios mediante formulario
+- ✅ Editar información de usuarios existentes
+- ✅ Eliminar usuarios
+- ✅ Visualizar lista completa de usuarios
+- ✅ Sistema de estados visuales (activo, inactivo, ausente, ocupado)
+
+### Gestión de Clientes
+
+- ✅ Filtrado automático de usuarios con rol "Cliente"
+- ✅ Visualización específica para clientes
+- ✅ Eliminación de clientes
+- ✅ Indicadores de estado visual
+
+## 📊 Modelo de Datos
+
+### Schema de Usuario (MongoDB)
+
+```javascript
+{
+  name: String (requerido),
+  email: String (requerido),
+  role: String (requerido),
+  status: String (requerido),
+  createdAt: Date (opcional)
+}
+```
+
+### Roles Disponibles
+
+- **Manager**: Administrador del sistema
+- **Consultor/Consultora**: Personal de consultoría
+- **Cliente**: Usuarios clientes
+- **Otros**: Roles adicionales
+
+### Estados Disponibles
+
+| Estado | Color | Código Hex |
+|--------|-------|------------|
+| Activo | Verde | #12a912ff |
+| Inactivo | Gris | #bfbfbfff |
+| Ausente | Amarillo | #ffbf00 |
+| Ocupado | Rojo | #dc143c |
+
+## 🔌 API Endpoints
+
+### Base URL
+```
+VITE_API_URL_USERS=tu_url_de_api
+```
+
+### Endpoints Disponibles
+
+| Método | Ruta | Descripción |
+|--------|------|-------------|
+| GET | `/` | Obtener todos los usuarios |
+| GET | `/:id` | Obtener un usuario específico |
+| POST | `/` | Crear un nuevo usuario |
+| PUT | `/:id` | Actualizar un usuario |
+| DELETE | `/:id` | Eliminar un usuario |
+
+## 💻 Componentes Principales
+
+### 1. UserHomePage.jsx
+Página principal que contiene la navegación y el layout general del módulo de usuarios.
+
+**Características:**
+- Navegación entre lista de usuarios y clientes
+- Header dinámico según la sección activa
+- Carga inicial de datos desde la API
+
+### 2. UserPage.jsx
+Gestión completa de usuarios con formulario de creación y lista.
+
+**Funcionalidades:**
+- Formulario de registro de nuevos usuarios
+- Lista de todos los usuarios
+- Modal de edición
+- Operaciones CRUD completas
+
+### 3. ClientPage.jsx
+Vista específica para la gestión de clientes.
+
+**Funcionalidades:**
+- Filtrado automático de usuarios con rol "Cliente"
+- Visualización en tarjetas
+- Eliminación de clientes
+
+### 4. UserCard.jsx y ClientCard.jsx
+Componentes de tarjeta para mostrar información individual.
+
+**Elementos:**
+- Nombre, email y rol del usuario
+- Indicador visual de estado
+- Botones de acción (eliminar, editar)
+
+### 5. EditUserModal.jsx
+Modal para editar información de usuarios existentes.
+
+**Campos editables:**
+- Nombre y apellidos
+- Correo electrónico
+- Rol
+- Estado
+
+### 6. RegistroForm.jsx (formulario.jsx)
+Formulario para el registro de nuevos usuarios.
+
+**Campos:**
+- Nombre (obligatorio)
+- Email (obligatorio)
+- Rol (obligatorio)
+
+## 🎨 Sistema de Estados Visuales
+
+Los estados se representan mediante indicadores de color circulares:
+
+```javascript
+function userStatus(estado) {
+  if (estado === 'activo') return { background: '#12a912ff' }
+  if (estado === 'inactivo') return { background: '#bfbfbfff' }
+  if (estado === 'ausente') return { background: '#ffbf00' }
+  if (estado === 'ocupado') return { background: '#dc143c' }
+}
+```
+
+## 🔄 Flujo de Datos
+
+### Creación de Usuario
+
+1. El usuario completa el formulario en `RegistroForm`
+2. Se envía `handleSubmit` con los datos del formulario
+3. Se actualiza el estado local con `setUsers`
+4. Se envía petición POST a la API mediante `usersApi.createData()`
+5. MongoDB almacena el nuevo usuario
+
+### Actualización de Usuario
+
+1. Click en botón "Editar" abre `EditUserModal`
+2. Se cargan los datos actuales en el formulario
+3. Usuario modifica campos necesarios
+4. `handleUpdate` envía datos actualizados
+5. PUT request actualiza en base de datos
+6. Estado local se sincroniza con los cambios
+
+### Eliminación de Usuario
+
+1. Click en botón "Eliminar"
+2. Se filtra el usuario del estado local inmediatamente
+3. DELETE request elimina de la base de datos
+4. La UI se actualiza automáticamente
+
+## 🛠️ Configuración e Instalación
+
+### Variables de Entorno
+
+Crea un archivo `.env` en la raíz del proyecto:
+
+```env
+VITE_API_URL_USERS=http://localhost:3000/api/users
+```
+
+### Instalación de Dependencias
+
+```bash
+# Frontend
+npm install react react-router-dom
+
+# Backend
+npm install express mongoose
+```
+
+### Ejecución
+
+```bash
+# Frontend (Puerto 5173 por defecto con Vite)
+npm run dev
+
+# Backend (Puerto 3000)
+npm start
+```
+
+## 📝 Context API
+
+El módulo utiliza `ApiDataContext` para gestionar el estado global:
+
+```javascript
+const { users, setUsers, usersApi } = useContext(ApiDataContext)
+```
+
+**Propiedades:**
+- `users`: Array de usuarios
+- `setUsers`: Función para actualizar usuarios
+- `usersApi`: Objeto con métodos CRUD
+
+## 🧪 Testing
+
+Para probar los endpoints de la API, puedes usar **Postman**:
+
+### Ejemplo: Crear Usuario
+
+```http
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "name": "Juan Pérez",
+  "email": "juan@example.com",
+  "role": "Cliente",
+  "status": "activo"
+}
+```
+
+### Ejemplo: Actualizar Usuario
+
+```http
+PUT http://localhost:3000/api/users/[ID_DEL_USUARIO]
+Content-Type: application/json
+
+{
+  "name": "Juan Pérez Actualizado",
+  "email": "juan.nuevo@example.com",
+  "role": "Manager",
+  "status": "ausente"
+}
+```
+
+## 🐛 Posibles Mejoras
+
+- [ ] Implementar paginación para listas grandes
+- [ ] Añadir búsqueda y filtros avanzados
+- [ ] Validación más robusta en el frontend
+- [ ] Confirmación antes de eliminar usuarios
+- [ ] Sistema de permisos según rol
+- [ ] Manejo de errores más detallado
+- [ ] Loading states durante operaciones asíncronas
+- [ ] Notificaciones de éxito/error (toast)
+
+## 📱 Responsive Design
+
+El módulo está diseñado para funcionar en diferentes tamaños de pantalla con las clases CSS apropiadas definidas en `stylesMarc.css`.
+
+## 🔐 Consideraciones de Seguridad
+
+- Validar inputs en frontend y backend
+- Implementar autenticación y autorización
+- Sanitizar datos antes de guardar en DB
+- Usar variables de entorno para URLs sensibles
+- Implementar rate limiting en la API
+
+## 📄 Licencia
+
+Este módulo es parte del proyecto final de desarrollo web full stack.
+
+---
+
+**Desarrollado con:** React, Node.js, Express, MongoDB, React Router DOM
