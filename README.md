@@ -448,7 +448,7 @@ PORT=3000
 MONGODB_URI=mongodb://localhost:3000/santos/
 
 # MongoDB Atlas
-# MONGODB_URI=mongodb+srv://usuario:password@cluster.mongodb.net
+# MONGODB_URI=mongodb+srv://usuario:<password>@cluster.mongodb.net
 
 # Entorno
 NODE_ENV=development
