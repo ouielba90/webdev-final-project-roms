@@ -274,12 +274,20 @@ Funcionalidades:
 ---
 ---
 
-# 📜 Lista de proyectos (hllricardo)
+<details>
+<summary>
+
+# 📜 Lista de proyectos (hllricardo) 
+
+</summary>
+
 Enlace a GitHub(https://github.com/hllricardo)
 
 Subpágina para mostrar y gestionar los diferentes proyectos que gestiona la empresa y a los empleados que estan trabajando en los diferentes proyectos.
 
-## Cada proyecto tendra:
+## Modelo de proyecto
+
+Cada proyecto tendra estas caracteristicas:
 
 * Id como clave única (objeto id, único)
 * Un titulo (string,  requerido)
@@ -289,25 +297,25 @@ Subpágina para mostrar y gestionar los diferentes proyectos que gestiona la emp
 * La lista de trabajadores asignados (Son los trabajadores los que se asignan a los proyectos)
 * Y el estado del proyecto (string, requerido)
 
-## Funcionalidades:
-* Mostrar información del proyecto:
+## Funcionalidades
+* **Mostrar información del proyecto:**
 Para desplegar la información de un proyecto y tener acceso a los botones de eliminar y editar hay que
 pinchar en el proyecto.
 
-* Crear:
+* **Crear:**
 Para crear un nuevo proyecto se rellenara los campos del titulo, nombre
 del cliente y descripción. Los demás campos estarán vacíos o con un
 valor por defecto.
 
-* Editar:
+* **Editar:**
 Se podrá editar todos los campos menos el de usuarios. Para añadir tareas tendrás
 escribir en el campo de "nueva tarea" y darle al botón de añadir, se vera la nueva tarea al
 final de la lista de tareas. Pincha en guardar para conservar los cambios.
 
-* Eliminar:
+* **Eliminar:**
 Para borrar un proyecto solo hay que pulsar el botón de eliminar y confirmar la eliminación.
 
-## Estructura que afecta a las sección de proyectos
+## Estructura que afecta a la sección de proyectos
 ```
 app
 └── src
@@ -335,7 +343,7 @@ app
 
 ```
 
-## Cambios y mejoras para el futuro:
+## Cambios y mejoras para el futuro
 
 * Añadir dos filtros en la lista de proyectos, un desplegable que muestre solo los clientes con los que se tenga un proyecto como mínimo y que al seleccionar
 uno se vean esos proyectos y otro filtro para ver según el estado en el que se encuentra el proyecto.
@@ -345,6 +353,7 @@ mover a los trabajadores de un proyecto a otro.
 
 * Unificar los datos de la base de datos de usuarios con la base provisional de usuarios asignados a proyectos
 
+</details>
 ---
 
 3. Usuarios y clientes (UserPage)
