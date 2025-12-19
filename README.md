@@ -565,41 +565,6 @@ Content-Type: application/json
 
 ## 💻 Frontend
 
-### Estructura de Componentes
-
-
-src/
-├── components/
-│   ├── Messages/
-│   │   ├── MessageList.jsx
-│   │   ├── MessageItem.jsx
-│   │   └── MessageForm.jsx
-│   │
-│   ├── Notifications/
-│   │   ├── NotificationList.jsx
-│   │   └── NotificationItem.jsx
-│   │
-│   └── Chat/
-│       ├── ChatWindow.jsx
-│       ├── ChatMessage.jsx
-│       └── ChatInput.jsx
-│
-├── pages/
-│   ├── Home.jsx
-│   ├── Messages.jsx
-│   ├── Notifications.jsx
-│   └── Chat.jsx
-│
-├── services/
-│   ├── api.js
-│   ├── messagesService.js
-│   ├── notificationsService.js
-│   └── chatService.js
-│
-├── App.jsx
-└── main.jsx
-
-
 ## 🧪 Testing con Postman
 
 ### Colección de Postman
