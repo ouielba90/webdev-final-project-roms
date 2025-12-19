@@ -274,7 +274,12 @@ Funcionalidades:
 ---
 ---
 
+<details>
+<summary>
+
 # 📜 Lista de proyectos (hllricardo) 
+
+</summary>
 
 Enlace a GitHub(https://github.com/hllricardo)
 
@@ -348,6 +353,7 @@ mover a los trabajadores de un proyecto a otro.
 
 * Unificar los datos de la base de datos de usuarios con la base provisional de usuarios asignados a proyectos
 
+</details>
 ---
 
 3. Usuarios y clientes (UserPage)
