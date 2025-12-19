@@ -273,8 +273,10 @@ Funcionalidades:
 
 ---
 ---
-
-# 📜 Lista de proyectos (hllricardo)
+<details>
+<summary>
+# 📜 Lista de proyectos (hllricardo) 
+</summary>
 Enlace a GitHub(https://github.com/hllricardo)
 
 Subpágina para mostrar y gestionar los diferentes proyectos que gestiona la empresa y a los empleados que estan trabajando en los diferentes proyectos.
@@ -346,7 +348,7 @@ uno se vean esos proyectos y otro filtro para ver según el estado en el que se 
 mover a los trabajadores de un proyecto a otro.
 
 * Unificar los datos de la base de datos de usuarios con la base provisional de usuarios asignados a proyectos
-
+</details>
 ---
 
 3. Usuarios y clientes (UserPage)
