@@ -401,7 +401,7 @@ proyecto/
 
 #### 1. Clonar el repositorio
 
-git clone https://github.com/tu-usuario/tu-proyecto.git
+git clone https://github.com/ouielba90/webdev-final-project-roms.git
 
 
 #### 2. Instalar dependencias del Backend
@@ -564,41 +564,6 @@ Content-Type: application/json
 
 
 ## 💻 Frontend
-
-### Estructura de Componentes
-
-
-src/
-├── components/
-│   ├── Messages/
-│   │   ├── MessageList.jsx
-│   │   ├── MessageItem.jsx
-│   │   └── MessageForm.jsx
-│   │
-│   ├── Notifications/
-│   │   ├── NotificationList.jsx
-│   │   └── NotificationItem.jsx
-│   │
-│   └── Chat/
-│       ├── ChatWindow.jsx
-│       ├── ChatMessage.jsx
-│       └── ChatInput.jsx
-│
-├── pages/
-│   ├── Home.jsx
-│   ├── Messages.jsx
-│   ├── Notifications.jsx
-│   └── Chat.jsx
-│
-├── services/
-│   ├── api.js
-│   ├── messagesService.js
-│   ├── notificationsService.js
-│   └── chatService.js
-│
-├── App.jsx
-└── main.jsx
-
 
 ## 🧪 Testing con Postman
 
