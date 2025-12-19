@@ -342,6 +342,8 @@ uno se vean esos proyectos y otro filtro para ver según el estado en el que se 
 * Crear los métodos para que los trabajadores puedan asignarse a los proyectos donde trabajen y también los métodos para que los administradores puedan
 mover a los trabajadores de un proyecto a otro.
 
+* Unificar los datos de la base de datos de usuarios con la base provisional de usuarios asignados a proyectos
+
 ---
 
 3. Usuarios y clientes (UserPage)
