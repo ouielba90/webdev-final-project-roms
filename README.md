@@ -306,28 +306,9 @@ id, from, to (multiples o a un grupo en concreto), text, date, (attachments)
 
 <!-- Comunicaciones por Santos --> 
 
+https://github.com/sanpro23
+
 # 📱 Sistema de Comunicaciones
-
-## 📋 Tabla de Contenidos
-
-- [Descripción](#descripción)
-- [Tecnologías](#tecnologías)
-- [Características](#características)
-- [Estructura del Proyecto](#estructura-del-proyecto)
-- [Instalación](#instalación)
-- [Configuración](#configuración)
-- [Uso](#uso)
-- [API Endpoints](#api-endpoints)
-- [Frontend](#frontend)
-- [Contribuidores](#contribuidores)
-
----
-
-## 🎯 Descripción
-
-Sistema completo de gestión empresarial desarrollado como proyecto final de bootcamp de desarrollo web full-stack. 
-La Funcionalidad que trabajo yo es la de comunicaciones
----
 
 ## 🛠️ Tecnologías
 
@@ -349,7 +330,6 @@ La Funcionalidad que trabajo yo es la de comunicaciones
 - **Git** - Control de versiones
 - **npm** - Gestor de paquetes
 
----
 
 ## ✨ Características
 
@@ -360,11 +340,9 @@ La Funcionalidad que trabajo yo es la de comunicaciones
 - ✅ Marcado de mensajes como leídos
 - ✅ Edición de mensajes
 
----
 
 ## 📁 Estructura del Proyecto
 
-```
 proyecto/
 │
 ├── backend/
@@ -409,37 +387,31 @@ proyecto/
 │   └── package.json
 │
 └── README.md
-```
 
----
 
 ## 🚀 Instalación
 
 ### Prerrequisitos
 
-- Node.js (v14 o superior)
-- MongoDB (local o MongoDB Atlas)
-- npm o yarn
+- Node.js (v22.2 )
+- MongoDB (MongoDB Atlas)
+- npm 
 - Git
 
 ### Pasos de Instalación
 
 #### 1. Clonar el repositorio
 
-```bash
 git clone https://github.com/tu-usuario/tu-proyecto.git
-cd tu-proyecto
-```
+
 
 #### 2. Instalar dependencias del Backend
 
-```bash
-cd backend
 npm install
-```
+
 
 **Dependencias principales:**
-```json
+
 {
   "dependencies": {
     "express": "^4.18.2",
@@ -448,26 +420,20 @@ npm install
     "dotenv": "^16.0.3"
   }
 }
-```
+
 
 #### 3. Instalar dependencias del Frontend
-
-```bash
-cd ../frontend
 npm install
-```
 
 **Dependencias principales:**
-```json
+
 {
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }
 }
-```
 
----
 
 ## ⚙️ Configuración
 
@@ -475,27 +441,24 @@ npm install
 
 #### 1. Crear archivo `.env` en la carpeta backend
 
-```env
 # Puerto del servidor
 PORT=3000
 
 # MongoDB local
-MONGODB_URI=mongodb://localhost:27017/gestion_empresarial
+MONGODB_URI=mongodb://localhost:3000/santos/
 
-# O MongoDB Atlas
-# MONGODB_URI=mongodb+srv://usuario:password@cluster.mongodb.net/gestion_empresarial
+# MongoDB Atlas
+# MONGODB_URI=mongodb+srv://usuario:password@cluster.mongodb.net
 
 # Entorno
 NODE_ENV=development
-```
+
 
 #### 2. Configurar MongoDB
 
 **Opción A: MongoDB Local**
-```bash
 # Iniciar MongoDB
 mongod
-```
 
 **Opción B: MongoDB Atlas**
 1. Crear cuenta en [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
@@ -511,52 +474,39 @@ mongod
 - `notifications` - Notificaciones del sistema
 - `chat-messages` - Mensajes de chat
 
----
-
 ## 🎮 Uso
 
 ### Iniciar el Backend
 
-```bash
-cd backend
 npm start
-```
 
 El servidor iniciará en `http://localhost:3000`
 
 **Salida esperada:**
-```
+
 API is running at http://localhost:3000
 MongoDB conectado correctamente
-```
 
 ### Iniciar el Frontend
 
-```bash
-cd frontend
 npm run dev
-```
 
-El frontend iniciará en `http://localhost:5173` (Vite) o `http://localhost:3000` (Create React App)
+El frontend iniciará en `http://localhost:5173` (Vite) 
 
 ### Verificar Instalación
 
 **Prueba rápida con curl:**
-```bash
+
 curl http://localhost:3000/
 # Respuesta: "Hello, World!"
-```
 
----
 
 ## 📡 API Endpoints
 
 ### Base URL
-```
-http://localhost:3000
-```
 
----
+http://localhost:3000
+
 
 ### 💬 Módulo de Comunicaciones
 
@@ -571,30 +521,10 @@ http://localhost:3000
 | DELETE | `/santos/messages/:id` | Eliminar mensaje |
 
 **Ejemplo: Crear mensaje**
-```bash
+
 POST http://localhost:3000/santos/messages
 Content-Type: application/json
 
-{
-  "from": "alice@example.com",
-  "to": "bob@example.com",
-  "text": "¿Nos vemos mañana?",
-  "date": "2024-12-13T15:00:00Z"
-}
-```
-
-**Respuesta:**
-```json
-{
-  "_id": "657abc123...",
-  "from": "alice@example.com",
-  "to": "bob@example.com",
-  "text": "¿Nos vemos mañana?",
-  "date": "2024-12-13T15:00:00.000Z",
-  "edited": false,
-  "editedAt": null
-}
-```
 
 #### Notificaciones
 
@@ -607,18 +537,10 @@ Content-Type: application/json
 | DELETE | `/santos/notifications/:id` | Eliminar notificación |
 
 **Ejemplo: Crear notificación**
-```bash
+
 POST http://localhost:3000/santos/notifications
 Content-Type: application/json
 
-{
-  "from": "system",
-  "to": "alice@example.com",
-  "text": "Tienes un nuevo mensaje",
-  "date": "2024-12-13T15:00:00Z",
-  "isAlert": false
-}
-```
 
 #### Chat Messages
 
@@ -631,47 +553,22 @@ Content-Type: application/json
 | DELETE | `/santos/chat-messages/:id` | Eliminar mensaje |
 
 **Ejemplo: Crear mensaje de chat**
-```bash
+
 POST http://localhost:3000/santos/chat-messages
 Content-Type: application/json
 
-{
-  "id": 1,
-  "from": "alice@example.com",
-  "to": "bob@example.com",
-  "text": "Hola Bob!",
-  "chatId": 100
-}
-```
 
 **Ejemplo: Marcar como leído**
-```bash
+
 PUT http://localhost:3000/santos/chat-messages/1
 Content-Type: application/json
 
-{
-  "read": true
-}
-```
-
----
-
-
-| Método | Endpoint | Descripción |
-|--------|----------|-------------|
-| GET | `/ouissam/servers` | Obtener todos los servidores |
-| GET | `/ouissam/servers/:id` | Obtener servidor por ID |
-| POST | `/ouissam/servers` | Crear servidor |
-| PUT | `/ouissam/servers/:id` | Actualizar servidor |
-| DELETE | `/ouissam/servers/:id` | Eliminar servidor |
-
----
 
 ## 💻 Frontend
 
 ### Estructura de Componentes
 
-```
+
 src/
 ├── components/
 │   ├── Messages/
@@ -702,20 +599,17 @@ src/
 │
 ├── App.jsx
 └── main.jsx
-```
----
+
 
 ## 🧪 Testing con Postman
 
 ### Colección de Postman
 
----
 
 ## 📝 Scripts Disponibles
 
 ### Backend
 
-```json
 {
   "scripts": {
     "start": "node index.js",
@@ -723,11 +617,10 @@ src/
     "test": "jest"
   }
 }
-```
+
 
 ### Frontend
 
-```json
 {
   "scripts": {
     "dev": "vite",
@@ -736,20 +629,15 @@ src/
     "lint": "eslint src"
   }
 }
-```
----
 
 ## 📄 Licencia
 
 Este proyecto es parte de un bootcamp de desarrollo web y está bajo licencia MIT.
 
----
 
 ## 🙏 Agradecimientos
 
 - A nuestros instructores del bootcamp
-
----
 
 ## 📚 Recursos Adicionales
 

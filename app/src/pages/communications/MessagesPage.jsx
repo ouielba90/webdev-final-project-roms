@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";  //hook para manejar estados
 import MessageCard from "../../components/communications/MessageCard"
 
-// URL de tu API backend - ajusta según mi configuración
+// URL de mi API backend - ajusta según mi configuración
 const API_URL = 'http://localhost:3000/santos/messages'; 
 
 //funcion principal
@@ -40,26 +40,30 @@ function MessagesPages() {
   };
 
   //Funcion para eliminar mensaje
-  const handleDeleteMessage = (id) => {
-    // código de eliminación
-    if (window.confirm('¿Estás seguro de que quieres eliminar este mensaje?')) {
-        try {
+  const handleDeleteMessage = async (id) => {
+  if (window.confirm('¿Estás seguro de que quieres eliminar este mensaje?')) {
+    try {
+      // Esperar a que fetch resuelva la promesa no devuelve objeto por eso necesitamos await
+      const response = await fetch(`${API_URL}/${id}`, {
+        method: 'DELETE',
+      });
 
-          //fetch devuelve una promesa no un objeto directo por eso usamos await
-          const response =  fetch(`${API_URL}/${id}`, {  
-            method: 'DELETE',
-          });
-          if (!response.ok) {
-            throw new Error('Error al eliminar el mensaje');
-          }
-          // Actualizar el estado local para reflejar la eliminación en la BD
-          setMessages(prevMessages => prevMessages.filter(message => message.id !== id));
-        }catch (err) {
-          console.error('Error al eliminar el mensaje:', err);
-          alert('No se pudo eliminar el mensaje. Inténtalo de nuevo más tarde.');   
-        }
+      if (!response.ok) {
+        throw new Error('Error al eliminar el mensaje');
+      }
+
+      // Actualizar el estado local para reflejar la eliminación en la BD
+      setMessages(prevMessages =>
+        prevMessages.filter(message => message.id !== id)
+      );
+    } catch (err) {
+      console.error('Error al eliminar el mensaje:', err);
+      alert('No se pudo eliminar el mensaje. Inténtalo de nuevo más tarde.');
     }
-  };
+  }
+};
+
+ 
 
   //Funcion para iniciar la edicion
   const handleStartEdit = (message) => {
