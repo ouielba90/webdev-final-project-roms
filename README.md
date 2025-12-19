@@ -292,21 +292,21 @@ Cada proyecto tendra estas caracteristicas:
 * Y el estado del proyecto (string, requerido)
 
 ## Funcionalidades
-* Mostrar información del proyecto:
+* **Mostrar información del proyecto:**
 Para desplegar la información de un proyecto y tener acceso a los botones de eliminar y editar hay que
 pinchar en el proyecto.
 
-* Crear:
+* **Crear:**
 Para crear un nuevo proyecto se rellenara los campos del titulo, nombre
 del cliente y descripción. Los demás campos estarán vacíos o con un
 valor por defecto.
 
-* Editar:
+* **Editar:**
 Se podrá editar todos los campos menos el de usuarios. Para añadir tareas tendrás
 escribir en el campo de "nueva tarea" y darle al botón de añadir, se vera la nueva tarea al
 final de la lista de tareas. Pincha en guardar para conservar los cambios.
 
-* Eliminar:
+* **Eliminar:**
 Para borrar un proyecto solo hay que pulsar el botón de eliminar y confirmar la eliminación.
 
 ## Estructura que afecta a la sección de proyectos
