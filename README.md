@@ -401,7 +401,7 @@ proyecto/
 
 #### 1. Clonar el repositorio
 
-git clone https://github.com/tu-usuario/tu-proyecto.git
+git clone https://github.com/ouielba90/webdev-final-project-roms.git
 
 
 #### 2. Instalar dependencias del Backend
