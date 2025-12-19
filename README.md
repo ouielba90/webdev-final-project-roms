@@ -278,13 +278,69 @@ Funcionalidades:
 
 Subpágina para mostrar y gestionar los diferentes proyectos que gestiona la empresa y a los empleados que estan trabajando en los diferentes proyectos.
 
-Cada proyecto tendra:
+## Cada proyecto tendra:
 
-  * Un titulo
-  * El nombre del cliente
-  * Las tareas que hay que realizar
-  * La lista de trabajadores asignados
-  * Y el estado del proyecto
+* Id como clave única (objeto id, único)
+* Un titulo (string,  requerido)
+* El nombre del cliente (string, requerido)
+* La descripción del proyecto (string)
+* Las tareas que hay que realizar (lista de string)
+* La lista de trabajadores asignados (Son los trabajadores los que se asignan a los proyectos)
+* Y el estado del proyecto (string, requerido)
+
+## Funcionalidades:
+* Mostrar información del proyecto:
+Para desplegar la información de un proyecto y tener acceso a los botones de eliminar y editar hay que
+pinchar en el proyecto.
+
+* Crear:
+Para crear un nuevo proyecto se rellenara los campos del titulo, nombre
+del cliente y descripción. Los demás campos estarán vacíos o con un
+valor por defecto.
+
+* Editar:
+Se podrá editar todos los campos menos el de usuarios. Para añadir tareas tendrás
+escribir en el campo de "nueva tarea" y darle al botón de añadir, se vera la nueva tarea al
+final de la lista de tareas. Pincha en guardar para conservar los cambios.
+
+* Eliminar:
+Para borrar un proyecto solo hay que pulsar el botón de eliminar y confirmar la eliminación.
+
+## Estructura que afecta a las sección de proyectos
+```
+app
+└── src
+    ├── App.jsx
+    ├── components
+    │   └── projects
+    │       ├── fetchData.js
+    │       ├── ProjectCreate.jsx
+    │       ├── ProjectDelete.jsx
+    │       ├── ProjectEdit.jsx
+    │       ├── ProjectItem.jsx
+    │       └── ProjectList.jsx
+    ├── context
+    │   ├── ApiDataContext.js
+    │   └── ProviderDataApi.jsx
+    ├── logic
+    │   ├── getProjects.js
+    │   └── useApi.js
+    ├── pages
+    │   └── projects
+    │       ├── HomeProjPage.jsx
+    │       └── StylesRicardo.css
+    └── sections
+        └── projectSections.js
+
+```
+
+## Cambios y mejoras para el futuro:
+
+* Añadir dos filtros en la lista de proyectos, un desplegable que muestre solo los clientes con los que se tenga un proyecto como mínimo y que al seleccionar
+uno se vean esos proyectos y otro filtro para ver según el estado en el que se encuentra el proyecto.
+
+* Crear los métodos para que los trabajadores puedan asignarse a los proyectos donde trabajen y también los métodos para que los administradores puedan
+mover a los trabajadores de un proyecto a otro.
 
 ---
 
