@@ -365,7 +365,6 @@ id, from, to (multiples o a un grupo en concreto), text, date, (attachments)
 
 <!-- Comunicaciones por Santos --> 
 
-```md
 # 📱 Sistema de Comunicaciones
 
 ## 🛠️ Tecnologías
@@ -391,15 +390,15 @@ id, from, to (multiples o a un grupo en concreto), text, date, (attachments)
 ## ✨ Características
 
 ### 💬 Módulo de Comunicaciones (Santos)
-- ✅ Mensajes directos entre usuarios  
-- ✅ Sistema de notificaciones  
-- ✅ Chat con historial de conversaciones  
-- ✅ Marcado de mensajes como leídos  
-- ✅ Edición de mensajes  
+- ✅ Mensajes directos entre usuarios
+- ✅ Sistema de notificaciones
+- ✅ Chat con historial de conversaciones
+- ✅ Marcado de mensajes como leídos
+- ✅ Edición de mensajes
 
 ## 📁 Estructura del Proyecto
 
-```txt
+```
 proyecto/
 │
 ├── backend/
@@ -410,17 +409,17 @@ proyecto/
 │   │   ├── models/
 │   │   │   ├── communications.messages.model.js
 │   │   │   ├── communications.notifications.model.js
-│   │   │   ├── communications.chats.model.js
+│   │   │   └── communications.chats.model.js
 │   │   │
 │   │   ├── controllers/
 │   │   │   ├── communications.messages.controller.js
 │   │   │   ├── communications.notifications.controller.js
-│   │   │   ├── communications.chats.controller.js
+│   │   │   └── communications.chats.controller.js
 │   │   │
 │   │   └── routes/
 │   │       ├── communications.messages.routes.js
 │   │       ├── communications.notifications.routes.js
-│   │       ├── comunications.chats.routes.js
+│   │       └── comunications.chats.routes.js
 │   │
 │   ├── data/
 │   │   ├── ChatMessages.data.js
@@ -446,7 +445,6 @@ proyecto/
 ## 🚀 Instalación
 
 ### Prerrequisitos
-
 - Node.js (v22.2)
 - MongoDB (MongoDB Atlas)
 - npm
@@ -463,10 +461,11 @@ git clone https://github.com/ouielba90/webdev-final-project-roms.git
 #### 2. Instalar dependencias del Backend
 
 ```bash
+cd backend
 npm install
 ```
 
-**Dependencias principales:**
+Dependencias principales:
 
 ```json
 {
@@ -482,10 +481,11 @@ npm install
 #### 3. Instalar dependencias del Frontend
 
 ```bash
+cd frontend
 npm install
 ```
 
-**Dependencias principales:**
+Dependencias principales:
 
 ```json
 {
@@ -507,10 +507,10 @@ npm install
 PORT=3000
 
 # MongoDB local
-MONGODB_URI=mongodb://localhost:3000/santos/
+MONGODB_URI=mongodb://localhost:27017/santos
 
 # MongoDB Atlas
-# MONGODB_URI=mongodb+srv://usuario:<password>@cluster.mongodb.net
+# MONGODB_URI=mongodb+srv://usuario:<password>@cluster.mongodb.net/santos
 
 # Entorno
 NODE_ENV=development
@@ -526,30 +526,31 @@ mongod
 
 **Opción B: MongoDB Atlas**
 
-1. Crear cuenta en [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)  
-2. Crear un cluster  
-3. Obtener connection string  
-4. Añadir IP a whitelist  
-5. Copiar URI a `.env`  
+1. Crear cuenta en [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+2. Crear un cluster
+3. Obtener connection string
+4. Añadir IP a whitelist
+5. Copiar URI a `.env`
 
 #### 3. Estructura de la Base de Datos
 
-**Colecciones creadas automáticamente:**
-- `messages` - Mensajes directos  
-- `notifications` - Notificaciones del sistema  
-- `chat-messages` - Mensajes de chat  
+Colecciones creadas automáticamente:
+- `messages` - Mensajes directos
+- `notifications` - Notificaciones del sistema
+- `chat-messages` - Mensajes de chat
 
 ## 🎮 Uso
 
 ### Iniciar el Backend
 
 ```bash
+cd backend
 npm start
 ```
 
 El servidor iniciará en `http://localhost:3000`
 
-**Salida esperada:**
+Salida esperada:
 
 ```
 API is running at http://localhost:3000
@@ -559,6 +560,7 @@ MongoDB conectado correctamente
 ### Iniciar el Frontend
 
 ```bash
+cd frontend
 npm run dev
 ```
 
@@ -566,7 +568,7 @@ El frontend iniciará en `http://localhost:5173` (Vite)
 
 ### Verificar Instalación
 
-**Prueba rápida con curl:**
+Prueba rápida con curl:
 
 ```bash
 curl http://localhost:3000/
@@ -576,7 +578,6 @@ curl http://localhost:3000/
 ## 📡 API Endpoints
 
 ### Base URL
-
 ```
 http://localhost:3000
 ```
@@ -598,6 +599,13 @@ http://localhost:3000
 ```http
 POST http://localhost:3000/santos/messages
 Content-Type: application/json
+
+{
+  "senderId": "user123",
+  "receiverId": "user456",
+  "content": "Hola, ¿cómo estás?",
+  "timestamp": "2024-01-15T10:30:00Z"
+}
 ```
 
 #### Notificaciones
@@ -615,6 +623,13 @@ Content-Type: application/json
 ```http
 POST http://localhost:3000/santos/notifications
 Content-Type: application/json
+
+{
+  "userId": "user123",
+  "type": "message",
+  "content": "Tienes un nuevo mensaje",
+  "read": false
+}
 ```
 
 #### Chat Messages
@@ -632,6 +647,13 @@ Content-Type: application/json
 ```http
 POST http://localhost:3000/santos/chat-messages
 Content-Type: application/json
+
+{
+  "chatId": "chat001",
+  "senderId": "user123",
+  "content": "Hola desde el chat",
+  "timestamp": "2024-01-15T10:30:00Z"
+}
 ```
 
 **Ejemplo: Marcar como leído**
@@ -639,13 +661,23 @@ Content-Type: application/json
 ```http
 PUT http://localhost:3000/santos/chat-messages/1
 Content-Type: application/json
+
+{
+  "read": true
+}
 ```
 
 ## 💻 Frontend
 
+El frontend está construido con React y proporciona una interfaz de usuario intuitiva para:
+- Enviar y recibir mensajes directos
+- Ver y gestionar notificaciones
+- Participar en chats en tiempo real
+- Ver historial de conversaciones
+
 ## 🧪 Testing con Postman
 
-### Colección de Postman
+Puedes importar la colección de Postman para probar todos los endpoints fácilmente. La colección incluye ejemplos de todas las operaciones CRUD para cada módulo.
 
 ## 📝 Scripts Disponibles
 
@@ -681,15 +713,15 @@ Este proyecto es parte de un bootcamp de desarrollo web y está bajo licencia MI
 ## 🙏 Agradecimientos
 
 - A nuestros instructores del bootcamp
+- A la comunidad de desarrolladores
 
 ## 📚 Recursos Adicionales
 
 ### Documentación Oficial
-- [Node.js](https://nodejs.org/docs/)
+- [Node.js](https://nodejs.org/)
 - [Express.js](https://expressjs.com/)
-- [MongoDB](https://docs.mongodb.com/)
-- [Mongoose](https://mongoosejs.com/docs/)
+- [MongoDB](https://www.mongodb.com/)
+- [Mongoose](https://mongoosejs.com/)
 - [React](https://react.dev/)
-```
 
-
+---
