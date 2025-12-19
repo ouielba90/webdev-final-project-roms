@@ -342,7 +342,7 @@ https://github.com/sanpro23
 
 
 ## 📁 Estructura del Proyecto
-
+``` 
 proyecto/
 │
 ├── backend/
@@ -389,9 +389,8 @@ proyecto/
 └── README.md
 
 
-## 🚀 Instalación
-
-### Prerrequisitos
+``` 
+� Instalacióón### Prerrequisitos
 
 - Node.js (v22.2 )
 - MongoDB (MongoDB Atlas)
