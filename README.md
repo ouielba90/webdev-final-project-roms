@@ -306,7 +306,7 @@ id, from, to (multiples o a un grupo en concreto), text, date, (attachments)
 
 <!-- Comunicaciones por Santos --> 
 
-```
+```md
 # 📱 Sistema de Comunicaciones
 
 ## 🛠️ Tecnologías
@@ -332,15 +332,15 @@ id, from, to (multiples o a un grupo en concreto), text, date, (attachments)
 ## ✨ Características
 
 ### 💬 Módulo de Comunicaciones (Santos)
-- ✅ Mensajes directos entre usuarios
-- ✅ Sistema de notificaciones
-- ✅ Chat con historial de conversaciones
-- ✅ Marcado de mensajes como leídos
-- ✅ Edición de mensajes
+- ✅ Mensajes directos entre usuarios  
+- ✅ Sistema de notificaciones  
+- ✅ Chat con historial de conversaciones  
+- ✅ Marcado de mensajes como leídos  
+- ✅ Edición de mensajes  
 
 ## 📁 Estructura del Proyecto
 
-```
+```txt
 proyecto/
 │
 ├── backend/
@@ -352,19 +352,16 @@ proyecto/
 │   │   │   ├── communications.messages.model.js
 │   │   │   ├── communications.notifications.model.js
 │   │   │   ├── communications.chats.model.js
-│   │   │  
 │   │   │
 │   │   ├── controllers/
 │   │   │   ├── communications.messages.controller.js
 │   │   │   ├── communications.notifications.controller.js
 │   │   │   ├── communications.chats.controller.js
-│   │   │  
 │   │   │
 │   │   └── routes/
 │   │       ├── communications.messages.routes.js
 │   │       ├── communications.notifications.routes.js
 │   │       ├── comunications.chats.routes.js
-│   │      
 │   │
 │   ├── data/
 │   │   ├── ChatMessages.data.js
@@ -465,24 +462,23 @@ NODE_ENV=development
 **Opción A: MongoDB Local**
 
 ```bash
-# Iniciar MongoDB
 mongod
 ```
 
 **Opción B: MongoDB Atlas**
 
-1. Crear cuenta en [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
-2. Crear un cluster
-3. Obtener connection string
-4. Añadir IP a whitelist
-5. Copiar URI a `.env`
+1. Crear cuenta en [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)  
+2. Crear un cluster  
+3. Obtener connection string  
+4. Añadir IP a whitelist  
+5. Copiar URI a `.env`  
 
 #### 3. Estructura de la Base de Datos
 
 **Colecciones creadas automáticamente:**
-- `messages` - Mensajes directos
-- `notifications` - Notificaciones del sistema
-- `chat-messages` - Mensajes de chat
+- `messages` - Mensajes directos  
+- `notifications` - Notificaciones del sistema  
+- `chat-messages` - Mensajes de chat  
 
 ## 🎮 Uso
 
@@ -636,3 +632,5 @@ Este proyecto es parte de un bootcamp de desarrollo web y está bajo licencia MI
 - [Mongoose](https://mongoosejs.com/docs/)
 - [React](https://react.dev/)
 ```
+
+
