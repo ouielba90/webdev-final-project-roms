@@ -306,8 +306,7 @@ id, from, to (multiples o a un grupo en concreto), text, date, (attachments)
 
 <!-- Comunicaciones por Santos --> 
 
-https://github.com/sanpro23
-
+```
 # 📱 Sistema de Comunicaciones
 
 ## 🛠️ Tecnologías
@@ -330,7 +329,6 @@ https://github.com/sanpro23
 - **Git** - Control de versiones
 - **npm** - Gestor de paquetes
 
-
 ## ✨ Características
 
 ### 💬 Módulo de Comunicaciones (Santos)
@@ -340,9 +338,9 @@ https://github.com/sanpro23
 - ✅ Marcado de mensajes como leídos
 - ✅ Edición de mensajes
 
-
 ## 📁 Estructura del Proyecto
-``` 
+
+```
 proyecto/
 │
 ├── backend/
@@ -387,30 +385,34 @@ proyecto/
 │   └── package.json
 │
 └── README.md
+```
 
+## 🚀 Instalación
 
-``` 
-� Instalacióón### Prerrequisitos
+### Prerrequisitos
 
-- Node.js (v22.2 )
+- Node.js (v22.2)
 - MongoDB (MongoDB Atlas)
-- npm 
+- npm
 - Git
 
 ### Pasos de Instalación
 
 #### 1. Clonar el repositorio
 
+```bash
 git clone https://github.com/ouielba90/webdev-final-project-roms.git
-
+```
 
 #### 2. Instalar dependencias del Backend
 
+```bash
 npm install
-
+```
 
 **Dependencias principales:**
 
+```json
 {
   "dependencies": {
     "express": "^4.18.2",
@@ -419,20 +421,24 @@ npm install
     "dotenv": "^16.0.3"
   }
 }
-
+```
 
 #### 3. Instalar dependencias del Frontend
+
+```bash
 npm install
+```
 
 **Dependencias principales:**
 
+```json
 {
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }
 }
-
+```
 
 ## ⚙️ Configuración
 
@@ -440,6 +446,7 @@ npm install
 
 #### 1. Crear archivo `.env` en la carpeta backend
 
+```env
 # Puerto del servidor
 PORT=3000
 
@@ -451,15 +458,19 @@ MONGODB_URI=mongodb://localhost:3000/santos/
 
 # Entorno
 NODE_ENV=development
-
+```
 
 #### 2. Configurar MongoDB
 
 **Opción A: MongoDB Local**
+
+```bash
 # Iniciar MongoDB
 mongod
+```
 
 **Opción B: MongoDB Atlas**
+
 1. Crear cuenta en [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
 2. Crear un cluster
 3. Obtener connection string
@@ -477,35 +488,43 @@ mongod
 
 ### Iniciar el Backend
 
+```bash
 npm start
+```
 
 El servidor iniciará en `http://localhost:3000`
 
 **Salida esperada:**
 
+```
 API is running at http://localhost:3000
 MongoDB conectado correctamente
+```
 
 ### Iniciar el Frontend
 
+```bash
 npm run dev
+```
 
-El frontend iniciará en `http://localhost:5173` (Vite) 
+El frontend iniciará en `http://localhost:5173` (Vite)
 
 ### Verificar Instalación
 
 **Prueba rápida con curl:**
 
+```bash
 curl http://localhost:3000/
 # Respuesta: "Hello, World!"
-
+```
 
 ## 📡 API Endpoints
 
 ### Base URL
 
+```
 http://localhost:3000
-
+```
 
 ### 💬 Módulo de Comunicaciones
 
@@ -521,9 +540,10 @@ http://localhost:3000
 
 **Ejemplo: Crear mensaje**
 
+```http
 POST http://localhost:3000/santos/messages
 Content-Type: application/json
-
+```
 
 #### Notificaciones
 
@@ -537,9 +557,10 @@ Content-Type: application/json
 
 **Ejemplo: Crear notificación**
 
+```http
 POST http://localhost:3000/santos/notifications
 Content-Type: application/json
-
+```
 
 #### Chat Messages
 
@@ -553,15 +574,17 @@ Content-Type: application/json
 
 **Ejemplo: Crear mensaje de chat**
 
+```http
 POST http://localhost:3000/santos/chat-messages
 Content-Type: application/json
-
+```
 
 **Ejemplo: Marcar como leído**
 
+```http
 PUT http://localhost:3000/santos/chat-messages/1
 Content-Type: application/json
-
+```
 
 ## 💻 Frontend
 
@@ -569,11 +592,11 @@ Content-Type: application/json
 
 ### Colección de Postman
 
-
 ## 📝 Scripts Disponibles
 
 ### Backend
 
+```json
 {
   "scripts": {
     "start": "node index.js",
@@ -581,10 +604,11 @@ Content-Type: application/json
     "test": "jest"
   }
 }
-
+```
 
 ### Frontend
 
+```json
 {
   "scripts": {
     "dev": "vite",
@@ -593,11 +617,11 @@ Content-Type: application/json
     "lint": "eslint src"
   }
 }
+```
 
 ## 📄 Licencia
 
 Este proyecto es parte de un bootcamp de desarrollo web y está bajo licencia MIT.
-
 
 ## 🙏 Agradecimientos
 
@@ -611,5 +635,4 @@ Este proyecto es parte de un bootcamp de desarrollo web y está bajo licencia MI
 - [MongoDB](https://docs.mongodb.com/)
 - [Mongoose](https://mongoosejs.com/docs/)
 - [React](https://react.dev/)
-
-
+```
