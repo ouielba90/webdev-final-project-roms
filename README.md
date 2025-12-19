@@ -274,7 +274,8 @@ Funcionalidades:
 ---
 ---
 
-# 📜 Lista de proyectos
+# 📜 Lista de proyectos (hllricardo)
+Enlace a GitHub(https://github.com/hllricardo)
 
 Subpágina para mostrar y gestionar los diferentes proyectos que gestiona la empresa y a los empleados que estan trabajando en los diferentes proyectos.
 
