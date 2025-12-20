@@ -28,7 +28,7 @@ El proyecto ha sido construido por un equipo multidisciplinar que ha asumido rol
 
 
 <details>
-<summary><b>🛠️ Tecnologías usadas</b></summary>
+<summary><h2>🛠️ Tecnologías usadas</h2></summary>
 
 ### 🖥️ Backend
 - **Node.js** - Entorno de ejecución
@@ -56,7 +56,7 @@ El proyecto ha sido construido por un equipo multidisciplinar que ha asumido rol
 ---
 
 <details>
-<summary><b>▶️ Instrucciones de Ejecución</b></summary>
+<summary><h2>▶️ Instrucciones de Ejecución</h2></summary>
 
 Para desplegar el proyecto en tu entorno local, necesitarás **Node.js** y **MongoDB**. El repositorio está dividido en dos directorios principales: `api` (Backend) y `app` (Frontend).
 
@@ -123,7 +123,7 @@ npm run dev
 ---
 
 <details>
-<summary><b>🔌 API y Backend</b></summary>
+<summary><h2>🔌 API y Backend</h2></summary>
 
 El backend está construido con **Node.js** y **Express**, exponiendo una API RESTful que gestiona la lógica de negocio y la persistencia de datos en **MongoDB**. Utiliza principios de arquitectura MVC (Modelo-Vista-Controlador) para organizar el código.
 
@@ -191,7 +191,7 @@ El backend está construido con **Node.js** y **Express**, exponiendo una API RE
 ---
 
 <details>
-<summary><b>🌐 Contexto Global (Provider)</b></summary>
+<summary><h2>🌐 Contexto Global (Provider)</h2></summary>
 
 La aplicación utiliza **React Context API** para gestionar el estado global, centralizado en el componente `ProviderDataApi`.
 
@@ -220,7 +220,7 @@ const Component = () => {
 ---
 
 <details>
-<summary><b>📜 Lista de Proyectos (@hllricardo)</b></summary>
+<summary><h2>📜 Lista de Proyectos (@hllricardo)</h2></summary>
 
 Enlace a GitHub: [hllricardo](https://github.com/hllricardo)
 
@@ -306,7 +306,7 @@ app
 ---
 
 <details>
-<summary><b>📦 Inventario (@ouielba90)</b></summary>
+<summary><h2>📦 Inventario (@ouielba90)</h2></summary>
 
 Enlace a GitHub: [ouielba90](https://github.com/ouielba90)
 
@@ -551,7 +551,7 @@ Este enfoque facilita una **gestión proactiva** del inventario IT.
 ---
 
 <details>
-<summary><b>📱 Sistema de Comunicaciones (@sanpro23)</b></summary>
+<summary><h2>📱 Sistema de Comunicaciones (@sanpro23)</h2></summary>
 
 Enlace a GitHub: [sanpro23](https://github.com/sanpro23)
 
