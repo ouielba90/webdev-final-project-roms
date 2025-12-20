@@ -586,6 +586,76 @@ PUT http://localhost:3000/santos/chat-messages/1
 Content-Type: application/json
 ```
 
+# Página de Usuarios 👥
+
+Este proyecto forma parte del Bootcamp de Desarrollo Web.  
+La página de usuarios permite **crear, editar, eliminar y visualizar perfiles** de manera sencilla y dinámica.
+
+## 🚀 Características
+- Listado de usuarios con datos básicos.
+- Funciones de edición y eliminación conectadas al backend.
+- Uso de React para componentes reutilizables.
+- LocalStorage y API para persistencia de datos.
+
+## Uso´
+
+Accede a la página principal para ver el listado de usuarios.
+
+Haz clic en Editar para modificar un perfil.
+
+Usa Eliminar para borrar un usuario.
+
+Crea nuevos usuarios desde el formulario.
+
+## 📁 Estructura del Proyecto
+
+```
+proyecto/
+│
+├── backend/
+│   ├── src/
+│   │   ├── config/
+│   │   │   └── db.js                              # Conexión MongoDB
+│   │   │
+│   │   ├── models/
+│   │   │   ├── communications.messages.model.js
+│   │   │   ├── communications.notifications.model.js
+│   │   │   ├── communications.chats.model.js
+│   │   │  
+│   │   │
+│   │   ├── controllers/
+│   │   │   ├── communications.messages.controller.js
+│   │   │   ├── communications.notifications.controller.js
+│   │   │   ├── communications.chats.controller.js
+│   │   │  
+│   │   │
+│   │   └── routes/
+│   │       ├── communications.messages.routes.js
+│   │       ├── communications.notifications.routes.js
+│   │       ├── comunications.chats.routes.js
+│   │      
+│   │
+│   ├── data/
+│   │   ├── us.data.js
+│   │   ├── messages.data.js
+│   │   └── notifications.data.js
+│   │
+│   ├── .env
+│   ├── index.js
+│   └── package.json
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── App.jsx
+│   │
+│   └── package.json
+│
+└── README.md
+```
+
 ## 💻 Frontend
 
 ## 🧪 Testing con Postman
