@@ -1,53 +1,472 @@
-# Proyecto Final
 
-## Negocio: consultoría de ciberseguridad
+# 🛡️ Sistema de Gestión de Consultoría de Ciberseguridad (SGCC)
 
-1. Proyectos (ProjectPage)
-- Lista de proyectos + tareas internas (usuarios y clientes pueden interactuar (...) con estos)
-- Crear, editar y eliminar
-
-Ejemplos
-- Auditoría de red interna – Cliente: TechNova – Estado: En progreso – Revisión de red y accesos 
-    - Tareas: Escaneo de puertos (ok) Análisis de logs (en progreso) Informe final (en progreso)
-- Test de penetración web – Cliente: FinTrust – Estado: Pendiente – Simulación de ataques web
-- Autenticación multifactor – Cliente: AccessCorp – Estado: Completado – Activación de MFA en usuario
-
-Propiedades
-id, name, client, status, description, tasks, collabs
+![Status](https://img.shields.io/badge/Estado-En%20curso-yellow)
+![Version](https://img.shields.io/badge/version-0.5.0--alpha-blue)
 
 
-# 📦 Inventario (@ouielba90) 
+## 📖 Introducción General
 
-Esta sección implementa la **gestión integral de activos tecnológicos** de la plataforma de consultoría de ciberseguridad. El módulo cubre **hardware, software, licencias y servidores**, proporcionando trazabilidad completa, relaciones entre entidades y validación de reglas de negocio críticas.
+**SGCC** es una plataforma web integral desarrollada como Proyecto Final del Bootcamp de Desarrollo Web Fullstack. La aplicación está diseñada para digitalizar y optimizar los procesos operativos de una **consultora de ciberseguridad**, centralizando la gestión de recursos, proyectos, usuarios y comunicaciones en un único dashboard unificado.
 
-La implementación está realizada con **React**, **Context API** y una arquitectura modular orientada a escalabilidad y mantenimiento.
+El sistema permite la administración eficiente de:
+*   **Proyectos**: Ciclo de vida completo de auditorías y consultorías.
+*   **Inventario Tecnológico**: Hardware, software, licencias y servidores.
+*   **Comunicaciones**: Mensajería interna e instantánea entre departamentos.
+*   **Usuarios**: Gestión de roles (consultor, cliente) y accesos.
+
+### 🚀 Arquitectos del Proyecto
+
+El proyecto ha sido construido por un equipo multidisciplinar que ha asumido roles de ingeniería especializados:
+
+| Miembro | Rol Especializado | Impacto Clave |
+|---------|-------------------|---------------|
+| **Ricardo** | *Arquitecto Principal de Software* | Orquestación de flujos de trabajo y lógica de negocio escalable. |
+| **Ouissam** | *Ingeniero de Sistemas y Validaciones* | Validación de sistemas críticos y trazabilidad de activos físicos/lógicos. |
+| **Santos** | *Especialista en Sistemas Tiempo Real* | Implementación de ecosistemas de mensajería síncrona y reactiva. |
+| **Marc** | *Responsable de Seguridad y Accesos* | Blindaje de accesos, autenticación robusta y gestión granular de roles (RBAC). |
+
+
+<details>
+<summary><h2>🛠️ Tecnologías usadas</h2></summary>
+
+### 🖥️ Backend
+- **Node.js** - Entorno de ejecución
+- **Express.js** - Framework web
+- **MongoDB** - Base de datos NoSQL
+- **Mongoose** - ODM para MongoDB
+- **CORS** - Manejo de peticiones entre dominios
+- **dotenv** - Variables de entorno
+
+### 💻 Frontend
+- **React** - Librería de UI
+- **React Router DOM** - Enrutamiento
+- **Framer Motion & Lottie** - Animaciones avanzadas
+- **JavaScript (ES6+)** - Lenguaje de programación
+- **HTML5 & CSS3** - Estructura y estilos
+
+### 🧰 Herramientas de Desarrollo
+- **Postman** - Testing de API
+- **Git** - Control de versiones
+- **npm** - Gestor de paquetes
+
+
+</details>
 
 ---
 
-## 🧱 Arquitectura y Diseño
+<details>
+<summary><h2>▶️ Instrucciones de Ejecución</h2></summary>
 
-### Estructura del Proyecto
+Para desplegar el proyecto en tu entorno local, necesitarás **Node.js** y **MongoDB**. El repositorio está dividido en dos directorios principales: `api` (Backend) y `app` (Frontend).
+
+### 📋 Prerrequisitos
+*   Node.js (v16 o superior)
+*   MongoDB (Instancia local o Atlas)
+
+
+### ⚙️ Configuración
+
+Antes de iniciar el servidor, es necesario configurar las variables de entorno.
+
+#### 1. Backend (API)
+Copia el archivo de ejemplo y renómbralo a `.env` en la carpeta `api`:
+
+```bash
+cp api/.env.example api/.env
 ```
-├── api
-│    ├── index.js
-│    └── src
-│        ├── config
-│        │    └── db.js
-│        ├── controllers
-│        │    ├── inventory.hardware.controller.js
-│        │    ├── inventory.licenses.controller.js
-│        │    ├── inventory.servers.controller.js
-│        │    ├── inventory.software.controller.js
-│        ├── models
-│        │    ├── inventory.hardware.model.js
-│        │    ├── inventory.licenses.model.js
-│        │    ├── inventory.servers.model.js
-│        │    ├── inventory.software.model.js
-│        └── routes
-│            ├── inventory.hardware.routes.js
-│            ├── inventory.licenses.routes.js
-│            ├── inventory.servers.routes.js
-│            ├── inventory.software.routes.js
+
+Edita el archivo `.env` con tus credenciales:
+
+```env
+# Cadena de conexión a MongoDB (Local o Atlas)
+MONGO_URI=mongodb+srv://user:<password>@cluster...
+
+# Nombre de la base de datos
+MONGO_DB=webdev-final-project
+
+# Puerto del servidor (Por defecto 3000)
+PORT=3000
+```
+
+### 👣 Pasos para iniciar la aplicación
+
+Deberás ejecutar el backend y el frontend en terminales separadas:
+
+#### 1. Iniciar el Backend (API)
+Navega a la carpeta del servidor e instala las dependencias:
+```bash
+cd api
+npm install
+```
+Asegúrate de tener configurado tu archivo `.env` (basado en `.env.example`). Luego inicia el servidor:
+```bash
+npm start
+```
+> La API estará escuchando en el puerto 3000 (por defecto).
+
+#### 2. Iniciar el Frontend (APP)
+En una nueva terminal, navega a la carpeta de la aplicación:
+```bash
+cd app
+npm install
+```
+Inicia el servidor de desarrollo de Vite:
+```bash
+npm run dev
+```
+> Abre tu navegador en `http://localhost:5173` para ver la aplicación.
+
+
+</details>
+
+---
+
+<details>
+<summary><h2>🔌 API y Backend</h2></summary>
+
+El backend está construido con **Node.js** y **Express**, exponiendo una API RESTful que gestiona la lógica de negocio y la persistencia de datos en **MongoDB**. Utiliza principios de arquitectura MVC (Modelo-Vista-Controlador) para organizar el código.
+
+### 🛣️ Endpoints Disponibles
+
+#### 📜 Proyectos
+| Método | Ruta | Descripción |
+|--------|------|-------------|
+| GET | `/ricardo/projects/` | Obtener todos los proyectos |
+| GET | `/ricardo/projects/:id` | Obtener un proyecto por ID |
+| POST | `/ricardo/projects/` | Crear un nuevo proyecto |
+| PUT | `/ricardo/projects/:id` | Actualizar un proyecto |
+| DELETE | `/ricardo/projects/:id` | Eliminar un proyecto |
+
+#### 📦 Inventario 
+**Hardware**
+| Método | Ruta | Descripción |
+|--------|------|-------------|
+| GET | `/ouissam/hardware/` | Obtener todo el hardware |
+| GET | `/ouissam/hardware/:id` | Obtener un hardware específico |
+| POST | `/ouissam/hardware/` | Crear nuevo hardware |
+| PUT | `/ouissam/hardware/:id` | Actualizar hardware |
+| DELETE | `/ouissam/hardware/:id` | Eliminar hardware |
+
+*(Rutas similares existen para software (`/software`), licencias (`/licenses`) y servidores (`/servers`) bajo `/ouissam/...`)*
+
+#### 👥 Usuarios
+| Método | Ruta | Descripción |
+|--------|------|-------------|
+| GET | `/marc/users/` | Obtener todos los usuarios |
+| GET | `/marc/users/:id` | Obtener usuario por ID |
+| POST | `/marc/users/` | Registrar nuevo usuario |
+| PUT | `/marc/users/:id` | Editar perfil de usuario |
+| DELETE | `/marc/users/:id` | Eliminar usuario |
+
+#### 📱 Comunicaciones
+**Mensajes**
+| Método | Ruta | Descripción |
+|--------|------|-------------|
+| GET | `/santos/messages/` | Listar todos los mensajes |
+| GET | `/santos/messages/:id` | Ver mensaje individual |
+| POST | `/santos/messages/` | Enviar mensaje |
+| PUT | `/santos/messages/:id` | Editar mensaje |
+| DELETE | `/santos/messages/:id` | Borrar mensaje |
+
+**Notificaciones**
+| Método | Ruta | Descripción |
+|--------|------|-------------|
+| GET | `/santos/notifications/` | Ver todas las notificaciones |
+| POST | `/santos/notifications/` | Crear notificación |
+| PUT | `/santos/notifications/:id` | Marcar como leída/editar |
+| DELETE | `/santos/notifications/:id` | Eliminar notificación |
+
+**Chats**
+| Método | Ruta | Descripción |
+|--------|------|-------------|
+| GET | `/santos/chats/` | Listar chats disponibles |
+| GET | `/santos/chats/type/:type` | Filtrar chats por tipo (internal/client) |
+| POST | `/santos/chats/` | Iniciar nuevo chat |
+| POST | `/santos/chats/:id/messages` | Añadir mensaje al chat |
+
+
+</details>
+
+---
+
+<details>
+<summary><h2>🌐 Contexto Global (Provider)</h2></summary>
+
+La aplicación utiliza **React Context API** para gestionar el estado global, centralizado en el componente `ProviderDataApi`.
+
+### 🧠 Funcionamiento de `ProviderDataApi.jsx`
+
+1.  **Centralización**: Agrupa múltiples estados (`software`, `hardware`, `users`, `projects`, etc.) en un único proveedor.
+2.  **Hooks de API**: Inicializa instancias de `useApi` para cada módulo, proporcionando métodos CRUD estandarizados (`get`, `post`, `put`, `delete`).
+3.  **Distribución**: Expone tanto los **datos** (ej. `software`) como las **funciones modificadoras** (ej. `setSoftware`) y los **métodos de API** (ej. `softwareApi`) a toda la aplicación a través de `ApiDataContext`.
+
+**Ejemplo de Consumo:**
+Cualquier componente envuelto por este proveedor puede acceder a los datos y lógica sin necesidad de prop drilling:
+
+```javascript
+import { useContext } from 'react';
+import { ApiDataContext } from '../context/ApiDataContext';
+
+const Component = () => {
+    const { hardware, hardwareApi } = useContext(ApiDataContext);
+    // Acceso directo a la lista de hardware y funciones para modificarla
+}
+```
+
+
+</details>
+
+---
+
+<details>
+<summary><h2>📜 Lista de Proyectos (@hllricardo)</h2></summary>
+
+Enlace a GitHub: [hllricardo](https://github.com/hllricardo)
+
+Subpágina diseñada con **React** para la visualización y gestión dinámica de los **proyectos** de la empresa, permitiendo una interacción fluida en la asignación de empleados tareas.
+
+---
+
+## 🧩 Modelo de Datos
+
+### 📁 Proyecto
+
+Cada proyecto cuenta con las siguientes propiedades:
+
+* **Id**: Clave única (ObjectId)
+* **Título**: (string, requerido)
+* **Cliente**: Nombre del cliente (string, requerido)
+* **Descripción**: Detalles del proyecto (string, requerido)
+* **Tareas**: Lista de tareas a realizar (array de strings)
+* **Trabajadores asignados**: Lista de usuarios vinculados al proyecto
+* **Estado**: Situación actual del proyecto (string, requerido)
+
+---
+
+## ⚙️ Funcionalidades
+
+### 📄 Visualización
+Para desplegar la información completa de un proyecto y acceder a las opciones de gestión, basta con hacer clic en la tarjeta del proyecto.
+
+### ➕ Crear
+Permite registrar nuevos proyectos completando los campos de **título**, **nombre del cliente** y **descripción**. El resto de campos se inicializan con valores por defecto.
+
+### ✏️ Editar
+Se permite la edición de todos los campos excepto la asignación de usuarios.
+* **Tareas**: Para añadir tareas, escribir en el campo "nueva tarea" y pulsar añadir.
+* **Guardado**: Pulsar en "Guardar" para persistir los cambios.
+
+### 🗑️ Eliminar
+Eliminación de proyectos mediante botón dedicado con confirmación previa.
+
+---
+
+<details>
+<summary><b>🗂️ Estructura del Proyecto</b></summary>
+
+```
+app
+└── src
+    ├── App.jsx
+    ├── components
+    │   └── projects
+    │       ├── fetchData.js
+    │       ├── ProjectCreate.jsx
+    │       ├── ProjectDelete.jsx
+    │       ├── ProjectEdit.jsx
+    │       ├── ProjectItem.jsx
+    │       └── ProjectList.jsx
+    ├── context
+    │   ├── ApiDataContext.js
+    │   └── ProviderDataApi.jsx
+    ├── logic
+    │   ├── getProjects.js
+    │   └── useApi.js
+    ├── pages
+    │   └── projects
+    │       ├── HomeProjPage.jsx
+    │       └── StylesRicardo.css
+    └── sections
+        └── projectSections.js
+
+```
+</details>
+
+---
+
+## 🚀 Cambios y mejoras para el futuro
+
+* **Filtros avanzados**: Filtrado por cliente (desplegable) y por estado del proyecto.
+* **Gestión de asignaciones**: Métodos para que los trabajadores se auto-asignen y para que los administradores gestionen el equipo del proyecto.
+* **Unificación de datos**: Integración total entre la base de datos de usuarios y la asignación de proyectos.
+
+</details>
+
+---
+
+<details>
+<summary><h2>📦 Inventario (@ouielba90)</h2></summary>
+
+Enlace a GitHub: [ouielba90](https://github.com/ouielba90)
+
+Módulo integral de **gestión de activos IT**, implementado con una interfaz reactiva que facilita el control centralizado de **hardware, software, licencias y servidores**. Incorpora validaciones en tiempo real y reglas de negocio para garantizar la integridad de los datos.
+
+---
+
+## 🧩 Modelos de Inventario
+
+El inventario se compone de los siguientes dominios:
+
+### 🖥️ Hardware
+
+Cada elemento de hardware dispone de:
+
+* **Id**: Clave única (ObjectId)
+* **Tipo de dispositivo**: (string, requerido)
+* **Modelo**: (string, requerido)
+* **Estado**: (string, requerido)
+* **Fecha de compra**: (date, requerido)
+* **Especificaciones técnicas**:
+  * CPU
+  * RAM
+  * Almacenamiento
+* **Sistema operativo**: (string, requerido)
+* **Fecha de último mantenimiento**: (date, requerido)
+* **Usuario asignado**: (String, opcional)
+* **Software instalado**: (relación múltiple con Software)
+
+---
+
+### 💿 Software
+
+Cada software contiene:
+
+* **Id**: Clave única (ObjectId)
+* **Nombre**: (string, requerido)
+* **Versión**: (string, requerido)
+* **Categoría**: (string, requerido)
+* **Estado**: (string, requerido)
+* **Descripción**: (string, requerido)
+* **Licencia asociada**: (ObjectId, opcional, ref: LicensesPost)
+* **Hardware donde está instalado**: (relación múltiple con Hardware)
+* **Servidores donde está desplegado**: (relación múltiple con Servidores)
+
+---
+
+### 🔑 Licencias
+
+Cada licencia incluye:
+
+* **Id**: Clave única (ObjectId)
+* **Software asociado**: (ObjectId, requerido)
+* **Número de asientos**: (number, requerido)
+* **Fecha de compra**: (date, requerido)
+* **Fecha de expiración**: (date, requerido)
+* **Clave de licencia**: (string, requerido)
+* **Proveedor**: (string, requerido)
+* **Coste**: (number, requerido)
+
+---
+
+### 🖧 Servidores
+
+Los servidores se gestionan como recursos existentes del sistema:
+
+* **Id**: Clave única (ObjectId)
+* **Nombre y dirección IP**
+* **Ubicación**
+* **Sistema operativo**
+* **Estado**
+* **Número de nodos**
+* **Especificaciones por nodo**: (CPU, RAM, disco y uso)
+* **Software alojado**: (relación múltiple con Software)
+* **Usuarios con acceso**: (Array de strings)
+* **Número de usuarios conectados**: (Number)
+
+> ⚠️ **Los servidores no se pueden crear ni eliminar desde la interfaz**, solo visualizar  información relevante.
+
+---
+
+## ⚙️ Funcionalidades
+
+### 📄 Visualización
+
+* Listados independientes por dominio (hardware, software, licencias, servidores)
+* Tarjetas resumen con estado y métricas clave
+* Vistas de detalle con relaciones entre entidades
+
+---
+
+### ➕ Crear
+
+Se permite **crear únicamente**:
+
+* Hardware
+* Software
+* Licencias
+
+Los formularios incluyen validación completa antes del envío.
+Los servidores no pueden crearse desde el inventario.
+
+---
+
+### ✏️ Editar
+
+* Se pueden editar todos los campos de cada entidad
+* Las relaciones (software ↔ hardware / servidores / licencias) se gestionan de forma controlada
+* Los estados se recalculan automáticamente cuando aplica (ej. licencias expiradas)
+
+---
+
+### 🗑️ Eliminar
+
+Se permite **eliminar únicamente**:
+
+* Hardware
+* Software
+* Licencias
+
+La eliminación requiere confirmación mediante modal.
+Los servidores **no pueden eliminarse** desde el sistema.
+
+---
+
+## 🧠 Validación y Reglas de Negocio
+
+La lógica de validación está desacoplada de la interfaz mediante **custom hooks**:
+
+* `useHardwareValidation`
+* `useSoftwareValidation`
+* `useLicensesValidation`
+
+### Reglas aplicadas:
+
+* No se permiten fechas futuras de compra
+* Las fechas de expiración o mantenimiento deben ser posteriores a la compra
+* Validación por expresiones regulares (versiones, modelos, claves)
+* Valores numéricos positivos y coherentes
+* Control de envío mediante `canSubmit`
+
+---
+
+## 📊 Dashboard de Inventario
+
+El inventario dispone de un **dashboard central** que permite:
+
+* Visualizar el total de activos por categoría
+* Detectar licencias próximas a expirar
+* Identificar servidores con alta carga
+* Mostrar alertas de estado mediante animaciones visuales (Lottie)
+
+Este enfoque facilita una **gestión proactiva** del inventario IT.
+
+---
+
+<details>
+<summary><b>🗂️ Estructura del Inventario</b></summary>
+
+```
 ├── app
 │    ├── src
 │    │    ├── App.jsx
@@ -115,594 +534,203 @@ La implementación está realizada con **React**, **Context API** y una arquitec
 │    │        └── inventory
 │    │            └── date.js
 ```
----
-
-### Contexto Global de Inventario
-
-**`ProviderInventory.jsx` + `DataContext.js`**
-
-Se utiliza un **contexto global centralizado** para gestionar el estado compartido de:
-
-* Hardware
-* Software
-* Licencias
-* Servidores
-
-Este enfoque evita el *prop drilling*, lo que garantiza consistencia entre vistas y permite que cualquier componente del inventario acceda o actualice los datos de forma controlada.
+</details>
 
 ---
 
-### Hook de Acceso a la API
+## 🚀 Cambios y mejoras para el futuro
 
-**`useApi`**
+* Añadir control de permisos por rol (admin / técnico / consulta)
+* Historial de cambios por activo (auditoría)
+* Alertas automáticas por email para licencias y mantenimientos
+* Integración con sistemas de monitorización externos
+* Exportación de inventario a PDF / CSV
 
-Cada tipo de recurso dispone de un **hook dedicado** que encapsula:
-
-* Llamadas HTTP (`fetch`)
-* Normalización de datos
-* Operaciones CRUD
-
-Esto desacopla completamente la lógica de red de los componentes de presentación y facilita futuras migraciones o cambios de backend.
+</details>
 
 ---
 
-### Estructura Modular
+<details>
+<summary><h2>📱 Sistema de Comunicaciones (@sanpro23)</h2></summary>
 
-Ubicación:
-`/components/inventory`
-`/pages/inventory`
+Enlace a GitHub: [sanpro23](https://github.com/sanpro23)
 
-Cada dominio (hardware, software, licencias, servidores) sigue una **estructura homogénea**, compuesta por:
-
-* Página de listado
-* Página de detalle
-* Formularios de alta y edición
-* Tarjetas reutilizables
-* Modales de confirmación para operaciones CRUD
-
-Esta consistencia mejora la legibilidad del repositorio y reduce la curva de aprendizaje para nuevos desarrolladores.
+Módulo integral diseñado con una **interfaz intuitiva en React** para la gestión de la comunicación. Permite **enviar y recibir mensajes**, visualizar **historiales de chat** y gestionar **notificaciones** en tiempo real.
 
 ---
 
-## ✅ Validación Frontend y Lógica de Negocio
+## 🧩 Modelo de Datos
 
-La validación está **desacoplada de la UI** mediante **Custom Hooks** ubicados en `/logic/inventory`, garantizando la integridad de los datos antes de cualquier interacción con la API.
+### 💬 Mensajes Directos (CommunicationsMessages)
+* **From**: Emisor del mensaje (String, requerido)
+* **To**: Receptor del mensaje (String, requerido)
+* **Text**: Contenido del mensaje (String, requerido)
+* **Date**: Fecha de envío (Date, requerido)
+* **Edited**: Estado de edición (Boolean)
+* **EditedAt**: Fecha de edición (Date)
 
-### Hooks Implementados
+### 🔔 Notificaciones (CommunicationsNotifications)
+* **From**: Origen de la notificación (String, requerido)
+* **To**: Destinatario (String, requerido)
+* **Text**: Contenido (String, requerido)
+* **Date**: Fecha (Date, requerido)
+* **IsAlert**: Indicador de alerta prioritaria (Boolean, requerido)
 
-* `useSoftwareValidation`
-* `useHardwareValidation`
-* `useLicensesValidation`
-
-### Características Clave
-
-* **Validación reactiva en tiempo real** mediante `useEffect`
-* Control del estado de envío mediante `canSubmit`
-* Gestión de errores granular mediante un objeto `errors` para feedback visual inmediato
-
-### Reglas de Negocio Aplicadas
-
-* **Consistencia temporal**
-
-  * No se permiten fechas de compra futuras
-  * Las fechas de mantenimiento o expiración deben ser posteriores a la compra
-* **Validación de formato (Regex)**
-
-  * Modelos de hardware
-  * Versiones de software
-  * Claves de licencia
-* **Restricciones lógicas**
-
-  * Longitudes mínimas y máximas
-  * Valores numéricos positivos (costes, asignaciones, recursos)
+### 🗨️ Chats (Chat)
+* **Type**: Tipo de chat ('internal' o 'client')
+* **Participants**: Lista de participantes (Array de Strings)
+* **Messages**: Colección de mensajes del chat (Array de Subdocumentos)
+* **UnreadCount**: Contador de mensajes no leídos (Number)
+* **LastMessageDate**: Fecha del último mensaje (Date)
 
 ---
 
-## 📊 Dashboard de Inventario
+## ⚙️ Funcionalidades
 
-El Dashboard actúa como un **centro de control operativo**, ofreciendo información crítica de un solo vistazo:
+### 📨 Mensajería
+* **Mensajes directos**: Envío y recepción de mensajes en tiempo real entre usuarios.
+* **Edición de Mensajes**: Capacidad para modificar mensajes ya enviados.
+* **Chats Grupales**: Salas de chat internas y canales de comunicación con clientes.
+* **Historial Persistente**: Almacenamiento y consulta de todas las conversaciones pasadas.
 
-* Conteo global de activos
-* Métricas por categoría
-* Detección automática de:
-
-  * Licencias próximas a expirar
-  * Servidores con alta carga de usuarios
-  * Alertas por uso de CPU, RAM y disco
-* Uso de **animaciones Lottie** para estados y feedback visual
-
-Este enfoque permite una gestión **proactiva**, alineada con un entorno de consultoría IT/ciberseguridad.
+### 🔔 Notificaciones
+* **Alertas**: Sistema de avisos para eventos importantes.
+* **Estado de lectura**: Seguimiento de mensajes leídos/no leídos.
 
 ---
 
-## 💿 Gestión de Software
+<details>
+<summary><b>🗂️ Estructura de Comunicaciones</b></summary>
 
-Funcionalidades:
-
-* CRUD completo con validaciones
-* Asociación bidireccional con hardware y servidores
-* Filtros por categoría y estado
-* Búsqueda por nombre
-* Vista de detalle con relaciones y metadatos
+```
+├── api
+│    ├── src
+│    │    ├── controllers
+│    │    │    ├── communications.chats.controller.js
+│    │    │    ├── communications.messages.controller.js
+│    │    │    └── communications.notifications.controller.js
+│    │    ├── models
+│    │    │    ├── communications.chats.model.js
+│    │    │    ├── communications.messages.model.js
+│    │    │    └── communications.notifications.model.js
+│    │    └── routes
+│    │        ├── comunications.chats.routes.js
+│    │        ├── communications.messages.routes.js
+│    │        └── communications.notifications.routes.js
+├── app
+│    ├── src
+│    │    ├── components
+│    │    │    └── communications
+│    │    │        ├── ChatListItem.jsx
+│    │    │        ├── ChatMessage.jsx
+│    │    │        ├── FetchExample.jsx
+│    │    │        ├── MessageCard.jsx
+│    │    │        └── NotificationCard.jsx
+│    │    ├── pages
+│    │    │    └── communications
+│    │    │        ├── ChatViewPage.jsx
+│    │    │        ├── ClientChatsPage.jsx
+│    │    │        ├── HomeCommPage.jsx
+│    │    │        ├── InternalChatsPage.jsx
+│    │    │        ├── MessagesPage.jsx
+│    │    │        └── NotificationsPage.jsx
+│    │    ├── services
+│    │    │    ├── chatService.js
+│    │    │    ├── messagesService.js
+│    │    │    └── notificationsService.js
+│    │    └── sections
+│    │        └── communicationSections.js
+```
+</details>
 
 ---
 
-## 🖥️ Gestión de Hardware
+## 🚀 Cambios y mejoras para el futuro
 
-Funcionalidades:
+* **Multimedia**: Soporte para envío de archivos adjuntos e imágenes.
+* **Grupos**: Creación de grupos de chat dinámicos.
+* **Videollamadas**: Integración de WebRTC para llamadas en tiempo real.
 
-* CRUD completo con formularios estructurados
-* Filtros por tipo y estado
-* Búsqueda por modelo y ordenación A–Z / Z–A
-* Asociación múltiple de software
-* Vista de detalle con:
-
-  * Especificaciones técnicas
-  * Fechas relevantes
-  * Software instalado
+</details>
 
 ---
 
-## 🔑 Gestión de Licencias
+<details>
+<summary><h2>👥 Gestión de Usuarios y Clientes (@MarcCaBe)</h2></summary>
 
-Funcionalidades:
-
-* Asociación automática con software
-* Cálculo dinámico de estado (activa / expirada)
-* CRUD completo con campos técnicos:
-
-  * Proveedor
-  * Clave de licencia
-  * Asignaciones
-  * Fechas
-  * Coste
-* Filtros y búsqueda por software
+Módulo de administración de perfiles construido con una **interfaz dedicada** para la gestión eficiente de usuarios, autenticación y control de roles dentro de la plataforma.
 
 ---
 
-## 🖧 Gestión de Servidores
+## 🧩 Modelo de Datos
 
-Funcionalidades:
-
-* Tarjetas resumen con estado, ubicación, SO y usuarios
-* Vista de detalle avanzada con:
-
-  * Cálculo de promedios de CPU, RAM y disco
-  * Visualización de nodos individuales
-  * Listado de software y usuarios con acceso
-
----
----
-
-# 📜 Lista de proyectos
-
-Subpágina para mostrar y gestionar los diferentes proyectos que gestiona la empresa y a los empleados que estan trabajando en los diferentes proyectos.
-
-Cada proyecto tendra:
-
-  * Un titulo
-  * El nombre del cliente
-  * Las tareas que hay que realizar
-  * La lista de trabajadores asignados
-  * Y el estado del proyecto
+### 👤 Usuario (User)
+* **Name**: Nombre completo (String, requerido)
+* **Email**: Correo electrónico (String, requerido)
+* **Role**: Rol del usuario (String, requerido: Manager, Consultor, Cliente, etc.)
+* **Status**: Estado actual (String, requerido: activo, inactivo, ausente, ocupado)
+* **CreatedAt**: Fecha de creación (Date)
 
 ---
 
-3. Usuarios y clientes (UserPage)
-- Lista de usuarios y clientes
-- Crear, editar y eliminar perfiles
+## ⚙️ Funcionalidades
 
-Propiedades
-id, name, role, email, type (usuarios/clientes)
+### 📝 Gestión de Perfiles
+* **CRUD Completo**: Crear, leer, actualizar y eliminar usuarios.
+* **Roles**: Asignación y gestión de permisos mediante roles.
+* **Estados**: Visualización del estado de disponibilidad del usuario (colores indicadores).
 
+### 🤝 Gestión de Clientes
+* **Filtrado**: Vistas específicas para usuarios tipo Cliente.
+* **Administración**: Gestión dedicada para perfiles de clientes.
 
-4. Mensajeria y notificaciones (MessagesPage)
-- Mensajes instántaneos internos (usuario a usuario) y notificaciones relacionadas con los proyectos
-- Crear y eliminar mensajes.
+---
 
-Propiedades
-id, from, to (multiples o a un grupo en concreto), text, date, (attachments)
-
-
-<!-- Comunicaciones por Santos --> 
+<details>
+<summary><b>🗂️ Estructura de Usuarios</b></summary>
 
 ```
-# 📱 Sistema de Comunicaciones
-
-## 🛠️ Tecnologías
-
-### Backend
-- **Node.js** - Entorno de ejecución
-- **Express.js** - Framework web
-- **MongoDB** - Base de datos NoSQL
-- **Mongoose** - ODM para MongoDB
-- **CORS** - Manejo de peticiones entre dominios
-- **dotenv** - Variables de entorno
-
-### Frontend
-- **React** - Librería de UI
-- **JavaScript (ES6+)** - Lenguaje de programación
-- **HTML5 & CSS3** - Estructura y estilos
-
-### Herramientas de Desarrollo
-- **Postman** - Testing de API
-- **Git** - Control de versiones
-- **npm** - Gestor de paquetes
-
-## ✨ Características
-
-### 💬 Módulo de Comunicaciones (Santos)
-- ✅ Mensajes directos entre usuarios
-- ✅ Sistema de notificaciones
-- ✅ Chat con historial de conversaciones
-- ✅ Marcado de mensajes como leídos
-- ✅ Edición de mensajes
-
-## 📁 Estructura del Proyecto
-
+├── api
+│    ├── src
+│    │    ├── controllers
+│    │    │    └── users.user.controller.js
+│    │    ├── models
+│    │    │    └── users.user.model.js
+│    │    └── routes
+│    │        └── users.user.routes.js
+├── app
+│    ├── src
+│    │    ├── logic
+│    │    │    ├── getClients.js
+│    │    │    └── getUsers.js
+│    │    ├── pages
+│    │    │    └── usersClients
+│    │    │        ├── UserHomePage.jsx
+│    │    │        ├── clients
+│    │    │        │    ├── ClientCard.jsx
+│    │    │        │    └── ClientPage.jsx
+│    │    │        ├── users
+│    │    │        │    ├── EditUserModal.jsx
+│    │    │        │    ├── UserCard.jsx
+│    │    │        │    ├── UserPage.jsx
+│    │    │        │    └── formulario.jsx
+│    │    │        └── stylesMarc.css
+│    │    └── sections
+│    │        └── userSections.js
 ```
-proyecto/
-│
-├── backend/
-│   ├── src/
-│   │   ├── config/
-│   │   │   └── db.js                              # Conexión MongoDB
-│   │   │
-│   │   ├── models/
-│   │   │   ├── communications.messages.model.js
-│   │   │   ├── communications.notifications.model.js
-│   │   │   ├── communications.chats.model.js
-│   │   │  
-│   │   │
-│   │   ├── controllers/
-│   │   │   ├── communications.messages.controller.js
-│   │   │   ├── communications.notifications.controller.js
-│   │   │   ├── communications.chats.controller.js
-│   │   │  
-│   │   │
-│   │   └── routes/
-│   │       ├── communications.messages.routes.js
-│   │       ├── communications.notifications.routes.js
-│   │       ├── comunications.chats.routes.js
-│   │      
-│   │
-│   ├── data/
-│   │   ├── ChatMessages.data.js
-│   │   ├── messages.data.js
-│   │   └── notifications.data.js
-│   │
-│   ├── .env
-│   ├── index.js
-│   └── package.json
-│
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── services/
-│   │   └── App.jsx
-│   │
-│   └── package.json
-│
-└── README.md
-```
+</details>
 
-## 🚀 Instalación
+---
 
-### Prerrequisitos
+## 🚀 Cambios y mejoras para el futuro
 
-- Node.js (v22.2)
-- MongoDB (MongoDB Atlas)
-- npm
-- Git
+* **Seguridad Avanzada**: Implementación de 2FA, sanitización de datos y rate limiting en la API.
+* **Experiencia de Usuario**:
+    *   **Feedback Visual**: Notificaciones tipo 'toast' para éxito/error y estados de carga (loading states).
+    *   **Confirmaciones**: Modales de confirmación para acciones críticas (eliminación).
+* **Gestión de Datos**:
+    *   **Búsqueda Avanzada**: Filtros combinados y búsqueda en tiempo real.
+    *   **Paginación**: Optimización para listados con gran volumen de usuarios.
+    *   **Historial**: Registro de actividad y auditoría de cambios en perfiles.
 
-### Pasos de Instalación
-
-#### 1. Clonar el repositorio
-
-```bash
-git clone https://github.com/ouielba90/webdev-final-project-roms.git
-```
-
-#### 2. Instalar dependencias del Backend
-
-```bash
-npm install
-```
-
-**Dependencias principales:**
-
-```json
-{
-  "dependencies": {
-    "express": "^4.18.2",
-    "mongoose": "^8.0.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.3"
-  }
-}
-```
-
-#### 3. Instalar dependencias del Frontend
-
-```bash
-npm install
-```
-
-**Dependencias principales:**
-
-```json
-{
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  }
-}
-```
-
-## ⚙️ Configuración
-
-### Backend
-
-#### 1. Crear archivo `.env` en la carpeta backend
-
-```env
-# Puerto del servidor
-PORT=3000
-
-# MongoDB local
-MONGODB_URI=mongodb://localhost:3000/santos/
-
-# MongoDB Atlas
-# MONGODB_URI=mongodb+srv://usuario:<password>@cluster.mongodb.net
-
-# Entorno
-NODE_ENV=development
-```
-
-#### 2. Configurar MongoDB
-
-**Opción A: MongoDB Local**
-
-```bash
-# Iniciar MongoDB
-mongod
-```
-
-**Opción B: MongoDB Atlas**
-
-1. Crear cuenta en [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
-2. Crear un cluster
-3. Obtener connection string
-4. Añadir IP a whitelist
-5. Copiar URI a `.env`
-
-#### 3. Estructura de la Base de Datos
-
-**Colecciones creadas automáticamente:**
-- `messages` - Mensajes directos
-- `notifications` - Notificaciones del sistema
-- `chat-messages` - Mensajes de chat
-
-## 🎮 Uso
-
-### Iniciar el Backend
-
-```bash
-npm start
-```
-
-El servidor iniciará en `http://localhost:3000`
-
-**Salida esperada:**
-
-```
-API is running at http://localhost:3000
-MongoDB conectado correctamente
-```
-
-### Iniciar el Frontend
-
-```bash
-npm run dev
-```
-
-El frontend iniciará en `http://localhost:5173` (Vite)
-
-### Verificar Instalación
-
-**Prueba rápida con curl:**
-
-```bash
-curl http://localhost:3000/
-# Respuesta: "Hello, World!"
-```
-
-## 📡 API Endpoints
-
-### Base URL
-
-```
-http://localhost:3000
-```
-
-### 💬 Módulo de Comunicaciones
-
-#### Mensajes Directos
-
-| Método | Endpoint | Descripción |
-|--------|----------|-------------|
-| GET | `/santos/messages` | Obtener todos los mensajes |
-| GET | `/santos/messages/:id` | Obtener mensaje por ID |
-| POST | `/santos/messages` | Crear nuevo mensaje |
-| PUT | `/santos/messages/:id` | Actualizar mensaje |
-| DELETE | `/santos/messages/:id` | Eliminar mensaje |
-
-**Ejemplo: Crear mensaje**
-
-```http
-POST http://localhost:3000/santos/messages
-Content-Type: application/json
-```
-
-#### Notificaciones
-
-| Método | Endpoint | Descripción |
-|--------|----------|-------------|
-| GET | `/santos/notifications` | Obtener todas las notificaciones |
-| GET | `/santos/notifications/:userId` | Obtener notificaciones de usuario |
-| POST | `/santos/notifications` | Crear notificación |
-| PUT | `/santos/notifications/:id` | Actualizar notificación |
-| DELETE | `/santos/notifications/:id` | Eliminar notificación |
-
-**Ejemplo: Crear notificación**
-
-```http
-POST http://localhost:3000/santos/notifications
-Content-Type: application/json
-```
-
-#### Chat Messages
-
-| Método | Endpoint | Descripción |
-|--------|----------|-------------|
-| GET | `/santos/chat-messages` | Obtener todos los mensajes de chat |
-| GET | `/santos/chat-messages/:id` | Obtener mensaje por ID personalizado |
-| POST | `/santos/chat-messages` | Crear mensaje de chat |
-| PUT | `/santos/chat-messages/:id` | Actualizar mensaje (ej: marcar como leído) |
-| DELETE | `/santos/chat-messages/:id` | Eliminar mensaje |
-
-**Ejemplo: Crear mensaje de chat**
-
-```http
-POST http://localhost:3000/santos/chat-messages
-Content-Type: application/json
-```
-
-**Ejemplo: Marcar como leído**
-
-```http
-PUT http://localhost:3000/santos/chat-messages/1
-Content-Type: application/json
-```
-
-# Página de Usuarios 👥
-
-Este proyecto forma parte del Bootcamp de Desarrollo Web.  
-La página de usuarios permite **crear, editar, eliminar y visualizar perfiles** de manera sencilla y dinámica.
-
-## 🚀 Características
-- Listado de usuarios con datos básicos.
-- Funciones de edición y eliminación conectadas al backend.
-- Uso de React para componentes reutilizables.
-- LocalStorage y API para persistencia de datos.
-
-## Uso´
-
-Accede a la página principal para ver el listado de usuarios.
-
-Haz clic en Editar para modificar un perfil.
-
-Usa Eliminar para borrar un usuario.
-
-Crea nuevos usuarios desde el formulario.
-
-## 📁 Estructura del Proyecto
-
-```
-proyecto/
-│
-├── backend/
-│   ├── src/
-│   │   ├── config/
-│   │   │   └── db.js                              # Conexión MongoDB
-│   │   │
-│   │   ├── models/
-│   │   │   ├── communications.messages.model.js
-│   │   │   ├── communications.notifications.model.js
-│   │   │   ├── communications.chats.model.js
-│   │   │  
-│   │   │
-│   │   ├── controllers/
-│   │   │   ├── communications.messages.controller.js
-│   │   │   ├── communications.notifications.controller.js
-│   │   │   ├── communications.chats.controller.js
-│   │   │  
-│   │   │
-│   │   └── routes/
-│   │       ├── communications.messages.routes.js
-│   │       ├── communications.notifications.routes.js
-│   │       ├── comunications.chats.routes.js
-│   │      
-│   │
-│   ├── data/
-│   │   ├── us.data.js
-│   │   ├── messages.data.js
-│   │   └── notifications.data.js
-│   │
-│   ├── .env
-│   ├── index.js
-│   └── package.json
-│
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── services/
-│   │   └── App.jsx
-│   │
-│   └── package.json
-│
-└── README.md
-```
-
-## 💻 Frontend
-
-## 🧪 Testing con Postman
-
-### Colección de Postman
-
-## 📝 Scripts Disponibles
-
-### Backend
-
-```json
-{
-  "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "jest"
-  }
-}
-```
-
-### Frontend
-
-```json
-{
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "lint": "eslint src"
-  }
-}
-```
-
-## 📄 Licencia
-
-Este proyecto es parte de un bootcamp de desarrollo web y está bajo licencia MIT.
-
-## 🙏 Agradecimientos
-
-- A nuestros instructores del bootcamp
-
-## 📚 Recursos Adicionales
-
-### Documentación Oficial
-- [Node.js](https://nodejs.org/docs/)
-- [Express.js](https://expressjs.com/)
-- [MongoDB](https://docs.mongodb.com/)
-- [Mongoose](https://mongoosejs.com/docs/)
-- [React](https://react.dev/)
-```
+</details>
