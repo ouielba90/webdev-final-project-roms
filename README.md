@@ -237,7 +237,7 @@ Cada proyecto cuenta con las siguientes propiedades:
 * **Id**: Clave única (ObjectId)
 * **Título**: (string, requerido)
 * **Cliente**: Nombre del cliente (string, requerido)
-* **Descripción**: Detalles del proyecto (string)
+* **Descripción**: Detalles del proyecto (string, requerido)
 * **Tareas**: Lista de tareas a realizar (array de strings)
 * **Trabajadores asignados**: Lista de usuarios vinculados al proyecto
 * **Estado**: Situación actual del proyecto (string, requerido)
@@ -656,7 +656,7 @@ Módulo integral diseñado con una **interfaz intuitiva en React** para la gesti
 ---
 
 <details>
-<summary><b>👥 Gestión de Usuarios y Clientes (@MarcCaBe)</b></summary>
+<summary><h2>👥 Gestión de Usuarios y Clientes (@MarcCaBe)</h2></summary>
 
 Módulo de administración de perfiles construido con una **interfaz dedicada** para la gestión eficiente de usuarios, autenticación y control de roles dentro de la plataforma.
 
