@@ -28,8 +28,7 @@ El proyecto ha sido construido por un equipo multidisciplinar que ha asumido rol
 
 
 <details>
-<summary><span style="font-size: 20px;">🛠️ Tecnologías usadas</span>
-</summary>
+<summary><b>🛠️ Tecnologías usadas</b></summary>
 
 ### 🖥️ Backend
 - **Node.js** - Entorno de ejecución
@@ -57,7 +56,7 @@ El proyecto ha sido construido por un equipo multidisciplinar que ha asumido rol
 ---
 
 <details>
-<summary><span style="font-size: 20px;">▶️ Instrucciones de Ejecución</span></summary>
+<summary><b>▶️ Instrucciones de Ejecución</b></summary>
 
 Para desplegar el proyecto en tu entorno local, necesitarás **Node.js** y **MongoDB**. El repositorio está dividido en dos directorios principales: `api` (Backend) y `app` (Frontend).
 
@@ -124,7 +123,7 @@ npm run dev
 ---
 
 <details>
-<summary><span style="font-size: 20px;">🔌 API y Backend</span></summary>
+<summary><b>🔌 API y Backend</b></summary>
 
 El backend está construido con **Node.js** y **Express**, exponiendo una API RESTful que gestiona la lógica de negocio y la persistencia de datos en **MongoDB**. Utiliza principios de arquitectura MVC (Modelo-Vista-Controlador) para organizar el código.
 
@@ -192,7 +191,7 @@ El backend está construido con **Node.js** y **Express**, exponiendo una API RE
 ---
 
 <details>
-<summary><span style="font-size: 20px;">🌐 Contexto Global (Provider)</span></summary>
+<summary><b>🌐 Contexto Global (Provider)</b></summary>
 
 La aplicación utiliza **React Context API** para gestionar el estado global, centralizado en el componente `ProviderDataApi`.
 
@@ -221,7 +220,7 @@ const Component = () => {
 ---
 
 <details>
-<summary><span style="font-size: 20px;">📜 Lista de Proyectos (@hllricardo)</span></summary>
+<summary><b>📜 Lista de Proyectos (@hllricardo)</b></summary>
 
 Enlace a GitHub: [hllricardo](https://github.com/hllricardo)
 
@@ -264,7 +263,7 @@ Eliminación de proyectos mediante botón dedicado con confirmación previa.
 ---
 
 <details>
-<summary><span style="font-size: 20px;">🗂️ Estructura del Proyecto</span></summary>
+<summary><b>🗂️ Estructura del Proyecto</b></summary>
 
 ```
 app
@@ -307,7 +306,7 @@ app
 ---
 
 <details>
-<summary><span style="font-size: 20px;">📦 Inventario (@ouielba90)</span></summary>
+<summary><b>📦 Inventario (@ouielba90)</b></summary>
 
 Enlace a GitHub: [ouielba90](https://github.com/ouielba90)
 
@@ -465,7 +464,7 @@ Este enfoque facilita una **gestión proactiva** del inventario IT.
 ---
 
 <details>
-<summary><span style="font-size: 20px;">🗂️ Estructura del Inventario</span></summary>
+<summary><b>🗂️ Estructura del Inventario</b></summary>
 
 ```
 ├── app
@@ -552,7 +551,7 @@ Este enfoque facilita una **gestión proactiva** del inventario IT.
 ---
 
 <details>
-<summary><span style="font-size: 20px;">📱 Sistema de Comunicaciones (@sanpro23)</span></summary>
+<summary><b>📱 Sistema de Comunicaciones (@sanpro23)</b></summary>
 
 Enlace a GitHub: [sanpro23](https://github.com/sanpro23)
 
@@ -601,7 +600,7 @@ Módulo integral diseñado con una **interfaz intuitiva en React** para la gesti
 ---
 
 <details>
-<summary><span style="font-size: 20px;">🗂️ Estructura de Comunicaciones</span></summary>
+<summary><b>🗂️ Estructura de Comunicaciones</b></summary>
 
 ```
 ├── api
@@ -657,7 +656,7 @@ Módulo integral diseñado con una **interfaz intuitiva en React** para la gesti
 ---
 
 <details>
-<summary><span style="font-size: 20px;">👥 Gestión de Usuarios y Clientes (@MarcCaBe)</span></summary>
+<summary><b>👥 Gestión de Usuarios y Clientes (@MarcCaBe)</b></summary>
 
 Módulo de administración de perfiles construido con una **interfaz dedicada** para la gestión eficiente de usuarios, autenticación y control de roles dentro de la plataforma.
 
@@ -688,7 +687,7 @@ Módulo de administración de perfiles construido con una **interfaz dedicada** 
 ---
 
 <details>
-<summary><span style="font-size: 20px;">🗂️ Estructura de Usuarios</span></summary>
+<summary><b>🗂️ Estructura de Usuarios</b></summary>
 
 ```
 ├── api
