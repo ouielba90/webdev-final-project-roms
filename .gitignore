@@ -18,7 +18,6 @@ app/node_modules
 app/dist
 app/dist-ssr
 *.local
-README-complete.md
 
 # Editor directories and files
 .vscode/*
