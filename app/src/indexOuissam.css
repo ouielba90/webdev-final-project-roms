@@ -1826,13 +1826,6 @@
   color: white;
 }
 
-.compact-main-menu {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 32px;
-}
-
 .compact-main-menu .main-nav {
   margin-left: auto;
 }
