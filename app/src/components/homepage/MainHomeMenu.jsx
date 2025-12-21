@@ -1,11 +1,19 @@
 import { Link } from 'react-router-dom'
 import UnlockerPopup from './../../components/homepage/UnLockerPopup.jsx'
+import { useAuth } from '../../context/AuthContext'
 
 function MainHomeMenu() {
+  const { logout, username } = useAuth();
 
   return (
     <>
       <div className='main-home-page'>
+        <div className="user-bar-main-menu">
+          <span>Logueado como: <strong>{username}</strong></span>
+          <button onClick={logout} className="simple-logout-btn">
+            Cerrar Sesión
+          </button>
+        </div>
         <div className='main-home-page-header'>
           <h1>CyberProject</h1>
           <h3>Consultoría Ciberseguridad</h3>

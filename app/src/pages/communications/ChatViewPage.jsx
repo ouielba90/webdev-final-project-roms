@@ -3,7 +3,12 @@ import { useParams } from "react-router-dom";
 import ChatMessage from "../../components/communications/ChatMessage";
 
 // URL de tu API backend
-const API_URL = 'http://localhost:3000/santos/chats';
+const API_URL = `${import.meta.env.VITE_API_URL}/santos/chats`;
+
+const getAuthHeaders = () => {
+  const token = localStorage.getItem('token');
+  return token ? { 'Authorization': `Bearer ${token}` } : {};
+};
 
 function ChatViewPage() {
   const { chatId } = useParams();
@@ -28,12 +33,14 @@ function ChatViewPage() {
     try {
       setLoading(true);
       console.log('Cargando chat con ID:', chatId);
-      const response = await fetch(`${API_URL}/${chatId}`);
-      
+      const response = await fetch(`${API_URL}/${chatId}`, {
+        headers: getAuthHeaders()
+      });
+
       if (!response.ok) {
         throw new Error('Error al cargar el chat');
       }
-      
+
       const data = await response.json();
       setParticipants(data.participants || []);
       setMessages(data.messages || []);
@@ -53,7 +60,7 @@ function ChatViewPage() {
     try {
       // Determinar quién envía el mensaje
       const lastMessage = messages[messages.length - 1];
-      const sender = lastMessage 
+      const sender = lastMessage
         ? participants.find(user => user !== lastMessage.from) || currentUser
         : currentUser;
 
@@ -61,6 +68,7 @@ function ChatViewPage() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          ...getAuthHeaders()
         },
         body: JSON.stringify({
           from: sender,
@@ -94,6 +102,7 @@ function ChatViewPage() {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          ...getAuthHeaders()
         },
         body: JSON.stringify({ text: editText }),
       });
@@ -124,6 +133,7 @@ function ChatViewPage() {
       try {
         const response = await fetch(`${API_URL}/${chatId}/messages/${messageId}`, {
           method: 'DELETE',
+          headers: getAuthHeaders()
         });
 
         if (!response.ok) {

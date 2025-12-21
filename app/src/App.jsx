@@ -4,6 +4,7 @@ import ScrollToTop from './components/homepage/ScrollToTop';
 
 function App() {
   const currPath = useLocation()
+
   return (
     <>
       <ScrollToTop />

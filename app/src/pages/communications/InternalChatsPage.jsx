@@ -2,7 +2,12 @@ import { useEffect, useState } from 'react';
 import ChatListItem from '../../components/communications/ChatListItem';
 
 // URL base de mi API backend
-const API_BASE_URL = 'http://localhost:3000/santos/chats';
+const API_BASE_URL = `${import.meta.env.VITE_API_URL}/santos/chats`;
+
+const getAuthHeaders = () => {
+    const token = localStorage.getItem('token');
+    return token ? { 'Authorization': `Bearer ${token}` } : {};
+};
 
 function InternalChatPage() {
     const [chats, setChats] = useState([]);
@@ -20,7 +25,9 @@ function InternalChatPage() {
     const fetchInternalChats = async () => {
         try {
             setLoading(true);
-            const response = await fetch(`${API_BASE_URL}/type/internal`);
+            const response = await fetch(`${API_BASE_URL}/type/internal`, {
+                headers: getAuthHeaders()
+            });
 
             if (!response.ok) {
                 throw new Error('Error al cargar los chats internos');
@@ -64,7 +71,10 @@ function InternalChatPage() {
         try {
             const response = await fetch(`${API_BASE_URL}/${chatId}/messages/${messageId}`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...getAuthHeaders()
+                },
                 body: JSON.stringify({ text: editText }),
             });
 
@@ -93,6 +103,7 @@ function InternalChatPage() {
             try {
                 const response = await fetch(`${API_BASE_URL}/${chatId}/messages/${messageId}`, {
                     method: 'DELETE',
+                    headers: getAuthHeaders()
                 });
 
                 if (!response.ok) {
@@ -172,4 +183,3 @@ function InternalChatPage() {
 }
 
 export default InternalChatPage;
- 

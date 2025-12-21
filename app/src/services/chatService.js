@@ -1,13 +1,18 @@
 // Servicio para manejar las peticiones de chat con MongoDB
 
-const API_URL = 'http://localhost:3000/santos/chats';
+const API_URL = `${import.meta.env.VITE_API_URL}/santos/chats`;
+
+const getAuthHeaders = () => {
+    const token = localStorage.getItem('token');
+    return token ? { 'Authorization': `Bearer ${token}` } : {};
+};
 
 /**
  * Obtiene todos los chats desde la API
  * @returns {Promise} Promesa que resuelve con los datos de chats
  */
 export function fetchAllChats() {
-    return fetch(API_URL)
+    return fetch(API_URL, { headers: getAuthHeaders() })
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);
@@ -30,7 +35,7 @@ export function fetchAllChats() {
  * @returns {Promise} Promesa que resuelve con los chats del tipo especificado
  */
 export function fetchChatsByType(type) {
-    return fetch(`${API_URL}/type/${type}`)
+    return fetch(`${API_URL}/type/${type}`, { headers: getAuthHeaders() })
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);
@@ -53,7 +58,7 @@ export function fetchChatsByType(type) {
  * @returns {Promise} Promesa que resuelve con el chat específico
  */
 export function fetchChatById(chatId) {
-    return fetch(`${API_URL}/${chatId}`)
+    return fetch(`${API_URL}/${chatId}`, { headers: getAuthHeaders() })
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);
@@ -80,6 +85,7 @@ export function createChat(chatData) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            ...getAuthHeaders()
         },
         body: JSON.stringify(chatData)
     })
@@ -110,6 +116,7 @@ export function addMessageToChat(chatId, messageData) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            ...getAuthHeaders()
         },
         body: JSON.stringify(messageData)
     })
@@ -141,6 +148,7 @@ export function editMessageInChat(chatId, messageId, newText) {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
+            ...getAuthHeaders()
         },
         body: JSON.stringify({ text: newText })
     })
@@ -168,7 +176,8 @@ export function editMessageInChat(chatId, messageId, newText) {
  */
 export function deleteMessageFromChat(chatId, messageId) {
     return fetch(`${API_URL}/${chatId}/messages/${messageId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: getAuthHeaders()
     })
         .then(response => {
             if (!response.ok) {
@@ -193,7 +202,8 @@ export function deleteMessageFromChat(chatId, messageId) {
  */
 export function deleteChat(chatId) {
     return fetch(`${API_URL}/${chatId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: getAuthHeaders()
     })
         .then(response => {
             if (!response.ok) {

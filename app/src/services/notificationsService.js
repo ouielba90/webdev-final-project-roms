@@ -1,13 +1,18 @@
 // Servicio para manejar las peticiones de notificaciones con fetch usando .then() y .catch()
 
-const API_URL = 'http://localhost:3000/santos';
+const API_URL = `${import.meta.env.VITE_API_URL}/santos`;
+
+const getAuthHeaders = () => {
+    const token = localStorage.getItem('token');
+    return token ? { 'Authorization': `Bearer ${token}` } : {};
+};
 
 /**
  * Obtiene todas las notificaciones desde la API
  * @returns {Promise} Promesa que resuelve con los datos de notificaciones
  */
 export function fetchNotifications() {
-    return fetch(`${API_URL}/notifications`)
+    return fetch(`${API_URL}/notifications`, { headers: getAuthHeaders() })
         .then(response => {
             // Verificar si la respuesta es exitosa
             if (!response.ok) {
@@ -37,6 +42,7 @@ export function markNotificationAsRead(id) {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
+            ...getAuthHeaders()
         },
         body: JSON.stringify({ read: true })
     })
@@ -63,7 +69,8 @@ export function markNotificationAsRead(id) {
  */
 export function deleteNotification(id) {
     return fetch(`${API_URL}/notifications/${id}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: getAuthHeaders()
     })
         .then(response => {
             if (!response.ok) {
@@ -83,7 +90,7 @@ export function deleteNotification(id) {
  * @returns {Promise} Promesa que resuelve con las notificaciones no leídas
  */
 export function fetchUnreadNotifications() {
-    return fetch(`${API_URL}/notifications?read=false`)
+    return fetch(`${API_URL}/notifications?read=false`, { headers: getAuthHeaders() })
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);

@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 import ChatListItem from '../../components/communications/ChatListItem.jsx';
 
 // URL de tu API backend
-const API_URL = 'http://localhost:3000/santos/chats';
+const API_URL = `${import.meta.env.VITE_API_URL}/santos/chats`;
+
+const getAuthHeaders = () => {
+  const token = localStorage.getItem('token');
+  return token ? { 'Authorization': `Bearer ${token}` } : {};
+};
 
 function ClientChatsPage() {
   const [chats, setChats] = useState([]);
@@ -20,12 +25,14 @@ function ClientChatsPage() {
   const fetchClientChats = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_URL}/type/client`);
-      
+      const response = await fetch(`${API_URL}/type/client`, {
+        headers: getAuthHeaders()
+      });
+
       if (!response.ok) {
         throw new Error('Error al cargar los chats de clientes');
       }
-      
+
       const data = await response.json();
       // Filtrar solo los que tienen mensajes sin leer
       const unreadChats = data.filter(chat => chat.unreadCount > 0);
@@ -43,7 +50,7 @@ function ClientChatsPage() {
   // Filtrar cuando cambie "name" o "chats"
   useEffect(() => {
     if (chats.length === 0) return;
-    
+
     if (name === "") {
       setFilterChats(chats);
       return;
@@ -59,7 +66,7 @@ function ClientChatsPage() {
         participant.toLowerCase().includes(name.toLowerCase())
       );
     });
-    
+
     setFilterChats(filtered);
   }, [name, chats]);
 
@@ -94,7 +101,7 @@ function ClientChatsPage() {
             id="name-input-c"
             type="text"
             value={name}
-            onChange={(event) => setName(event.target.value)} 
+            onChange={(event) => setName(event.target.value)}
           />
         </form>
       </div>
