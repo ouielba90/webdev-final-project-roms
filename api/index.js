@@ -12,8 +12,6 @@ import notificationsRoutes from "./src/routes/communications.notifications.route
 import messagesRoutes from "./src/routes/communications.messages.routes.js";
 import chatMessagesRoutes from "./src/routes/comunications.chats.routes.js";
 import usersRoutes from "./src/routes/users.user.routes.js";
-import authRoutes from "./src/routes/auth.routes.js";
-import verifyToken from "./src/middleware/auth.middleware.js";
 //-----------------------------------------------
 
 dotenv.config();
@@ -26,8 +24,6 @@ api.use(cors());
 
 api.use(express.json());
 
-api.use("/auth", authRoutes);
-
 api.get("/", (req, res) => {
   res.send("Hello, World!");
 });
@@ -36,7 +32,7 @@ api.get("/", (req, res) => {
 api.get("/marc", (req, res) => {
   res.send("Esta es la API de Marc, los datos se encuentran en /users.");
 });
-api.use("/marc/users", verifyToken, usersRoutes);
+api.use("/marc/users", usersRoutes);
 
 /* API OUISSAM */
 api.get("/ouissam", (req, res) => {
@@ -44,10 +40,10 @@ api.get("/ouissam", (req, res) => {
     "Esta es la API de Ouissam, los datos se encuentran en /hardware, /software, /licenses o /servers.",
   );
 });
-api.use("/ouissam/software", verifyToken, softwareRoutes);
-api.use("/ouissam/hardware", verifyToken, hardwareRoutes);
-api.use("/ouissam/licenses", verifyToken, licensesRoutes);
-api.use("/ouissam/servers", verifyToken, serversRoutes);
+api.use("/ouissam/software", softwareRoutes);
+api.use("/ouissam/hardware", hardwareRoutes);
+api.use("/ouissam/licenses", licensesRoutes);
+api.use("/ouissam/servers", serversRoutes);
 
 /***************************************/
 
@@ -55,16 +51,16 @@ api.use("/ouissam/servers", verifyToken, serversRoutes);
 api.get("/ricardo", (req, res) => {
   console.log("Extrayendo los datos de proyectos");
 });
-api.use("/ricardo/projects", verifyToken, projectRoutes);
+api.use("/ricardo/projects", projectRoutes);
 
-api.use("/projectsUsers", verifyToken, projectUserRoutes);
+api.use("/projectsUsers", projectUserRoutes);
 
 /***************************************/
 
 /*API Santos*/
-api.use("/santos/notifications", verifyToken, notificationsRoutes);
-api.use("/santos/messages", verifyToken, messagesRoutes);
-api.use("/santos/chats", verifyToken, chatMessagesRoutes);
+api.use("/santos/notifications", notificationsRoutes);
+api.use("/santos/messages", messagesRoutes);
+api.use("/santos/chats", chatMessagesRoutes);
 
 /**************/
 

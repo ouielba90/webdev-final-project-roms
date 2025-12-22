@@ -1,11 +1,14 @@
-import { useContext } from "react"
+import { Link, Outlet } from "react-router-dom"
+import { useState, useContext, useEffect } from "react"
 import { ApiDataContext } from "../../../context/ApiDataContext.js"
 import ClientCard from "./ClientCard.jsx"
+import getClients from "../../../logic/getClients.js"
 
 function ClientPage() {
+  // const [clientsState, setClientsState] = useState()
   const { users, setUsers, usersApi } = useContext(ApiDataContext)
   const clients = users.filter(user => user.role === "Cliente")
-
+  
   async function onDeleteClient(id) {
     const copy = [...clients]
     setUsers(copy.filter((client) => {
@@ -20,14 +23,13 @@ function ClientPage() {
         <h2 className="subtitle">Lista de clientes</h2>
         <div className="clientsContainer">
           {clients.map(client => {
-            return (
-              <ClientCard
-                key={client.id}
-                client={client}
-                onDeleteClient={() => onDeleteClient(client._id)}
-              />
-            )
-          })}
+            return(
+            <ClientCard
+              key={client.id}
+              client={client}
+              onDeleteClient={() => onDeleteClient(client._id)}
+            />
+          )})}
         </div>
       </div>
     </>

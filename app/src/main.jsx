@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ProviderDataApi from "./context/ProviderDataApi"
 import App from './App.jsx'
 import HomeInvPage from './pages/inventory/HomeInvPage.jsx'
@@ -23,27 +23,7 @@ import ClientPage from './pages/usersClients/clients/ClientPage.jsx'
 import ClientChatsPage from './pages/communications/ClientChatsPage.jsx'
 import ChatViewPage from './pages/communications/ChatViewPage.jsx'
 import InternalChatsPage from './pages/communications/InternalChatsPage.jsx'
-import { AuthProvider, useAuth } from './context/AuthContext.jsx'
-import Login from './pages/Login.jsx'
 import './indexOuissam.css'
-
-function AppContent() {
-  const { isAuthenticated, isLoading } = useAuth();
-
-  if (isLoading) {
-    return <div>Cargando...</div>;
-  }
-
-  if (!isAuthenticated) {
-    return <Login />;
-  }
-
-  return (
-    <ProviderDataApi>
-      <RouterProvider router={router} />
-    </ProviderDataApi>
-  );
-};
 
 // Definición de rutas anidadas:
 // el menú superior mientras cambia el contenido en <Outlet />.
@@ -144,19 +124,17 @@ const router = createBrowserRouter(
               element: <ChatViewPage />,
             }
           ]
-        }
+        },
       ]
-    },
-    {
-      path: '*',
-      element: <Navigate to="/" replace />
     }
   ]
 )
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>
-      <AppContent />
-    </AuthProvider>
+    {/*Carga los datos de la API y crea el estado global.*/}
+    <ProviderDataApi>
+      {/*Muestra la interfaz de usuario correcta según la URL, usando los datos del Provider.*/}
+      <RouterProvider router={router} />
+    </ProviderDataApi>
   </StrictMode>,
 )

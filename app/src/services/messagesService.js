@@ -1,18 +1,13 @@
 // Servicio para manejar las peticiones de mensajes con fetch usando .then() y .catch()
 
-const API_URL = `${import.meta.env.VITE_API_URL}/santos`;
-
-const getAuthHeaders = () => {
-    const token = localStorage.getItem('token');
-    return token ? { 'Authorization': `Bearer ${token}` } : {};
-};
+const API_URL = 'http://localhost:3000/santos';
 
 /**
  * Obtiene todos los mensajes desde la API
  * @returns {Promise} Promesa que resuelve con los datos de mensajes
  */
 export function fetchMessages() {
-    return fetch(`${API_URL}/messages`, { headers: getAuthHeaders() })
+    return fetch(`${API_URL}/messages`)
         .then(response => {
             // Verificar si la respuesta es exitosa
             if (!response.ok) {
@@ -42,7 +37,6 @@ export function createMessage(messageData) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            ...getAuthHeaders()
         },
         body: JSON.stringify(messageData)
     })
@@ -73,7 +67,6 @@ export function updateMessage(id, messageData) {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
-            ...getAuthHeaders()
         },
         body: JSON.stringify(messageData)
     })
@@ -100,8 +93,7 @@ export function updateMessage(id, messageData) {
  */
 export function deleteMessage(id) {
     return fetch(`${API_URL}/messages/${id}`, {
-        method: 'DELETE',
-        headers: getAuthHeaders()
+        method: 'DELETE'
     })
         .then(response => {
             if (!response.ok) {

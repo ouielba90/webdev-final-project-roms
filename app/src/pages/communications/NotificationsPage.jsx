@@ -2,12 +2,7 @@ import { useEffect, useState } from "react"; //hook para manejar estados
 import NotificationCard from "../../components/communications/NotificationCard";
 
 // URL de tu API backend - ajustada según mi configuración
-const API_URL = `${import.meta.env.VITE_API_URL}/santos/notifications`;
-
-const getAuthHeaders = () => {
-  const token = localStorage.getItem('token');
-  return token ? { 'Authorization': `Bearer ${token}` } : {};
-};
+const API_URL = "http://localhost:3000/santos/notifications";
 
 //funcion principal
 
@@ -26,9 +21,7 @@ function NotificationsPage() {
   const fetchNotifications = async () => {
     try {
       setLoading(true); //inicia la carga
-      const response = await fetch(API_URL, {
-        headers: getAuthHeaders()
-      });
+      const response = await fetch(API_URL);
 
       if (!response.ok) {
         throw new Error("Error al obtener las notificaciones");
@@ -36,9 +29,9 @@ function NotificationsPage() {
 
       const data = await response.json();
       setNotifications(data);
-      // setError(null); // finaliza la carga correctamente
+      setError(err.message); //finaliza la carga
     } catch (error) {
-      setError(error.message);
+      setError(err.message);
       console.error("Error:", error);
     } finally {
       setLoading(false); //finaliza la carga
@@ -55,7 +48,6 @@ function NotificationsPage() {
       try {
         const response = await fetch(`${API_URL}/${id}`, {
           method: "DELETE",
-          headers: getAuthHeaders()
         });
 
         if (!response.ok) {
@@ -75,7 +67,7 @@ function NotificationsPage() {
     }
   };
 
-  // Renderizar estado de carga
+    // Renderizar estado de carga
   if (loading) {
     return (
       <div className="container-notifications">
@@ -96,7 +88,7 @@ function NotificationsPage() {
     );
   }
 
-  {/*Renderizacion de la estructura basica*/ }
+  {/*Renderizacion de la estructura basica*/}
   return (
     <>
       <div className="container-notifications">
@@ -106,7 +98,7 @@ function NotificationsPage() {
             <p>No hay notificaciones disponibles.</p>
           ) : (
 
-            notifications.map((notification) => (
+          notifications.map((notification) => (
               <NotificationCard
                 key={notification._id}
                 id={notification._id}
@@ -116,8 +108,8 @@ function NotificationsPage() {
                 date={notification.date}
                 isAlert={notification.isAlert}
                 onDeleteNotification={handleDeleteNotification}
-              />
-            ))
+             />
+           ))
           )}
         </div>
       </div>

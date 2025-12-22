@@ -3,11 +3,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 function useApi(specificUrl) {
     const fullApiUrl = `${apiUrl}/${specificUrl}`
     async function getData() {
-        const token = localStorage.getItem('token');
-        const headers = {};
-        if (token) headers['Authorization'] = `Bearer ${token}`;
-
-        return fetch(fullApiUrl, { headers }).then((response) => {
+        return fetch(fullApiUrl).then((response) => {
             if (!response.ok) {
                 throw new Error(`HTTP_ERROR_${response.status}`);
             }
@@ -17,13 +13,9 @@ function useApi(specificUrl) {
     }
 
     async function createData(postData) {
-        const token = localStorage.getItem('token');
-        const headers = { "Content-Type": "application/json" };
-        if (token) headers['Authorization'] = `Bearer ${token}`;
-
         return fetch(fullApiUrl, {
             method: "POST",
-            headers,
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(postData),
         })
             .then((response) => {
@@ -35,13 +27,9 @@ function useApi(specificUrl) {
     }
 
     async function updateData(id, updateData) {
-        const token = localStorage.getItem('token');
-        const headers = { "Content-Type": "application/json" };
-        if (token) headers['Authorization'] = `Bearer ${token}`;
-
         return fetch(`${fullApiUrl}/${id}`, {
             method: "PUT",
-            headers,
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(updateData),
         })
             .then((response) => {
@@ -53,13 +41,8 @@ function useApi(specificUrl) {
     }
 
     async function deleteData(id) {
-        const token = localStorage.getItem('token');
-        const headers = {};
-        if (token) headers['Authorization'] = `Bearer ${token}`;
-
         return fetch(`${fullApiUrl}/${id}`, {
             method: "DELETE",
-            headers,
         })
             .then((response) => {
                 if (!response.ok) {

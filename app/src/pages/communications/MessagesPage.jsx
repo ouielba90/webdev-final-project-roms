@@ -3,12 +3,7 @@ import { useEffect, useState } from "react";  //hook para manejar estados
 import MessageCard from "../../components/communications/MessageCard"
 
 // URL de mi API backend - ajusta según mi configuración
-const API_URL = `${import.meta.env.VITE_API_URL}/santos/messages`;
-
-const getAuthHeaders = () => {
-  const token = localStorage.getItem('token');
-  return token ? { 'Authorization': `Bearer ${token}` } : {};
-};
+const API_URL = 'http://localhost:3000/santos/messages'; 
 
 //funcion principal
 
@@ -18,7 +13,7 @@ function MessagesPages() {
   const [editText, setEditText] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  
   //useEffect para cargar los mensajes desde la API al montar el componente
 
   useEffect(() => {
@@ -30,9 +25,7 @@ function MessagesPages() {
   const fetchMessages = async () => {
     try {
       setLoading(true);
-      const response = await fetch(API_URL, {
-        headers: getAuthHeaders()
-      });
+      const response = await fetch(API_URL);
       if (!response.ok) {
         throw new Error('Error al obtener los mensajes');
       }
@@ -48,30 +41,29 @@ function MessagesPages() {
 
   //Funcion para eliminar mensaje
   const handleDeleteMessage = async (id) => {
-    if (window.confirm('¿Estás seguro de que quieres eliminar este mensaje?')) {
-      try {
-        // Esperar a que fetch resuelva la promesa no devuelve objeto por eso necesitamos await
-        const response = await fetch(`${API_URL}/${id}`, {
-          method: 'DELETE',
-          headers: getAuthHeaders()
-        });
+  if (window.confirm('¿Estás seguro de que quieres eliminar este mensaje?')) {
+    try {
+      // Esperar a que fetch resuelva la promesa no devuelve objeto por eso necesitamos await
+      const response = await fetch(`${API_URL}/${id}`, {
+        method: 'DELETE',
+      });
 
-        if (!response.ok) {
-          throw new Error('Error al eliminar el mensaje');
-        }
-
-        // Actualizar el estado local para reflejar la eliminación en la BD
-        setMessages(prevMessages =>
-          prevMessages.filter(message => message.id !== id)
-        );
-      } catch (err) {
-        console.error('Error al eliminar el mensaje:', err);
-        alert('No se pudo eliminar el mensaje. Inténtalo de nuevo más tarde.');
+      if (!response.ok) {
+        throw new Error('Error al eliminar el mensaje');
       }
+
+      // Actualizar el estado local para reflejar la eliminación en la BD
+      setMessages(prevMessages =>
+        prevMessages.filter(message => message.id !== id)
+      );
+    } catch (err) {
+      console.error('Error al eliminar el mensaje:', err);
+      alert('No se pudo eliminar el mensaje. Inténtalo de nuevo más tarde.');
     }
-  };
+  }
+};
 
-
+ 
 
   //Funcion para iniciar la edicion
   const handleStartEdit = (message) => {
@@ -86,29 +78,28 @@ function MessagesPages() {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          ...getAuthHeaders()
         },
-        body: JSON.stringify({
-          text: editText,
-          edited: true,
-          editedAt: new Date().toISOString()
+        body: JSON.stringify({ 
+          text: editText, 
+          edited: true, 
+          editedAt: new Date().toISOString() 
         }),
       });
-      if (!response.ok) {
-        throw new Error('Error al actualizar el mensaje');
-      }
-      const updatedMessage = await response.json();
-
-      // Actualizar el estado local para reflejar la actualización en la BD
-
-      setMessages(prev => prev.map(message =>
-        message.id === id ? updatedMessage : message
-      ));
-
-      // Limpiar estado de edición
-
-      setEditingId(null);
-      setEditText('');
+    if (!response.ok) {
+      throw new Error('Error al actualizar el mensaje');
+    }
+    const updatedMessage = await response.json();
+    
+    // Actualizar el estado local para reflejar la actualización en la BD
+    
+    setMessages(prev => prev.map(message =>
+      message.id === id ? updatedMessage : message
+    ));
+    
+    // Limpiar estado de edición
+    
+    setEditingId(null);
+    setEditText('');
     } catch (err) {
       console.error('Error al actualizar el mensaje:', err);
       alert('No se pudo actualizar el mensaje. Inténtalo de nuevo más tarde.');
@@ -116,7 +107,7 @@ function MessagesPages() {
   };
 
   //Funcion para cancelar Edicion
-
+  
   const handleCancelEdit = () => {
     setEditingId(null);
     setEditText('');
@@ -129,17 +120,17 @@ function MessagesPages() {
   //Renderizar estado de error
   if (error) {
     return (
-      <div className="container-messages">
-        <h1>Mensajes</h1>
-        <p className="error-message">Error: {error}</p>
-        <button onClick={fetchMessages}>Reintentar</button>
-      </div>
+    <div className="container-messages">
+      <h1>Mensajes</h1>
+      <p className="error-message">Error: {error}</p>
+      <button onClick={fetchMessages}>Reintentar</button>
+    </div>
     );
   }
 
 
   {/*Renderizacion de la estructura basica*/ }
-
+  
   return (
     <>
       <div className="container-messages">
@@ -148,9 +139,9 @@ function MessagesPages() {
           {messages.length === 0 ? (
             <p>No hay mensajes disponibles.</p>
           ) : (
-
-            messages.map((message) => (
-              <MessageCard
+          
+          messages.map((message) => (  
+            <MessageCard
                 key={message._id}
                 id={message._id}
                 from={message.from}
@@ -168,10 +159,10 @@ function MessagesPages() {
                 editText={editText}
                 onEditTextChange={(newText) => setEditText(newText)}
 
-              />
-            ))
+            />
+          ))
           )}
-        </div>
+           </div>
       </div>
     </>
   );

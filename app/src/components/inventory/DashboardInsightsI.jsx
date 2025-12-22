@@ -1,5 +1,6 @@
 import StatusAnimation from "./StatusAnimation.jsx"
 function DashboardInsightsI({ riskLicenses, lastMaintHard, software }) {
+  console.log(riskLicenses)
   return (
     <>
       <div className="insights-card insights-licenses">

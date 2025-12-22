@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
 
 function CompactMainMenu() {
-  const { logout, username } = useAuth();
   return (
     <header className="compact-main-menu">
       <div className="logo">
@@ -18,12 +16,6 @@ function CompactMainMenu() {
         <Link to="/users">USUARIOS</Link>
         <Link to="/communications">COMUNICACIONES</Link>
       </nav>
-      <div className="user-info-compact">
-        <span>{username}</span>
-        <button onClick={logout} className="simple-logout-btn-compact">
-          Salir
-        </button>
-      </div>
     </header>
   );
 }
